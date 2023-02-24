@@ -15,7 +15,7 @@ export default function Main() {
                     routeData?.map((route, index) => {
                         return (
                             // <Route key={index} element={<route.route />} >
-                            <Route path={route.path} element={<route.element />} />
+                            <Route key={index} path={route.path} element={<route.element />} />
                             // </Route>
                         )
                     })

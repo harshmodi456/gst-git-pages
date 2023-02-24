@@ -1,0 +1,1 @@
+export const BASE_URL ='https://blog-backend.mastersindia.co/api/v1/'

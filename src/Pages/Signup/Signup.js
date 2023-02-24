@@ -1,81 +1,135 @@
-import React from 'react';
-import './Signup.css'
-import { Link } from 'react-router-dom';
-import TextField from '@mui/material/TextField';
-import { Formik, Field, Form, ErrorMessage } from 'formik';
-import * as Yup from 'yup';
+import React from "react";
+import "./Signup.scss";
+import { Link } from "react-router-dom";
+// import TextField from '@mui/material/TextField';
+import { Formik, Field, Form } from "formik";
+import * as Yup from "yup";
+import CustomTextField from "../../Components/CustomTextField/CustomTextField";
+import { Card, CardContent, CardHeader } from "@mui/material";
 
-export default function Signup() {
+const Signup = () => {
+  const [showPassword, setShowPassword] = React.useState(false);
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const validationSchema = Yup.object({
+    gstin: Yup.string()
+      .min(15, "GST must be at least 15 characters")
+      .max(15, "GST must be at least 15 characters")
+      .required("Gst Number is Required."),
+    password: Yup.string()
+      .required("Password is required")
+      .min(5, "Your password is too short.")
+      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Passwords must match"
+    )
+    // });
+
+    // password: Yup.string()
+    //   .min(8, "Password is too short - should be 8 chars minimum.")
+    //   .required("Password is Required."),
+    // // .max(20, 'Password must be less then 20 characters.'),
+    // confirmPassword: Yup.string()
+    //   .when("password", {
+    //     is: (val) => (val && val.length > 0 ? true : false),
+    //     then: Yup.string().oneOf([Yup.ref("password")], "Not matched !")
+    //   })
+    //   .required("Required")
+  });
 
   const signupHandler = (values) => {
-    console.log(values)
-  }
+    console.log(values);
+  };
 
   return (
-    <div className='signup-container d-flex align-items-center'>
-      <Formik
-        initialValues={{ gstin: '', password: '', confirmPassword: '' }}
-        validationSchema={Yup.object({
-          gstin: Yup.string()
-            .min(15)
-            .max(15)
-            .required('Required.'),
-          password: Yup.string()
-            .required('No password provided.'),
-            // .min(8, 'Password is too short - should be 8 chars minimum.')
-            // .max(20, 'Password must be less then 20 characters.'),
-          confirmPassword: Yup.string()
-            .when("password", {
-              is: (val) => (val && val.length > 0 ? true : false),
-              then: Yup.string().oneOf(
-                [Yup.ref("password")],
-                "Not matched !"
-              ),
-            })
-            .required('Required')
-        })}
+    <div className="form-signin">
+      <div className="form-card">
+        <Card sx={{ width: 450 }}>
+          <CardHeader title="Sign Up" className="card-header text-center" />
+          <CardContent className="mt-2">
+            <Formik
+              initialValues={{ gstin: "", password: "", confirmPassword: "" }}
+              validationSchema={validationSchema}
+              onSubmit={async (values) => {
+                signupHandler(values);
+              }}
+            >
+              {/* className="w-50 mx-auto m-5 p-5 border rounded" */}
+              <Form>
+                <div className="form-group">
+                  <Field
+                    name="gstin"
+                    type="text"
+                    component={CustomTextField}
+                    id="gstin"
+                    label="Gst Number"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                  />
+                </div>
+                <div className="form-group">
+                  <Field
+                    name="password"
+                    type={showPassword ? "text" : "password"}
+                    component={CustomTextField}
+                    id="password"
+                    label="Password"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                    setShowPassword={setShowPassword}
+                    showPassword={showPassword}
+                    handleClickShowPassword={handleClickShowPassword}
+                  />
+                </div>
 
-        onSubmit={async (values) => {
-          signupHandler(values);
-        }}
-      >
-        <Form className='w-50 mx-auto m-5 p-5 border rounded'>
-          <h2 className='mb-5'>Signup</h2>
+                <div className="form-group">
+                  <Field
+                    name="confirmPassword"
+                    type={showPassword ? "text" : "password"}
+                    component={CustomTextField}
+                    id="confirmPassword"
+                    label="Confirm Password"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                    // setShowPassword={setShowPassword}
+                    // showPassword={showPassword}
+                    // handleClickShowPassword={handleClickShowPassword}
+                  />
+                </div>
 
-          <div>
-            <label htmlFor='gstin' className='font-weight-bold'>GST Number :</label>
-            <Field className='form-control' name='gstin' type="text" />
-            <div className='text-danger text-right mt-2'>
-              <ErrorMessage name="gstin" />
-            </div>
-          </div>
+                <div className="w-100">
+                  <button className="w-100 btn btn-lg btn-primary">
+                    Sign Up
+                  </button>
+                </div>
 
-          <div>
-            <label htmlFor='password' className='font-weight-bold'>Password :</label>
-            <Field className='form-control' name='password' type="password" />
-            <div className='text-danger text-right mt-2'>
-              <ErrorMessage name="password" />
-            </div>
-          </div>
+                <div className="mt-3">
+                  <span style={{ color: "#6a758b" }}>
+                    Already have an account?
+                  </span>{" "}
+                  &nbsp;{" "}
+                  <Link to="/login" className="have-account">
+                    Login
+                  </Link>
+                </div>
 
-          <div> 
-            <label htmlFor='confirmPassword' className='font-weight-bold'>Confirm Password :</label>
-            <Field className='form-control' name='confirmPassword' type="password" />
-            <div className='text-danger text-right mt-2'>
-              <ErrorMessage name="confirmPassword" />
-            </div>
-          </div>
-
-          <div className='d-flex justify-content-between mt-4'>
-            <Link to='/login'>Already have an account? Login</Link>
-          </div>
-
-          <div className='w-100'>
-            <button type='submit' className='btn btn-success mx-auto d-block mt-5'>Login</button>
-          </div>
-
-        </Form>
-      </Formik>
+                {/* <div className="w-100">
+                  <button
+                    type="submit"
+                    className="btn btn-success mx-auto d-block mt-5"
+                  >
+                    Login
+                  </button>
+                </div> */}
+              </Form>
+            </Formik>
+          </CardContent>
+        </Card>
+      </div>
     </div>
-  )
-}
+  );
+};
+
+export default Signup;

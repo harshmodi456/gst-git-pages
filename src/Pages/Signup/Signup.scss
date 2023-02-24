@@ -1,0 +1,46 @@
+.form-signin {
+    height: 100vh;
+  
+    background-image: url("../../Assets/Images/sigin-background-image.jpg");
+    //   -webkit-background-size: cover;
+    //   -moz-background-size: cover;
+    //   -o-background-size: cover;
+    //   background-size: cover;
+  
+    .form-card {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+  
+      .MuiFormControl-root {
+        width: 100%;
+        .form-control-textFiled {
+          font-size: 14px;
+          border-color: #f6f8f9 !important;
+          background-color: #f6f8f9;
+          color: #4e5e6a;
+          box-shadow: none;
+          transition: background 0.5s;
+        }
+      }
+  
+      .forgot-pass {
+        color: #29689e;
+        text-decoration: none;
+      }
+      .have-account {
+        color: #29689e;
+        text-decoration: none;
+      }
+    }
+  
+    .card-header {
+      background-color: #fff;
+      color: inherit;
+      font-weight: bold;
+      border-color: #eef6f9;
+      padding: 12px 16px;
+    }
+  }
+  
