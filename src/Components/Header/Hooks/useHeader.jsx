@@ -1,12 +1,16 @@
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 
 export default function useHeader() {
-    const location = useLocation();
-    const currentPath = location.pathname;
-    
-    if (currentPath === '/login' || currentPath === '/signup') {
-        return false;
-    } else {
-        return true;
-    }
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  if (
+    currentPath === "/login" ||
+    currentPath === "/signup" ||
+    currentPath === "/"
+  ) {
+    return false;
+  } else {
+    return true;
+  }
 }

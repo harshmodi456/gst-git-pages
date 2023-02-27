@@ -7,6 +7,10 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
+import Grid from "@mui/material/Grid";
+import loginImg from "../../Assets/Images/img2.png";
 // import { Button } from "@mui/material";
 
 const Login = () => {
@@ -24,67 +28,74 @@ const Login = () => {
   return (
     <div className="form-signin">
       <div className="form-card">
-        <Card sx={{ width: 450 }}>
-          <CardHeader title="Sign in" className="card-header text-center" />
-          <CardContent className="mt-2">
-            <Formik
-              initialValues={{
-                gstNumber: ""
-              }}
-              validationSchema={validationSchema}
-              // onSubmit={(values) => handalAddTask(values)}
-            >
-              {(props) => (
-                <Form>
-                  <div className="form-group">
-                    <Field
-                      name="gstNumber"
-                      type="text"
-                      // placeholder="Add New Task"
-                      component={CustomTextField}
-                      id="gstNumber"
-                      label="Gst Number"
-                      variant="outlined"
-                      className="form-control-textFiled"
-                    />
-                  </div>
-                  <div className="form-group">
-                    <Field
-                      name="password"
-                      type={showPassword ? "text" : "password"}
-                      // placeholder="Add New Task"
-                      component={CustomTextField}
-                      id="password"
-                      label="Password"
-                      variant="outlined"
-                      className="form-control-textFiled"
-                      setShowPassword={setShowPassword}
-                      showPassword={showPassword}
-                      handleClickShowPassword={handleClickShowPassword}
-                    />
-                  </div>
-                  <div className="w-100">
-                    <button className="w-100 btn btn-lg btn-primary">
-                      Sign In
-                    </button>
-                  </div>
-                  <div className="mt-2 forgot-pass">
-                    <Link >Forgot password?</Link>
-                  </div>
-                  <div className="mt-3">
-                    <span style={{ color: "#6a758b" }}>
-                      You don't have an account?
-                    </span>{" "}
-                    &nbsp;{" "}
-                    <Link to="/signup" className="have-account">
-                      Sign up
-                    </Link>
-                  </div>
-                </Form>
-              )}
-            </Formik>
-          </CardContent>
-        </Card>
+        <Grid container spacing={{ xs: 0, md: 3 }} columns={{ xs: 0, sm: 8, md: 12 }}>
+          <Grid item xs={4} className="grid-first">
+            <img src={loginImg} />
+          </Grid>
+          <Grid item xs={4} md={5}>
+            <Card sx={{ width: 450 }}>
+              <CardHeader title="Sign in" className="card-header text-center" />
+              <CardContent>
+                <Formik
+                  initialValues={{
+                    gstNumber: ""
+                  }}
+                  validationSchema={validationSchema}
+                  // onSubmit={(values) => handalAddTask(values)}
+                >
+                  {(props) => (
+                    <Form>
+                      <div className="form-group">
+                        <Field
+                          name="gstNumber"
+                          type="text"
+                          // placeholder="Add New Task"
+                          component={CustomTextField}
+                          id="gstNumber"
+                          label="Gst Number"
+                          variant="outlined"
+                          className="form-control-textFiled"
+                        />
+                      </div>
+                      <div className="form-group">
+                        <Field
+                          name="password"
+                          type={showPassword ? "text" : "password"}
+                          // placeholder="Add New Task"
+                          component={CustomTextField}
+                          id="password"
+                          label="Password"
+                          variant="outlined"
+                          className="form-control-textFiled"
+                          setShowPassword={setShowPassword}
+                          showPassword={showPassword}
+                          handleClickShowPassword={handleClickShowPassword}
+                        />
+                      </div>
+                      <div className="w-50 mt-4 mb-3">
+                        <button className="w-100 btn btn-lg btn-primary">
+                          Sign In
+                        </button>
+                      </div>
+                      <div className="mt-2 account-signup">
+                        <span style={{ color: "#27489f" }}>
+                          You don't have an account?
+                        </span>{" "}
+                        &nbsp;{" "}
+                        <Link to="/signup" className="have-account">
+                          Sign up
+                        </Link>
+                      </div>
+                      {/* <div className="mt-2 forgot-pass">
+                    <Link>Forgot password?</Link>
+                  </div> */}
+                    </Form>
+                  )}
+                </Formik>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );

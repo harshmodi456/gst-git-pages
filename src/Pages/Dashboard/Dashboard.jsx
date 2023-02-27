@@ -12,6 +12,8 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { BASE_URL } from "../../Constant/ApiUrl";
 import axios from "axios";
+import { Card, CardContent, CardHeader, Grid } from "@mui/material";
+import logoImg from "../../Assets/Images/img2.png";
 
 const Dashboard = () => {
   const [getSearchData, setSearchData] = useState([]);
@@ -58,7 +60,106 @@ const Dashboard = () => {
   return (
     <div className="main-hom-view">
       <div className="container mt-5" role="main">
-        <Formik
+        <Grid
+          container
+          spacing={{ xs: 0, md: 3 }}
+          columns={{ xs: 0, sm: 8, md: 12 }}
+        >
+          <Grid item xs={4} className="grid-first">
+            <img src={logoImg} />
+          </Grid>
+          <Grid item xs={4} md={5}>
+            <Card sx={{ width: 450 }}>
+              <CardHeader
+                title="Search Result Based On Business"
+                className="card-header text-center"
+              />
+              <CardContent>
+                <Formik
+                  initialValues={{
+                    gstNumber: ""
+                  }}
+                  validationSchema={validationSchema}
+                  onSubmit={(values) => onSearch(values)}
+                >
+                  {(props) => (
+                    <Form>
+                      <div className="row">
+                        <div className="col-xs-12 col-md-8">
+                          <div className="form-group form-input-fields">
+                            <Field
+                              name="gstNumber"
+                              render={({
+                                field,
+                                form: { touched, errors }
+                              }) => (
+                                <>
+                                  <div className="input-group mb-4 border rounded-pill p-1">
+                                    <div className="border-0">
+                                      <button
+                                        id="button-addon4"
+                                        type="button"
+                                        className="btn btn-link text-info"
+                                      >
+                                        <i className="fa fa-search"></i>
+                                      </button>
+                                    </div>
+                                    <input
+                                      {...field}
+                                      type="text"
+                                      name="gstNumber"
+                                      placeholder="Search GST number here..."
+                                      className="form-control bg-none border-0"
+                                    />
+                                  </div>
+                                  {touched[field.name] &&
+                                    errors[field.name] && (
+                                      <div className="error">
+                                        {errors[field.name]}
+                                      </div>
+                                    )}
+                                </>
+                              )}
+                            />
+                          </div>
+                        </div>
+                        <div className="col-xs-4 col-md-2 ml-4">
+                          <button
+                            type="submit"
+                            className="btn btn-lg btn-primary"
+                          >
+                            <span
+                              className="search-button"
+                              aria-hidden="true"
+                            ></span>{" "}
+                            Search
+                          </button>
+                        </div>
+                      </div>
+                    </Form>
+                  )}
+                </Formik>
+
+                <div className="table-view">
+                  {getSearchData.length === 0 ? (
+                    <div
+                      style={{
+                        textAlign: "center",
+                        color: "black"
+                      }}
+                    >
+                      Data not found!
+                    </div>
+                  ) : (
+                    <div>data here</div>
+                  )}
+                </div>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </div>
+      {/* <Formik
           initialValues={{
             gstNumber: ""
           }}
@@ -88,7 +189,7 @@ const Dashboard = () => {
                               {...field}
                               type="text"
                               name="gstNumber"
-                              placeholder="Search GSN number here..."
+                              placeholder="Search GST number here..."
                               className="form-control bg-none border-0"
                             />
                           </div>
@@ -152,8 +253,7 @@ const Dashboard = () => {
               </TableBody>
             </Table>
           </TableContainer>
-        </div>
-      </div>
+        </div> */}
     </div>
   );
 };

@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
-import { Card, CardContent, CardHeader } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid } from "@mui/material";
+import loginImg from "../../Assets/Images/img2.png";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -44,78 +45,87 @@ const Signup = () => {
   };
 
   return (
-    <div className="form-signin">
+    <div className="form-signup">
       <div className="form-card">
-        <Card sx={{ width: 450 }}>
-          <CardHeader title="Sign Up" className="card-header text-center" />
-          <CardContent className="mt-2">
-            <Formik
-              initialValues={{ gstin: "", password: "", confirmPassword: "" }}
-              validationSchema={validationSchema}
-              onSubmit={async (values) => {
-                signupHandler(values);
-              }}
-            >
-              {/* className="w-50 mx-auto m-5 p-5 border rounded" */}
-              <Form>
-                <div className="form-group">
-                  <Field
-                    name="gstin"
-                    type="text"
-                    component={CustomTextField}
-                    id="gstin"
-                    label="Gst Number"
-                    variant="outlined"
-                    className="form-control-textFiled"
-                  />
-                </div>
-                <div className="form-group">
-                  <Field
-                    name="password"
-                    type={showPassword ? "text" : "password"}
-                    component={CustomTextField}
-                    id="password"
-                    label="Password"
-                    variant="outlined"
-                    className="form-control-textFiled"
-                    setShowPassword={setShowPassword}
-                    showPassword={showPassword}
-                    handleClickShowPassword={handleClickShowPassword}
-                  />
-                </div>
+        <Grid container spacing={{ xs: 0, md: 3 }} columns={{ xs: 0, sm: 8, md: 12 }}>
+          <Grid item xs={4} className="grid-first">
+            <img src={loginImg} />
+          </Grid>
+          <Grid item xs={4} md={5}>
+            <Card sx={{ width: 450 }}>
+              <CardHeader title="Sign Up" className="card-header text-center" />
+              <CardContent className="mt-2">
+                <Formik
+                  initialValues={{
+                    gstin: "",
+                    password: "",
+                    confirmPassword: ""
+                  }}
+                  validationSchema={validationSchema}
+                  onSubmit={async (values) => {
+                    signupHandler(values);
+                  }}
+                >
+                  {/* className="w-50 mx-auto m-5 p-5 border rounded" */}
+                  <Form>
+                    <div className="form-group">
+                      <Field
+                        name="gstin"
+                        type="text"
+                        component={CustomTextField}
+                        id="gstin"
+                        label="Gst Number"
+                        variant="outlined"
+                        className="form-control-textFiled"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <Field
+                        name="password"
+                        type={showPassword ? "text" : "password"}
+                        component={CustomTextField}
+                        id="password"
+                        label="Password"
+                        variant="outlined"
+                        className="form-control-textFiled"
+                        setShowPassword={setShowPassword}
+                        showPassword={showPassword}
+                        handleClickShowPassword={handleClickShowPassword}
+                      />
+                    </div>
 
-                <div className="form-group">
-                  <Field
-                    name="confirmPassword"
-                    type={showPassword ? "text" : "password"}
-                    component={CustomTextField}
-                    id="confirmPassword"
-                    label="Confirm Password"
-                    variant="outlined"
-                    className="form-control-textFiled"
-                    // setShowPassword={setShowPassword}
-                    // showPassword={showPassword}
-                    // handleClickShowPassword={handleClickShowPassword}
-                  />
-                </div>
+                    <div className="form-group">
+                      <Field
+                        name="confirmPassword"
+                        type={showPassword ? "text" : "password"}
+                        component={CustomTextField}
+                        id="confirmPassword"
+                        label="Confirm Password"
+                        variant="outlined"
+                        className="form-control-textFiled"
+                        // setShowPassword={setShowPassword}
+                        // showPassword={showPassword}
+                        // handleClickShowPassword={handleClickShowPassword}
+                      />
+                    </div>
 
-                <div className="w-100">
-                  <button className="w-100 btn btn-lg btn-primary">
-                    Sign Up
-                  </button>
-                </div>
+                    <div className="w-50">
+                      <button className="w-100 btn btn-lg btn-primary">
+                        Sign Up
+                      </button>
+                    </div>
 
-                <div className="mt-3">
-                  <span style={{ color: "#6a758b" }}>
-                    Already have an account?
-                  </span>{" "}
-                  &nbsp;{" "}
-                  <Link to="/login" className="have-account">
-                    Login
-                  </Link>
-                </div>
+                    <div className="mt-3 account-signup">
+                      <span style={{ color: "#27489f" }}>
+                        Already have an account?
+                      </span>{" "}
+                      &nbsp;{" "}
+                      <Link to="/login" className="have-account">
+                        Login
+                      </Link>
+                    </div>
 
-                {/* <div className="w-100">
+                    {/* <div className="w-100">
                   <button
                     type="submit"
                     className="btn btn-success mx-auto d-block mt-5"
@@ -123,10 +133,12 @@ const Signup = () => {
                     Login
                   </button>
                 </div> */}
-              </Form>
-            </Formik>
-          </CardContent>
-        </Card>
+                  </Form>
+                </Formik>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
       </div>
     </div>
   );
