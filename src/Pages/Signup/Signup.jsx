@@ -1,17 +1,21 @@
 import React from "react";
 import "./Signup.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 // import TextField from '@mui/material/TextField';
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
+import { useAppDispatch } from "../../Redux/Store/Store";
+import { signUpUser } from "../../Redux/Reducers/SignInUpReducer";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     gstin: Yup.string()
@@ -26,30 +30,45 @@ const Signup = () => {
       [Yup.ref("password"), null],
       "Passwords must match"
     )
-    // });
-
-    // password: Yup.string()
-    //   .min(8, "Password is too short - should be 8 chars minimum.")
-    //   .required("Password is Required."),
-    // // .max(20, 'Password must be less then 20 characters.'),
-    // confirmPassword: Yup.string()
-    //   .when("password", {
-    //     is: (val) => (val && val.length > 0 ? true : false),
-    //     then: Yup.string().oneOf([Yup.ref("password")], "Not matched !")
-    //   })
-    //   .required("Required")
   });
 
-  const signupHandler = (values) => {
-    console.log(values);
+  const signupHandler = (takeValue) => {
+    console.log(takeValue);
+    // dispatch(
+    //   gstVerify({
+    //     gstin: takeValue.gstin
+    //   })
+    // ).then((res) => {
+    //   console.log("res.payload===", res.payload);
+    //   if (res?.payload?.status === "success") {
+    //     // navigate("/login");
+    //     alert(res.payload.message);
+    //   }
+    // });
+    dispatch(
+      signUpUser({
+        gstin: takeValue.gstin,
+        password: takeValue.password,
+        passwordConfirm: takeValue.confirmPassword
+      })
+    ).then((res) => {
+      console.log("res.payload===", res.payload);
+      if (res?.payload?.status === "success") {
+        navigate("/login");
+      }
+    });
   };
 
   return (
     <div className="form-signup">
       <div className="form-card">
-        <Grid container spacing={{ xs: 0, md: 3 }} columns={{ xs: 0, sm: 8, md: 12 }}>
+        <Grid
+          container
+          spacing={{ xs: 0, md: 3 }}
+          columns={{ xs: 0, sm: 8, md: 12 }}
+        >
           <Grid item xs={4} className="grid-first">
-            <img src={loginImg} />
+            <img src={loginImg} alt="sign up" />
           </Grid>
           <Grid item xs={4} md={5}>
             <Card sx={{ width: 450 }}>
@@ -87,7 +106,7 @@ const Signup = () => {
                         id="password"
                         label="Password"
                         variant="outlined"
-                        className="form-control-textFiled"
+                        // className="form-control-textFiled"
                         setShowPassword={setShowPassword}
                         showPassword={showPassword}
                         handleClickShowPassword={handleClickShowPassword}

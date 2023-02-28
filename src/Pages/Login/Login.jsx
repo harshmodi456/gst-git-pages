@@ -7,15 +7,16 @@ import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import { Link } from "react-router-dom";
-import { styled } from "@mui/material/styles";
-import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import loginImg from "../../Assets/Images/img2.png";
+import { useAppDispatch } from "../../Redux/Store/Store";
+import { signInUser } from "../../Redux/Reducers/SignInUpReducer";
 // import { Button } from "@mui/material";
 
 const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const dispatch = useAppDispatch();
 
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
@@ -25,12 +26,30 @@ const Login = () => {
     password: Yup.string().required("Password required")
   });
 
+  const signInHandler = (takeValue) => {
+    dispatch(
+      signInUser({
+        gstin: takeValue.gstin,
+        password: takeValue.password
+      })
+    ).then((res) => {
+      console.log("res.payload===", res.payload);
+      // if (res?.payload?.status === "success") {
+      //   navigate("/login");
+      // }
+    });
+  };
+
   return (
     <div className="form-signin">
       <div className="form-card">
-        <Grid container spacing={{ xs: 0, md: 3 }} columns={{ xs: 0, sm: 8, md: 12 }}>
+        <Grid
+          container
+          spacing={{ xs: 0, md: 3 }}
+          columns={{ xs: 0, sm: 8, md: 12 }}
+        >
           <Grid item xs={4} className="grid-first">
-            <img src={loginImg} />
+            <img src={loginImg} alt="login"/>
           </Grid>
           <Grid item xs={4} md={5}>
             <Card sx={{ width: 450 }}>
@@ -41,7 +60,7 @@ const Login = () => {
                     gstNumber: ""
                   }}
                   validationSchema={validationSchema}
-                  // onSubmit={(values) => handalAddTask(values)}
+                  onSubmit={(values) => signInHandler(values)}
                 >
                   {(props) => (
                     <Form>

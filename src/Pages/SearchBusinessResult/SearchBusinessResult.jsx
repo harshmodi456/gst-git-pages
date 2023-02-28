@@ -1,21 +1,13 @@
 import React, { useState } from "react";
-import "./Dashboard.scss";
+import "./SearchBusinessResult.scss";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import { styled } from "@mui/material/styles";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell, { tableCellClasses } from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
 import { BASE_URL } from "../../Constant/ApiUrl";
 import axios from "axios";
 import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import logoImg from "../../Assets/Images/img2.png";
 
-const Dashboard = () => {
+const SearchBusinessResult = () => {
   const [getSearchData, setSearchData] = useState([]);
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
@@ -23,26 +15,6 @@ const Dashboard = () => {
       .max(15, "GST must be at least 15 characters")
       .required("GST Number is required")
   });
-
-  const StyledTableCell = styled(TableCell)(({ theme }) => ({
-    [`&.${tableCellClasses.head}`]: {
-      backgroundColor: theme.palette.common.black,
-      color: theme.palette.common.white
-    },
-    [`&.${tableCellClasses.body}`]: {
-      fontSize: 14
-    }
-  }));
-
-  const StyledTableRow = styled(TableRow)(({ theme }) => ({
-    "&:nth-of-type(odd)": {
-      backgroundColor: theme.palette.action.hover
-    },
-    // hide last border
-    "&:last-child td, &:last-child th": {
-      border: 0
-    }
-  }));
 
   const onSearch = async (val) => {
     const res = await axios(
@@ -59,20 +31,20 @@ const Dashboard = () => {
 
   return (
     <div className="main-hom-view">
-      <div className="container mt-5" role="main">
+      <div className="container" role="main">
         <Grid
           container
           spacing={{ xs: 0, md: 3 }}
           columns={{ xs: 0, sm: 8, md: 12 }}
         >
           <Grid item xs={4} className="grid-first">
-            <img src={logoImg} />
+            <img src={logoImg} alt="left logo" />
           </Grid>
           <Grid item xs={4} md={5}>
             <Card sx={{ width: 450 }}>
               <CardHeader
                 title="Search Result Based On Business"
-                className="card-header text-center"
+                className="card-header card-text-center"
               />
               <CardContent>
                 <Formik
@@ -123,7 +95,7 @@ const Dashboard = () => {
                             />
                           </div>
                         </div>
-                        <div className="col-xs-4 col-md-2 ml-4">
+                        <div className="col-xs-4 col-md-2 ml-4 btn-div">
                           <button
                             type="submit"
                             className="btn btn-lg btn-primary"
@@ -151,7 +123,22 @@ const Dashboard = () => {
                       Data not found!
                     </div>
                   ) : (
-                    <div>data here</div>
+                    getSearchData?.map((row, index) => (
+                      <>
+                        <span className="main-title ml-2">{row?.tradeNam}</span>
+                        <div className="data-view">
+                          <div className="data-view-title media-view-title-first p-3">
+                            Name : {row?.lgnm}
+                          </div>{" "}
+                          <div className="data-view-title media-view-title p-3">
+                            Gst Number : {row?.gstin}
+                          </div>
+                          <div className="data-view-title p-3">
+                            Address : {row?.pradr?.addr?.bnm}
+                          </div>
+                        </div>
+                      </>
+                    ))
                   )}
                 </div>
               </CardContent>
@@ -258,4 +245,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default SearchBusinessResult;

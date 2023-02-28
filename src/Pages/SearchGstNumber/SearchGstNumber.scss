@@ -1,9 +1,5 @@
-.form-signin {
-  // height: 100vh;
-
-  // background-image: url("../../Assets/Images/sigin-background-image.jpg");
-  background-color: #ffffff;
-  // background-color: #eef1f9;
+.form-searchGst {
+  //   background-color: #ffffff;
   color: #4e5e6a;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.5px;
@@ -13,82 +9,75 @@
   background-attachment: fixed;
   overflow: hidden;
   overflow-x: hidden;
-  height: 100vh;
+  //   height: 100vh;
 
-  .form-card {
-    .MuiGrid-container {
+  .MuiGrid-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 65px);
+    margin-top: 0px;
+
+    .grid-first {
+      img {
+        border-radius: 12px;
+        margin-left: 230px;
+      }
+    }
+  }
+
+  .MuiGrid-item {
+    padding-left: 0%;
+  }
+
+  .MuiPaper-elevation {
+    border-radius: 12px;
+    border: 1px #676767;
+    border-style: solid;
+    .account-signup {
       display: flex;
       justify-content: center;
-      align-items: center;
-      height: 100vh;
+    }
+  }
 
-      .grid-first {
-        img {
-          border-radius: 12px;
-          margin-left: 230px;
-        }
-      }
+  .MuiFormControl-root {
+    width: 100%;
+
+    .MuiInputLabel-root {
+      color: #193c98 !important;
+    }
+    .Mui-focused {
+      color: #193c98 !important;
+    }
+    .MuiOutlinedInput-notchedOutline {
+      border-color: #193c98 !important;
     }
 
-    .MuiGrid-item {
-      padding-left: 0%;
+    .MuiFilledInput-root {
+      border-bottom: 1px solid #193c98 !important;
     }
 
-    .MuiPaper-elevation {
-      border-radius: 12px;
-      border: 1px #676767;
-      border-style: solid;
-      .account-signup {
-        display: flex;
-        justify-content: center;
-      }
+    .MuiInput-root {
+      border-bottom: 1px solid #193c98 !important;
     }
 
-    .MuiFormControl-root {
-      width: 100%;
-
-      .MuiInputLabel-root {
-        color: #193c98 !important;
-      }
-      .Mui-focused {
-        color: #193c98 !important;
-      }
-      .MuiOutlinedInput-notchedOutline {
-        border-color: #193c98 !important;
-      }
-
-      .MuiFilledInput-root {
-        border-bottom: 1px solid #193c98 !important;
-      }
-
-      .MuiInput-root {
-        border-bottom: 1px solid #193c98 !important;
-      }
-
-      .form-control-textFiled {
-        font-size: 14px;
-        background-color: #f6f8f9;
-        color: #4e5e6a;
-        box-shadow: none;
-        transition: background 0.5s;
-      }
-
-      .btn-primary {
-        border-color: #193c98;
-        background-color: #193c98;
-      }
+    .form-control-textFiled {
+      font-size: 14px;
+      background-color: #f6f8f9;
+      color: #4e5e6a;
+      box-shadow: none;
+      transition: background 0.5s;
     }
 
-    .forgot-pass {
-      a {
-        color: #6071bd !important;
-        text-decoration: none;
-      }
+    .btn-primary {
+      border-color: #193c98;
+      background-color: #193c98;
     }
-    .have-account {
-      color: #29689e;
-      text-decoration: none;
-    }
+  }
+
+  .text-or {
+    text-align: center;
+    font-size: 18px !important;
   }
 
   .card-header {
@@ -118,9 +107,6 @@
   }
   //  Mobile devices
   @media (min-width: 320px) and (max-width: 480px) {
-    .form-signin {
-      // background-color: #de3163;
-    }
     .grid-first {
       display: none !important;
 
@@ -133,6 +119,10 @@
     .MuiPaper-elevation {
       width: 50vh;
     }
+
+    .MuiGrid-container {
+      height: 100vh;
+    }
   }
 
   // iPads, Tablets
@@ -143,6 +133,10 @@
         border-radius: 12px;
         margin-left: 0px;
       }
+    }
+
+    .MuiGrid-container {
+      height: 100vh;
     }
   }
 
@@ -155,6 +149,10 @@
         height: 312px;
       }
     }
+
+    .MuiGrid-container {
+      height: 100vh;
+    }
   }
 
   // Desktops, large screens
@@ -166,6 +164,10 @@
         height: 312px;
       }
     }
+
+    .MuiGrid-container {
+      height: 100vh;
+    }
   }
 
   @media (min-width: 1201px) and (max-width: 1919px) {
@@ -174,6 +176,10 @@
         border-radius: 12px;
         margin-left: 100px !important;
       }
+    }
+
+    .MuiGrid-container {
+      height: 100vh;
     }
   }
 }

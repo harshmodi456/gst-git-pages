@@ -6,8 +6,7 @@ export default function useHeader() {
 
   if (
     currentPath === "/login" ||
-    currentPath === "/signup" ||
-    currentPath === "/"
+    currentPath === "/signup"
   ) {
     return false;
   } else {
