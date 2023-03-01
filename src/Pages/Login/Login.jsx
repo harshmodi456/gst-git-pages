@@ -40,7 +40,7 @@ const Login = () => {
     //   // }
     // });
 
-    navigate("/");
+    navigate("/search-gst-number");
   };
 
   return (

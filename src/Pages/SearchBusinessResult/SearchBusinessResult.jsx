@@ -38,6 +38,13 @@ const SearchBusinessResult = () => {
     });
   };
 
+  const rowObj = {
+    tradeNam: "CANON INDIA PVT.LTD.",
+    lgnm: "CANON INDIA PRIVATE LIMITED",
+    gstin: "24AAACC4175D1Z4",
+    addr: "Block H, TPS 14, SUMEL Business Park -6"
+  };
+
   return (
     <div className="main-hom-view">
       <div className="container" role="main">
@@ -123,14 +130,33 @@ const SearchBusinessResult = () => {
 
                 <div className="table-view">
                   {getSearchData.length === 0 ? (
-                    <div
-                      style={{
-                        textAlign: "center",
-                        color: "black"
-                      }}
-                    >
-                      Data not found!
-                    </div>
+                    // <div
+                    //   style={{
+                    //     textAlign: "center",
+                    //     color: "black"
+                    //   }}
+                    // >
+                    //   Data not found!
+                    // </div>
+                    <>
+                      <span className="main-title ml-2">
+                        {rowObj?.tradeNam}
+                      </span>
+                      <div
+                        className="data-view"
+                        onClick={() => handleSelectBusiness(rowObj)}
+                      >
+                        <div className="data-view-title media-view-title-first p-3">
+                          Name : {rowObj?.lgnm}
+                        </div>{" "}
+                        <div className="data-view-title media-view-title p-3">
+                          Gst Number : {rowObj?.gstin}
+                        </div>
+                        <div className="data-view-title p-3">
+                          Address : {rowObj?.addr}
+                        </div>
+                      </div>
+                    </>
                   ) : (
                     getSearchData?.map((row, index) => (
                       <>

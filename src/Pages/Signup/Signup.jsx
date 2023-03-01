@@ -54,7 +54,7 @@ const Signup = () => {
     ).then((res) => {
       console.log("res.payload===", res.payload);
       if (res?.payload?.status === "success") {
-        navigate("/login");
+        navigate("/");
       }
     });
   };
@@ -139,7 +139,7 @@ const Signup = () => {
                         Already have an account?
                       </span>{" "}
                       &nbsp;{" "}
-                      <Link to="/login" className="have-account">
+                      <Link to="/" className="have-account">
                         Login
                       </Link>
                     </div>

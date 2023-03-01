@@ -33,7 +33,7 @@ const Header = (props) => {
 
   const handleRoute = (getVal) => {
     if (getVal === "Home") {
-      navigate("/");
+      navigate("/search-gst-number");
     }
   };
 

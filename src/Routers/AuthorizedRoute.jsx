@@ -6,5 +6,6 @@ export default function AuthorizedRoute() {
 
     const [cookies] = useCookies();
 
-    return (cookies.isLogin === 'true') ? <Outlet /> : <Navigate to='/login' />
+    // return (cookies.isLogin === 'true') ? <Outlet /> : <Navigate to='/login' />
+    return (cookies.isLogin === 'true') ? <Outlet /> : <Navigate to='/' />
 }

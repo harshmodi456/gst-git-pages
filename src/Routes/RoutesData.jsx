@@ -14,12 +14,14 @@ export const routeData = [
     element: Signup
   },
   {
-    path: "/login",
+    // path: "/login",
+    path: "/",
     route: PublicRoute,
     element: Login
   },
   {
-    path: "/",
+    // path: "/",
+    path: "/search-gst-number",
     route: AuthorizedRoute,
     element: SearchGstNumber
   },
