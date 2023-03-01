@@ -5,8 +5,14 @@ import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import "./SearchGstNumber.scss";
+import { useAppDispatch } from "../../Redux/Store/Store";
+import { SearchByGstNumber } from "../../Redux/Reducers/SearchGstNumber";
+import { useNavigate } from "react-router-dom";
 
 const SearchGstNumber = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object({
     gstNumber: Yup.string()
       .min(15, "GST must be at least 15 characters")
@@ -14,7 +20,16 @@ const SearchGstNumber = () => {
       .required("Gst Number is Required.")
   });
 
-  const searchGstHandler = (value) => {};
+  const searchGstHandler = (takeValue) => {
+    // dispatch(SearchByGstNumber(takeValue.gstNumber)).then((res) => {
+    //   console.log("res.payload===", res.payload);
+    //   // if (res?.payload?.status === "success") {
+    //   //   navigate("/login");
+    //   // }
+    // });
+
+    navigate("/business-result");
+  };
 
   return (
     <div className="form-searchGst">

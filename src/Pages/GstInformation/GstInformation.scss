@@ -158,13 +158,13 @@
     }
   }
 
-  .dialog-view {
-    .MuiDialog-container {
-      .MuiDialog-paperWidthSm {
-        width: 100% !important;
-      }
-    }
-  }
+  // .dialog-view {
+  //   .MuiDialog-container {
+  //     .MuiPaper-elevation {
+  //       width: 100% !important;
+  //     }
+  //   }
+  // }
   //  Mobile devices
   @media (min-width: 320px) and (max-width: 480px) {
     .grid-first {

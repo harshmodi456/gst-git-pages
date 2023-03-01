@@ -20,10 +20,14 @@ import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./GstInformation.scss";
+import { useLocation } from "react-router-dom";
 
 const GstInformation = () => {
   const [value, setValue] = React.useState(2);
   const [open, setOpen] = React.useState(false);
+
+  const location = useLocation();
+  let { getRow } = location.state;
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -31,6 +35,21 @@ const GstInformation = () => {
 
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const Title = ({ children }) => (
+    <div className="title" style={{ color: "#2a2829", fontSize: "21px" }}>
+      {children}
+      <div className="subtitle" style={{ color: "#747474", fontSize: "14px" }}>
+        Posting Publicly
+      </div>
+    </div>
+  );
+
+  const formInitialValues = {
+    name: getRow?.ctb || "",
+    businessName: getRow?.lgnm || "",
+    address: getRow?.pradr?.addr?.bnm || ""
   };
 
   return (
@@ -52,9 +71,7 @@ const GstInformation = () => {
             />
             <CardContent>
               <Formik
-                initialValues={{
-                  gstNumber: ""
-                }}
+                initialValues={formInitialValues}
                 // validationSchema={validationSchema}
                 // onSubmit={(values) => searchGstHandler(values)}
               >
@@ -152,8 +169,19 @@ const GstInformation = () => {
       </Grid>
 
       <div className="dialog-view">
-        <Dialog open={open} onClose={handleClose}>
-          <DialogTitle>Bharat Info</DialogTitle>
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          PaperProps={{
+            sx: {
+              width: "100%"
+              // maxHeight: 300
+            }
+          }}
+        >
+          <DialogTitle id="alert-dialog-title">
+            <Title>{getRow?.lgnm || "Bharat Info"}</Title>
+          </DialogTitle>
           <DialogContent>
             <DialogContentText>
               <div className="rate-view">
@@ -171,8 +199,9 @@ const GstInformation = () => {
               autoFocus
               margin="dense"
               id="name"
-              label="Email Address"
-              type="email"
+              // label="Email Address"
+              type="text"
+              placeholder="Share Details Of Your Own Experience At This Place"
               fullWidth
               variant="outlined"
             />

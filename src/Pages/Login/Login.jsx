@@ -6,7 +6,7 @@ import CardContent from "@mui/material/CardContent";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
@@ -17,6 +17,7 @@ const Login = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
@@ -27,17 +28,19 @@ const Login = () => {
   });
 
   const signInHandler = (takeValue) => {
-    dispatch(
-      signInUser({
-        gstin: takeValue.gstin,
-        password: takeValue.password
-      })
-    ).then((res) => {
-      console.log("res.payload===", res.payload);
-      // if (res?.payload?.status === "success") {
-      //   navigate("/login");
-      // }
-    });
+    // dispatch(
+    //   signInUser({
+    //     gstin: takeValue.gstNumber,
+    //     password: takeValue.password
+    //   })
+    // ).then((res) => {
+    //   console.log("res.payload===", res.payload);
+    //   // if (res?.payload?.status === "success") {
+    //   //   navigate("/login");
+    //   // }
+    // });
+
+    navigate("/");
   };
 
   return (
@@ -49,7 +52,7 @@ const Login = () => {
           columns={{ xs: 0, sm: 8, md: 12 }}
         >
           <Grid item xs={4} className="grid-first">
-            <img src={loginImg} alt="login"/>
+            <img src={loginImg} alt="login" />
           </Grid>
           <Grid item xs={4} md={5}>
             <Card sx={{ width: 450 }}>
@@ -57,7 +60,8 @@ const Login = () => {
               <CardContent>
                 <Formik
                   initialValues={{
-                    gstNumber: ""
+                    gstNumber: "",
+                    password: ""
                   }}
                   validationSchema={validationSchema}
                   onSubmit={(values) => signInHandler(values)}

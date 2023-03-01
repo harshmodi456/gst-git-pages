@@ -97,7 +97,13 @@ const Header = (props) => {
                 </Typography>
                 <Box sx={{ display: { xs: "none", sm: "block" } }}>
                   {navItems.map((item) => (
-                    <Button key={item} sx={{ color: "#fff" }}>
+                    <Button
+                      key={item}
+                      sx={{ color: "#fff" }}
+                      onClick={(event) => {
+                        handleRoute(item);
+                      }}
+                    >
                       {item}
                     </Button>
                   ))}

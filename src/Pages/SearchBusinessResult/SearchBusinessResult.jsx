@@ -6,8 +6,10 @@ import { BASE_URL } from "../../Constant/ApiUrl";
 import axios from "axios";
 import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import logoImg from "../../Assets/Images/img2.png";
+import { useNavigate } from "react-router-dom";
 
 const SearchBusinessResult = () => {
+  const navigate = useNavigate();
   const [getSearchData, setSearchData] = useState([]);
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
@@ -27,6 +29,13 @@ const SearchBusinessResult = () => {
     } else {
       setSearchData(getResult);
     }
+  };
+
+  const handleSelectBusiness = (getRow) => {
+    console.log("getRow", getRow);
+    navigate("/gst-information", {
+      state: { getRow }
+    });
   };
 
   return (
@@ -126,7 +135,10 @@ const SearchBusinessResult = () => {
                     getSearchData?.map((row, index) => (
                       <>
                         <span className="main-title ml-2">{row?.tradeNam}</span>
-                        <div className="data-view">
+                        <div
+                          className="data-view"
+                          onClick={() => handleSelectBusiness(row)}
+                        >
                           <div className="data-view-title media-view-title-first p-3">
                             Name : {row?.lgnm}
                           </div>{" "}
