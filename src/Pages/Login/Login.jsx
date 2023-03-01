@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
-import { signInUser } from "../../Redux/Reducers/SignInUpReducer";
+import { gstVerify, signInUser } from "../../Redux/Reducers/SignInUpReducer";
 // import { Button } from "@mui/material";
 
 const Login = () => {
@@ -29,18 +29,30 @@ const Login = () => {
 
   const signInHandler = (takeValue) => {
     // dispatch(
-    //   signInUser({
-    //     gstin: takeValue.gstNumber,
-    //     password: takeValue.password
+    //   gstVerify({
+    //     gstin: takeValue.gstNumber
     //   })
     // ).then((res) => {
     //   console.log("res.payload===", res.payload);
-    //   // if (res?.payload?.status === "success") {
-    //   //   navigate("/login");
-    //   // }
+    //   if (res?.payload?.status === "success") {
+    //     // navigate("/login");
+    //     alert(res.payload.message);
+    //   }
     // });
 
-    navigate("/search-gst-number");
+    dispatch(
+      signInUser({
+        gstin: takeValue.gstNumber,
+        password: takeValue.password
+      })
+    ).then((res) => {
+      console.log("res.payload===", res.payload);
+      if (res?.payload?.status === true) {
+        navigate("/search-gst-number");
+      }
+    });
+
+    // navigate("/search-gst-number");
   };
 
   return (

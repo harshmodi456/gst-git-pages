@@ -1,5 +1,6 @@
 import axios from "axios";
-export const api = "https://wa-gst-api.onrender.com/api/v1/";
+// export const api = "https://wa-gst-api.onrender.com/api/v1/";
+export const api = "http://localhost:5000/api/v1/";
 
 const instance = axios.create({
   baseURL: "https://wa-gst-api.onrender.com/api/v1/",

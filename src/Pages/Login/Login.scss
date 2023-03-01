@@ -134,6 +134,91 @@
       width: 50vh;
     }
   }
+  @media (min-width: 360px) and (max-width: 640px) {
+    .form-signin {
+      // background-color: #de3163;
+    }
+    .grid-first {
+      display: none !important;
+
+      img {
+        border-radius: 12px;
+        margin-left: 0px;
+      }
+    }
+
+    .MuiPaper-elevation {
+      width: 50vh;
+    }
+  }
+  @media (min-width: 375px) and (max-width: 667px) {
+    .form-signin {
+      // background-color: #de3163;
+    }
+    .grid-first {
+      display: none !important;
+
+      img {
+        border-radius: 12px;
+        margin-left: 0px;
+      }
+    }
+
+    .MuiPaper-elevation {
+      width: 50vh;
+    }
+  }
+  @media (min-width: 360px) and (max-width: 720px) {
+    .form-signin {
+      // background-color: #de3163;
+    }
+    .grid-first {
+      display: none !important;
+
+      img {
+        border-radius: 12px;
+        margin-left: 0px;
+      }
+    }
+
+    .MuiPaper-elevation {
+      width: 50vh;
+    }
+  }
+  @media (min-width: 375px) and (max-width: 812px) {
+    .form-signin {
+      // background-color: #de3163;
+    }
+    .grid-first {
+      display: none !important;
+
+      img {
+        border-radius: 12px;
+        margin-left: 0px;
+      }
+    }
+
+    .MuiPaper-elevation {
+      width: 50vh;
+    }
+  }
+  @media (min-width: 411px) and (max-width: 731px) {
+    .form-signin {
+      // background-color: #de3163;
+    }
+    .grid-first {
+      display: none !important;
+
+      img {
+        border-radius: 12px;
+        margin-left: 0px;
+      }
+    }
+
+    .MuiPaper-elevation {
+      width: 50vh;
+    }
+  }
 
   // iPads, Tablets
   @media (min-width: 481px) and (max-width: 768px) {

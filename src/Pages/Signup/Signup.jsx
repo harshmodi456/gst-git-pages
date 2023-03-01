@@ -8,7 +8,7 @@ import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
-import { signUpUser } from "../../Redux/Reducers/SignInUpReducer";
+import { gstVerify, signUpUser } from "../../Redux/Reducers/SignInUpReducer";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -45,6 +45,7 @@ const Signup = () => {
     //     alert(res.payload.message);
     //   }
     // });
+
     dispatch(
       signUpUser({
         gstin: takeValue.gstin,
@@ -53,7 +54,7 @@ const Signup = () => {
       })
     ).then((res) => {
       console.log("res.payload===", res.payload);
-      if (res?.payload?.status === "success") {
+      if (res?.payload?.status === true) {
         navigate("/");
       }
     });

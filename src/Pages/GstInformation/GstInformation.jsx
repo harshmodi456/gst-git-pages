@@ -27,7 +27,7 @@ const GstInformation = () => {
   const [open, setOpen] = React.useState(false);
 
   const location = useLocation();
-  let { getRow } = location.state;
+  let getRow = location?.state?.getRow;
 
   const handleClickOpen = () => {
     setOpen(true);

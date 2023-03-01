@@ -1,25 +1,53 @@
 import * as React from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import CssBaseline from "@mui/material/CssBaseline";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
-
+import {
+  Avatar,
+  List,
+  ListItem,
+  Stack,
+  colors,
+  ListItemButton,
+  ListItemIcon,
+  Button,
+  Typography,
+  Toolbar,
+  ListItemText,
+  IconButton,
+  Drawer,
+  Divider,
+  CssBaseline,
+  Box,
+  AppBar
+} from "@mui/material";
+import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import useHeaderFooter from "./Hooks/useHeader.jsx";
+import { Link, useNavigate } from "react-router-dom";
+import logo from "../../Assets/Images/logo192.png";
 import "./Header.scss";
-import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 const navItems = ["Home"];
+
+const colorConfigs = {
+  sidebar: {
+    bg: "#233044",
+    color: "#eeeeee",
+    hoverBg: "#1e293a",
+    activeBg: "#1e253a"
+  },
+  topbar: {
+    bg: "#fff",
+    color: "#000"
+  },
+  mainBg: colors.grey["100"]
+};
+const sizeConfigs = {
+  sidebar: {
+    // width: "300px"
+    width: "240px"
+  }
+};
+
 const Header = (props) => {
   const isVisibleHeader = useHeaderFooter();
   const navigate = useNavigate();
@@ -37,6 +65,7 @@ const Header = (props) => {
     }
   };
 
+  let appState = false;
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <Typography variant="h6" sx={{ my: 2 }}>
@@ -50,6 +79,36 @@ const Header = (props) => {
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton
+              sx={{
+                "&: hover": {
+                  backgroundColor: colorConfigs.sidebar.hoverBg
+                },
+                backgroundColor:
+                  appState === item.state
+                    ? colorConfigs.sidebar.activeBg
+                    : "unset",
+                paddingY: "12px",
+                paddingX: "24px"
+              }}
+              onClick={() => handleRoute(item)}
+            >
+              <ListItemIcon
+                sx={{
+                  color: colorConfigs.sidebar.color
+                }}
+                className="d-flex align-items-center justify-content-center"
+              >
+                <AppsOutlinedIcon />
+                <ListItemText primary={item} className="ml-3" />
+              </ListItemIcon>
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </List>
+      {/* <List>
+        {navItems.map((item) => (
+          <ListItem key={item} disablePadding>
+            <ListItemButton
               sx={{ textAlign: "center" }}
               onClick={() => handleRoute(item)}
             >
@@ -57,7 +116,7 @@ const Header = (props) => {
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </List> */}
     </Box>
   );
 
@@ -119,11 +178,22 @@ const Header = (props) => {
                 ModalProps={{
                   keepMounted: true // Better open performance on mobile.
                 }}
+                // sx={{
+                //   display: { xs: "block", sm: "none" },
+                //   "& .MuiDrawer-paper": {
+                //     boxSizing: "border-box",
+                //     width: drawerWidth
+                //   }
+                // }}
                 sx={{
-                  display: { xs: "block", sm: "none" },
+                  width: sizeConfigs.sidebar.width,
+                  flexShrink: 0,
                   "& .MuiDrawer-paper": {
+                    width: sizeConfigs.sidebar.width,
                     boxSizing: "border-box",
-                    width: drawerWidth
+                    borderRight: "0px",
+                    backgroundColor: colorConfigs.sidebar.bg,
+                    color: colorConfigs.sidebar.color
                   }
                 }}
               >

@@ -73,7 +73,7 @@ const signUpUserSlice = createSlice({
       state.success = true;
       const createLocalObject = {
         success: true,
-        userInfo: action.payload.data
+        userInfo: action.payload
       };
       localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
       toast.success("Login Success!", {
