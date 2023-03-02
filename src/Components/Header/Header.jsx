@@ -26,7 +26,7 @@ import logo from "../../Assets/Images/logo192.png";
 import "./Header.scss";
 
 const drawerWidth = 240;
-const navItems = ["Home"];
+const navItems = ["Home", "Log Out"];
 
 const colorConfigs = {
   sidebar: {
@@ -62,6 +62,9 @@ const Header = (props) => {
   const handleRoute = (getVal) => {
     if (getVal === "Home") {
       navigate("/search-gst-number");
+    } else if (getVal === "Log Out") {
+      localStorage.clear();
+      navigate("/");
     }
   };
 

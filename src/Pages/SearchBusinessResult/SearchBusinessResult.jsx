@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchBusinessResult.scss";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
@@ -7,10 +7,18 @@ import axios from "axios";
 import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import logoImg from "../../Assets/Images/img2.png";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "../../Redux/Store/Store";
+import {
+  SearchByGstNumber,
+  getAllGstRecord
+} from "../../Redux/Reducers/SearchGstNumReducer";
 
 const SearchBusinessResult = () => {
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  // const location = useParams();
   const [getSearchData, setSearchData] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
       .min(15, "GST must be at least 15 characters")
@@ -18,22 +26,22 @@ const SearchBusinessResult = () => {
       .required("GST Number is required")
   });
 
-  const onSearch = async (val) => {
-    const res = await axios(
-      `${BASE_URL}custom/search/name_and_pan/?keyword=${val?.gstNumber}`
-    );
-    const getResult = await res.data.data;
-    console.log("res.data", res.data);
-    if (Object.keys(res.data.data).length === 0) {
-      setSearchData([]);
-    } else {
-      setSearchData(getResult);
+  useEffect(() => {
+    dispatch(getAllGstRecord()).then((res) => {
+      setSearchData(res.payload.gst);
+    });
+  }, []);
+
+  const onSearch = async () => {
+    if (searchInput !== "" || searchInput !== null) {
+      dispatch(SearchByGstNumber(searchInput)).then((res) => {
+        setSearchData(res.payload.gst);
+      });
     }
   };
 
   const handleSelectBusiness = (getRow) => {
-    console.log("getRow", getRow);
-    navigate("/gst-information", {
+    navigate(`/gst-information/${getRow?.gstData?.gstin}`, {
       state: { getRow }
     });
   };
@@ -63,7 +71,52 @@ const SearchBusinessResult = () => {
                 className="card-header card-text-center"
               />
               <CardContent>
-                <Formik
+                <div className="row">
+                  <div className="col-xs-12 col-md-8">
+                    <div className="form-group form-input-fields">
+                      <div className="input-group mb-4 border rounded-pill p-1">
+                        <div className="border-0">
+                          <button
+                            id="button-addon4"
+                            type="button"
+                            className="btn btn-link text-info"
+                          >
+                            <i className="fa fa-search"></i>
+                          </button>
+                        </div>
+                        <input
+                          type="text"
+                          name="gstNumber"
+                          placeholder="Search GST number here..."
+                          className="form-control bg-none border-0"
+                          onChange={(e) => {
+                            console.log(e.target.value);
+                            if (
+                              e.target.value == "" ||
+                              e.target.value == null
+                            ) {
+                              dispatch(getAllGstRecord()).then((res) => {
+                                setSearchData(res.payload.gst);
+                              });
+                            }
+                            setSearchInput(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-xs-4 col-md-2 ml-4 btn-div">
+                    <button
+                      type="button"
+                      onClick={() => onSearch()}
+                      className="btn btn-lg btn-primary"
+                    >
+                      <span className="search-button" aria-hidden="true"></span>{" "}
+                      Search
+                    </button>
+                  </div>
+                </div>
+                {/* <Formik
                   initialValues={{
                     gstNumber: ""
                   }}
@@ -126,38 +179,38 @@ const SearchBusinessResult = () => {
                       </div>
                     </Form>
                   )}
-                </Formik>
+                </Formik> */}
 
                 <div className="table-view">
                   {getSearchData.length === 0 ? (
-                    // <div
-                    //   style={{
-                    //     textAlign: "center",
-                    //     color: "black"
-                    //   }}
-                    // >
-                    //   Data not found!
-                    // </div>
-                    <>
-                      <span className="main-title ml-2">
-                        {rowObj?.tradeNam}
-                      </span>
-                      <div
-                        className="data-view"
-                        onClick={() => handleSelectBusiness(rowObj)}
-                      >
-                        <div className="data-view-title media-view-title-first p-3">
-                          Name : {rowObj?.lgnm}
-                        </div>{" "}
-                        <div className="data-view-title media-view-title p-3">
-                          Gst Number : {rowObj?.gstin}
-                        </div>
-                        <div className="data-view-title p-3">
-                          Address : {rowObj?.addr}
-                        </div>
-                      </div>
-                    </>
+                    <div
+                      style={{
+                        textAlign: "center",
+                        color: "black"
+                      }}
+                    >
+                      Data not found!
+                    </div>
                   ) : (
+                    // <>
+                    //   <span className="main-title ml-2">
+                    //     {rowObj?.tradeNam}
+                    //   </span>
+                    //   <div
+                    //     className="data-view"
+                    //     onClick={() => handleSelectBusiness(rowObj)}
+                    //   >
+                    //     <div className="data-view-title media-view-title-first p-3">
+                    //       Name : {rowObj?.lgnm}
+                    //     </div>{" "}
+                    //     <div className="data-view-title media-view-title p-3">
+                    //       Gst Number : {rowObj?.gstin}
+                    //     </div>
+                    //     <div className="data-view-title p-3">
+                    //       Address : {rowObj?.addr}
+                    //     </div>
+                    //   </div>
+                    // </>
                     getSearchData?.map((row, index) => (
                       <>
                         <span className="main-title ml-2">{row?.tradeNam}</span>
@@ -166,13 +219,13 @@ const SearchBusinessResult = () => {
                           onClick={() => handleSelectBusiness(row)}
                         >
                           <div className="data-view-title media-view-title-first p-3">
-                            Name : {row?.lgnm}
+                            Name : {row?.gstData?.lgnm}
                           </div>{" "}
                           <div className="data-view-title media-view-title p-3">
-                            Gst Number : {row?.gstin}
+                            Gst Number : {row?.gstData?.gstin}
                           </div>
                           <div className="data-view-title p-3">
-                            Address : {row?.pradr?.addr?.bnm}
+                            Address : {row?.gstData?.pradr?.addr?.bnm}
                           </div>
                         </div>
                       </>

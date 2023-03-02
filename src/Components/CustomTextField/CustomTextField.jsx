@@ -16,7 +16,6 @@ const CustomTextField = ({
   form: { touched, errors }, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
   ...props
 }) => {
-  console.log("touched", touched);
   return (
     <>
       {field?.name === "password" ? (

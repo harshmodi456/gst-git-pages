@@ -33,13 +33,11 @@ const Signup = () => {
   });
 
   const signupHandler = (takeValue) => {
-    console.log(takeValue);
     // dispatch(
     //   gstVerify({
     //     gstin: takeValue.gstin
     //   })
     // ).then((res) => {
-    //   console.log("res.payload===", res.payload);
     //   if (res?.payload?.status === "success") {
     //     // navigate("/login");
     //     alert(res.payload.message);
@@ -53,7 +51,6 @@ const Signup = () => {
         passwordConfirm: takeValue.confirmPassword
       })
     ).then((res) => {
-      console.log("res.payload===", res.payload);
       if (res?.payload?.status === true) {
         navigate("/");
       }

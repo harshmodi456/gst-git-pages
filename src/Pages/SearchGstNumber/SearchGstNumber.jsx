@@ -6,7 +6,10 @@ import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import "./SearchGstNumber.scss";
 import { useAppDispatch } from "../../Redux/Store/Store";
-import { SearchByGstNumber } from "../../Redux/Reducers/SearchGstNumber";
+import {
+  gstVerify,
+  postGstRecord
+} from "../../Redux/Reducers/SearchGstNumReducer";
 import { useNavigate } from "react-router-dom";
 
 const SearchGstNumber = () => {
@@ -22,13 +25,26 @@ const SearchGstNumber = () => {
 
   const searchGstHandler = (takeValue) => {
     // dispatch(SearchByGstNumber(takeValue.gstNumber)).then((res) => {
-    //   console.log("res.payload===", res.payload);
     //   // if (res?.payload?.status === "success") {
     //   //   navigate("/login");
     //   // }
     // });
 
-    navigate("/business-result");
+    const reqeObj = {
+      gstin: takeValue.gstNumber
+    };
+
+    dispatch(gstVerify(reqeObj)).then((res) => {
+      if (res?.payload?.status === true || res?.payload?.data) {
+        dispatch(postGstRecord(reqeObj)).then((res) => {
+          if (res?.payload?.status === true) {
+            // navigate(`/business-result/${takeValue.gstNumber}`);
+            navigate(`/business-result`);
+          }
+        });
+      }
+    });
+    // navigate("/business-result");
   };
 
   return (

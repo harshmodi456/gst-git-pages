@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import SignUpReducer from "../Reducers/SignInUpReducer";
-import SearchGstNumberReducer from '../Reducers/SearchGstNumber'
+import SearchGstNumberReducer from '../Reducers/SearchGstNumReducer'
 const Store = configureStore({
   reducer: {
     signUpUser: SignUpReducer,

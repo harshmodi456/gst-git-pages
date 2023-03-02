@@ -33,20 +33,6 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
-// for login action and state declaration
-export const gstVerify = createAsyncThunk(
-  "user/gstVerify",
-  async (data, thunkApi) => {
-    try {
-      return await (
-        await axios.post(`${api}gst/verify`, data)
-      ).data;
-    } catch (error) {
-      return thunkApi.rejectWithValue(error);
-    }
-  }
-);
-
 const initialState = {
   loading: false,
   userInfo: {},
@@ -123,41 +109,6 @@ const signUpUserSlice = createSlice({
       <Navigate to="/signIn" />;
     });
     builder.addCase(signUpUser.rejected, (state, action) => {
-      state.error = action?.payload?.response?.data;
-      state.loading = false;
-      toast.error(action?.payload?.response?.data?.message, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light"
-      });
-    });
-
-    // for gst verify
-    builder.addCase(gstVerify.pending, (state, action) => {
-      state.loading = true;
-      state.error = {};
-    });
-    builder.addCase(gstVerify.fulfilled, (state, action) => {
-      state.loading = false;
-      //   state.success = true;
-      toast.success("Gst Number is valid!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light"
-      });
-      //   <Navigate to="/signIn" />;
-    });
-    builder.addCase(gstVerify.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
       state.loading = false;
       toast.error(action?.payload?.response?.data?.message, {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Login.scss";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -19,6 +19,17 @@ const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const takeUserInfo = localStorage.getItem("userInfo");
+    const getUserInfo = JSON.parse(takeUserInfo);
+    if (getUserInfo !== undefined && getUserInfo !== null) {
+      navigate("/");
+    }
+    if (getUserInfo) {
+      navigate("/search-gst-number");
+    }
+  }, []);
+
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
       .min(15, "GST must be at least 15 characters")
@@ -33,7 +44,6 @@ const Login = () => {
     //     gstin: takeValue.gstNumber
     //   })
     // ).then((res) => {
-    //   console.log("res.payload===", res.payload);
     //   if (res?.payload?.status === "success") {
     //     // navigate("/login");
     //     alert(res.payload.message);
@@ -46,7 +56,6 @@ const Login = () => {
         password: takeValue.password
       })
     ).then((res) => {
-      console.log("res.payload===", res.payload);
       if (res?.payload?.status === true) {
         navigate("/search-gst-number");
       }
