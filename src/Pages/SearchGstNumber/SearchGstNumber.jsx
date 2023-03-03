@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import { Card, CardContent, CardHeader, Grid } from "@mui/material";
+import { Card, CardContent, CardHeader, Grid, TextField } from "@mui/material";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import "./SearchGstNumber.scss";
@@ -11,10 +11,16 @@ import {
   postGstRecord
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useNavigate } from "react-router-dom";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const [loading, isLoading] = React.useState(false);
+  const [gstNumber, setGstNumber] = React.useState("");
+  const [checkGstIn, setCheckGstIn] = React.useState(false);
+  const [businessName, setBusinessName] = React.useState("");
 
   const validationSchema = Yup.object({
     gstNumber: Yup.string()
@@ -29,9 +35,9 @@ const SearchGstNumber = () => {
     //   //   navigate("/login");
     //   // }
     // });
-
+    isLoading(true);
     const reqeObj = {
-      gstin: takeValue.gstNumber
+      gstin: takeValue
     };
 
     dispatch(gstVerify(reqeObj)).then((res) => {
@@ -41,6 +47,7 @@ const SearchGstNumber = () => {
             // navigate(`/business-result/${takeValue.gstNumber}`);
             navigate(`/business-result`);
           }
+          isLoading(false);
         });
       }
     });
@@ -49,6 +56,12 @@ const SearchGstNumber = () => {
 
   return (
     <div className="form-searchGst">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid
         container
         spacing={{ xs: 0, md: 3 }}
@@ -65,7 +78,81 @@ const SearchGstNumber = () => {
               className="card-header text-center"
             />
             <CardContent>
-              <Formik
+              <form>
+                <div className="form-group">
+                  <TextField
+                    name="gstNumber"
+                    type="text"
+                    // component={CustomTextField}
+                    id="gstNumber"
+                    label="Gst Number"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                    value={gstNumber}
+                    onChange={(event) => {
+                      setCheckGstIn(true);
+                      setGstNumber(event.target.value);
+                      setBusinessName("");
+                      if (event.target.value?.toString().length <= 15) {
+                        setCheckGstIn(true);
+                      }
+                      if (event.target.value?.toString().length === 15) {
+                        setCheckGstIn(false);
+                      }
+                      if (event.target.value === "") {
+                        setCheckGstIn(false);
+                      }
+                    }}
+                    inputProps={{ maxLength: 15, minLength: 15 }}
+                  />
+                  {checkGstIn && (
+                    <span className="text-danger">
+                      GST must be at least 15 characters
+                    </span>
+                  )}
+                </div>
+                <h5 className="text-or mb-3">OR</h5>
+                <div className="form-group">
+                  <TextField
+                    name="businessName"
+                    type="text"
+                    // component={CustomTextField}
+                    id="businessName"
+                    label="Business Name"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                    value={businessName}
+                    onChange={(event) => {
+                      setBusinessName(event.target.value);
+                      setGstNumber("");
+                    }}
+                  />
+                </div>
+                <div className="w-50 mt-4 mb-3">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      searchGstHandler(gstNumber ? gstNumber : businessName);
+                    }}
+                    className="w-100 btn btn-lg btn-primary"
+                    disabled={
+                      gstNumber ? checkGstIn : businessName ? false : true
+                    }
+                  >
+                    Submit
+                  </button>
+                </div>
+                {/* <div className="mt-2 account-signup">
+                        <span style={{ color: "#27489f" }}>
+                          You don't have an account?
+                        </span>{" "}
+                        &nbsp;{" "}
+                        <Link to="/signup" className="have-account">
+                          Sign up
+                        </Link>
+                      </div> */}
+              </form>
+              {/* <Formik
                 initialValues={{
                   gstNumber: ""
                 }}
@@ -102,18 +189,9 @@ const SearchGstNumber = () => {
                         Submit
                       </button>
                     </div>
-                    {/* <div className="mt-2 account-signup">
-                        <span style={{ color: "#27489f" }}>
-                          You don't have an account?
-                        </span>{" "}
-                        &nbsp;{" "}
-                        <Link to="/signup" className="have-account">
-                          Sign up
-                        </Link>
-                      </div> */}
                   </Form>
                 )}
-              </Formik>
+              </Formik> */}
             </CardContent>
           </Card>
         </Grid>

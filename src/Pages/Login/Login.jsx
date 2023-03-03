@@ -11,13 +11,16 @@ import Grid from "@mui/material/Grid";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { gstVerify, signInUser } from "../../Redux/Reducers/SignInUpReducer";
-// import { Button } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Login = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  const [showPassword, setShowPassword] = React.useState(false);
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+  const [loading, isLoading] = React.useState(false);
 
   useEffect(() => {
     const takeUserInfo = localStorage.getItem("userInfo");
@@ -49,7 +52,7 @@ const Login = () => {
     //     alert(res.payload.message);
     //   }
     // });
-
+    isLoading(true);
     dispatch(
       signInUser({
         gstin: takeValue.gstNumber,
@@ -59,6 +62,7 @@ const Login = () => {
       if (res?.payload?.status === true) {
         navigate("/search-gst-number");
       }
+      isLoading(false);
     });
 
     // navigate("/search-gst-number");
@@ -66,6 +70,12 @@ const Login = () => {
 
   return (
     <div className="form-signin">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="form-card">
         <Grid
           container

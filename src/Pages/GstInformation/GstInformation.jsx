@@ -28,6 +28,8 @@ import {
   writeReview
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import moment from "moment/moment";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -38,14 +40,17 @@ const GstInformation = () => {
   const [reviewTextDesc, setReviewTextDesc] = React.useState("");
   // const [gstDbId, setGstDbId] = React.useState("");
   const [getReviewData, setReviewData] = React.useState([]);
+  const [loading, isLoading] = React.useState(false);
 
   const getUserToken = JSON.parse(localStorage.getItem("userInfo"));
-  let gstDbId = "";
+
   useEffect(() => {
+    isLoading(true);
     dispatch(getRecordGstById(params.gstNumber)).then((res) => {
       setFormValue(res?.payload?.data);
       dispatch(getWriteReview(res?.payload?.data?._id)).then((res) => {
         setReviewData(res?.payload?.reviews);
+        isLoading(false);
       });
     });
   }, []);
@@ -76,10 +81,11 @@ const GstInformation = () => {
     };
     dispatch(writeReview(writeReviewInput)).then((res) => {
       if (res?.payload?.status === true) {
-        console.log("res?.payload", res?.payload);
         handleClose();
+        isLoading(true);
         dispatch(getWriteReview(getFormValue._id)).then((res) => {
           setReviewData(res?.payload?.reviews);
+          isLoading(false);
         });
       }
     });
@@ -93,6 +99,12 @@ const GstInformation = () => {
 
   return (
     <div className="form-searchGstInformation">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid
         container
         spacing={{ xs: 0, md: 3 }}

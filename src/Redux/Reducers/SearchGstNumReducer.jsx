@@ -136,18 +136,22 @@ const SearchGstNumber = createSlice({
     });
     builder.addCase(gstVerify.fulfilled, (state, action) => {
       state.loading = false;
-      //   state.success = true;
-      toast.success("Gst Number is valid!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light"
-      });
-      //   <Navigate to="/signIn" />;
+      
+      let isValid =
+        typeof action?.payload.data === "object" &&
+        action?.payload.data !== null;
+      if (!isValid) {
+        toast.success("Gst Number is valid!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      }
     });
     builder.addCase(gstVerify.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;

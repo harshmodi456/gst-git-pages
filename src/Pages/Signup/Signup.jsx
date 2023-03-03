@@ -9,9 +9,12 @@ import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { gstVerify, signUpUser } from "../../Redux/Reducers/SignInUpReducer";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const [loading, isLoading] = React.useState(false);
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const dispatch = useAppDispatch();
@@ -43,7 +46,7 @@ const Signup = () => {
     //     alert(res.payload.message);
     //   }
     // });
-
+    isLoading(true);
     dispatch(
       signUpUser({
         gstin: takeValue.gstin,
@@ -54,11 +57,18 @@ const Signup = () => {
       if (res?.payload?.status === true) {
         navigate("/");
       }
+      isLoading(false);
     });
   };
 
   return (
     <div className="form-signup">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="form-card">
         <Grid
           container

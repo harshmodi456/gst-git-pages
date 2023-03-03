@@ -12,6 +12,8 @@ import {
   SearchByGstNumber,
   getAllGstRecord
 } from "../../Redux/Reducers/SearchGstNumReducer";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const SearchBusinessResult = () => {
   const navigate = useNavigate();
@@ -19,6 +21,8 @@ const SearchBusinessResult = () => {
   // const location = useParams();
   const [getSearchData, setSearchData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [loading, isLoading] = React.useState(false);
+
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
       .min(15, "GST must be at least 15 characters")
@@ -27,15 +31,19 @@ const SearchBusinessResult = () => {
   });
 
   useEffect(() => {
+    isLoading(true);
     dispatch(getAllGstRecord()).then((res) => {
       setSearchData(res.payload.gst);
+      isLoading(false);
     });
   }, []);
 
   const onSearch = async () => {
+    isLoading(true);
     if (searchInput !== "" || searchInput !== null) {
       dispatch(SearchByGstNumber(searchInput)).then((res) => {
         setSearchData(res.payload.gst);
+        isLoading(false);
       });
     }
   };
@@ -55,6 +63,12 @@ const SearchBusinessResult = () => {
 
   return (
     <div className="main-hom-view">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="container" role="main">
         <Grid
           container
@@ -213,7 +227,9 @@ const SearchBusinessResult = () => {
                     // </>
                     getSearchData?.map((row, index) => (
                       <>
-                        <span className="main-title ml-2">{row?.tradeNam}</span>
+                        <span className="main-title ml-2" key={index}>
+                          {row?.tradeNam}
+                        </span>
                         <div
                           className="data-view"
                           onClick={() => handleSelectBusiness(row)}
