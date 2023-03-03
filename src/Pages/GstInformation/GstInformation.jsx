@@ -128,6 +128,7 @@ const GstInformation = () => {
                         placeholder="Name"
                         variant="outlined"
                         className="form-control-textFiled"
+                        disabled={true}
                       />
                     </div>
                     <div className="form-group">
@@ -141,6 +142,7 @@ const GstInformation = () => {
                         placeholder="Business Name"
                         variant="outlined"
                         className="form-control-textFiled"
+                        disabled={true}
                       />
                     </div>
                     <div className="form-group">
@@ -154,6 +156,7 @@ const GstInformation = () => {
                         placeholder="Address"
                         variant="outlined"
                         className="form-control-textFiled"
+                        disabled={true}
                       />
                     </div>
                   </Form>

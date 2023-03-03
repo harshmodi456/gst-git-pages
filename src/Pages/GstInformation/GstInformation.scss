@@ -150,6 +150,7 @@
       border: 1px #183a99;
       border-style: solid;
       width: 100%;
+      margin-left: 0px;
     }
     .MuiCard-root {
       max-width: none;
@@ -184,23 +185,22 @@
   //   }
   // }
   //  Mobile devices
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (max-width: 480px) {
     .grid-first {
       display: none !important;
 
       img {
-        border-radius: 12px;
         margin-left: 0px;
       }
     }
 
     .MuiPaper-elevation {
-      width: 50vh;
+      width: 92%;
+      margin-left: 15px;
     }
 
     .MuiGrid-container {
-      height: 100%;
-      margin-top: 65px;
+      margin-top: 100px;
     }
 
     .rate-div-main {

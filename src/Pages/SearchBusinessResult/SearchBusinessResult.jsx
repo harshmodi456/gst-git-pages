@@ -218,13 +218,13 @@ const SearchBusinessResult = () => {
                           className="data-view"
                           onClick={() => handleSelectBusiness(row)}
                         >
-                          <div className="data-view-title media-view-title-first p-3">
+                          <div className="data-view-title media-view-title-first">
                             Name : {row?.gstData?.lgnm}
                           </div>{" "}
-                          <div className="data-view-title media-view-title p-3">
+                          <div className="data-view-title media-view-title">
                             Gst Number : {row?.gstData?.gstin}
                           </div>
-                          <div className="data-view-title p-3">
+                          <div className="data-view-title">
                             Address : {row?.gstData?.pradr?.addr?.bnm}
                           </div>
                         </div>

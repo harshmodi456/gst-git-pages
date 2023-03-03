@@ -93,17 +93,43 @@
       font-size: large;
     }
 
+    .MuiCardContent-root {
+      padding: 0px !important;
+
+      .row {
+        margin-left: 0px !important;
+      }
+    }
+
     .data-view {
-      height: 140px;
-      width: 100%;
+      display: flex;
+      flex-direction: column;
+      margin: 0px 16px;
+      padding: 12px;
       border: 1px solid #002fa5 !important;
       border-radius: 10px;
+      transition: all 0.5s;
       cursor: pointer;
 
       .data-view-title {
-        // margin-top: 5px;
         color: #686868;
-        height: 12px;
+        margin: 5px 0px;
+      }
+    }
+
+    .data-view:hover {
+      display: flex;
+      flex-direction: column;
+      margin: 0px 16px;
+      padding: 12px;
+      border: 1px solid #002fa5 !important;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.5s;
+      box-shadow: #b8b7ff 0px 0px 15px 7px !important;
+      .data-view-title {
+        color: #686868;
+        margin: 5px 0px;
       }
     }
 
@@ -118,6 +144,7 @@
     .table-view {
       height: 551px;
       overflow-y: auto;
+      padding: 0px 0px 16px 0px;
 
       .MuiTableCell-head {
         background-color: #8ba6e6;
@@ -143,7 +170,7 @@
   }
 
   //  Mobile devices
-  @media (min-width: 320px) and (max-width: 480px) {
+  @media (max-width: 480px) {
     .grid-first {
       display: none !important;
 
@@ -155,11 +182,13 @@
 
     .MuiGrid-container {
       margin-left: 0px !important;
-      height: 100vh !important;
+      .form-input-fields{
+        margin-right: 14px;
+      }
     }
 
     .MuiPaper-elevation {
-      width: 50vh;
+      width: 100%;
     }
 
     .table-view {
@@ -203,8 +232,8 @@
   @media (min-width: 481px) and (max-width: 768px) {
     .grid-first {
       display: none !important;
+
       img {
-        border-radius: 12px;
         margin-left: 0px;
       }
     }

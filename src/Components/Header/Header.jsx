@@ -20,13 +20,15 @@ import {
   AppBar
 } from "@mui/material";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
+import LogoutIcon from "@mui/icons-material/Logout";
+import BusinessIcon from "@mui/icons-material/Business";
 import useHeaderFooter from "./Hooks/useHeader.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../Assets/Images/logo192.png";
 import "./Header.scss";
 
 const drawerWidth = 240;
-const navItems = ["Home", "Log Out"];
+const navItems = ["Home", "Business", "Log Out"];
 
 const colorConfigs = {
   sidebar: {
@@ -62,6 +64,8 @@ const Header = (props) => {
   const handleRoute = (getVal) => {
     if (getVal === "Home") {
       navigate("/search-gst-number");
+    } else if (getVal === "Business") {
+      navigate("/business-result");
     } else if (getVal === "Log Out") {
       localStorage.clear();
       navigate("/");
@@ -101,8 +105,22 @@ const Header = (props) => {
                 }}
                 className="d-flex align-items-center justify-content-center"
               >
-                <AppsOutlinedIcon />
-                <ListItemText primary={item} className="ml-3" />
+                {item === "Home" ? (
+                  <>
+                    <AppsOutlinedIcon />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                ) : item === "Business" ? (
+                  <>
+                    <BusinessIcon />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                ) : (
+                  <>
+                    <LogoutIcon className="ml-1" />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                )}
               </ListItemIcon>
             </ListItemButton>
           </ListItem>
