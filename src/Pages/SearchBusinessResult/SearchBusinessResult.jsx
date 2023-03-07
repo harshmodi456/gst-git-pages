@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import "./SearchBusinessResult.scss";
-import { Field, Form, Formik } from "formik";
-import * as Yup from "yup";
-import { BASE_URL } from "../../Constant/ApiUrl";
-import axios from "axios";
+// import { Field, Form, Formik } from "formik";
+// import * as Yup from "yup";
+// import { BASE_URL } from "../../Constant/ApiUrl";
+// import axios from "axios";
 import { Card, CardContent, CardHeader, Grid } from "@mui/material";
 import logoImg from "../../Assets/Images/img2.png";
 import { useNavigate } from "react-router-dom";
@@ -14,6 +14,7 @@ import {
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const SearchBusinessResult = () => {
   const navigate = useNavigate();
@@ -21,22 +22,35 @@ const SearchBusinessResult = () => {
   // const location = useParams();
   const [getSearchData, setSearchData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
+  const [size, setSize] = useState(10);
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(0);
+  const [hasMore, setHasMore] = React.useState(false);
   const [loading, isLoading] = React.useState(false);
 
-  const validationSchema = Yup.object().shape({
-    gstNumber: Yup.string()
-      .min(15, "GST must be at least 15 characters")
-      .max(15, "GST must be at least 15 characters")
-      .required("GST Number is required")
-  });
+  // const validationSchema = Yup.object().shape({
+  //   gstNumber: Yup.string()
+  //     .min(15, "GST must be at least 15 characters")
+  //     .max(15, "GST must be at least 15 characters")
+  //     .required("GST Number is required")
+  // });
 
   useEffect(() => {
+    getAllGstRecordFn();
+  }, []);
+
+  const getAllGstRecordFn = () => {
     isLoading(true);
-    dispatch(getAllGstRecord()).then((res) => {
+    const queryBody = {
+      size: size,
+      page: page
+    };
+    dispatch(getAllGstRecord(queryBody)).then((res) => {
       setSearchData(res.payload.gst);
+      setTotalPage(res.payload.total_page);
       isLoading(false);
     });
-  }, []);
+  };
 
   const onSearch = async () => {
     isLoading(true);
@@ -54,11 +68,27 @@ const SearchBusinessResult = () => {
     });
   };
 
-  const rowObj = {
-    tradeNam: "CANON INDIA PVT.LTD.",
-    lgnm: "CANON INDIA PRIVATE LIMITED",
-    gstin: "24AAACC4175D1Z4",
-    addr: "Block H, TPS 14, SUMEL Business Park -6"
+  // const rowObj = {
+  //   tradeNam: "CANON INDIA PVT.LTD.",
+  //   lgnm: "CANON INDIA PRIVATE LIMITED",
+  //   gstin: "24AAACC4175D1Z4",
+  //   addr: "Block H, TPS 14, SUMEL Business Park -6"
+  // };
+
+  const fetchMoreData = () => {
+    alert("called");
+    console.log("page===", page === totalPage);
+    if (page === totalPage) {
+      setHasMore(false);
+      return;
+    }
+    // a fake async api call like which sends
+    // 20 more records in .5 secs
+    setTimeout(() => {
+      setSize(size + 10);
+      setPage(page + 1);
+      getAllGstRecordFn();
+    }, 500);
   };
 
   return (
@@ -106,12 +136,13 @@ const SearchBusinessResult = () => {
                           onChange={(e) => {
                             console.log(e.target.value);
                             if (
-                              e.target.value == "" ||
-                              e.target.value == null
+                              e.target.value === "" ||
+                              e.target.value === null
                             ) {
-                              dispatch(getAllGstRecord()).then((res) => {
-                                setSearchData(res.payload.gst);
-                              });
+                              // dispatch(getAllGstRecord()).then((res) => {
+                              //   setSearchData(res.payload.gst);
+                              // });
+                              getAllGstRecordFn();
                             }
                             setSearchInput(e.target.value);
                           }}
@@ -194,9 +225,8 @@ const SearchBusinessResult = () => {
                     </Form>
                   )}
                 </Formik> */}
-
-                <div className="table-view">
-                  {getSearchData.length === 0 ? (
+                <div className="table-view" id="scrollableDiv">
+                  {getSearchData?.length === 0 ? (
                     <div
                       style={{
                         textAlign: "center",
@@ -225,27 +255,44 @@ const SearchBusinessResult = () => {
                     //     </div>
                     //   </div>
                     // </>
-                    getSearchData?.map((row, index) => (
-                      <>
-                        <span className="main-title ml-2" key={index}>
-                          {row?.tradeNam}
-                        </span>
-                        <div
-                          className="data-view"
-                          onClick={() => handleSelectBusiness(row)}
-                        >
-                          <div className="data-view-title media-view-title-first">
-                            Name : {row?.gstData?.lgnm}
-                          </div>{" "}
-                          <div className="data-view-title media-view-title">
-                            Gst Number : {row?.gstData?.gstin}
+
+                    <InfiniteScroll
+                      height={551}
+                      dataLength={getSearchData?.length}
+                      // pullDownToRefreshThreshold={50}
+                      // next={fetchMoreData}
+                      scrollableTarget="scrollableDiv"
+                      next={fetchMoreData}
+                      hasMore={hasMore}
+                      loader={<h4>Loading...</h4>}
+                      // endMessage={
+                      //   <p style={{ textAlign: "center" }}>
+                      //     <b>Yay! You have seen it all</b>
+                      //   </p>
+                      // }
+                    >
+                      {getSearchData?.map((row, index) => (
+                        <>
+                          <span className="main-title ml-2" key={index}>
+                            {row?.tradeNam}
+                          </span>
+                          <div
+                            className="data-view"
+                            onClick={() => handleSelectBusiness(row)}
+                          >
+                            <div className="data-view-title media-view-title-first">
+                              Name : {row?.gstData?.lgnm}
+                            </div>{" "}
+                            <div className="data-view-title media-view-title">
+                              Gst Number : {row?.gstData?.gstin}
+                            </div>
+                            <div className="data-view-title">
+                              Address : {row?.gstData?.pradr?.addr?.bnm}
+                            </div>
                           </div>
-                          <div className="data-view-title">
-                            Address : {row?.gstData?.pradr?.addr?.bnm}
-                          </div>
-                        </div>
-                      </>
-                    ))
+                        </>
+                      ))}
+                    </InfiniteScroll>
                   )}
                 </div>
               </CardContent>

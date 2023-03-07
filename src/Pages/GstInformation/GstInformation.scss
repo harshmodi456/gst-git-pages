@@ -177,13 +177,14 @@
     background: #8ba6e6;
     border-radius: 10px;
   }
-  // .dialog-view {
-  //   .MuiDialog-container {
-  //     .MuiPaper-elevation {
-  //       width: 100% !important;
-  //     }
-  //   }
-  // }
+  .basic-single {
+    .select__control {
+      height: 50px;
+      border: 1px #183a99;
+      border-style: solid;
+      font-size: 14px;
+    }
+  }
   //  Mobile devices
   @media (max-width: 480px) {
     .grid-first {

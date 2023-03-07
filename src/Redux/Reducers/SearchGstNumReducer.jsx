@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
 import { api } from "../../Constant/AxiosInstance";
 import { toast } from "react-toastify";
 import instance from "../../Constant/AxiosInstance";
@@ -58,7 +57,7 @@ export const getAllGstRecord = createAsyncThunk(
       return await // await doFetch(`${api}/auth/login`,'POST',data)
       // await axios.get(`${api}gst/getGst/${data}`)
       (
-        await instance.get(`${api}gst`, data)
+        await instance.get(`${api}gst?size=${data.size}?page=${data.page}`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -106,7 +105,11 @@ export const getWriteReview = createAsyncThunk(
       return await // await doFetch(`${api}/auth/login`,'POST',data)
       // await axios.get(`${api}gst/getGst/${data}`)
       (
-        await instance.get(`${api}review/${data}`)
+        await instance.get(
+          `${api}review/${data?.gstId}${
+            data?.address ? `?address=${data?.address}` : ""
+          }`
+        )
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -136,12 +139,24 @@ const SearchGstNumber = createSlice({
     });
     builder.addCase(gstVerify.fulfilled, (state, action) => {
       state.loading = false;
-      
-      let isValid =
-        typeof action?.payload.data === "object" &&
-        action?.payload.data !== null;
-      if (!isValid) {
-        toast.success("Gst Number is valid!", {
+
+      // let isValid =
+      //   typeof action?.payload.data === "object" &&
+      //   action?.payload.data !== null;
+
+      if (action?.payload?.status === true) {
+        toast.success("Gst number or name is valid!", {
+          position: "top-right",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light"
+        });
+      } else {
+        toast.success("Gst number or name is not valid!", {
           position: "top-right",
           autoClose: 2000,
           hideProgressBar: false,
@@ -152,6 +167,18 @@ const SearchGstNumber = createSlice({
           theme: "light"
         });
       }
+      // if (!isValid) {
+      //   toast.success("Gst Number is valid!", {
+      //     position: "top-right",
+      //     autoClose: 2000,
+      //     hideProgressBar: false,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     progress: undefined,
+      //     theme: "light"
+      //   });
+      // }
     });
     builder.addCase(gstVerify.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;

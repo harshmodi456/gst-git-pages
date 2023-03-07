@@ -11,4 +11,15 @@
   .MuiButtonBase-root {
     color: rgba(0, 0, 0, 0.87) !important;
   }
+
+  button:focus {
+    outline: none !important;
+  }
+  @media (max-width: 480px) {
+    .MuiButtonBase-root {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+    }
+  }
 }

@@ -1,10 +1,8 @@
 import * as React from "react";
 import MenuIcon from "@mui/icons-material/Menu";
 import {
-  Avatar,
   List,
   ListItem,
-  Stack,
   colors,
   ListItemButton,
   ListItemIcon,
@@ -23,11 +21,11 @@ import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BusinessIcon from "@mui/icons-material/Business";
 import useHeaderFooter from "./Hooks/useHeader.jsx";
-import { Link, useNavigate } from "react-router-dom";
-import logo from "../../Assets/Images/logo192.png";
+import { useNavigate } from "react-router-dom";
+// import logo from "../../Assets/Images/logo192.png";
 import "./Header.scss";
 
-const drawerWidth = 240;
+// const drawerWidth = 240;
 const navItems = ["Home", "Business", "Log Out"];
 
 const colorConfigs = {
@@ -160,10 +158,14 @@ const Header = (props) => {
                   color="inherit"
                   aria-label="open drawer"
                   edge="start"
-                  onClick={handleDrawerToggle}
+                  // onClick={handleDrawerToggle}
                   sx={{ mr: 2, display: { sm: "none" } }}
                 >
-                  <MenuIcon />
+                  <MenuIcon onClick={handleDrawerToggle} />
+                  <div className="d-flex h-100 justify-content-center">
+                    <h3 className="m-0">G S T</h3>
+                    <h3 className="m-0 ml-2 text-danger"> I N </h3>
+                  </div>
                 </IconButton>
                 <Typography
                   variant="h6"

@@ -1,8 +1,8 @@
 import React from "react";
-import { Formik, Field, Form } from "formik";
-import * as Yup from "yup";
+// import { Formik, Field, Form } from "formik";
+// import * as Yup from "yup";
 import { Card, CardContent, CardHeader, Grid, TextField } from "@mui/material";
-import CustomTextField from "../../Components/CustomTextField/CustomTextField";
+// import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import "./SearchGstNumber.scss";
 import { useAppDispatch } from "../../Redux/Store/Store";
@@ -13,6 +13,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import PostAddIcon from "@mui/icons-material/PostAdd";
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
@@ -21,39 +22,61 @@ const SearchGstNumber = () => {
   const [gstNumber, setGstNumber] = React.useState("");
   const [checkGstIn, setCheckGstIn] = React.useState(false);
   const [businessName, setBusinessName] = React.useState("");
+  const [gstSearchData, setGstSearchData] = React.useState([]);
 
-  const validationSchema = Yup.object({
-    gstNumber: Yup.string()
-      .min(15, "GST must be at least 15 characters")
-      .max(15, "GST must be at least 15 characters")
-      .required("Gst Number is Required.")
-  });
+  // const validationSchema = Yup.object({
+  //   gstNumber: Yup.string()
+  //     .min(15, "GST must be at least 15 characters")
+  //     .max(15, "GST must be at least 15 characters")
+  //     .required("Gst Number is Required.")
+  // });
 
   const searchGstHandler = (takeValue) => {
-    // dispatch(SearchByGstNumber(takeValue.gstNumber)).then((res) => {
-    //   // if (res?.payload?.status === "success") {
-    //   //   navigate("/login");
-    //   // }
-    // });
     isLoading(true);
-    const reqeObj = {
-      gstin: takeValue
-    };
+    // const reqeObj = {
+    //   gstin: takeValue
+    // };
 
-    dispatch(gstVerify(reqeObj)).then((res) => {
-      if (res?.payload?.status === true || res?.payload?.data) {
-        dispatch(postGstRecord(reqeObj)).then((res) => {
-          if (res?.payload?.status === true) {
-            // navigate(`/business-result/${takeValue.gstNumber}`);
-            navigate(`/business-result`);
-          }
-          isLoading(false);
-        });
+    dispatch(gstVerify(takeValue)).then((res) => {
+      if (res?.payload?.status === true) {
+        setGstSearchData(res?.payload?.data);
+      } else {
+        setGstSearchData([]);
       }
+
+      isLoading(false);
     });
-    // navigate("/business-result");
   };
 
+  const onPostHandle = (takeRecord) => {
+    isLoading(true);
+    const reqeObj = {
+      gstin: takeRecord.gstin,
+      gstData: {
+        stjCd: takeRecord.stjCd,
+        dty: takeRecord.dty,
+        stj: takeRecord.stj,
+        lgnm: takeRecord.lgnm,
+        cxdt: takeRecord.cxdt,
+        gstin: takeRecord.gstin,
+        lstupdt: takeRecord.lstupdt,
+        ctb: takeRecord.ctb,
+        rgdt: takeRecord.rgdt,
+        pradr: takeRecord.pradr,
+        ctjCd: takeRecord.ctjCd,
+        sts: takeRecord.sts,
+        tradeNam: takeRecord.tradeNam,
+        ctj: takeRecord.ctj,
+        einvoiceStatus: takeRecord.einvoiceStatus
+      }
+    };
+    dispatch(postGstRecord(reqeObj)).then((res) => {
+      if (res?.payload?.status === true) {
+        navigate(`/business-result`);
+      }
+      isLoading(false);
+    });
+  };
   return (
     <div className="form-searchGst">
       <Backdrop
@@ -91,7 +114,7 @@ const SearchGstNumber = () => {
                     value={gstNumber}
                     onChange={(event) => {
                       setCheckGstIn(true);
-                      setGstNumber(event.target.value);
+                      setGstNumber(event.target.value.toUpperCase());
                       setBusinessName("");
                       if (event.target.value?.toString().length <= 15) {
                         setCheckGstIn(true);
@@ -132,26 +155,70 @@ const SearchGstNumber = () => {
                   <button
                     type="button"
                     onClick={() => {
-                      searchGstHandler(gstNumber ? gstNumber : businessName);
+                      searchGstHandler(
+                        gstNumber
+                          ? {
+                              gstin: gstNumber
+                            }
+                          : {
+                              businessName: businessName
+                            }
+                      );
                     }}
                     className="w-100 btn btn-lg btn-primary"
                     disabled={
                       gstNumber ? checkGstIn : businessName ? false : true
                     }
                   >
-                    Submit
+                    Search
                   </button>
                 </div>
-                {/* <div className="mt-2 account-signup">
-                        <span style={{ color: "#27489f" }}>
-                          You don't have an account?
-                        </span>{" "}
-                        &nbsp;{" "}
-                        <Link to="/signup" className="have-account">
-                          Sign up
-                        </Link>
-                      </div> */}
               </form>
+              <div
+                className={`${
+                  gstSearchData?.length === 0 ? "d-none" : "table-view"
+                }`}
+              >
+                {gstSearchData?.length === 0 ? (
+                  <div
+                    style={{
+                      textAlign: "center",
+                      color: "black"
+                    }}
+                  >
+                    Data not found!
+                  </div>
+                ) : (
+                  gstSearchData?.map((row, index) => (
+                    <>
+                      <div
+                        className="data-view"
+                        // onClick={() => handleSelectBusiness(row)}
+                      >
+                        <div className="data-view-title media-view-title-first">
+                          <div className="dataview-div-name">
+                            Name : {row?.lgnm}
+                          </div>
+                          {!row.isAvailble && (
+                            <div
+                              className="dataview-div-icon"
+                              onClick={() => onPostHandle(row)}
+                            >
+                              <PostAddIcon />
+                            </div>
+                          )}
+                        </div>{" "}
+                        <div className="data-view-title media-view-title">
+                          Gst Number : {row?.gstin}
+                        </div>
+                        <div className="data-view-title">
+                          Address : {row?.pradr?.addr?.bnm}
+                        </div>
+                      </div>
+                    </>
+                  ))
+                )}
+              </div>
               {/* <Formik
                 initialValues={{
                   gstNumber: ""

@@ -8,19 +8,18 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControl,
   Grid,
   IconButton,
   Rating,
-  TextField,
-  Typography
+  TextField
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
-import React, { useEffect } from "react";
+import React, { useEffect, useMemo } from "react";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 import "./GstInformation.scss";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   getRecordGstById,
@@ -30,6 +29,8 @@ import {
 import moment from "moment/moment";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import Select from "react-select";
+import EditIcon from "@mui/icons-material/Edit";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -40,7 +41,10 @@ const GstInformation = () => {
   const [reviewTextDesc, setReviewTextDesc] = React.useState("");
   // const [gstDbId, setGstDbId] = React.useState("");
   const [getReviewData, setReviewData] = React.useState([]);
+  const [addressData, setAddressData] = React.useState([]);
+  const [selectedAddress, setSelectedAddress] = React.useState("");
   const [loading, isLoading] = React.useState(false);
+  // const [modalObject, setModalObject] = React.useState("");
 
   const getUserToken = JSON.parse(localStorage.getItem("userInfo"));
 
@@ -48,7 +52,11 @@ const GstInformation = () => {
     isLoading(true);
     dispatch(getRecordGstById(params.gstNumber)).then((res) => {
       setFormValue(res?.payload?.data);
-      dispatch(getWriteReview(res?.payload?.data?._id)).then((res) => {
+      setAddressData(res?.payload?.data?.gstData?.adadr);
+      const request = {
+        gstId: res?.payload?.data?._id
+      };
+      dispatch(getWriteReview(request)).then((res) => {
         setReviewData(res?.payload?.reviews);
         isLoading(false);
       });
@@ -61,6 +69,39 @@ const GstInformation = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setValue("");
+    setReviewTextDesc("");
+  };
+
+  const onFilterHandler = (takeItems) => {
+    isLoading(true);
+    setSelectedAddress(takeItems);
+    if (takeItems) {
+      const request = {
+        gstId: getFormValue?._id,
+        address: takeItems.value
+      };
+      try {
+        dispatch(getWriteReview(request)).then((res) => {
+          setReviewData(res?.payload?.reviews);
+          isLoading(false);
+        });
+      } catch (error) {
+        isLoading(false);
+      }
+    } else {
+      const request = {
+        gstId: getFormValue?._id
+      };
+      try {
+        dispatch(getWriteReview(request)).then((res) => {
+          setReviewData(res?.payload?.reviews);
+          isLoading(false);
+        });
+      } catch (error) {
+        isLoading(false);
+      }
+    }
   };
 
   const Title = ({ children }) => (
@@ -76,6 +117,7 @@ const GstInformation = () => {
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
       gstId: getFormValue._id,
+      address: selectedAddress?.value,
       reviewText: reviewTextDesc,
       rating: value
     };
@@ -92,10 +134,23 @@ const GstInformation = () => {
   };
 
   const formInitialValues = {
-    name: getFormValue?.gstData?.ctb,
+    name: getFormValue?.gstData?.tradeNam,
     businessName: getFormValue?.gstData?.lgnm,
     address: getFormValue?.gstData?.pradr?.addr?.bnm
   };
+
+  const addressOptions = useMemo(
+    () =>
+      addressData.map((item) => {
+        console.log("item", item.addr.bnm);
+        return {
+          ...item,
+          label: item.addr.bnm,
+          value: item.addr.bnm
+        };
+      }),
+    [addressData]
+  );
 
   return (
     <div className="form-searchGstInformation">
@@ -130,7 +185,7 @@ const GstInformation = () => {
                 {(props) => (
                   <Form>
                     <div className="form-group">
-                      <label>Name</label>
+                      <label>Trade Name</label>
                       <Field
                         name="name"
                         type="text"
@@ -162,9 +217,19 @@ const GstInformation = () => {
                       <Field
                         name="address"
                         type="text"
-                        component={CustomTextField}
+                        // component={CustomTextField}
+                        render={(props) => (
+                          <FormControl>
+                            <Select
+                              isClearable={true}
+                              className="basic-single"
+                              classNamePrefix="select"
+                              options={addressOptions}
+                              onChange={(items) => onFilterHandler(items)}
+                            />
+                          </FormControl>
+                        )}
                         id="address"
-                        // label="Address"
                         placeholder="Address"
                         variant="outlined"
                         className="form-control-textFiled"
@@ -176,7 +241,11 @@ const GstInformation = () => {
               </Formik>
               <div className="w-100 mt-4 mb-3 footer-div">
                 <div className="text-feedback mr-4">Feedback</div>
-                <button className="btn" onClick={handleClickOpen}>
+                <button
+                  className="btn"
+                  onClick={handleClickOpen}
+                  disabled={selectedAddress ? false : true}
+                >
                   Write Review
                 </button>
               </div>
@@ -210,8 +279,16 @@ const GstInformation = () => {
                     <Card sx={{ maxWidth: 345 }} key={index}>
                       <CardHeader
                         action={
-                          <IconButton aria-label="settings">
-                            <MoreVertIcon />
+                          <IconButton
+                            aria-label="settings"
+                            onClick={() => {
+                              setOpen(true);
+                              setValue(items?.rating);
+                              setReviewTextDesc(items?.reviewText);
+                            }}
+                            disabled={selectedAddress ? false : true}
+                          >
+                            <EditIcon />
                           </IconButton>
                         }
                         title={items?.reviewText}
@@ -241,13 +318,20 @@ const GstInformation = () => {
       <div className="dialog-view">
         <Dialog
           open={open}
-          onClose={handleClose}
+          // onClose={handleClose}
+          onClose={(event, reason) => {
+            if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
+              // Set 'open' to false, however you would do that with your particular code.
+              handleClose();
+            }
+          }}
           PaperProps={{
             sx: {
               width: "100%"
-              // maxHeight: 300
             }
           }}
+          disableEscapeKeyDown={true}
+          disableBackdropClick={true}
         >
           <DialogTitle id="alert-dialog-title">
             <Title>{getFormValue?.gstData?.lgnm || "Bharat Info"}</Title>
@@ -274,6 +358,7 @@ const GstInformation = () => {
               placeholder="Share Details Of Your Own Experience At This Place"
               fullWidth
               variant="outlined"
+              value={reviewTextDesc}
               onChange={(event) => {
                 setReviewTextDesc(event.target.value);
               }}

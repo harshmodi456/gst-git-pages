@@ -10,7 +10,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Grid from "@mui/material/Grid";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
-import { gstVerify, signInUser } from "../../Redux/Reducers/SignInUpReducer";
+import { signInUser } from "../../Redux/Reducers/SignInUpReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
