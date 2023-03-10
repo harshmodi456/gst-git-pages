@@ -9,7 +9,8 @@ export const gstVerify = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await (
-        await instance.post(`${api}gst/verify`, data)
+        // await instance.post(`${api}gst/verify`, data)
+        await instance.get(`${api}gst/verify/${data}`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -97,6 +98,27 @@ export const writeReview = createAsyncThunk(
   }
 );
 
+// for update review
+export const updateReview = createAsyncThunk(
+  "Gst/updateReview",
+  async (data, thunkApi) => {
+    const updateData = {
+      address: data?.address,
+      reviewText: data?.reviewText,
+      rating: data?.rating,
+    };
+    try {
+      return await // await doFetch(`${api}/auth/login`,'POST',data)
+      // await axios.get(`${api}gst/getGst/${data}`)
+      (
+        await instance.put(`${api}review/${data._id}`, updateData)
+      ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 // for get write review by id
 export const getWriteReview = createAsyncThunk(
   "Gst/getWriteReview",
@@ -122,7 +144,7 @@ const initialState = {
   gstInfo: {},
   reviewData: {},
   error: {},
-  success: false
+  success: false,
 };
 
 const SearchGstNumber = createSlice({
@@ -153,7 +175,7 @@ const SearchGstNumber = createSlice({
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light"
+          theme: "light",
         });
       } else {
         toast.success("Gst number or name is not valid!", {
@@ -164,7 +186,7 @@ const SearchGstNumber = createSlice({
           pauseOnHover: true,
           draggable: true,
           progress: undefined,
-          theme: "light"
+          theme: "light",
         });
       }
       // if (!isValid) {
@@ -191,7 +213,7 @@ const SearchGstNumber = createSlice({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
+        theme: "light",
       });
     });
 
@@ -212,7 +234,7 @@ const SearchGstNumber = createSlice({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
+        theme: "light",
       });
     });
     builder.addCase(postGstRecord.rejected, (state, action) => {
@@ -226,7 +248,7 @@ const SearchGstNumber = createSlice({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
+        theme: "light",
       });
     });
 
@@ -292,7 +314,7 @@ const SearchGstNumber = createSlice({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
+        theme: "light",
       });
     });
     builder.addCase(writeReview.rejected, (state, action) => {
@@ -306,7 +328,42 @@ const SearchGstNumber = createSlice({
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-        theme: "light"
+        theme: "light",
+      });
+    });
+
+    // for update review
+    builder.addCase(updateReview.pending, (state, action) => {
+      state.loading = true;
+      state.error = {};
+    });
+    builder.addCase(updateReview.fulfilled, (state, action) => {
+      state.reviewData = action.payload;
+      state.loading = false;
+      state.success = true;
+      toast.success("Review updated successfully", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+    });
+    builder.addCase(updateReview.rejected, (state, action) => {
+      state.error = JSON.parse(JSON.stringify(action.payload));
+      state.loading = false;
+      toast.error(action?.payload?.response?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
     });
 
@@ -324,7 +381,7 @@ const SearchGstNumber = createSlice({
       state.error = JSON.parse(JSON.stringify(action.payload));
       state.loading = false;
     });
-  }
+  },
 });
 
 export default SearchGstNumber.reducer;

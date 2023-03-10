@@ -5,7 +5,7 @@ export default function useHeader() {
   const currentPath = location.pathname;
 
   if (
-    currentPath === "/" ||
+    currentPath === "/login" ||
     currentPath === "/signup"
   ) {
     return false;

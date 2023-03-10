@@ -3,27 +3,30 @@ import React from "react";
 // import * as Yup from "yup";
 import { Card, CardContent, CardHeader, Grid, TextField } from "@mui/material";
 // import CustomTextField from "../../Components/CustomTextField/CustomTextField";
-import SearchImg from "../../Assets/Images/img2.png";
+// import SearchImg from "../../Assets/Images/img2.png";
 import "./SearchGstNumber.scss";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   gstVerify,
-  postGstRecord
+  postGstRecord,
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import PostAddIcon from "@mui/icons-material/PostAdd";
+// import PostAddIcon from "@mui/icons-material/PostAdd";
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loading, isLoading] = React.useState(false);
-  const [gstNumber, setGstNumber] = React.useState("");
-  const [checkGstIn, setCheckGstIn] = React.useState(false);
-  const [businessName, setBusinessName] = React.useState("");
+  // const [gstNumber, setGstNumber] = React.useState("");
+  const [verificationValue, setVerificationValue] = React.useState("");
+  // const [checkGstIn, setCheckGstIn] = React.useState(false);
+  // const [businessName, setBusinessName] = React.useState("");
   const [gstSearchData, setGstSearchData] = React.useState([]);
 
+  const takeUserInfo = localStorage.getItem("userInfo");
+  const getUserInfo = JSON.parse(takeUserInfo);
   // const validationSchema = Yup.object({
   //   gstNumber: Yup.string()
   //     .min(15, "GST must be at least 15 characters")
@@ -48,35 +51,44 @@ const SearchGstNumber = () => {
     });
   };
 
-  const onPostHandle = (takeRecord) => {
+  console.log("gstSearchData", gstSearchData);
+  const onPostHandle = (getRow) => {
     isLoading(true);
     const reqeObj = {
-      gstin: takeRecord.gstin,
+      gstin: getRow.gstin,
       gstData: {
-        stjCd: takeRecord.stjCd,
-        dty: takeRecord.dty,
-        stj: takeRecord.stj,
-        lgnm: takeRecord.lgnm,
-        cxdt: takeRecord.cxdt,
-        gstin: takeRecord.gstin,
-        lstupdt: takeRecord.lstupdt,
-        ctb: takeRecord.ctb,
-        rgdt: takeRecord.rgdt,
-        pradr: takeRecord.pradr,
-        ctjCd: takeRecord.ctjCd,
-        sts: takeRecord.sts,
-        tradeNam: takeRecord.tradeNam,
-        ctj: takeRecord.ctj,
-        einvoiceStatus: takeRecord.einvoiceStatus
-      }
+        stjCd: getRow.stjCd,
+        dty: getRow.dty,
+        stj: getRow.stj,
+        lgnm: getRow.lgnm,
+        cxdt: getRow.cxdt,
+        gstin: getRow.gstin,
+        lstupdt: getRow.lstupdt,
+        ctb: getRow.ctb,
+        rgdt: getRow.rgdt,
+        pradr: getRow.pradr,
+        ctjCd: getRow.ctjCd,
+        sts: getRow.sts,
+        tradeNam: getRow.tradeNam,
+        ctj: getRow.ctj,
+        einvoiceStatus: getRow.einvoiceStatus,
+      },
     };
     dispatch(postGstRecord(reqeObj)).then((res) => {
       if (res?.payload?.status === true) {
-        navigate(`/business-result`);
+        if (getUserInfo !== undefined && getUserInfo !== null) {
+          navigate(`/gst-information/${getRow?.gstin}`, {
+            state: { getRow },
+          });
+        } else {
+          navigate("/login");
+        }
+        // navigate(`/business-result`);
       }
       isLoading(false);
     });
   };
+
   return (
     <div className="form-searchGst">
       <Backdrop
@@ -86,6 +98,83 @@ const SearchGstNumber = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
       <Grid
+        className="container-div"
+        // spacing={{ xs: 0, md: 3 }}
+        columns={{ xs: 0, sm: 8, md: 12 }}
+      >
+        <div className="main-div d-flex container">
+          <div className="form-group w-100">
+            <label>Gst Number / Business Name</label>
+            <TextField
+              name="verificationValue"
+              type="text"
+              id="verificationValue"
+              placeholder="Search Gst NUmber Or Business Name"
+              variant="outlined"
+              className="form-control-textFiled"
+              value={verificationValue}
+              onChange={(event) => {
+                setVerificationValue(event.target.value);
+              }}
+            />
+          </div>
+          <div className="w-25 btn-div">
+            <button
+              type="button"
+              onClick={() => {
+                searchGstHandler(verificationValue);
+              }}
+              className="w-100 btn btn-lg btn-primary"
+              disabled={verificationValue ? false : true}
+            >
+              Search
+            </button>
+          </div>
+        </div>
+        <div className={`table-view`}>
+          {gstSearchData?.length === 0 ? (
+            <div
+              style={{
+                textAlign: "center",
+                color: "black",
+              }}
+            >
+              Data not found!
+            </div>
+          ) : (
+            gstSearchData?.map((row, index) => (
+              <>
+                <div
+                  className="data-view"
+                  onClick={() => onPostHandle(row)}
+                  key={index}
+                >
+                  <div className="data-view-title media-view-title-first">
+                    <div className="dataview-div-name">
+                      Name : {row?.tradeNam}
+                    </div>
+                    {/* {!row.isAvailble && (
+                      <div
+                        className="dataview-div-icon"
+                        onClick={() => onPostHandle(row)}
+                      >
+                        <PostAddIcon />
+                      </div>
+                    )} */}
+                  </div>{" "}
+                  <div className="data-view-title media-view-title">
+                    Gst Number : {row?.gstin}
+                  </div>
+                  <div className="data-view-title">
+                    Address : {row?.pradr?.addr?.bnm}
+                  </div>
+                </div>
+              </>
+            ))
+          )}
+        </div>
+      </Grid>
+      {/* <Grid
         container
         spacing={{ xs: 0, md: 3 }}
         columns={{ xs: 0, sm: 8, md: 12 }}
@@ -259,10 +348,10 @@ const SearchGstNumber = () => {
                   </Form>
                 )}
               </Formik> */}
-            </CardContent>
+      {/* </CardContent>
           </Card>
         </Grid>
-      </Grid>
+      </Grid> */}{" "}
     </div>
   );
 };

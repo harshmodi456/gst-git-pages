@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   SearchByGstNumber,
-  getAllGstRecord
+  getAllGstRecord,
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -22,10 +22,10 @@ const SearchBusinessResult = () => {
   // const location = useParams();
   const [getSearchData, setSearchData] = useState([]);
   const [searchInput, setSearchInput] = useState("");
-  const [size, setSize] = useState(10);
+  // const [size, setSize] = useState(10);
   const [page, setPage] = useState(1);
   const [totalPage, setTotalPage] = useState(0);
-  const [hasMore, setHasMore] = React.useState(false);
+  const [hasMore, setHasMore] = React.useState(true);
   const [loading, isLoading] = React.useState(false);
 
   // const validationSchema = Yup.object().shape({
@@ -36,17 +36,24 @@ const SearchBusinessResult = () => {
   // });
 
   useEffect(() => {
-    getAllGstRecordFn();
+    getAllGstRecordFn({
+      size: 10,
+      page: 1,
+    });
   }, []);
 
-  const getAllGstRecordFn = () => {
+  const getAllGstRecordFn = async (queryBody) => {
     isLoading(true);
-    const queryBody = {
-      size: size,
-      page: page
-    };
-    dispatch(getAllGstRecord(queryBody)).then((res) => {
-      setSearchData(res.payload.gst);
+    // const queryBody = {
+    //   size: size,
+    //   page: page
+    // };
+    await dispatch(getAllGstRecord(queryBody)).then((res) => {
+      if (queryBody?.page === 1) {
+        setSearchData(res?.payload?.gst || []);
+      } else {
+        setSearchData([...getSearchData, ...res.payload.gst]);
+      }
       setTotalPage(res.payload.total_page);
       isLoading(false);
     });
@@ -64,7 +71,7 @@ const SearchBusinessResult = () => {
 
   const handleSelectBusiness = (getRow) => {
     navigate(`/gst-information/${getRow?.gstData?.gstin}`, {
-      state: { getRow }
+      state: { getRow },
     });
   };
 
@@ -75,19 +82,20 @@ const SearchBusinessResult = () => {
   //   addr: "Block H, TPS 14, SUMEL Business Park -6"
   // };
 
-  const fetchMoreData = () => {
-    alert("called");
-    console.log("page===", page === totalPage);
+  const fetchMoreData = async () => {
     if (page === totalPage) {
       setHasMore(false);
       return;
     }
     // a fake async api call like which sends
     // 20 more records in .5 secs
-    setTimeout(() => {
-      setSize(size + 10);
-      setPage(page + 1);
-      getAllGstRecordFn();
+    await setTimeout(async () => {
+      // setSize((prev) => prev + 10);
+      setPage((prev) => prev + 1);
+      await getAllGstRecordFn({
+        size: 10,
+        page: page + 1,
+      });
     }, 500);
   };
 
@@ -134,15 +142,14 @@ const SearchBusinessResult = () => {
                           placeholder="Search GST number here..."
                           className="form-control bg-none border-0"
                           onChange={(e) => {
-                            console.log(e.target.value);
                             if (
                               e.target.value === "" ||
                               e.target.value === null
                             ) {
-                              // dispatch(getAllGstRecord()).then((res) => {
-                              //   setSearchData(res.payload.gst);
-                              // });
-                              getAllGstRecordFn();
+                              getAllGstRecordFn({
+                                size: 10,
+                                page: 1,
+                              });
                             }
                             setSearchInput(e.target.value);
                           }}
@@ -225,12 +232,12 @@ const SearchBusinessResult = () => {
                     </Form>
                   )}
                 </Formik> */}
-                <div className="table-view" id="scrollableDiv">
+                <div className="table-view">
                   {getSearchData?.length === 0 ? (
                     <div
                       style={{
                         textAlign: "center",
-                        color: "black"
+                        color: "black",
                       }}
                     >
                       Data not found!
@@ -255,44 +262,45 @@ const SearchBusinessResult = () => {
                     //     </div>
                     //   </div>
                     // </>
-
-                    <InfiniteScroll
-                      height={551}
-                      dataLength={getSearchData?.length}
-                      // pullDownToRefreshThreshold={50}
-                      // next={fetchMoreData}
-                      scrollableTarget="scrollableDiv"
-                      next={fetchMoreData}
-                      hasMore={hasMore}
-                      loader={<h4>Loading...</h4>}
-                      // endMessage={
-                      //   <p style={{ textAlign: "center" }}>
-                      //     <b>Yay! You have seen it all</b>
-                      //   </p>
-                      // }
+                    <div
+                      id="scrollableDiv"
+                      style={{ height: "100%", overflow: "auto" }}
                     >
-                      {getSearchData?.map((row, index) => (
-                        <>
-                          <span className="main-title ml-2" key={index}>
-                            {row?.tradeNam}
-                          </span>
-                          <div
-                            className="data-view"
-                            onClick={() => handleSelectBusiness(row)}
-                          >
-                            <div className="data-view-title media-view-title-first">
-                              Name : {row?.gstData?.lgnm}
-                            </div>{" "}
-                            <div className="data-view-title media-view-title">
-                              Gst Number : {row?.gstData?.gstin}
+                      <InfiniteScroll
+                        dataLength={getSearchData?.length}
+                        scrollableTarget="scrollableDiv"
+                        next={fetchMoreData}
+                        hasMore={hasMore}
+                        loader={<h6 className="text-center">Loading...</h6>}
+                        // endMessage={
+                        //   <p style={{ textAlign: "center" }}>
+                        //     <b>Yay! You have seen it all</b>
+                        //   </p>
+                        // }
+                      >
+                        {getSearchData?.map((row, index) => (
+                          <>
+                            <span className="main-title ml-2" key={index}>
+                              {row?.tradeNam}
+                            </span>
+                            <div
+                              className="data-view"
+                              onClick={() => handleSelectBusiness(row)}
+                            >
+                              <div className="data-view-title media-view-title-first">
+                                Name : {row?.gstData?.lgnm}
+                              </div>{" "}
+                              <div className="data-view-title media-view-title">
+                                Gst Number : {row?.gstData?.gstin}
+                              </div>
+                              <div className="data-view-title">
+                                Address : {row?.gstData?.pradr?.addr?.bnm}
+                              </div>
                             </div>
-                            <div className="data-view-title">
-                              Address : {row?.gstData?.pradr?.addr?.bnm}
-                            </div>
-                          </div>
-                        </>
-                      ))}
-                    </InfiniteScroll>
+                          </>
+                        ))}
+                      </InfiniteScroll>
+                    </div>
                   )}
                 </div>
               </CardContent>

@@ -12,7 +12,7 @@ import {
   Grid,
   IconButton,
   Rating,
-  TextField
+  TextField,
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useMemo } from "react";
@@ -24,7 +24,8 @@ import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   getRecordGstById,
   getWriteReview,
-  writeReview
+  updateReview,
+  writeReview,
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import moment from "moment/moment";
 import Backdrop from "@mui/material/Backdrop";
@@ -44,22 +45,26 @@ const GstInformation = () => {
   const [addressData, setAddressData] = React.useState([]);
   const [selectedAddress, setSelectedAddress] = React.useState("");
   const [loading, isLoading] = React.useState(false);
-  // const [modalObject, setModalObject] = React.useState("");
+  const [isEditable, setIsEditable] = React.useState(false);
+  const [modalObject, setModalObject] = React.useState("");
 
   const getUserToken = JSON.parse(localStorage.getItem("userInfo"));
 
   useEffect(() => {
     isLoading(true);
     dispatch(getRecordGstById(params.gstNumber)).then((res) => {
-      setFormValue(res?.payload?.data);
-      setAddressData(res?.payload?.data?.gstData?.adadr);
-      const request = {
-        gstId: res?.payload?.data?._id
-      };
-      dispatch(getWriteReview(request)).then((res) => {
-        setReviewData(res?.payload?.reviews);
-        isLoading(false);
-      });
+      if (res?.payload?.data) {
+        setFormValue(res?.payload?.data);
+        console.log("res?.payload?.data", res?.payload?.data);
+        setAddressData(res?.payload?.data?.gstData?.adadr);
+        const request = {
+          gstId: res?.payload?.data?._id,
+        };
+        dispatch(getWriteReview(request)).then((res) => {
+          setReviewData(res?.payload?.reviews);
+        });
+      }
+      isLoading(false);
     });
   }, []);
 
@@ -69,6 +74,7 @@ const GstInformation = () => {
 
   const handleClose = () => {
     setOpen(false);
+    setIsEditable(false);
     setValue("");
     setReviewTextDesc("");
   };
@@ -79,7 +85,7 @@ const GstInformation = () => {
     if (takeItems) {
       const request = {
         gstId: getFormValue?._id,
-        address: takeItems.value
+        address: takeItems.value,
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
@@ -91,7 +97,7 @@ const GstInformation = () => {
       }
     } else {
       const request = {
-        gstId: getFormValue?._id
+        gstId: getFormValue?._id,
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
@@ -119,34 +125,53 @@ const GstInformation = () => {
       gstId: getFormValue._id,
       address: selectedAddress?.value,
       reviewText: reviewTextDesc,
-      rating: value
+      rating: value,
     };
-    dispatch(writeReview(writeReviewInput)).then((res) => {
-      if (res?.payload?.status === true) {
-        handleClose();
-        isLoading(true);
-        dispatch(getWriteReview(getFormValue._id)).then((res) => {
-          setReviewData(res?.payload?.reviews);
-          isLoading(false);
-        });
-      }
-    });
+    if (isEditable) {
+      const updateReviewInput = {
+        _id: modalObject._id,
+        address: selectedAddress?.value,
+        reviewText: reviewTextDesc,
+        rating: value,
+      };
+      dispatch(updateReview(updateReviewInput)).then((res) => {
+        if (res?.payload?.status === true) {
+          handleClose();
+          isLoading(true);
+          dispatch(getWriteReview(res?.payload?.data)).then((res) => {
+            console.log("res?.payload?.data", res?.payload?.reviews);
+            setReviewData(res?.payload?.reviews);
+            isLoading(false);
+          });
+        }
+      });
+    } else {
+      dispatch(writeReview(writeReviewInput)).then((res) => {
+        if (res?.payload?.status === true) {
+          handleClose();
+          isLoading(true);
+          dispatch(getWriteReview(getFormValue._id)).then((res) => {
+            setReviewData(res?.payload?.reviews);
+            isLoading(false);
+          });
+        }
+      });
+    }
   };
 
   const formInitialValues = {
     name: getFormValue?.gstData?.tradeNam,
     businessName: getFormValue?.gstData?.lgnm,
-    address: getFormValue?.gstData?.pradr?.addr?.bnm
+    address: getFormValue?.gstData?.pradr?.addr?.bnm,
   };
 
   const addressOptions = useMemo(
     () =>
-      addressData.map((item) => {
-        console.log("item", item.addr.bnm);
+      addressData?.map((item) => {
         return {
           ...item,
           label: item.addr.bnm,
-          value: item.addr.bnm
+          value: item.addr.bnm,
         };
       }),
     [addressData]
@@ -269,7 +294,7 @@ const GstInformation = () => {
                   <div
                     style={{
                       textAlign: "center",
-                      color: "black"
+                      color: "black",
                     }}
                   >
                     Data not found!
@@ -283,22 +308,39 @@ const GstInformation = () => {
                             aria-label="settings"
                             onClick={() => {
                               setOpen(true);
+                              setIsEditable(true);
                               setValue(items?.rating);
                               setReviewTextDesc(items?.reviewText);
+                              setModalObject(items);
                             }}
                             disabled={selectedAddress ? false : true}
                           >
                             <EditIcon />
                           </IconButton>
                         }
-                        title={items?.reviewText}
+                        title={items?.address}
                         subheader={moment(items?.updatedAt).format(
                           "MMMM d, YYYY"
                         )}
                       />
                       <CardContent>
+                        <div className="text-aria">
+                          <textarea className="textarea-cls">
+                            {items?.reviewText}
+                          </textarea>
+                          {/* <IconButton
+                            aria-label="settings"
+                            onClick={() => {
+                              setOpen(true);
+                              setValue(items?.rating);
+                              setReviewTextDesc(items?.reviewText);
+                            }}
+                            disabled={selectedAddress ? false : true}
+                          >
+                            <EditIcon />
+                          </IconButton> */}
+                        </div>
                         <div className="rate-view">
-                          {/* <label className="num-review mr-2">2.0 </label> */}
                           <Rating
                             name="simple-controlled"
                             value={items?.rating}
@@ -327,8 +369,8 @@ const GstInformation = () => {
           }}
           PaperProps={{
             sx: {
-              width: "100%"
-            }
+              width: "100%",
+            },
           }}
           disableEscapeKeyDown={true}
           disableBackdropClick={true}

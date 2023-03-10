@@ -12,35 +12,37 @@ export const routeData = [
     path: "/signup",
     // route: PublicRoute,
     isAuthenticated: false,
-    element: Signup
+    element: Signup,
   },
   {
-    // path: "/login",
-    path: "/",
+    path: "/login",
+    // path: "/",
     // route: PublicRoute,
     isAuthenticated: false,
-    element: Login
+    element: Login,
   },
   {
-    // path: "/",
-    path: "/search-gst-number",
+    path: "/",
+    // path: "/search-gst-number",
     // route: AuthorizedRoute,
-    isAuthenticated: true,
-    element: SearchGstNumber
+    // isAuthenticated: true,
+    isAuthenticated: false,
+    element: SearchGstNumber,
   },
   {
     path: "/business-result",
     // route: AuthorizedRoute,
-    isAuthenticated: true,
-    element: SearchBusinessResult
+    // isAuthenticated: true,
+    isAuthenticated: false,
+    element: SearchBusinessResult,
   },
   {
     // path: "/gst-information",
     path: "/gst-information/:gstNumber",
     // route: AuthorizedRoute,
     isAuthenticated: true,
-    element: GstInformation
-  }
+    element: GstInformation,
+  },
 ];
 
 // export const publicRouteData = [

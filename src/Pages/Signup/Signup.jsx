@@ -5,20 +5,79 @@ import { Link, useNavigate } from "react-router-dom";
 import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
-import { Card, CardContent, CardHeader, Grid } from "@mui/material";
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  CardHeader,
+  Grid,
+  Step,
+  StepLabel,
+  Stepper,
+  Typography
+} from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { signUpUser } from "../../Redux/Reducers/SignInUpReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
+const steps = ["Enter GST", "Create an ad"];
+
 const Signup = () => {
   const [showPassword, setShowPassword] = React.useState(false);
   const [loading, isLoading] = React.useState(false);
 
+  const [activeStep, setActiveStep] = React.useState(0);
+  const [skipped, setSkipped] = React.useState(new Set());
+
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+
+  // for steppers
+  const isStepOptional = (step) => {
+    return step === 1;
+  };
+
+  const isStepSkipped = (step) => {
+    return skipped.has(step);
+  };
+
+  const handleNext = () => {
+    let newSkipped = skipped;
+    if (isStepSkipped(activeStep)) {
+      newSkipped = new Set(newSkipped.values());
+      newSkipped.delete(activeStep);
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped(newSkipped);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleSkip = () => {
+    if (!isStepOptional(activeStep)) {
+      // You probably want to guard against something like this,
+      // it should never occur unless someone's actively trying to break something.
+      throw new Error("You can't skip a step that isn't optional.");
+    }
+
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+    setSkipped((prevSkipped) => {
+      const newSkipped = new Set(prevSkipped.values());
+      newSkipped.add(activeStep);
+      return newSkipped;
+    });
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
   const validationSchema = Yup.object({
     gstin: Yup.string()
@@ -79,6 +138,68 @@ const Signup = () => {
             <img src={loginImg} alt="sign up" />
           </Grid>
           <Grid item xs={4} md={5}>
+            <div className="text-center">
+              <Stepper activeStep={activeStep}>
+                {steps.map((label, index) => {
+                  const stepProps = {};
+                  const labelProps = {};
+                  if (isStepOptional(index)) {
+                    labelProps.optional = (
+                      <Typography variant="caption">Optional</Typography>
+                    );
+                  }
+                  if (isStepSkipped(index)) {
+                    stepProps.completed = false;
+                  }
+                  return (
+                    <Step key={label} {...stepProps}>
+                      <StepLabel {...labelProps}>{label}</StepLabel>
+                    </Step>
+                  );
+                })}
+              </Stepper>
+              {activeStep === steps.length ? (
+                <React.Fragment>
+                  <Typography sx={{ mt: 2, mb: 1 }}>
+                    All steps completed - you&apos;re finished
+                  </Typography>
+                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                    <Box sx={{ flex: "1 1 auto" }} />
+                    <Button onClick={handleReset}>Reset</Button>
+                  </Box>
+                </React.Fragment>
+              ) : (
+                <React.Fragment>
+                  <Typography sx={{ mt: 2, mb: 1 }}>
+                    Step {activeStep + 1}
+                  </Typography>
+                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                    <Button
+                      color="inherit"
+                      disabled={activeStep === 0}
+                      onClick={handleBack}
+                      sx={{ mr: 1 }}
+                    >
+                      Back
+                    </Button>
+                    <Box sx={{ flex: "1 1 auto" }} />
+                    {isStepOptional(activeStep) && (
+                      <Button
+                        color="inherit"
+                        onClick={handleSkip}
+                        sx={{ mr: 1 }}
+                      >
+                        Skip
+                      </Button>
+                    )}
+
+                    <Button onClick={handleNext}>
+                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                    </Button>
+                  </Box>
+                </React.Fragment>
+              )}
+            </div>
             <Card sx={{ width: 450 }}>
               <CardHeader title="Sign Up" className="card-header text-center" />
               <CardContent className="mt-2">

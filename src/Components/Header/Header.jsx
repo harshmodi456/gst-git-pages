@@ -15,7 +15,7 @@ import {
   Divider,
   CssBaseline,
   Box,
-  AppBar
+  AppBar,
 } from "@mui/material";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -26,26 +26,25 @@ import { useNavigate } from "react-router-dom";
 import "./Header.scss";
 
 // const drawerWidth = 240;
-const navItems = ["Home", "Business", "Log Out"];
 
 const colorConfigs = {
   sidebar: {
     bg: "#233044",
     color: "#eeeeee",
     hoverBg: "#1e293a",
-    activeBg: "#1e253a"
+    activeBg: "#1e253a",
   },
   topbar: {
     bg: "#fff",
-    color: "#000"
+    color: "#000",
   },
-  mainBg: colors.grey["100"]
+  mainBg: colors.grey["100"],
 };
 const sizeConfigs = {
   sidebar: {
     // width: "300px"
-    width: "240px"
-  }
+    width: "240px",
+  },
 };
 
 const Header = (props) => {
@@ -54,6 +53,14 @@ const Header = (props) => {
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
+  const takeUserInfo = localStorage.getItem("userInfo");
+  const getUserInfo = JSON.parse(takeUserInfo);
+
+  const navItems = [
+    "Home",
+    "Business",
+    getUserInfo !== undefined && getUserInfo !== null ? "Log Out" : "Log In",
+  ];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -61,12 +68,15 @@ const Header = (props) => {
 
   const handleRoute = (getVal) => {
     if (getVal === "Home") {
-      navigate("/search-gst-number");
+      // navigate("/search-gst-number");
+      navigate("/");
     } else if (getVal === "Business") {
       navigate("/business-result");
     } else if (getVal === "Log Out") {
       localStorage.clear();
       navigate("/");
+    } else if (getVal === "Log In") {
+      navigate("/login");
     }
   };
 
@@ -86,20 +96,20 @@ const Header = (props) => {
             <ListItemButton
               sx={{
                 "&: hover": {
-                  backgroundColor: colorConfigs.sidebar.hoverBg
+                  backgroundColor: colorConfigs.sidebar.hoverBg,
                 },
                 backgroundColor:
                   appState === item.state
                     ? colorConfigs.sidebar.activeBg
                     : "unset",
                 paddingY: "12px",
-                paddingX: "24px"
+                paddingX: "24px",
               }}
               onClick={() => handleRoute(item)}
             >
               <ListItemIcon
                 sx={{
-                  color: colorConfigs.sidebar.color
+                  color: colorConfigs.sidebar.color,
                 }}
                 className="d-flex align-items-center justify-content-center"
               >
@@ -199,7 +209,7 @@ const Header = (props) => {
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 ModalProps={{
-                  keepMounted: true // Better open performance on mobile.
+                  keepMounted: true, // Better open performance on mobile.
                 }}
                 // sx={{
                 //   display: { xs: "block", sm: "none" },
@@ -216,8 +226,8 @@ const Header = (props) => {
                     boxSizing: "border-box",
                     borderRight: "0px",
                     backgroundColor: colorConfigs.sidebar.bg,
-                    color: colorConfigs.sidebar.color
-                  }
+                    color: colorConfigs.sidebar.color,
+                  },
                 }}
               >
                 {drawer}

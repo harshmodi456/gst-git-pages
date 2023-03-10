@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Login.scss";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
@@ -22,23 +22,23 @@ const Login = () => {
   const handleClickShowPassword = () => setShowPassword((show) => !show);
   const [loading, isLoading] = React.useState(false);
 
-  useEffect(() => {
-    const takeUserInfo = localStorage.getItem("userInfo");
-    const getUserInfo = JSON.parse(takeUserInfo);
-    if (getUserInfo !== undefined && getUserInfo !== null) {
-      navigate("/");
-    }
-    if (getUserInfo) {
-      navigate("/search-gst-number");
-    }
-  }, []);
+  // useEffect(() => {
+  //   const takeUserInfo = localStorage.getItem("userInfo");
+  //   const getUserInfo = JSON.parse(takeUserInfo);
+  //   if (getUserInfo !== undefined && getUserInfo !== null) {
+  //     navigate("/");
+  //   }
+  //   if (getUserInfo) {
+  //     navigate("/search-gst-number");
+  //   }
+  // }, []);
 
   const validationSchema = Yup.object().shape({
     gstNumber: Yup.string()
       .min(15, "GST must be at least 15 characters")
       .max(15, "GST must be at least 15 characters")
       .required("GST Number is required"),
-    password: Yup.string().required("Password required")
+    password: Yup.string().required("Password required"),
   });
 
   const signInHandler = (takeValue) => {
@@ -56,11 +56,12 @@ const Login = () => {
     dispatch(
       signInUser({
         gstin: takeValue.gstNumber,
-        password: takeValue.password
+        password: takeValue.password,
       })
     ).then((res) => {
       if (res?.payload?.status === true) {
-        navigate("/search-gst-number");
+        // navigate("/search-gst-number");
+        navigate("/business-result");
       }
       isLoading(false);
     });
@@ -92,7 +93,7 @@ const Login = () => {
                 <Formik
                   initialValues={{
                     gstNumber: "",
-                    password: ""
+                    password: "",
                   }}
                   validationSchema={validationSchema}
                   onSubmit={(values) => signInHandler(values)}

@@ -7,14 +7,13 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  overflow: hidden;
-  overflow-x: hidden;
+  overflow: auto;
 
   .MuiGrid-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 64px);
+    height: calc(100vh - 65px);
     margin-top: 0px;
 
     .grid-first {
@@ -145,6 +144,15 @@
   .footer-card-view {
     height: 210px;
     overflow: auto;
+
+    .MuiCardHeader-root {
+      padding: 10px 15px 0px 15px;
+    }
+
+    .MuiCardContent-root {
+      padding: 0px 12px 0px 12px;
+    }
+
     .MuiPaper-elevation {
       border-radius: 12px;
       border: 1px #183a99;
@@ -152,13 +160,39 @@
       width: 100%;
       margin-left: 0px;
     }
+
     .MuiCard-root {
       max-width: none;
       margin-top: 5px;
     }
+
     .MuiCardHeader-title {
       color: #183a99;
-      font-weight: 600;
+      font-weight: 500;
+      font-size: 12px;
+    }
+
+    .MuiCardHeader-subheader {
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .text-aria {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      textarea {
+        height: 50px;
+        width: 90% !important;
+        margin-top: 12px;
+        border-radius: 8px;
+        padding: 5px;
+        border: 1px solid #183a99;
+        resize: none;
+      }
+      // svg{
+      //   color: #183a99;
+      // }
     }
   }
 
