@@ -4,6 +4,7 @@ import useHeaderFooter from "../Header/Hooks/useHeader.jsx";
 import { Routes, Route } from "react-router-dom";
 import { routeData } from "../../Routes/RoutesData";
 import PrivateRoute from "../../Routers/AuthorizedRoute";
+import NotFound from "../../Pages/NotFound/NotFound";
 export default function Main() {
   const isVisibleHeader = useHeaderFooter();
 
@@ -29,6 +30,7 @@ export default function Main() {
             // </Route>
           );
         })}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

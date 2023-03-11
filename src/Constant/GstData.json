@@ -1,0 +1,7011 @@
+[
+  {
+    "isAvailble": false,
+    "stjCd": "KA001",
+    "dty": "Regular",
+    "lgnm": "RELIANCE COMMODITIES LIMITED",
+    "stj": "LGSTO 010 - Bengaluru",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Pm Complex, Cambridge Layout",
+          "st": "2Nd Cross, Saibaba Temple Road",
+          "loc": "Ulsoor, Bangalore",
+          "bno": "No 43",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "2nd Floor",
+          "lt": "",
+          "pncd": "560008",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Natraj Arcade, Acst Layout, Hudco",
+          "st": "1St Stage, Kuvempunagar",
+          "loc": "New Kantharaj Urs Road",
+          "bno": "No.Mig-35",
+          "stcd": "Karnataka",
+          "dst": "Mysuru (Mysore)",
+          "city": "",
+          "flno": "2Nd Floor",
+          "lt": "",
+          "pncd": "570023",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Hangirkar Bhavan",
+          "st": "Congress Road",
+          "loc": "Tilakwadi, Belgaum",
+          "bno": "No.5",
+          "stcd": "Karnataka",
+          "dst": "Belagavi (Belgaum)",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "590006",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Annapurna",
+          "st": "10Th Main Road 4Th Block",
+          "loc": "Jayanagar, Bangalore",
+          "bno": "No.797",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "1st Floor",
+          "lt": "",
+          "pncd": "560011",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "10 Cross",
+          "loc": "Malleshwaram, Bangalore",
+          "bno": "16",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "Part of 2nd floor",
+          "lt": "",
+          "pncd": "560003",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Pebble Beach",
+          "st": "Embassy Golf Links Business Park",
+          "loc": "Domlur, Bangalore, Karnataka",
+          "bno": "Reliance Capital Financial Plaza",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "1st Floor",
+          "lt": "",
+          "pncd": "560071",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Ali Askar Road",
+          "loc": "Bangalore",
+          "bno": "No.-17, Shah Sultan Complex",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "First Floor",
+          "lt": "",
+          "pncd": "560052",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Municipal corporation of Mangalore",
+          "st": "LHH Road",
+          "loc": "Mangalore",
+          "bno": "Maximum Commercial Complex, Door No. 14-6-664/51-1",
+          "stcd": "Karnataka",
+          "dst": "Dakshina Kannada",
+          "city": "",
+          "flno": "4th Floor",
+          "lt": "",
+          "pncd": "575001",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Mfar Manyata Tech Park Phase IV",
+          "st": "Nagawara Village, Kasaba Hobli",
+          "loc": "Bangalore North Taluk",
+          "bno": "F11, First Level",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "560045",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "South Tower - Virgo, Bagmane Constellation Business Park",
+          "st": "Doddanekundi Village, Municipal Ward No.85",
+          "loc": "Bangalore East Taluk",
+          "bno": "Unit No.9 situated at the Mezzanine level of First Floor",
+          "stcd": "Karnataka",
+          "dst": "Bengaluru (Bangalore) Urban",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "560037",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "29AADCR0446F1ZI",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "10/06/2020",
+    "ctb": "Public Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "SUBHASRI MAHENDRA TOWERS",
+        "st": "11TH MAIN ROAD",
+        "loc": "JAYANAGAR, BANGLORE",
+        "bno": "3RD FLOOR, SUBHASRI MAHENDRA TOWERS",
+        "stcd": "Karnataka",
+        "dst": "Bengaluru (Bangalore) Urban",
+        "city": "",
+        "flno": "3RD FLOOR",
+        "lt": "",
+        "pncd": "560011",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "ctjCd": "YV0304",
+    "tradeNam": "RELIANCE COMMODITIES LIMITED",
+    "sts": "Active",
+    "ctj": "RANGE-DSD3"
+  },
+  {
+    "isAvailble": true,
+    "stjCd": "DL115",
+    "dty": "Regular",
+    "lgnm": "RELIANCE CORPORATE IT PARK LIMITED",
+    "stj": "Ward 208",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "",
+          "st": "City Centre",
+          "loc": "Sector -13 Dwarka",
+          "bno": "DDA-Plot No-1",
+          "stcd": "Delhi",
+          "dst": "South West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110075",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Block -A",
+          "loc": "Community Centre, Vikaspuri,",
+          "bno": "DDA-Plot No- A",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110018",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Central Business District ,",
+          "st": "Plot No. 29 and 31,",
+          "loc": "Shadhra",
+          "bno": "Unit No. 102 and 103",
+          "stcd": "Delhi",
+          "dst": "North East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110032",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Laxman House",
+          "loc": "Asaf Ali Road",
+          "bno": "Ground and FF, 9,10,11/3",
+          "stcd": "Delhi",
+          "dst": "Central Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110002",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Lawrence Road",
+          "loc": "Delhi",
+          "bno": "C-34/4",
+          "stcd": "Delhi",
+          "dst": "North West Delhi",
+          "city": "",
+          "flno": "1",
+          "lt": "",
+          "pncd": "110035",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Bajaj Eye Hospital,",
+          "st": "A-1/2, Nathu Colony Chowk, 100 Foot Road, Durgapuri,",
+          "loc": "Shahdara",
+          "bno": "Ground Floor",
+          "stcd": "Delhi",
+          "dst": "North East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110032",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Okhla Phase 1",
+          "loc": "New Delhi",
+          "bno": "C 124",
+          "stcd": "Delhi",
+          "dst": "South Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110020",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Plot No 26, Poothkalan, Kanjhawala Road,",
+          "loc": "Rohini",
+          "bno": "Grond Floor",
+          "stcd": "Delhi",
+          "dst": "North West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110086",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "E-4/31 and 4/31 A",
+          "loc": "Krishna Nagar",
+          "bno": "1st and 2nd Floor",
+          "stcd": "Delhi",
+          "dst": "East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110051",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Rani Jhansi Road",
+          "loc": "Motia Khan",
+          "bno": "Plot No -31",
+          "stcd": "Delhi",
+          "dst": "Central Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110055",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Plot No. 94",
+          "loc": "Okhla, Phase 3",
+          "bno": "1st and 2nd Floor",
+          "stcd": "Delhi",
+          "dst": "South Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110020",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "B-23 , G T Karnal Road",
+          "loc": "Industrial Area",
+          "bno": "1st and 2nd Floor",
+          "stcd": "Delhi",
+          "dst": "North East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110033",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mohan Cooperative industrial Estate",
+          "loc": "Mathura Road",
+          "bno": "B-1 / E-26",
+          "stcd": "Delhi",
+          "dst": "South Delhi",
+          "city": "",
+          "flno": "2",
+          "lt": "",
+          "pncd": "110044",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Kapashera",
+          "loc": "Village Kapashera",
+          "bno": "Khasra No- 78",
+          "stcd": "Delhi",
+          "dst": "South West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110037",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Vijay Park, Main Shivaji Marg,",
+          "loc": "Najafgarh",
+          "bno": "Janakpuri Zone -B1",
+          "stcd": "Delhi",
+          "dst": "South East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110043",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Nangloi extension-2C",
+          "st": "Yaduvanshi Bhawan, Village Nangloi Jat, Main Nagafagarh Road",
+          "loc": "Nangloi",
+          "bno": "Plot No- 222B , Kharsa No. 60/2/2  56/22/1",
+          "stcd": "Delhi",
+          "dst": "North West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "MIN Lal Dora of Village Sultanpur",
+          "loc": "Mehrauli",
+          "bno": "Khasra No-231 and Khasra No-248",
+          "stcd": "Delhi",
+          "dst": "South West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110030",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Plot No.FC-6",
+          "loc": "Narela",
+          "bno": "Aggarwal Indicom Plaza",
+          "stcd": "Delhi",
+          "dst": "North West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110040",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Naraina Industrial Area,",
+          "loc": "Phase I",
+          "bno": "B-100",
+          "stcd": "Delhi",
+          "dst": "South West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110028",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "71-72, Ashok Park Main",
+          "loc": "Rohtak Road",
+          "bno": "Barrel House",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110035",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Gopal Das Bhawan",
+          "loc": "Barakhamba Road",
+          "bno": "28",
+          "stcd": "Delhi",
+          "dst": "Central Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mohan Co-operative industrial Estate Ltd",
+          "loc": "Mathura Road",
+          "bno": "Plot No J-1/1 in Block No B-1",
+          "stcd": "Delhi",
+          "dst": "South Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110044",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Zafarpur",
+          "loc": "New Delhi",
+          "bno": "Khasra No.590-2-02, 593-4-16",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Tikri Kalan",
+          "loc": "New Delhi",
+          "bno": "Khasra No - 21/24",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Subhash Vihar Colony",
+          "loc": "Tikri Kalan,New Delhi",
+          "bno": "Khasra No.65/21",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "1 /2 Roop Nagar",
+          "loc": "Near Shakti Nagar Chowk",
+          "bno": "Ground and 1st Floor",
+          "stcd": "Delhi",
+          "dst": "North Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110007",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "PLOT NO. 94",
+          "loc": "OKHLA PHASE 3",
+          "bno": "1ST and 2ND FLOOR",
+          "stcd": "Delhi",
+          "dst": "South Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110020",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Tikri Kalan",
+          "loc": "Delhi",
+          "bno": "Khasra No. 41/22/2 and 45/2/1",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Tikri Kalan",
+          "loc": "Delhi",
+          "bno": "Khasra No. 45/3,",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Quila no.22",
+          "loc": "Village Tikri Kalan, Delhi",
+          "bno": "Khasra No. 22/19/2",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "17,4-10,18/1,3-04,24,4-10,25,4-16,65/21,4-16,794,0-01,",
+          "loc": "Village Tikri Kalan, Delhi",
+          "bno": "Khasra No. 26/1/2,0-07,27/6,4-16,7/1,3-00,64/15,4-16,16,4-16",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "16,17",
+          "loc": "Village Tikri Kalan, Delhi",
+          "bno": "Khasra No. 27/15",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "38/5/1 ,0-8",
+          "loc": "Village Tikri Kalan, Delhi",
+          "bno": "Khasra No.26/21/1,0-2,27/25,4-4,37,0-5",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "15/1,1-8",
+          "loc": "Village Tikri Kalan, Delhi",
+          "bno": "Khasra No. 21/6,4-16,7,4-4,14/1,1-8",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Tikri Kalan",
+          "loc": "Delhi",
+          "bno": "Khasra No.64/5",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Tikri Kalan",
+          "loc": "Delhi",
+          "bno": "Khasra No. 26/09, 4-16, 11,4-16 and 12, 4-16,",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Tikri Kalan",
+          "loc": "Delhi",
+          "bno": "Khasra No. 65/11,4-02,12,4-02,13 ,5-00",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Village Tikri Kalan,",
+          "loc": "Delhi",
+          "bno": "Khasra No. 27/6, 4-16, 27/7/1,3-0,7",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "76/21/2/1,76/19/2,20/1/1,21/2, 76/10,76/13/76/11",
+          "loc": "76/1 Village Ghewra ,Main Rohtak Road, Delhi",
+          "bno": "Khasra No.76/19/1, 76/12,76/19/2,20/1/1,21/2/2,76/20/1/2,",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110081",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata No. 1361",
+          "loc": "Village Tikri Kalan, Delhi",
+          "bno": "Khasra No. 63/25/2",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110041",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "MM Road Motia Khan",
+          "loc": "Rani Jhansi Road Delhi",
+          "bno": "Plot No-32 UGF, FF, SF",
+          "stcd": "Delhi",
+          "dst": "North East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110055",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Wazirabad Road",
+          "loc": "Bhajanpura, Delhi",
+          "bno": "C-35",
+          "stcd": "Delhi",
+          "dst": "North East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110053",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Works Contract"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "1st floor, 2nd Floor, 3rd Floor, 4th floor",
+          "loc": "Najafgarh, Delhi",
+          "bno": "Plot No. 579",
+          "stcd": "Delhi",
+          "dst": "West Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110043",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Works Contract"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "G3S Cinema, Garg Trade Centre",
+          "loc": "Sector-11, Rohini, Delhi",
+          "bno": "Ground floor and First Floor,",
+          "stcd": "Delhi",
+          "dst": "North East Delhi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "110085",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Works Contract"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "07AABCD7169H1ZI",
+    "nba": [
+      "Office / Sale Office",
+      "Warehouse / Depot",
+      "Recipient of Goods or Services",
+      "Works Contract"
+    ],
+    "lstupdt": "12/12/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "International Trade Tower",
+        "loc": "Nehru Place",
+        "bno": "10th Floor",
+        "stcd": "Delhi",
+        "dst": "South Delhi",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "110019",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "ctjCd": "ZK0604",
+    "tradeNam": "RELIANCE CORPORATE IT PARK LIMITED",
+    "sts": "Active",
+    "ctj": "RANGE - 164"
+  },
+  {
+    "isAvailble": true,
+    "stjCd": "MP008",
+    "lgnm": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "stj": "Bhopal -1",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "23AAACR3168H1ZK",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "05/07/2021",
+    "rgdt": "04/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "loc": "Bhopal",
+        "st": "Arera Hills MP Nagar",
+        "bno": "DB City Mall",
+        "stcd": "Madhya Pradesh",
+        "dst": "Bhopal",
+        "city": "",
+        "flno": "3rd Floor Office Block No 1",
+        "lt": "",
+        "pncd": "462016",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "UI0202",
+    "ctj": "RANGE-II"
+  },
+  {
+    "isAvailble": true,
+    "stjCd": "GJ011",
+    "lgnm": "RELIANCE COMMODITIES LIMITED",
+    "stj": "Ghatak 11 (Ahmedabad)",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "21St Century Business Centre",
+          "st": "Surat Ring Road",
+          "loc": "Surat",
+          "bno": "Office No 1002",
+          "dst": "Surat",
+          "stcd": "Gujarat",
+          "city": "",
+          "flno": "Upper Ground Floor",
+          "lt": "",
+          "pncd": "395007",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Aamrapali Complex",
+          "st": "Water Tank Road",
+          "loc": "Karelibaug, Baroda",
+          "bno": "Shop No 137 To 141",
+          "dst": "Vadodara",
+          "stcd": "Gujarat",
+          "city": "",
+          "flno": "1St Floor",
+          "lt": "",
+          "pncd": "390018",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Harihar Chowk",
+          "st": "Near Skse",
+          "loc": "Rajkot",
+          "bno": "101 Krish Business Planet",
+          "dst": "Rajkot",
+          "stcd": "Gujarat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "360001",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Reliance Capital House",
+          "st": "Nr. Mithakali Road",
+          "loc": "Navrangpura, Ahmedabad",
+          "bno": "Aashi Complex",
+          "dst": "Ahmedabad",
+          "stcd": "Gujarat",
+          "city": "",
+          "flno": "3rd floor",
+          "lt": "",
+          "pncd": "380009",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "24AADCR0446F2ZR",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "23/06/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Shivalik 2",
+        "st": "132 Ring Road",
+        "loc": "Ahemdabad",
+        "bno": "Office 101/B ,1st Floor, Shivalik 2",
+        "dst": "Ahmedabad",
+        "stcd": "Gujarat",
+        "city": "",
+        "flno": "1st",
+        "lt": "",
+        "pncd": "380015",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "sts": "Active",
+    "tradeNam": "RELIANCE COMMODITIES LIMITED",
+    "ctjCd": "WS0705",
+    "ctj": "RANGE V"
+  },
+  {
+    "isAvailble": true,
+    "stjCd": "TN144",
+    "stj": "MYLAPORE",
+    "lgnm": "DIESEL FASHION INDIA RELIANCE PRIVATE LIMITED",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "PHOENIX MARKET CITY",
+          "st": "VELECHERY ROAD",
+          "loc": "CHENNAI",
+          "bno": "142",
+          "dst": "Chennai",
+          "stcd": "Tamil Nadu",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "600042",
+          "lg": ""
+        },
+        "ntr": "Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "EXPRESS AVANUE",
+          "st": "SHOP NO 5 WHITES ROAD",
+          "loc": "ROYAPETTAH",
+          "bno": "49-50",
+          "dst": "Chennai",
+          "stcd": "Tamil Nadu",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "600014",
+          "lg": ""
+        },
+        "ntr": "Retail Business"
+      }
+    ],
+    "cxdt": "",
+    "nba": ["Retail Business"],
+    "gstin": "33AACCD6235H1ZX",
+    "lstupdt": "17/08/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "A-1 TOWER",
+        "st": "DR RADHAKRISHNAN SALAI",
+        "loc": "MYLAPORE",
+        "bno": "89",
+        "dst": "Chennai",
+        "stcd": "Tamil Nadu",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "600004",
+        "lg": ""
+      },
+      "ntr": "Retail Business"
+    },
+    "sts": "Active",
+    "tradeNam": "DIESEL FASHION INDIA RELIANCE PRIVATE LIMITED",
+    "ctjCd": "TK0505",
+    "ctj": "RANGE V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TG108",
+    "lgnm": "RELIANCE PROLIFIC TRADERS PRIVATE LIMITED",
+    "stj": "BASHEERBAGH - I",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "WARD NO 1 BLOCK NO 1",
+          "st": "VINAYAKA NAGAR",
+          "loc": "NIZAMABAD",
+          "bno": "SY NO 254 AND 259",
+          "stcd": "Telangana",
+          "dst": "Nizamabad",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "503001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "OPP SRR GOVT COLLEGE",
+          "st": "VIVEKANANDAPURI",
+          "loc": "KARIMNAGAR",
+          "bno": "SY NO 1342 1347 1348,B AND 1349",
+          "stcd": "Telangana",
+          "dst": "Karimnagar",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "502005",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      }
+    ],
+    "cxdt": "",
+    "nba": ["Office / Sale Office"],
+    "gstin": "36AABCH6106L1ZL",
+    "lstupdt": "06/06/2022",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "LAKE SHORE TOWERS",
+        "st": "RAJBHAVAN ROAD",
+        "loc": "SOMAJIGUDA",
+        "bno": "6- 3- 1090 / B",
+        "stcd": "Telangana",
+        "dst": "Hyderabad",
+        "city": "",
+        "flno": "4",
+        "lt": "",
+        "pncd": "500082",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "RELIANCE PROLIFIC TRADERS PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "YN0801",
+    "ctj": "SOMAJIGUDA"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TN331",
+    "dty": "Regular",
+    "lgnm": "RELIANCE PAACKS",
+    "stj": "VIRUDHUNAGAR - III",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "33AAKFR2981H1Z0",
+    "nba": [
+      "Office / Sale Office",
+      "Factory / Manufacturing",
+      "Wholesale Business",
+      "Retail Business"
+    ],
+    "lstupdt": "09/09/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "Hussain Colony",
+        "loc": "Sivakasi",
+        "bno": "4/1640",
+        "dst": "Virudhunagar",
+        "stcd": "Tamil Nadu",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "626189",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office, Factory / Manufacturing, Wholesale Business, Retail Business"
+    },
+    "ctjCd": "XO0501",
+    "tradeNam": "RELIANCE PAACKS",
+    "sts": "Active",
+    "ctj": "VIRUDHUNAGAR - I RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "WB050",
+    "stj": "COOCH BEHAR",
+    "lgnm": "RELIANCE UN EMPLOYEED ENGINEERS CO OP SOCIETY LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "19AAAAR3105Q1Z9",
+    "nba": ["Works Contract"],
+    "lstupdt": "27/07/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Society/ Club/ Trust/ AOP",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "R R N ROAD SOUTH",
+        "loc": "SADAR",
+        "bno": "-",
+        "stcd": "West Bengal",
+        "dst": "Cooch Behar",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "736101",
+        "lg": ""
+      },
+      "ntr": "Works Contract"
+    },
+    "sts": "Active",
+    "tradeNam": "RELIANCE UN EMPLOYED ENGINEERS CO OP SOCIETY LIMITED",
+    "ctjCd": "WE0501",
+    "ctj": "COOCHBEHAR I RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "DL056",
+    "lgnm": "NEW RELIANCE PUBLICITY SERVICES PVT LTD",
+    "stj": "Ward 56",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "07AAACN8261H1ZE",
+    "nba": ["Works Contract"],
+    "lstupdt": "28/07/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "MEERA BAGH",
+        "loc": "PASCHIM VIHAR",
+        "bno": "A-132",
+        "stcd": "Delhi",
+        "dst": "West Delhi",
+        "city": "",
+        "flno": "2nd FLOOR",
+        "lt": "",
+        "pncd": "110063",
+        "lg": ""
+      },
+      "ntr": "Works Contract"
+    },
+    "tradeNam": "NEW RELIANCE PUBLICITY SER. PVT LTD",
+    "sts": "Active",
+    "ctjCd": "ZL0602",
+    "ctj": "RANGE - 117"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GA005",
+    "dty": "Regular",
+    "lgnm": "DIESEL FASHION INDIA RELIANCE PRIVATE LIMITED",
+    "stj": "Panaji",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "30AACCD6235H1Z3",
+    "nba": ["Office / Sale Office"],
+    "lstupdt": "13/04/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "CMM Arena",
+        "st": "Renovadi",
+        "loc": "Merces",
+        "bno": "RCITPL Premises,Ground Floor,",
+        "stcd": "Goa",
+        "dst": "North Goa",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "403005",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "ctjCd": "UF0202",
+    "tradeNam": "Diesel Fashion India Reliance Private Limited",
+    "sts": "Active",
+    "ctj": "RANGE-II"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MZ001",
+    "lgnm": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "stj": "Aizawl 'N' Circle",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "15AAACR3168H1ZH",
+    "nba": [
+      "Office / Sale Office",
+      "Supplier of Services",
+      "Recipient of Goods or Services"
+    ],
+    "lstupdt": "30/09/2020",
+    "rgdt": "02/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Ramhlun North",
+        "loc": "P.S Bawnkawn",
+        "st": "Ramhlun N",
+        "bno": "Lalpara",
+        "stcd": "Mizoram",
+        "dst": "Aizawl",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "796001",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "UW0101",
+    "ctj": "AIZAWL I RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TR034",
+    "dty": "Regular",
+    "stj": "Charge - VII Level 1",
+    "lgnm": "RELIANCE TELECOM LIMITED",
+    "adadr": [],
+    "cxdt": "05/05/2020",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "gstin": "16AAACR2658E4ZH",
+    "lstupdt": "29/05/2020",
+    "ctb": "Company under Corporate Insolvency Resolution Process",
+    "rgdt": "02/05/2020",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "OLD KALI BARI ROAD",
+        "loc": "West Tripura",
+        "bno": "RELIANCE TELECOM LIMITED",
+        "stcd": "Tripura",
+        "dst": "West Tripura",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "799001",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "ctjCd": "UX0101",
+    "sts": "Cancelled",
+    "tradeNam": "",
+    "ctj": "AGARTALA I RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "AR026",
+    "stj": "Itanagar Zone-II",
+    "lgnm": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "12AAACR3168H1ZN",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "25/09/2020",
+    "rgdt": "29/06/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Near Hyundai Service Centre",
+        "st": "R.K. Mission",
+        "loc": "Itanagar",
+        "bno": "Chandan Nagar",
+        "stcd": "Arunachal Pradesh",
+        "dst": "Papum Pare",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "791113",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "UT0102",
+    "ctj": "ITANAGAR RANGE"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE TELECOM LTD",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE TELECOM LIMITED",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "18AAACR2658E2ZF",
+    "lstupdt": "18/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "sts": "Cancelled",
+    "tradeNam": "RELIANCE TELECOM LTD.  KASUMPTI SHIMLA",
+    "dty": "Regular",
+    "lgnm": "RELIANCE TELECOM LIMITED",
+    "cxdt": "-",
+    "gstin": "02AAACR2658E1ZT",
+    "lstupdt": "25/04/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0508",
+    "stj": "NARIMAN-POINT_702",
+    "lgnm": "Reliance 4IR Realty Development Limited",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AAHCD1949B1ZU",
+    "nba": [
+      "Leasing Business",
+      "Retail Business",
+      "Office / Sale Office",
+      "Supplier of Services",
+      "Recipient of Goods or Services",
+      "Works Contract",
+      "Warehouse / Depot"
+    ],
+    "lstupdt": "11/10/2020",
+    "rgdt": "02/03/2020",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "MAKER CHAMBER IV",
+        "st": "JAMNALAL BAJAJ MARG",
+        "loc": "NARIMAN POINT",
+        "bno": "141, PLOT-222, EAST WING",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai City",
+        "city": "",
+        "flno": "FLOOR 13",
+        "lt": "",
+        "pncd": "400021",
+        "lg": ""
+      },
+      "ntr": "Leasing Business, Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services, Works Contract, Warehouse / Depot"
+    },
+    "sts": "Active",
+    "tradeNam": "Reliance 4IR Realty Development Limited",
+    "ctjCd": "VN0804",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "PB151",
+    "lgnm": "DIESEL FASHION INDIA RELIANCE PRIVATE LIMITED",
+    "dty": "Regular",
+    "stj": "Mohali - Ward No.3",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "Ludhiana",
+          "st": "Firozpur Road, outside octroi limitx",
+          "bno": "Godown No. 1, 2 and 3 Thareekhay, Backside Rajguru Nagar",
+          "stcd": "Punjab",
+          "dst": "Ludhiana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "141008",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "Sirhind",
+          "st": "Tehsil Bassi Pathana",
+          "bno": "Village kotla Fazal",
+          "stcd": "Punjab",
+          "dst": "Fatehgarh Sahib",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "140406",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Retail Business"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "03AACCD6235H1Z0",
+    "nba": ["Office / Sale Office", "Retail Business"],
+    "lstupdt": "17/08/2021",
+    "ctb": "Private Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "loc": "Mohali",
+        "st": "Phase -VIII, Industrial Focal Point",
+        "bno": "C-135",
+        "stcd": "Punjab",
+        "dst": "SAS Nagar",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "160071",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office, Retail Business"
+    },
+    "tradeNam": "DIESEL FASHION INDIA RELIANCE PRIVATE LIMITED",
+    "ctjCd": "ZD1402",
+    "sts": "Active",
+    "ctj": "RANGE-II"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE CORPORATE IT PARK LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE CORPORATE IT PARK LIMITED",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "03AABCD7169H1ZQ",
+    "lstupdt": "24/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE CORPORATE IT PARK LTD.",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE CORPORATE IT PARK LIMITED",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "18AABCD7169H3ZD",
+    "lstupdt": "31/05/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "KA090",
+    "lgnm": "RELIANCE DALL MILL",
+    "stj": "LGSTO 530 - Raichur",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "01/09/2020",
+    "gstin": "29AAGFR0573H1Z1",
+    "nba": ["Retail Business", "Wholesale Business", "Factory / Manufacturing"],
+    "lstupdt": "08/10/2020",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "INDUSTRIAL AREA",
+        "loc": "RAICHUR",
+        "bno": "POLT NO 32 SURVEY NO 270",
+        "stcd": "Karnataka",
+        "dst": "Raichur",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "584101",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Wholesale Business, Factory / Manufacturing"
+    },
+    "tradeNam": "RELIANCE DALL MILL",
+    "sts": "Cancelled",
+    "ctjCd": "TC0204",
+    "ctj": "RAICHUR-A RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "AR026",
+    "lgnm": "Reliance SMSL Limited",
+    "stj": "Itanagar Zone-II",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "12AALCS0575Q1ZV",
+    "nba": [
+      "Office / Sale Office",
+      "Supplier of Services",
+      "Recipient of Goods or Services",
+      "Retail Business",
+      "Wholesale Business"
+    ],
+    "lstupdt": "10/08/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Chandan Nagar",
+        "loc": "Itanagar",
+        "st": "R.K. Mission",
+        "bno": "Near Hundai Service Centre",
+        "stcd": "Arunachal Pradesh",
+        "dst": "Papum Pare",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "791113",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services, Retail Business, Wholesale Business"
+    },
+    "sts": "Active",
+    "tradeNam": "Reliance SMSL Limited",
+    "ctjCd": "UT0102",
+    "ctj": "ITANAGAR RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "WB085",
+    "lgnm": "RELIANCE FURNITURE",
+    "stj": "SALT LAKE",
+    "dty": "Composition",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "19AAEFR5784J1ZK",
+    "nba": ["Retail Business", "Wholesale Business"],
+    "lstupdt": "01/04/2021",
+    "rgdt": "19/08/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "JESSORE ROAD",
+        "loc": "DUMDUM KOLKATA",
+        "bno": "99/51",
+        "dst": "North Twenty Four Parganas",
+        "stcd": "West Bengal",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "700028",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Wholesale Business"
+    },
+    "tradeNam": "RELIANCE FURNITURE",
+    "sts": "Active",
+    "ctjCd": "WA0905",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE DAIRY FOODS LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE DAIRY FOODS LIMITED",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "19AADCR4813L1Z3",
+    "lstupdt": "22/03/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GJ017",
+    "lgnm": "RELIANCE CORPORATION",
+    "stj": "Ghatak 17 (Ahmedabad)",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Office / Sale Office"],
+    "gstin": "24AABFR9085P1ZI",
+    "lstupdt": "14/04/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "HIRABHAI MARKET",
+        "loc": "AHMEDABAD",
+        "bno": "44",
+        "stcd": "Gujarat",
+        "dst": "Ahmedabad",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "380022",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "RELIENCE CORPORATION",
+    "sts": "Active",
+    "ctjCd": "WS0104",
+    "ctj": "RANGE IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GJ041",
+    "dty": "Composition",
+    "lgnm": "RELIANCE RADIATORS",
+    "stj": "Ghatak 41 (Vadodara)",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "24AACFR6120L1ZB",
+    "nba": ["Retail Business", "Factory / Manufacturing"],
+    "lstupdt": "01/04/2021",
+    "ctb": "Partnership",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "RELIANCE REDIATORS",
+        "st": "NAVI DHARTI",
+        "loc": "NAGARWADA",
+        "bno": "MU SHOP NO 6",
+        "dst": "Vadodara",
+        "stcd": "Gujarat",
+        "city": "",
+        "flno": "0",
+        "lt": "",
+        "pncd": "390001",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Factory / Manufacturing"
+    },
+    "ctjCd": "TA0304",
+    "tradeNam": "RELIANCE RADIATORS",
+    "sts": "Active",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE GRANITE PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "dty": "Regular",
+    "stj": "",
+    "ctj": "",
+    "lgnm": "RELIANCE GRANITE PRIVATE LIMITED",
+    "cxdt": "-",
+    "gstin": "36AABCR1369P1ZW",
+    "lstupdt": "08/03/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0598",
+    "lgnm": "RELIANCE ELECTRICALS",
+    "stj": "KANDIVALI-WEST_713",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AAFFR4451B1ZH",
+    "nba": ["Office / Sale Office"],
+    "lstupdt": "23/03/2022",
+    "rgdt": "10/10/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "ASMI INDUSTRIAL COMPLEX",
+        "st": "RAM MANDIR ROAD",
+        "loc": "GOREGAON WEST",
+        "bno": "SHOP NO 530, R-5,",
+        "dst": "Mumbai Suburban",
+        "stcd": "Maharashtra",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "400104",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "RELIANCE ELECTRICALS",
+    "sts": "Active",
+    "ctjCd": "VP0904",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE TRADING LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE TRADING LIMITED",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "03AADCR7079N1ZW",
+    "lstupdt": "09/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE DAIRY FOODS LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE DAIRY FOODS LIMITED",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "33AADCR4813L1ZD",
+    "lstupdt": "22/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "AP118",
+    "lgnm": "RELIANCE COMMODITIES LIMITED",
+    "stj": "DWARAKANAGAR",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "",
+          "st": "NEAR NTR CIRCLE, PATAMATA,",
+          "loc": "VIJAYWADA",
+          "bno": "59A-13-1,",
+          "dst": "Krishna",
+          "stcd": "Andhra Pradesh",
+          "city": "",
+          "flno": "GROUND FLOOR,",
+          "lt": "",
+          "pncd": "520010",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Supplier of Services"
+      },
+      {
+        "addr": {
+          "bnm": "V R C Complex",
+          "st": "Rajaji Marg",
+          "loc": "Dwarakanagar, Visakhapatnam",
+          "bno": "47-15-15",
+          "dst": "Visakhapatnam",
+          "stcd": "Andhra Pradesh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "530016",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "37AADCR0446F1ZL",
+    "nba": ["Recipient of Goods or Services", "Supplier of Services"],
+    "lstupdt": "23/06/2019",
+    "rgdt": "19/08/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "V R C COMPLEX,",
+        "st": "RAJAJI MARG,",
+        "loc": "DWARAKANAGAR",
+        "bno": "47-15-14/2",
+        "dst": "Visakhapatnam",
+        "stcd": "Andhra Pradesh",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "530016",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services, Supplier of Services"
+    },
+    "tradeNam": "RELIANCE COMMODITIES LIMITED",
+    "sts": "Active",
+    "ctjCd": "YJ0207",
+    "ctj": "DWARAKANAGAR"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GA005",
+    "lgnm": "RELIANCE CORPORATE IT PARK LIMITED",
+    "stj": "Panaji",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Opp. Basketball Ground",
+          "st": "Kadamba Depot Rd",
+          "loc": "Alto-Porvorim,Socorro",
+          "bno": "Xenia Bldg",
+          "stcd": "Goa",
+          "dst": "North Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403501",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Opp. Auto Service",
+          "st": "F.L.Gomes Road",
+          "loc": "Vasco",
+          "bno": "Z-Square",
+          "stcd": "Goa",
+          "dst": "South Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403802",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Opp. Inter Designer, Near B.M.Servicing Station",
+          "st": "A.C.Pacheco Road",
+          "loc": "Borda, Margao",
+          "bno": "Gods Blessing",
+          "stcd": "Goa",
+          "dst": "South Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403601",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Ground Floor, Guru Sai Plaza",
+          "st": "Isidorio Baptista Road",
+          "loc": "Pajifond, Margao",
+          "bno": "Shop No. 1",
+          "stcd": "Goa",
+          "dst": "South Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403601",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Atharva Residency",
+          "st": "Near Sushrusha Hospital",
+          "loc": "Varkhandem, Ponda",
+          "bno": "Shop No. 1",
+          "stcd": "Goa",
+          "dst": "North Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403401",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Karma Empress",
+          "st": "Near KTC Bus Stand",
+          "loc": "Vollant, Vasco",
+          "bno": "Shop No. 2",
+          "stcd": "Goa",
+          "dst": "South Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403802",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Shankar Parvati Bldg",
+          "st": "18th June Road",
+          "loc": "Panaji",
+          "bno": "Shop No. 9",
+          "stcd": "Goa",
+          "dst": "North Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403001",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Survey No 197/1,201/1 of Cortalim Village",
+          "loc": "Mormugaon",
+          "bno": "Survey No 68/1,82/1of Sancoale Village",
+          "stcd": "Goa",
+          "dst": "South Goa",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "403710",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Office / Sale Office, Retail Business"
+      }
+    ],
+    "cxdt": "",
+    "nba": [
+      "Works Contract",
+      "Office / Sale Office",
+      "Warehouse / Depot",
+      "Retail Business"
+    ],
+    "gstin": "30AABCD7169H1ZT",
+    "lstupdt": "11/12/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "CMM Arena",
+        "st": "Renovadi",
+        "loc": "Merces",
+        "bno": "Ground Floor",
+        "stcd": "Goa",
+        "dst": "North Goa",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "403005",
+        "lg": ""
+      },
+      "ntr": "Works Contract, Office / Sale Office"
+    },
+    "tradeNam": "RELIANCE CORPORATE IT PARK LIMITED",
+    "sts": "Active",
+    "ctjCd": "UF0204",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "sts": "Cancelled",
+    "tradeNam": "RELIANCE STEEL INDUSTRIES",
+    "dty": "Regular",
+    "lgnm": "RELIANCE STEEL INDUSTRIES",
+    "cxdt": "-",
+    "gstin": "37AAIFR5126N1ZQ",
+    "lstupdt": "06/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "HR147",
+    "stj": "Panipat Ward 1",
+    "lgnm": "RELIANCE LOOMTEX",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "HUDA Panipat",
+          "st": "Sector-25 Part-1",
+          "bno": "130",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing, Warehouse / Depot, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "HUDA Panipat",
+          "st": "Sector-25 Part-1",
+          "bno": "145",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Factory / Manufacturing"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "Near NFL, Panipat",
+          "st": "G.T Road",
+          "bno": "Reliance Loomtex",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing, Office / Sale Office, Wholesale Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "PANIPAT",
+          "st": "INDUSTRIAL AREA",
+          "bno": "E-56",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing, Supplier of Services, Others"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "PANIPAT",
+          "st": "SECTOR-29, PART- 2,HUDA",
+          "bno": "650",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing, Supplier of Services, Others"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "Panipat",
+          "st": "Industral Area",
+          "bno": "T-2",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing, Export"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "PANIPAT",
+          "st": "INDUSTRIAL AREA",
+          "bno": "C-5/B",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "loc": "HUDA, PANIPAT",
+          "st": "SECTOR 25",
+          "bno": "PLOT NO. 91",
+          "dst": "Panipat",
+          "stcd": "Haryana",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "132103",
+          "lg": ""
+        },
+        "ntr": "Factory / Manufacturing"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "06AALFR1386F1Z3",
+    "nba": [
+      "Factory / Manufacturing",
+      "Wholesale Business",
+      "Office / Sale Office",
+      "Export",
+      "Service Provision",
+      "Warehouse / Depot",
+      "Supplier of Services",
+      "Others"
+    ],
+    "lstupdt": "09/07/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "loc": "PANIPAT",
+        "st": "INDUSTRIAL AREA",
+        "bno": "E-2",
+        "dst": "Panipat",
+        "stcd": "Haryana",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "132103",
+        "lg": ""
+      },
+      "ntr": "Factory / Manufacturing, Wholesale Business, Office / Sale Office, Export, Service Provision"
+    },
+    "sts": "Active",
+    "tradeNam": "RELIANCE LOOMTEX",
+    "ctjCd": "ZQ0204",
+    "ctj": "RANGE 9"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GJ009",
+    "stj": "Ghatak 9 (Ahmedabad)",
+    "lgnm": "Reliance Ethane Pipeline Limited",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "M and R Station - Hazira Plant",
+          "st": "Reliance Industries Limited, Hazira Manufacturing Division,",
+          "loc": "Mora, PO-Bhatha, Surat",
+          "bno": "R.S. No 244/P",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "394510",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE-IPS-01",
+          "st": "On Jawa Kanjanhari Road",
+          "loc": "PO-Valsad, Kanjanhari",
+          "bno": "Relaince Compressor Station 09",
+          "stcd": "Gujarat",
+          "dst": "Valsad",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396055",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE-M and R-03",
+          "st": "On Bhadhbhut Kasawas Road",
+          "loc": "Bhadbhut",
+          "bno": "Reliance Compressor Station 10",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "392012",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 1",
+          "st": "D-2/24 GIDC Dahej -2 Estate",
+          "loc": "Moje Joiva Talika Vagra",
+          "bno": "Blcok no 244/P.245/P.246/P.247/ P, 249/p",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "392130",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 2",
+          "st": "Kaladara",
+          "loc": "PO-Vagra",
+          "bno": "Survey no 92",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "392165",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 4",
+          "st": "Mothiya ,Tal.Hansot",
+          "loc": "Bharuch",
+          "bno": "Block no. 48",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "393030",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 5",
+          "st": "Parvat",
+          "loc": "Hansot",
+          "bno": "Block no 209",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "394810",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 6",
+          "st": "Syadla",
+          "loc": "Oplad, Surat",
+          "bno": "Block 100",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "395001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DMD DNEPL Pump station",
+          "st": "Dahej",
+          "loc": "Vagra",
+          "bno": "Reliance Industries Limited",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "392130",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "MLV-03 DNEPL, Reliance Gas Pipeline Ltd",
+          "st": "On Bhadhbhut Kasawas Road",
+          "loc": "Bhadbhut",
+          "bno": "Opposite to Reliance Compressor Station 10",
+          "stcd": "Gujarat",
+          "dst": "Bharuch",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "392012",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "SLV-01, DNEPL, Reliance Gas Pipeline Ltd,",
+          "st": "Vadoli",
+          "loc": "Olpad",
+          "bno": "Survey no-480",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "394110",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "SLV-02, DNEPL, Reliance Gas Pipeline Ltd,",
+          "st": "Vanakala",
+          "loc": "Choryasi",
+          "bno": "Dandi Road",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "395005",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "SLV-03, DNEPL, Reliance Gas Pipeline Ltd,",
+          "st": "Damka",
+          "loc": "Choryasi",
+          "bno": "RS NO-435-P-1/2",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "394510",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 8",
+          "st": "Chhedachha",
+          "loc": "Kamrej",
+          "bno": "Block 93-old block no. 65",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "395007",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 9",
+          "st": "Waktana",
+          "loc": "Choryasi",
+          "bno": "Survey no 348",
+          "stcd": "Gujarat",
+          "dst": "Surat",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "395009",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE-MLV-10",
+          "st": "Surevy No 132",
+          "loc": "Dabhel, Jalalpore",
+          "bno": "Surevy No 132",
+          "stcd": "Gujarat",
+          "dst": "Navsari",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396415",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 11",
+          "st": "Munsad",
+          "loc": "Munsad",
+          "bno": "Block no 490/P1",
+          "stcd": "Gujarat",
+          "dst": "Navsari",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396463",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 12",
+          "st": "Vegam",
+          "loc": "Gandevi",
+          "bno": "Block no 1021",
+          "stcd": "Gujarat",
+          "dst": "Navsari",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396350",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE- MLV-13",
+          "st": "Survey No 81",
+          "loc": "Ambheta, Gandevi",
+          "bno": "Survey No 81",
+          "stcd": "Gujarat",
+          "dst": "Navsari",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396360",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 14",
+          "st": "Vagaldhara",
+          "loc": "Valsad",
+          "bno": "Block No. 100",
+          "stcd": "Gujarat",
+          "dst": "Valsad",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "395001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE - MLV 15",
+          "st": "Parvasa",
+          "loc": "Parvasa, Pardi",
+          "bno": "Survey no 236/1",
+          "stcd": "Gujarat",
+          "dst": "Valsad",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396125",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE-MLV-16",
+          "st": "Survey No 141P9/ 139P8",
+          "loc": "Zaroli, Umergaon",
+          "bno": "Survey No 141P9/ 139P8",
+          "stcd": "Gujarat",
+          "dst": "Valsad",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396105",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "DNE-MLV-17",
+          "st": "Chainage no. 1204",
+          "loc": "Zaroli, Umergaon",
+          "bno": "Chainage no. 1204",
+          "stcd": "Gujarat",
+          "dst": "Valsad",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "396105",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "24AAJCR6591F1Z4",
+    "nba": [
+      "Office / Sale Office",
+      "Warehouse / Depot",
+      "Supplier of Services",
+      "Recipient of Goods or Services"
+    ],
+    "lstupdt": "18/02/2021",
+    "rgdt": "30/10/2019",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Safforn Near Centre Point",
+        "st": "Panchvati Panch rasta",
+        "loc": "Ambavadi",
+        "bno": "101",
+        "stcd": "Gujarat",
+        "dst": "Ahmedabad",
+        "city": "",
+        "flno": "1st floor",
+        "lt": "",
+        "pncd": "380006",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "sts": "Active",
+    "tradeNam": "Reliance Ethane Pipeline Limited",
+    "ctjCd": "WS0604",
+    "ctj": "RANGE IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "JH022",
+    "stj": "Ranchi East",
+    "dty": "Regular",
+    "lgnm": "Diesel Fashion India Reliance Private Limited",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "20AACCD6235H1Z4",
+    "nba": ["Retail Business", "Office / Sale Office"],
+    "lstupdt": "17/08/2021",
+    "rgdt": "08/10/2018",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Sandhya Tower, Village Konka",
+        "st": "Purila Road",
+        "loc": "P S Lalpur",
+        "bno": "2nd and",
+        "stcd": "Jharkhand",
+        "dst": "Ranchi",
+        "city": "",
+        "flno": "3rd Floor",
+        "lt": "",
+        "pncd": "834001",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Office / Sale Office"
+    },
+    "sts": "Active",
+    "ctjCd": "XW0202",
+    "tradeNam": "Diesel Fashion India Reliance Private Limited",
+    "ctj": "RANGE - II"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0305",
+    "lgnm": "RELIANCE ASSET RECONSTRUCTION COMPANY LIMITED",
+    "stj": "GOREGAON-WEST_703",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Sagar Tech Plaza",
+          "st": "Andheri kurla Road, Sakinaka Junction",
+          "loc": "Andheri East",
+          "bno": "Office No 407,408,409,410,411",
+          "dst": "Mumbai",
+          "stcd": "Maharashtra",
+          "city": "",
+          "flno": "B Wing",
+          "lt": "",
+          "pncd": "400072",
+          "lg": ""
+        },
+        "ntr": "Others"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "27AADCR3968G1Z3",
+    "nba": [
+      "Service Provision",
+      "Supplier of Services",
+      "Recipient of Goods or Services",
+      "Others"
+    ],
+    "lstupdt": "23/08/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "R-Tech Park, Nirlon Compound",
+        "st": "Western Express Highway",
+        "loc": "Goregaon - East",
+        "bno": "11th Floor, North Side",
+        "dst": "Mumbai Suburban",
+        "stcd": "Maharashtra",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "400063",
+        "lg": ""
+      },
+      "ntr": "Service Provision, Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "RELIANCE ASSET RECONSTRUCTION COMPANY LIMITED",
+    "sts": "Active",
+    "ctjCd": "VM0704",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG1354",
+    "stj": "URAN_701",
+    "dty": "Input Service Distributor (ISD)",
+    "lgnm": "Reliance Lifestyle Holdings Limited",
+    "adadr": [],
+    "cxdt": "01/03/2020",
+    "nba": ["Recipient of Goods or Services"],
+    "gstin": "27AADCB1864F2ZT",
+    "lstupdt": "30/08/2020",
+    "rgdt": "02/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "GR",
+        "st": "5 TTC INDUSTRIAL AREA, GHANSOLI",
+        "loc": "THANE BELAPUR ROAD, NAVI MUMBAI",
+        "bno": "RELIANCE CORPORATE PARK",
+        "dst": "Thane",
+        "stcd": "Maharashtra",
+        "city": "",
+        "flno": "RCP",
+        "lt": "",
+        "pncd": "400701",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services"
+    },
+    "ctjCd": "VU0404",
+    "sts": "Cancelled",
+    "tradeNam": "Reliance Lifestyle Holdings Limited",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "UP1731",
+    "lgnm": "RELIANCE LIFE SCIENCES PVT.LTD.",
+    "stj": "Lucknow Sector-18",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Commercial yojna",
+          "st": "Taramandal Road",
+          "loc": "Gorakhpur",
+          "bno": "Plot no. -142/D",
+          "stcd": "Uttar Pradesh",
+          "dst": "Gorakhpur",
+          "city": "",
+          "flno": "Buddh Vihar",
+          "lt": "",
+          "pncd": "273016",
+          "lg": ""
+        },
+        "ntr": "Others"
+      },
+      {
+        "addr": {
+          "bnm": "rampur garden",
+          "st": "civil lines",
+          "loc": "bareily",
+          "bno": "35",
+          "stcd": "Uttar Pradesh",
+          "dst": "Bareilly",
+          "city": "",
+          "flno": "B/3",
+          "lt": "",
+          "pncd": "243001",
+          "lg": ""
+        },
+        "ntr": "Others"
+      },
+      {
+        "addr": {
+          "bnm": "In front of Relief Hospital",
+          "st": "Sitapur road",
+          "loc": "Lucknow",
+          "bno": "UGF 538/3",
+          "stcd": "Uttar Pradesh",
+          "dst": "Lucknow",
+          "city": "",
+          "flno": "",
+          "lt": "26.908734",
+          "pncd": "226020",
+          "lg": "80.901947"
+        },
+        "ntr": "Supplier of Services, Office / Sale Office"
+      }
+    ],
+    "cxdt": "",
+    "nba": ["Office / Sale Office", "Others", "Supplier of Services"],
+    "gstin": "09AABCR7594L1ZM",
+    "lstupdt": "15/03/2022",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "ELDECO CORPORATE CHAMBER 2",
+        "st": "PHASE 1 VIBHUTI KHAND",
+        "loc": "GOMTI NAGAR",
+        "bno": "PLOT NO TC 58V AND 59V",
+        "stcd": "Uttar Pradesh",
+        "dst": "Lucknow",
+        "city": "",
+        "flno": "8 and 9",
+        "lt": "",
+        "pncd": "226010",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "M/S RELIANCE LIFE SCIENCES PVT LTD",
+    "sts": "Active",
+    "ctjCd": "ZU0104",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "AP119",
+    "lgnm": "SRI SRINIVASA RELIANCE TRANSPORT COMPANY",
+    "stj": "GAJUWAKA",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "37ACJFS0324E1ZD",
+    "nba": ["Service Provision"],
+    "lstupdt": "13/03/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "67,68",
+        "st": "AUTONAGAR",
+        "loc": "AUTONAGAR",
+        "bno": "block B",
+        "stcd": "Andhra Pradesh",
+        "dst": "Visakhapatnam",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "530012",
+        "lg": ""
+      },
+      "ntr": "Service Provision"
+    },
+    "tradeNam": "SRI SRINIVASA RELIANCE TRANSPORT COMPANY",
+    "sts": "Active",
+    "ctjCd": "YJ0309",
+    "ctj": "SHEELANAGAR"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "PY002",
+    "lgnm": "Reliance BP mobility Limited",
+    "stj": "Goods Division - III/IAC (Commune Panchayat)",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "",
+          "st": "RS No. 127/1A/1A/1A/2/3, Cad No. 295/1 Part, Patta No. 572,",
+          "loc": "No. 35 Oulgaret Revenue Village, Pondicherry",
+          "bno": "PYF002, Plot No. 134, 135, 136 and 148 VIP Nagar,",
+          "dst": "Puducherry",
+          "stcd": "Puducherry",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "605010",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "SY. NO- 32/1,32/6,32/3, MOOLAKADAVU,",
+          "loc": "PANDAKKAL VILLAGE, MAHE TALUK, PUTHUSSERY",
+          "bno": "KLF071 - , M/s Royal Petroleum,",
+          "dst": "Puducherry",
+          "stcd": "Puducherry",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "673310",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "nba": [
+      "Retail Business",
+      "Office / Sale Office",
+      "Warehouse / Depot",
+      "Supplier of Services",
+      "Recipient of Goods or Services"
+    ],
+    "gstin": "34AAHCR2546N1Z1",
+    "lstupdt": "02/06/2022",
+    "rgdt": "20/05/2020",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "MANGALAM ROAD, URAIYUR VILLINUR COMMUNE",
+        "loc": "Pondicherry",
+        "bno": "64",
+        "dst": "Puducherry",
+        "stcd": "Puducherry",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "605110",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "Reliance BP mobility Limited",
+    "sts": "Active",
+    "ctjCd": "XQ0205",
+    "ctj": "RANGE II-E"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TG133",
+    "lgnm": "RELIANCE COMMERCIAL FINANCE LIMITED",
+    "stj": "MADHAPUR -III",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "36AABCR6898M1ZI",
+    "nba": [
+      "Supplier of Services",
+      "Recipient of Goods or Services",
+      "Office / Sale Office",
+      "Others"
+    ],
+    "lstupdt": "27/04/2022",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Naveen Nagar",
+        "st": "Road No. 1, Banjara Hills",
+        "loc": "Hyderabad",
+        "bno": "6-3-248",
+        "dst": "Hyderabad",
+        "stcd": "Telangana",
+        "city": "",
+        "flno": "3rd Floor",
+        "lt": "",
+        "pncd": "500034",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office, Others"
+    },
+    "tradeNam": "Reliance Commercial Finance Limited",
+    "sts": "Active",
+    "ctjCd": "YN0802",
+    "ctj": "PUNJAGUTTA"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG1111",
+    "dty": "Regular",
+    "lgnm": "RELIANCE ELECTRICS",
+    "stj": "CHINCHWADGAON_702",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "",
+          "st": "MUTKE WADI",
+          "loc": "CHAKAN",
+          "bno": "SHOP NO 7 SUCCESS POINT",
+          "stcd": "Maharashtra",
+          "dst": "Pune",
+          "city": "",
+          "flno": "NEAR SURYA HOSPITAL",
+          "lt": "",
+          "pncd": "410501",
+          "lg": ""
+        },
+        "ntr": "Retail Business"
+      }
+    ],
+    "cxdt": "",
+    "nba": ["Retail Business"],
+    "gstin": "27AATFR1373E1ZY",
+    "lstupdt": "07/09/2019",
+    "ctb": "Partnership",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "AJMERA HSG SOCIETY",
+        "loc": "PIMPRI",
+        "bno": "FLAT NO 303 BUILDING NO B 3/3",
+        "stcd": "Maharashtra",
+        "dst": "Pune",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "411018",
+        "lg": ""
+      },
+      "ntr": "Retail Business"
+    },
+    "tradeNam": "RELIANCE ELECTRICS",
+    "ctjCd": "UC0405",
+    "sts": "Active",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE TEXTILE SERVICES",
+    "sts": "Cancelled",
+    "dty": "Regular",
+    "lgnm": "RELIANCE TEXTILES SERVICES",
+    "stj": "",
+    "ctj": "",
+    "cxdt": "-",
+    "gstin": "27AACFR2622R1ZU",
+    "lstupdt": "19/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE RETAIL SECURITIES AND BROKING COMPANY LIMITED",
+    "sts": "Cancelled",
+    "dty": "Regular",
+    "lgnm": "RELIANCE RETAIL SECURITIES AND BROKING COMPANY LIMITED",
+    "cxdt": "-",
+    "gstin": "27AADCR8443C1ZF",
+    "lstupdt": "19/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "WB087",
+    "lgnm": "RELIANCE ENTERPRISE",
+    "stj": "SHIBPUR",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Supplier of Services", "Works Contract"],
+    "gstin": "19AAUFR5914Q1Z2",
+    "lstupdt": "26/07/2018",
+    "rgdt": "09/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "PO-MAKARDAH",
+        "loc": "PS-DOMJUR",
+        "bno": "VII- NIMERHATI",
+        "stcd": "West Bengal",
+        "dst": "Howrah",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "711409",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Works Contract"
+    },
+    "tradeNam": "RELIANCE ENTERPRISE",
+    "sts": "Active",
+    "ctjCd": "WD0202",
+    "ctj": "RANGE-II"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "KA067",
+    "lgnm": "RELIANCE MARKETING",
+    "stj": "LGSTO 390 - Belagavi",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "29AADFR8189E1ZQ",
+    "nba": ["Retail Business"],
+    "lstupdt": "20/05/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "HUNS TALKIES ROAD",
+        "loc": "BELGAUM",
+        "bno": "3137/1A/5",
+        "dst": "Belagavi",
+        "stcd": "Karnataka",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "590002",
+        "lg": ""
+      },
+      "ntr": "Retail Business"
+    },
+    "tradeNam": "RELIANCE MARKETING",
+    "sts": "Active",
+    "ctjCd": "TC0704",
+    "ctj": "BELAGAVI-CITY RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0518",
+    "dty": "Regular",
+    "lgnm": "RELIANCE DAIRY & PHARMA FITTINGS",
+    "stj": "GIRGAON_601",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AAMFR7168J1ZH",
+    "nba": ["Retail Business", "Wholesale Business"],
+    "lstupdt": "07/09/2019",
+    "ctb": "Partnership",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "DODEYA HOUSE",
+        "loc": "GIRGAUN",
+        "st": "4TH KUMBHARWADA",
+        "bno": "34-34 - 4",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai",
+        "city": "",
+        "flno": "GROUND FLOOR",
+        "lt": "",
+        "pncd": "400004",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Wholesale Business"
+    },
+    "tradeNam": "RELIANCE DAIRY AND PHARMA FITTINGS",
+    "ctjCd": "VN0404",
+    "sts": "Active",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "HP015",
+    "dty": "Regular",
+    "lgnm": "Reliance SMSL Limited",
+    "stj": "Cart Road Circle",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "02AALCS0575Q1ZW",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "02/03/2021",
+    "ctb": "Public Limited Company",
+    "rgdt": "02/08/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "loc": "Tutikandi, Shimla",
+        "st": "Parking Block of Modern ISBT",
+        "bno": "Level 1792, 2nd Floor from Ground",
+        "stcd": "Himachal Pradesh",
+        "dst": "Shimla",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "171004",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "ctjCd": "ZB0101",
+    "tradeNam": "Reliance SMSL Limited",
+    "sts": "Active",
+    "ctj": "SHIMLA-I"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "HR126",
+    "lgnm": "RELIANCE COMMERCIAL FINANCE LIMITED",
+    "dty": "Regular",
+    "stj": "Karnal Ward 9",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "06AABCR6898M1ZL",
+    "nba": [
+      "Recipient of Goods or Services",
+      "Supplier of Services",
+      "Office / Sale Office"
+    ],
+    "lstupdt": "21/10/2021",
+    "ctb": "Public Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "SCO-211",
+        "st": "Sector 12",
+        "loc": "Karnal",
+        "bno": "211",
+        "stcd": "Haryana",
+        "dst": "Karnal",
+        "city": "",
+        "flno": "1st Floor and 2nd Floor,",
+        "lt": "",
+        "pncd": "132001",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services, Supplier of Services, Office / Sale Office"
+    },
+    "tradeNam": "Reliance Commercial Finance Limited",
+    "ctjCd": "ZQ0503",
+    "sts": "Active",
+    "ctj": "RANGE 23"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "CH007",
+    "lgnm": "SUMMIT DIGITEL INFRASTRUCTURE PRIVATE LIMITED",
+    "stj": "Ward 7",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "04AAGCR2798R1ZJ",
+    "nba": ["Office / Sale Office"],
+    "lstupdt": "08/12/2021",
+    "rgdt": "28/08/2018",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "Sector 34-A",
+        "loc": "Chandigarh",
+        "bno": "S.C.O. No.87-88",
+        "stcd": "Chandigarh",
+        "dst": "Chandigarh",
+        "city": "",
+        "flno": "3rd  4th Floor",
+        "lt": "",
+        "pncd": "160022",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "SUMMIT DIGITEL INFRASTRUCTURE PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "ZC0305",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "KL136",
+    "lgnm": "RELIANCE DRESS MATERIALS",
+    "stj": "Commercial Tax Office I Cricle",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Retail Business"],
+    "gstin": "32AAIFR7682K1ZP",
+    "lstupdt": "22/04/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "GRAND BAZAR",
+        "st": "S.M STREET CROSS ROAD",
+        "loc": "NAGARAM",
+        "bno": "7/533A-17",
+        "dst": "Kozhikode",
+        "stcd": "Kerala",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "673001",
+        "lg": ""
+      },
+      "ntr": "Retail Business"
+    },
+    "tradeNam": "RELIANCE",
+    "sts": "Active",
+    "ctjCd": "TJ0301",
+    "ctj": "KOZHIKODE I RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "lgnm": "RELIANCE HOME FINANCE LIMITED",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Capital City",
+          "st": "Korappath Lane, Round North",
+          "loc": "Thrissur",
+          "bno": "4th Floor",
+          "stcd": "Kerala",
+          "dst": "Ernakulam",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "680022",
+          "lg": ""
+        },
+        "ntr": "Service Provision, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "32AAECR0305E1Z6",
+    "nba": ["Service Provision", "Recipient of Goods or Services"],
+    "lstupdt": "31/08/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Kurickal Arcade",
+        "st": "NH47, Changampuzha Nagar Park",
+        "loc": "Edappally, Cochin",
+        "bno": "2nd Floor",
+        "stcd": "Kerala",
+        "dst": "Ernakulam",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "682024",
+        "lg": ""
+      },
+      "ntr": "Service Provision, Recipient of Goods or Services"
+    },
+    "tradeNam": "RELIANCE HOME FINANCE  LIMITED",
+    "sts": "Updated",
+    "ctjCd": "TI0504",
+    "ctj": "KAKKANAD RANGE-4"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "BR010",
+    "dty": "Regular",
+    "lgnm": "Reliance SMSL Limited",
+    "stj": "Danapur",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "10AALCS0575Q1ZZ",
+    "nba": [
+      "Recipient of Goods or Services",
+      "Supplier of Services",
+      "Office / Sale Office",
+      "Wholesale Business",
+      "Retail Business"
+    ],
+    "lstupdt": "17/04/2018",
+    "ctb": "Public Limited Company",
+    "rgdt": "28/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "Dudheshwar Nath Complex",
+        "st": "Bailey Road",
+        "loc": "Rupaspur",
+        "bno": "Plot no 210 and 233",
+        "stcd": "Bihar",
+        "dst": "Patna",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "800014",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services, Supplier of Services, Office / Sale Office, Wholesale Business, Retail Business"
+    },
+    "ctjCd": "XU0305",
+    "tradeNam": "Reliance SMSL Limited",
+    "sts": "Active",
+    "ctj": "PHULWARISARIF RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GJ055",
+    "stj": "Ghatak 55 (Bharuch)",
+    "lgnm": "RELIANCE ELECTROMATION",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "24AAZFR7914H1ZL",
+    "nba": [
+      "Retail Business",
+      "Works Contract",
+      "Warehouse / Depot",
+      "Export",
+      "Wholesale Business",
+      "Recipient of Goods or Services"
+    ],
+    "lstupdt": "28/10/2021",
+    "rgdt": "09/07/2019",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "AMARKUNJ SOCIETY",
+        "loc": "BHARUCH",
+        "st": "BHOLAV",
+        "bno": "ROOM NO A-04",
+        "stcd": "Gujarat",
+        "dst": "Bharuch",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "392001",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Works Contract, Warehouse / Depot, Export, Wholesale Business, Recipient of Goods or Services"
+    },
+    "tradeNam": "RELIANCE ELECTROMATION",
+    "sts": "Active",
+    "ctjCd": "VB0602",
+    "ctj": "RANGE-II"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0414",
+    "stj": "KALBADEVI_503",
+    "dty": "Regular",
+    "lgnm": "RELIANCE PAUL & SHARK FASHIONS PRIVATE LIMITED",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Total LogisticsIndiaP.Ltd, Manas Prayag, Paras Compound",
+          "st": "Paras Compound, Goa by-Pass Road, Palaspha Phata",
+          "loc": "Panvel",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Raigad",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "410203",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "G",
+          "st": "5 TTC Industrial Area, Thane-Belapur Road, Ghansoli",
+          "loc": "Navi Mumbai",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "Reliance Corporate IT Park Ltd",
+          "lt": "",
+          "pncd": "400701",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "G",
+          "st": "Build. No. 171, Unit No. 1  2, Build. No. 162,  Opp. Gajanan",
+          "loc": "Bhivandi",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "Unit 1  2, Indian Corporation Compalex",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Reliance Industries Ltd. Maker Tower E",
+          "st": "C.S No. 641  641A",
+          "loc": "Cuffe Parade",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai City",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400005",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Reliance Industries Ltd., RPL House",
+          "st": "Walchand Hirachand Marg,",
+          "loc": "Ballard Estate",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai City",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Phoenix Mall",
+          "st": "Gr. Floor, Palladium blck 34/14B, Phoenix Mill Compund, 462,",
+          "loc": "Lower Parel",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400013",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "C/o. Origin Logistics Pvt. Ltd",
+          "st": "Indian Corporation Complex, Build. No. 181  190 Unit No. 9",
+          "loc": "Bhivandi",
+          "bno": "Reliance Paul and Shark",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "and Warehousing LLP, Sagar Complex, Bldg. No. F-2,Gala No. 8",
+          "st": "Mumbai - Nashik Highway",
+          "loc": "Ovali Gaon, Bhiwandi",
+          "bno": "Reliance Paul and Shark, C/o. M/s. Blue Line Logistcs",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "M-1 K-Square Compound, Opp Urban Tadka Village Kurund",
+          "st": "Nr  Toll Naka Mumbai-Nashik Highway",
+          "loc": "Bhiwandi",
+          "bno": "Reliance Paul and Shark , K-Square",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421101",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "C/o. Rhea Retail Pvt. Ltd, Bldg. No. B-3,",
+          "st": "Survey No.06, Hissa No.2,",
+          "loc": "Village Kukse, Tal-Bhiwandi,",
+          "bno": "Paul and Shark, Sumeet Logistics and Indsutrial park,",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Ground Floor, Maker Maxity, Bandra Kurla Complex,",
+          "loc": "Bandra East, Mumbai",
+          "bno": "Reliance Paul and Shark, Unit No- G-5B,",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "400051",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Retail Business"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "27AAECR0315G1ZR",
+    "nba": ["Office / Sale Office", "Retail Business", "Warehouse / Depot"],
+    "lstupdt": "29/10/2021",
+    "ctb": "Private Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "LOKMANYA TILAK MARG",
+        "loc": "DHOBI TALAV",
+        "bno": "COURT HOUSE",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai City",
+        "city": "",
+        "flno": "4",
+        "lt": "",
+        "pncd": "400002",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "RELIANCE PAUL & SHARK FASHIONS PRIVATE LIMITED",
+    "ctjCd": "VN0301",
+    "sts": "Active",
+    "ctj": "RANGE-I"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0468",
+    "dty": "Regular",
+    "lgnm": "RELIANCE CORPORATE ADVISORY SERVICES LIMITED",
+    "stj": "MAZGAON_601",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Trade World B Wing",
+          "st": "SB Marg",
+          "loc": "Lower Parel",
+          "bno": "Kamala Mills Compound",
+          "dst": "Mumbai City",
+          "stcd": "Maharashtra",
+          "city": "",
+          "flno": "7th Floor",
+          "lt": "",
+          "pncd": "400013",
+          "lg": ""
+        },
+        "ntr": "Service Provision, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "27AAECR2504B1ZY",
+    "nba": ["Service Provision", "Recipient of Goods or Services"],
+    "lstupdt": "07/09/2019",
+    "ctb": "Public Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "Kamala Mills Compound",
+        "st": "S. B. Marg, Lower Parel",
+        "loc": "Mumbai",
+        "bno": "Trade World",
+        "dst": "Mumbai City",
+        "stcd": "Maharashtra",
+        "city": "",
+        "flno": "B-Wing, 7th Floor",
+        "lt": "",
+        "pncd": "400013",
+        "lg": ""
+      },
+      "ntr": "Service Provision, Recipient of Goods or Services"
+    },
+    "ctjCd": "VO0304",
+    "tradeNam": "RELIANCE CORPORATE ADVISORY SERVICES LIMITED",
+    "sts": "Active",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG1266",
+    "stj": "PUNE CANTT_607",
+    "lgnm": "RELIANCE SERVICES",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AAEFR4394J1ZR",
+    "nba": ["Service Provision"],
+    "lstupdt": "07/09/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "21/8 MANGALDAS ROAD",
+        "loc": "PUNE",
+        "bno": "METRO HOUSE ,OFFICE NO 108/109",
+        "stcd": "Maharashtra",
+        "dst": "Pune",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "411001",
+        "lg": ""
+      },
+      "ntr": "Service Provision"
+    },
+    "tradeNam": "RELIANCE SERVICES",
+    "sts": "Active",
+    "ctjCd": "UC0605",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GJ009",
+    "stj": "Ghatak 9 (Ahmedabad)",
+    "lgnm": "RELIANCE SMSL LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Service Provision", "Recipient of Goods or Services"],
+    "gstin": "24AALCS0575Q1ZQ",
+    "lstupdt": "06/08/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Saffron",
+        "st": "Panchvati 5 Rasta",
+        "loc": "Near Bank of Baroda Ambawadi",
+        "bno": "101",
+        "stcd": "Gujarat",
+        "dst": "Ahmedabad",
+        "city": "",
+        "flno": "1st Floor",
+        "lt": "",
+        "pncd": "386006",
+        "lg": ""
+      },
+      "ntr": "Service Provision, Recipient of Goods or Services"
+    },
+    "sts": "Active",
+    "tradeNam": "Reliance SMSL Limited",
+    "ctjCd": "WS0603",
+    "ctj": "RANGE III"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TG120",
+    "lgnm": "M/S RELIANCE ARMOURY",
+    "stj": "JUBILEE HILLS - II",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "36ABEFM9849C2ZZ",
+    "nba": ["Retail Business", "Wholesale Business"],
+    "lstupdt": "16/09/2019",
+    "rgdt": "19/05/2018",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "No F-8 empire square Road",
+        "st": "Road No.36 Jubilee Hills",
+        "loc": "HYDERABAD",
+        "bno": "empire square Road",
+        "stcd": "Telangana",
+        "dst": "Hyderabad",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "500033",
+        "lg": ""
+      },
+      "ntr": "Retail Business, Wholesale Business"
+    },
+    "tradeNam": "M/S RELIANCE ARMOURY",
+    "sts": "Active",
+    "ctjCd": "YN0703",
+    "ctj": "JUBILEE HILLS - I"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE ELECTRICALS",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE ELECTRICALS",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "27AADFR7333Q2ZK",
+    "lstupdt": "26/04/2017"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE & SUNRISE STONE INDUSTRIES",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE & SUNRISE STONE INDUSTRIES (JV)",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "27AAAAR4448Q1ZW",
+    "lstupdt": "19/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE TRADE SERVICES CENTRE LIMITED",
+    "sts": "Cancelled",
+    "dty": "Regular",
+    "lgnm": "RELIANCE TRADE SERVICES CENTRE LIMITED",
+    "stj": "",
+    "ctj": "",
+    "cxdt": "-",
+    "gstin": "27AACCT7875R1Z9",
+    "lstupdt": "19/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "OD009",
+    "lgnm": "RELIANCE CORPORATE IT PARK LIMITED",
+    "stj": "Bhubaneswar III Circle",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Distric Center",
+          "st": "Chandrasekharpur",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-18, Ground Floor",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751016",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-220/14",
+          "st": "Mouza- Sambalpur",
+          "loc": "Sambalpur",
+          "bno": "Plot No-1203/1782",
+          "stcd": "Odisha",
+          "dst": "Sambalpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Mauza- Chandrasekharpur",
+          "st": "Bhubaneswar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-314",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751023",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Jaiswal Building",
+          "st": "Uditnagar",
+          "loc": "Rourkela",
+          "bno": "Plot No-544",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "769012",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Sector-6, CDA",
+          "st": "Cuttack",
+          "loc": "Cuttack",
+          "bno": "Plot No-16C",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "765019",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Mahanadi Vihar",
+          "st": "Cuttack",
+          "loc": "Cuttack",
+          "bno": "Plot No-664",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "765019",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Municipality Market",
+          "st": "Traffic Gate",
+          "loc": "Sundergarh",
+          "bno": "Shop No-3",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "770002",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Buxi Bazar",
+          "st": "Cuttack",
+          "loc": "Cuttack",
+          "bno": "Swastic Center Building",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "765019",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "In front of Vensu INN",
+          "st": "Bhubaneswar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-74, Bapuji Nagar",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751009",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Distric Center",
+          "st": "Chandrasekharpur",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-18, Ground Floor",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751016",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Krushna Chitralaya Building",
+          "st": "Cuttack",
+          "loc": "Cuttack",
+          "bno": "Plot No-1576",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Civil Township",
+          "st": "Rourkela",
+          "loc": "Rourkela",
+          "bno": "Plot No-7",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "769004",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Near Mangalabag Puja Mandap",
+          "st": "Cuttack",
+          "loc": "Cuttack",
+          "bno": "Plot No-2087",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Kisam Ghara Bari-1",
+          "st": "Mauza-Mansingh Bazar",
+          "loc": "Balasore",
+          "bno": "Khata No-494/284",
+          "stcd": "Odisha",
+          "dst": "Balasore",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "756001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-287/724",
+          "st": "Mauza- Dhipasahi",
+          "loc": "Baripada",
+          "bno": "Plot No-88/2427",
+          "stcd": "Odisha",
+          "dst": "Mayurbhanj",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "757001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-776/130",
+          "st": "Mauza-Mathasahi",
+          "loc": "Bhadrak",
+          "bno": "Plot No-2421/4537",
+          "stcd": "Odisha",
+          "dst": "Bhadrak",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "756135",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-632, Nazul",
+          "st": "Mauza- Bhawanipatna",
+          "loc": "Kalahandi",
+          "bno": "Plot No-2026/27",
+          "stcd": "Odisha",
+          "dst": "Kalahandi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "766001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-621/810",
+          "st": "Mauza- Brajarajnagar",
+          "loc": "Jharsuguda",
+          "bno": "Plot No-4963/8683",
+          "stcd": "Odisha",
+          "dst": "Jharsuguda",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768225",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-230/147, 2480",
+          "st": "Mauza- Rajendrapur",
+          "loc": "Berhampur",
+          "bno": "Plot No-178/1164",
+          "stcd": "Odisha",
+          "dst": "Ganjam",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "760001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-194",
+          "st": "Jatani Town, Khasmahal",
+          "loc": "Jatani",
+          "bno": "Plot No-184",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752050",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-579",
+          "st": "Mauza- Jharsuguda",
+          "loc": "Unit-6",
+          "bno": "Plot No-3209",
+          "stcd": "Odisha",
+          "dst": "Jharsuguda",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768201",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-263/1297",
+          "st": "Mauza- Jeypore",
+          "loc": "Jeypore",
+          "bno": "Plot No-619/2674",
+          "stcd": "Odisha",
+          "dst": "Koraput",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "764001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-30/88",
+          "st": "Mauza- Kaliguda",
+          "loc": "Rayagada",
+          "bno": "Plot No-104/223, 103/1/269",
+          "stcd": "Odisha",
+          "dst": "Rayagada",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "765001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-113/26",
+          "st": "Mauza- Linguri",
+          "loc": "Sunabeda",
+          "bno": "Plot No-119",
+          "stcd": "Odisha",
+          "dst": "Koraput",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "763002",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Rajgangpur",
+          "st": "Lipaloi",
+          "loc": "Rajgangpur",
+          "bno": "Plot No-540/702,Khata No-122/693",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "770017",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-888/98",
+          "st": "Mauza-Balangir Kha",
+          "loc": "Balangir",
+          "bno": "Plot No-477/1688",
+          "stcd": "Odisha",
+          "dst": "Balangir",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "767001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-259/689",
+          "st": "Mauza-bagabrundaban",
+          "loc": "Balasore",
+          "bno": "Plot No-378",
+          "stcd": "Odisha",
+          "dst": "Balasore",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "756001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-2414/1251,2542/13",
+          "st": "Tahasil-Bargarh",
+          "loc": "Bargarh",
+          "bno": "Plot No-1377/9471,1378/9472, 1377/10633",
+          "stcd": "Odisha",
+          "dst": "Bargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768028",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-505/153",
+          "st": "Mauza-Odisho",
+          "loc": "Dist-Kendrapada",
+          "bno": "Plot No-107/1662",
+          "stcd": "Odisha",
+          "dst": "Kendrapara",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754211",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-136/57",
+          "st": "Mauza- Hatiatanagar Bhairavpur Unit No-7",
+          "loc": "Dist-Keonjhar",
+          "bno": "Plot No-675/1007",
+          "stcd": "Odisha",
+          "dst": "Kendujhar",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "758001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-114",
+          "st": "Mauza-Puri Town Unit No-29, Jhadeswari Sahi",
+          "loc": "Dist- Puri",
+          "bno": "Plot No-319/580",
+          "stcd": "Odisha",
+          "dst": "Puri",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752002",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-65/126",
+          "st": "Mauza- Semiliguda, Tehsil- Patangi",
+          "loc": "Dist- Koraput",
+          "bno": "Plot No-131/3299",
+          "stcd": "Odisha",
+          "dst": "Koraput",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "764001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-516/1036",
+          "st": "Mauza-Talashankara",
+          "loc": "Dist- Sundergarh",
+          "bno": "Plot No-52/5153",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "770002",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-1261/3007",
+          "st": "Mauza-Belpahar, Brajarajnagar",
+          "loc": "Jharsuguda",
+          "bno": "Plot No-2034, 1st Floor",
+          "stcd": "Odisha",
+          "dst": "Jharsuguda",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768217",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-365/290",
+          "st": "Mauza-Rourkela Unit-43",
+          "loc": "Sundergarh",
+          "bno": "Plot No-62/1409,59/1421",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "769012",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-121/27",
+          "st": "Tahasil-Keonjhar",
+          "loc": "Keonjhar",
+          "bno": "Plot No-214/427-429",
+          "stcd": "Odisha",
+          "dst": "Kendujhar",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "758001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-103, 145/575",
+          "st": "Mauza-Sundara, Barbil",
+          "loc": "Keonjhar",
+          "bno": "Plot No-507/634, 503/633",
+          "stcd": "Odisha",
+          "dst": "Kendujhar",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "758035",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Behind Port Trust Administrative Building",
+          "st": "Paradeep",
+          "loc": "Paradeep",
+          "bno": "1st Floor of Paradeep Bhawan BuildingBehind Port Trust Admin",
+          "stcd": "Odisha",
+          "dst": "Jagatsinghapur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754142",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-81, 333/345, 51",
+          "st": "Mauza-Unit 3 Padampur",
+          "loc": "Jajpur road",
+          "bno": "Plot No-450/1648, 451,452/820,453",
+          "stcd": "Odisha",
+          "dst": "Jajpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754161",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-763",
+          "st": "Mauza-Rayagadanagar",
+          "loc": "Rayagada",
+          "bno": "Plot No-349/2185",
+          "stcd": "Odisha",
+          "dst": "Rayagada",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "761213",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Lewis Road, Near Ravi Talkies Square",
+          "st": "Bhubaneswar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-B-2132/4323",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "750213",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-301/55",
+          "st": "Mauza- Baripada Town",
+          "loc": "Mayurbhanj",
+          "bno": "Plot No-572/902",
+          "stcd": "Odisha",
+          "dst": "Mayurbhanj",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "757001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-1458/1522",
+          "st": "Mauza- Bhawanipatna nazul",
+          "loc": "Kalahandi",
+          "bno": "Plot No-4527",
+          "stcd": "Odisha",
+          "dst": "Kalahandi",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "766001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-559/266,",
+          "st": "Mauza- Sambalpur Town Unit-15",
+          "loc": "Ainthapalli",
+          "bno": "Plot No-1920/3933,1922/3935,1924/3941",
+          "stcd": "Odisha",
+          "dst": "Sambalpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768003",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-70",
+          "st": "Kusunpur",
+          "loc": "Jajpur",
+          "bno": "Plot No-1019/1172,Mauza Unit-15",
+          "stcd": "Odisha",
+          "dst": "Jajpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "755019",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Plot No-257/903/1372",
+          "st": "Mauza-Sanapada",
+          "loc": "Khurda",
+          "bno": "Khata No-277/461",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752050",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Plot No- 1644/4814",
+          "st": "Mauza-Brajarajnagar Town unit No-1",
+          "loc": "Jharsuguda",
+          "bno": "Khata No-610/855",
+          "stcd": "Odisha",
+          "dst": "Jharsuguda",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768205",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "2nd Floor, Fortune Tower",
+          "st": "Mauza- Jayadev Vihar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-18/4282,Khata No-1426",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751023",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "2nd Floor, Fortune Tower",
+          "st": "Mauza- Jayadev Vihar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-18/4282,Khata No-1426",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751023",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-981/79",
+          "st": "Gr,1st , 2nd Floor",
+          "loc": "Mauza-Bhapur",
+          "bno": "Plot No-1318/1808",
+          "stcd": "Odisha",
+          "dst": "Ganjam",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752063",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-649/1697",
+          "st": "Mauza- Bijakhaman",
+          "loc": "Balangir",
+          "bno": "Plot No-249, 250 , 251",
+          "stcd": "Odisha",
+          "dst": "Balangir",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "767001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-648/2523",
+          "st": "Mauza- Jajarsingh",
+          "loc": "Khurda",
+          "bno": "Plot No-997/4486 , 5320",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752055",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-413/493 , 524, 390",
+          "st": "Mauza- Hulursingha",
+          "loc": "Angul",
+          "bno": "Plot No-24/1686 , 87",
+          "stcd": "Odisha",
+          "dst": "Angul",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754232",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-233",
+          "st": "Puri Town, Unit-14",
+          "loc": "Puri",
+          "bno": "Plot No-343 , 344",
+          "stcd": "Odisha",
+          "dst": "Puri",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-427/393",
+          "st": "Mauza- Chitabhanga",
+          "loc": "Sundergarh",
+          "bno": "Plot No-673/3763, 674 , 675",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "770001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-362/154 , 511",
+          "st": "Mauza-Deulabeda, Kolliery",
+          "loc": "Talcher",
+          "bno": "Plot No-376 , 377",
+          "stcd": "Odisha",
+          "dst": "Angul",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "759107",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-91",
+          "st": "Ground Floor",
+          "loc": "Brahmachari",
+          "bno": "Plot No-1413 P ,1414 , 1415,21 P",
+          "stcd": "Odisha",
+          "dst": "Bargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768028",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Dwd-CDA PL  B7/2001",
+          "st": "Mauza-Sec 8, Market",
+          "loc": "Cuttack",
+          "bno": "Plot No-8-3/CS/446 B  P",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753014",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-1608/82",
+          "st": "P.S.-Jatni",
+          "loc": "Dist-Khurda",
+          "bno": "Plot No-73 , 74",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752050",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-1083",
+          "st": "Mauza-Bikramnagar, Jeypore",
+          "loc": "Dist-Koraput",
+          "bno": "Plot No-34 , 111",
+          "stcd": "Odisha",
+          "dst": "Koraput",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "764001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-453/25, 1426/1351",
+          "st": "Mauza-Jayadev Vihar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-358 , 8/3476",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751023",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-362/23 KA",
+          "st": "Mauza-Deulabeda, Talcher",
+          "loc": "Talcher",
+          "bno": "Plot No-1605/3047",
+          "stcd": "Odisha",
+          "dst": "Angul",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "759107",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-13 , 14",
+          "st": "Bhramardiapatana,Tinimuhani Square",
+          "loc": "PO-Kajala",
+          "bno": "Plot No-113 P  , 114 P",
+          "stcd": "Odisha",
+          "dst": "Kendrapara",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754211",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-349",
+          "st": "Mauza-Bhimpur,Jagmara",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-400 P ,sub-plot-A",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751009",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-3470/2815 , 17733",
+          "st": "Mauza- Dhenkanal Town",
+          "loc": "Dhenkanal",
+          "bno": "Plot No-71/21075 , 11227",
+          "stcd": "Odisha",
+          "dst": "Dhenkanal",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "759001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Master Canteen,Unit-III,Bhubaneswar Town",
+          "st": "Mauza- Kharavela Nagar",
+          "loc": "Bhubaneswar",
+          "bno": "Plot No-1473 , 1537,Khata No-444",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751030",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "3rd Floor",
+          "st": "Sikharpur",
+          "loc": "Mahanadi Vihar",
+          "bno": "Plot No-5",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753004",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Mouza- Rourkela Town ,Unit-42",
+          "st": "3rd Floor",
+          "loc": "Raghunathpur",
+          "bno": "Plot No-9, Khata No-42",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "769004",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Plot No-1761/6076",
+          "st": "Mauza-Ankuli",
+          "loc": "Ganjam",
+          "bno": "Khata No-863/2796",
+          "stcd": "Odisha",
+          "dst": "Ganjam",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "760010",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "STATION SQUARE",
+          "st": "BHUBANESWAR",
+          "loc": "BHUBANESWAR",
+          "bno": "10-A",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "UNIT-3",
+          "lt": "",
+          "pncd": "751001",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Rev. Plot Nos.- 1,1-P and 2303-P,Rev.Khata No.531/1 and 405",
+          "loc": "Mouza -Mukundaprasad and Kholadwar, Khurda",
+          "bno": "IDCO Plot Nos-A/21,A21/A,A/22,A/22/B,A22-P",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752057",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mauza-Deuli,Tehsil-Kantapada,",
+          "loc": "P.S-Olatpur",
+          "bno": "Dadhichi Educational Trust, Plot No-3,Khata No-83/92",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754002",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "P.O Sason,Sambalpur",
+          "st": "Sambalpur",
+          "loc": "Sambalpur",
+          "bno": "State Highway 10 , Sandasingha,",
+          "stcd": "Odisha",
+          "dst": "Sambalpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768200",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Supplier of Services, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Khata No-229/47,229/109,229/13",
+          "st": "Mouza-Alkar, Tehsil- Jatni",
+          "loc": "P.S- Jatni,",
+          "bno": "Plot No- 329/636, 329/637/726,329/602",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752054",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Mouza-Ogalapada",
+          "st": "P.O/Tehsil-Janla",
+          "loc": "Janla",
+          "bno": "Plot No-502/1177,Khata No-255/37",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752054",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Janata Rice Mill,Goods Shed Road",
+          "st": "Mouza- Gosaninuagaon",
+          "loc": "Berhampur",
+          "bno": "Khat No-719,Plot No-423",
+          "stcd": "Odisha",
+          "dst": "Ganjam",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "760003",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Aurovind Nagar,PO J.K. Pur",
+          "st": "Chandili",
+          "loc": "Rayagada",
+          "bno": "Plot 369/1/554 , Khata no. - 4",
+          "stcd": "Odisha",
+          "dst": "Rayagada",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "765017",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "Rourkela",
+          "st": "Rourkela",
+          "loc": "Rourkela",
+          "bno": "Jail Road, Industrial Area",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "769004",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Supplier of Services, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "OPPOSITE ASHOK LEYLAND SHOWROOM",
+          "st": "Balasore",
+          "loc": "Balasore",
+          "bno": "AT/PO- SERGARH",
+          "stcd": "Odisha",
+          "dst": "Balasore",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "756060",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "KHATA NO-154/287",
+          "st": "MOUZA-SWARUP VILLA",
+          "loc": "BARIPADA",
+          "bno": "REVENUE PLOT NO-138/1015",
+          "stcd": "Odisha",
+          "dst": "Mayurbhanj",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "757029",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mauza-Sampur, Unit-43, Near SUM Hospital",
+          "loc": "P.S.-Chandaka, Bhubaneswar",
+          "bno": "Plot No.1079/1110/1961P,Khata No.-224/423 and 224/454",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751003",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mouza Chorda, Jajpur Road",
+          "loc": "Jajpur",
+          "bno": "Plot No.636 , 637, Khata No. 103",
+          "stcd": "Odisha",
+          "dst": "Jajpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "755026",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "162-D-1, 164-D-1,163-D-1, Original Khata No.-64-D-1,",
+          "loc": "Mouza- Cuttact Town, Unit 10, Cantonment,Cuttack",
+          "bno": "Plot Nos-350/934,350/935,350/936,350/937, Khata Nos. 165-D-1",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753001",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mouza- Bhubaneswar Town, Unit No.-17, At-Nayapalli,",
+          "loc": "Beside Krishna Tower, P.S.-New Capital,Bhubaneswar",
+          "bno": "Plot Nos.- 468/4586 and 468/4254,  Khata No.-2152",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751013",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata No.-368/1421, Mouza- BALANGIR, Bhagirathi",
+          "loc": "Chowk,Near SBI Main Branch, BALANGIR",
+          "bno": "Guru Complex,Ground and First Floor,Plot Nos.-543,543/1881",
+          "stcd": "Odisha",
+          "dst": "Balangir",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "767001",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Ward No-3, JHARSUGUDA,",
+          "loc": "Jharsuguda",
+          "bno": "Kedia Complex, Ground and 1st Floor, Plot Nos.-3216 and 3217",
+          "stcd": "Odisha",
+          "dst": "Jharsuguda",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768201",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mauza - Matha Sahi, Chhapulia Bypass, BHADRAK",
+          "loc": "Bhadrak",
+          "bno": "Plot No - 2199/5359, 2198/5348, Khata No - 776/2370",
+          "stcd": "Odisha",
+          "dst": "Bhadrak",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "756100",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "KHATA NO-474/148, PLOT NO-437/1859,KHATA NO-474/149",
+          "loc": "Mauza- Patia, BHUBANESWAR",
+          "bno": "Sai Suman Commercial Complex, Ground Floor,  PLOT NO-437/185",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751024",
+          "lg": ""
+        },
+        "ntr": "Supplier of Services, Recipient of Goods or Services, Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "BSL TOWNSHIP, P.S. Motonga,",
+          "loc": "Tahasil - Odapada",
+          "bno": "Plot No- 745-P,744-P,Khata No-107,120,Rev.Vill - NARENDRAPUR",
+          "stcd": "Odisha",
+          "dst": "Dhenkanal",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "759121",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata No.65/5286, Near Allahabad Bank, Main Road",
+          "loc": "SEMILIGUDA, P.S. Sunabeda,",
+          "bno": "Ground and First Floor, Plot No. 79/4492/4684/5586",
+          "stcd": "Odisha",
+          "dst": "Koraput",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "764036",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "738/2710, Mauza-Badasathia Batia, Near Telecom Colony",
+          "loc": "Dakshinkali Road, Dhenkanal Town",
+          "bno": "Plot No.1917/8030,1916/4365, GF and FF, Khata No.738/4035",
+          "stcd": "Odisha",
+          "dst": "Dhenkanal",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "759001",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Office / Sale Office, Recipient of Goods or Services, Supplier of Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Hotel Jay Jagannath, Canal Avenue, Main Road,",
+          "loc": "In front of Private Bus Stand",
+          "bno": "GF and FF, Pl. No.-1610/11480, Khata No.-2414/13541",
+          "stcd": "Odisha",
+          "dst": "Bargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768028",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Supplier of Services, Office / Sale Office, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata No.- 274/523, 274/381,  Holding No.- 09/153",
+          "loc": "Mauza-Bhaskarganj",
+          "bno": "Plot Nos.-879/1689, 883/1690, 879/1688, 883/1694, 873/1693",
+          "stcd": "Odisha",
+          "dst": "Balasore",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "756002",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Holding No.-70, Ward-11, Mouza- Sanapala",
+          "loc": "Khurda",
+          "bno": "Sakuntala Complex, Plot No.257/903/1372, Khata No.-277/461",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752056",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Office / Sale Office, Recipient of Goods or Services, Supplier of Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata Nos.-559/4109, 559/4142, 559/6007, Budharaja Main Road",
+          "loc": "Near Budharaja Flyover,Sambalpur Town,Ainthapalli",
+          "bno": "GF and FF, Plot Nos.-2501, 2502, 2502/9825",
+          "stcd": "Odisha",
+          "dst": "Sambalpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "768004",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata Nos-1330/3038,1330/2871, In Front of Saptasati Temple,",
+          "loc": "Mouza- Bhubaneswar Town, Unit No.-38, PANDARA,Bhubaneswar",
+          "bno": "Pl.Nos-1666/8620,1666/7503,1666/5423/6846",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751010",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "677/3703, 677/6171,  Khata Nos.- 427/1918, 427/1554",
+          "loc": "Rev Village-Chittabhanga, Mission Road",
+          "bno": "PARWATI BHAWAN, Gr. and First Floor, Plot Nos.-677, 676/6172",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "770002",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Office / Sale Office, Recipient of Goods or Services, Supplier of Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Subarnpur",
+          "loc": "Sonepur",
+          "bno": "AT/PO- Sonepur, Block Square, Near Hotel Progress INN",
+          "stcd": "Odisha",
+          "dst": "Sonepur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "767017",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Supplier of Services, Office / Sale Office, Leasing Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Khata No.-327, AT/P.O.-BAPUJI NAGAR,",
+          "loc": "Near Raj Mahal Square, Bhubaneswar",
+          "bno": "Plot Nos.-93, 93A, Corresponding Rev. Pl. Nos.-307, 307/1292",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751009",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services, Retail Business"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Holding-250,Near Hospital Sqr,Mouza-Kumbharapada",
+          "loc": "Puri Town",
+          "bno": "Plot No.-812, Hal Khata No.-144,Gr.,1st, 2nd,3rd,4th floor",
+          "stcd": "Odisha",
+          "dst": "Puri",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752001",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mauza- Dhipa Sahi, Near Bank of India,Station Road",
+          "loc": "Baripada",
+          "bno": "Gorund and First Floor, Plot No.-91, Khata No.- 287/722,",
+          "stcd": "Odisha",
+          "dst": "Mayurbhanj",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "757001",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "374/4091, 375/4092, 375/4093, 376, 376/6936, Khata Nos. 132,",
+          "loc": "Mauza- Talasankara, At-Sankara",
+          "bno": "First Fl., SANKARA CITY, Plot No-377-P,374/8242,375,375/7954",
+          "stcd": "Odisha",
+          "dst": "Sundargarh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "770020",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mouza-CHAULIAGANJ, Unit No.-29, Cuttack Town,",
+          "loc": "Cuttack",
+          "bno": "Plot No.-1309, Khata No.-233, Holding No.-366,",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753004",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Rev.Village-Mukundapur,   At-Sanabazar, Durga Bazar,",
+          "loc": "JAGATSINGHPUR",
+          "bno": "Plot Nos.-182,  183/4663, Khata Nos.-1119/443, 630,",
+          "stcd": "Odisha",
+          "dst": "Jagatsinghapur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754103",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Supplier of Services, Recipient of Goods or Services, Leasing Business, Works Contract"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Baripada Town, Unit No.5 , Lal Bazar",
+          "loc": "BARIPADA",
+          "bno": "GF and FF, Plot Nos.- 22, 23, Khata Nos.142/149, 142/150",
+          "stcd": "Odisha",
+          "dst": "Mayurbhanj",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "757001",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Works Contract, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Goutam Nagar,Near Kalpana Square,Opp. to Odisha State Museum",
+          "loc": "BHUBANESWAR",
+          "bno": "1st Floor,Utkal Kanika Galleria,Plot Nos.-77-A,77-B,77-C",
+          "stcd": "Odisha",
+          "dst": "Khordha",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "751014",
+          "lg": ""
+        },
+        "ntr": "Leasing Business, Works Contract, Office / Sale Office, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Rev.Village-Bhatia,Unit No.4,Near Chorda By-pass",
+          "loc": "JAJPUR ROAD",
+          "bno": "Plot No.924 and 934, Hal Khata No.-15",
+          "stcd": "Odisha",
+          "dst": "Jajpur",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "755019",
+          "lg": ""
+        },
+        "ntr": "Warehouse / Depot, Recipient of Goods or Services, Supplier of Services, Works Contract"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mauza- Balisahi, Near ICICI Bank, P.O./P.S.-Salepur,",
+          "loc": "SALEPUR",
+          "bno": "Rev. Plot Nos.-1037/2997, Khata No.-835/385",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "754202",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "758/385,  Cuttack Town, College Chhak,",
+          "loc": "CUTTACK",
+          "bno": "SAI COMPLEX-UC,Plot Nos.-972/3154,972/3153,KhataNos.-758/386",
+          "stcd": "Odisha",
+          "dst": "Cuttack",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "753003",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "V.K Central",
+          "st": "-62/5269, 62/2696, 62/5270,Mouza- Tumbiguda, Near Check Gate",
+          "loc": "On Station Road,  RAYAGADA",
+          "bno": "Plot No.15/1703, 15/1704/5694,15/2463,15/1704, Khata Nos.",
+          "stcd": "Odisha",
+          "dst": "Rayagada",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "765001",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mouza-Bikram Nagar, NKT Road,",
+          "loc": "JEYPORE",
+          "bno": "SHREE LAKSHMI HOMES,Plot Nos.-620/1121,620/1445,Khata No.-10",
+          "stcd": "Odisha",
+          "dst": "Koraput",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "764003",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Mouza, BALAGANDI, Puri Town, Grand Road",
+          "loc": "PURI",
+          "bno": "Plot Nos.- 289, 303 and 304",
+          "stcd": "Odisha",
+          "dst": "Puri",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "752001",
+          "lg": ""
+        },
+        "ntr": "Works Contract, Office / Sale Office, Warehouse / Depot, Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "nba": [
+      "Office / Sale Office",
+      "Warehouse / Depot",
+      "Recipient of Goods or Services",
+      "Supplier of Services",
+      "Retail Business",
+      "Leasing Business",
+      "Works Contract"
+    ],
+    "gstin": "21AABCD7169H1ZS",
+    "lstupdt": "09/12/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Fortune Tower",
+        "st": "Chandrasekharpur",
+        "loc": "Bbhubaneswar",
+        "bno": "1st Floor, Wing-A B",
+        "stcd": "Odisha",
+        "dst": "Khordha",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "751023",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "RELIANCE CORPORATE IT PARK LIMITED",
+    "sts": "Active",
+    "ctjCd": "WJ0102",
+    "ctj": "BHUBANESWAR II RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "KA011",
+    "lgnm": "RELIANCE PAUL & SHARK FASHIONS PRIVATE LIMITED",
+    "stj": "LGSTO 040 - Bengaluru",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Retail Business"],
+    "gstin": "29AAECR0315G1ZN",
+    "lstupdt": "17/08/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "RIL BUILDINGS, RICHMOND ROAD,",
+        "loc": "BANGALORE",
+        "bno": "No. 62/2, 2ND FLOOR",
+        "stcd": "Karnataka",
+        "dst": "Bengaluru Urban",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "560025",
+        "lg": ""
+      },
+      "ntr": "Retail Business"
+    },
+    "tradeNam": "RELIANCE PAUL & SHARK FASHIONS PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "YT0104",
+    "ctj": "RANGE-DED1"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0349",
+    "lgnm": "RELIANCE SMART CITIES LIMITED",
+    "dty": "Regular",
+    "stj": "KHAR-DANDA_702",
+    "adadr": [],
+    "cxdt": "01/08/2019",
+    "gstin": "27AAHCR4005N1Z6",
+    "nba": ["Others"],
+    "lstupdt": "30/12/2020",
+    "ctb": "Public Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "Plot No. 91-94",
+        "st": "PRABHAT COLONY",
+        "loc": "SANTACRUZ EAST",
+        "bno": "502",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai City",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "400055",
+        "lg": ""
+      },
+      "ntr": "Others"
+    },
+    "tradeNam": "Reliance Smart Cities Limited",
+    "sts": "Cancelled",
+    "ctjCd": "VP0604",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "BR038",
+    "stj": "Patna Special",
+    "lgnm": "RELIANCE MONEY INFRASTRUCTURE LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "21/05/2019",
+    "gstin": "10AADCR2730G1Z0",
+    "nba": ["Service Provision", "Recipient of Goods or Services", "Others"],
+    "lstupdt": "25/07/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Yunus plaza Grand Plaza",
+        "st": "Frazer Road",
+        "loc": "P S Kotwali",
+        "bno": "4003",
+        "stcd": "Bihar",
+        "dst": "",
+        "city": "",
+        "flno": "4 th Floor",
+        "lt": "",
+        "pncd": "800001",
+        "lg": ""
+      },
+      "ntr": "Service Provision, Recipient of Goods or Services, Others"
+    },
+    "sts": "Cancelled",
+    "ctjCd": "XU0201",
+    "tradeNam": "RELIANCE MONEY INFRASTRUCTURE LTD.",
+    "ctj": "GANDHI MAIDAN RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "NL004",
+    "dty": "Regular",
+    "lgnm": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "stj": "Dimapur Ward D",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "13AAACR3168H1ZL",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "17/04/2018",
+    "ctb": "Private Limited Company",
+    "rgdt": "06/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "CITY TOWER",
+        "loc": "DIMAPUR",
+        "st": "CIRCULAR ROAD",
+        "bno": "01",
+        "stcd": "Nagaland",
+        "dst": "Dimapur",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "797112",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "ctjCd": "UU0101",
+    "tradeNam": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "sts": "Active",
+    "ctj": "DIMAPUR I RANGE"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0413",
+    "lgnm": "DIESEL FASHION INDIA RELIANCE PRIVATE LIMITED",
+    "stj": "KALBADEVI_502",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Total LogisticsIndiaP.Ltd, Manas Prayag, Paras Compound",
+          "st": "Paras Compound, Goa by-Pass Road, Palaspha Phata",
+          "loc": "Panvel",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Raigad",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "410203",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Reliance Corporate IT Park Ltd",
+          "st": "5 TTC Industrial Area, Thane-Belapur Road, Ghansoli",
+          "loc": "Navi Mumbai",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400701",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Unit 1  2, Indian Corporation Compalex",
+          "st": "Build. No. 171, Unit No. 1  2, Build. No. 162Opp. Gajanan Pe",
+          "loc": "Bhivandi",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Reliance Industries  Maker Tower E",
+          "st": "C.S No. 641  641A,",
+          "loc": "Cuffe Parade",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400005",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Reliance Industries Ltd., RPL House",
+          "st": "Walchand Hirachand Marg,",
+          "loc": "Ballard Estate",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400001",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Palladium, Phoenix Mill Ltd",
+          "st": "G-14-G-15,  642, Senapati Bapat Marg",
+          "loc": "Lower Parel",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "1",
+          "lt": "",
+          "pncd": "400012",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Western Wind Situate",
+          "st": "1st Floor, Plot No. 22A, of TPS Santacruz No. II, CTS No. 10",
+          "loc": "Juhu Tara Road",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "1",
+          "lt": "",
+          "pncd": "400049",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "UG 67, Phoenix Market City",
+          "st": "Shop No. UG 67, Old Mukund Premises, Kamani, L.B.S Marg,",
+          "loc": "Kurla West",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400070",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "2",
+          "st": "Shop No.S-12 B.  642, Senapati Bapat Marg",
+          "loc": "Lower Parel",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "Palladium, Phoenix Mill Compound",
+          "lt": "",
+          "pncd": "400013",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "LG 021, Infinity Mall",
+          "st": "Link Raod",
+          "loc": "Malad WEST",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400064",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "G-37, Gr. Floor, R City Mall",
+          "st": "Reliancedigital, G-37,  LBS Marg,",
+          "loc": "Ghatkoper W",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "400086",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "C/o. Origin Logistics Pvt. Ltd",
+          "st": "Indian Corporation Complex, Build. No. 181  190 Unit No. 9",
+          "loc": "Bhivandi",
+          "bno": "Diesel Fashion India",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "G",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "Phoenix Market City, Shop No. UG-57 and UG - 57A,",
+          "st": "At Wadgaonsheri",
+          "loc": "Viman Nagar",
+          "bno": "Diesel Fashion India, Viman Nagar",
+          "stcd": "Maharashtra",
+          "dst": "Pune",
+          "city": "",
+          "flno": "Upper Gr. Floor",
+          "lt": "",
+          "pncd": "411014",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "M-1 K-Square Compound, Opp Urban Tadka Village Kurund,",
+          "st": "Nr  Toll Naka Mumbai-Nashik Highway",
+          "loc": "Bhiwandi",
+          "bno": "Diesel Fashion India , K-Square",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421101",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "C/o. Rhea Retail Pvt. Ltd, Bldg. No. B-3",
+          "st": "Survey No.06, Hissa No.2,",
+          "loc": "Village Kukse, Tal-Bhiwandi,",
+          "bno": "Diesel Fashion, Sumeet Logistics and Indsutrial park,",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Bandra Kurla Complex Road, Bandra Kurla Complex,",
+          "loc": "Bandra East, Mumbai",
+          "bno": "Diesel, Unit No- G-8, Ground Floor, Maker Maxity,",
+          "stcd": "Maharashtra",
+          "dst": "Mumbai Suburban",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "400051",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Office / Sale Office"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "Sagar Complex Building No. F-2, Gala No. 8, Ovali Village",
+          "loc": "Mumbai-Nasik Highway Bhiwandi",
+          "bno": "Diesel, Fashion, C/o. Blue Line Logistics N Warehousing LLP",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Warehouse / Depot"
+      },
+      {
+        "addr": {
+          "bnm": "",
+          "st": "No.7, 10/1, 10/2, Village-Borivali Tarfe, Sonale",
+          "loc": "Kukse, Bhiwandi, Thane",
+          "bno": "Diesel,Kerry Indev Logistics,A4,Global, Survey No.25,Hissa",
+          "stcd": "Maharashtra",
+          "dst": "Thane",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "421302",
+          "lg": ""
+        },
+        "ntr": "Retail Business, Warehouse / Depot"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "27AACCD6235H1ZQ",
+    "nba": ["Office / Sale Office", "Retail Business", "Warehouse / Depot"],
+    "lstupdt": "23/12/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "COURT HOUSE",
+        "st": "LOKMANYA TILAK MARG",
+        "loc": "DHOBI TALAV",
+        "bno": "DIESEL FASHION INDIA",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai",
+        "city": "",
+        "flno": "5",
+        "lt": "",
+        "pncd": "400002",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "DIESEL FASHION INDIA RELIANCE PVT LTD",
+    "sts": "Active",
+    "ctjCd": "VN0301",
+    "ctj": "RANGE-I"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0339",
+    "stj": "SANTACRUZ-EAST_701",
+    "lgnm": "Reliance Home Finance Limited",
+    "dty": "Input Service Distributor (ISD)",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AAECR0305E2ZW",
+    "nba": ["Recipient of Goods or Services"],
+    "lstupdt": "10/10/2020",
+    "rgdt": "06/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Ruby Tower",
+        "st": "North West Wing, Plot No. 29, JK Sawant Marg,",
+        "loc": "Dadar",
+        "bno": "11th Floor",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai City",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "400028",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services"
+    },
+    "sts": "Active",
+    "tradeNam": "Reliance Home Finance Limited",
+    "ctjCd": "VP0604",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0639",
+    "lgnm": "RELIANCE BUSINESS SERVICES",
+    "dty": "Regular",
+    "stj": "MULUND-WEST_602",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AACFR2929M1ZU",
+    "nba": ["Service Provision"],
+    "lstupdt": "24/02/2021",
+    "ctb": "Partnership",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "HIRASADAN",
+        "st": "R. R. T. ROAD",
+        "loc": "MULUND WEST",
+        "bno": "3",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai Suburban",
+        "city": "",
+        "flno": "GORUND",
+        "lt": "",
+        "pncd": "400080",
+        "lg": ""
+      },
+      "ntr": "Service Provision"
+    },
+    "tradeNam": "Reliance Business Services",
+    "ctjCd": "VW0405",
+    "sts": "Active",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TG122",
+    "lgnm": "RELIANCE TECHNOLOGIES",
+    "stj": "GENERAL BAZAAR - MARKET STREET-HISSAMGUNJ",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Wholesale Business", "Retail Business"],
+    "gstin": "36AAOFR2977H1ZM",
+    "lstupdt": "18/09/2019",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "CHENOY TRADE CENTRE",
+        "st": "PARKLANE",
+        "loc": "SECUNDERABAD",
+        "bno": "SHOP NO.103",
+        "stcd": "Telangana",
+        "dst": "Hyderabad",
+        "city": "",
+        "flno": "GROUND FLOOR",
+        "lt": "",
+        "pncd": "500003",
+        "lg": ""
+      },
+      "ntr": "Wholesale Business, Retail Business"
+    },
+    "sts": "Active",
+    "tradeNam": "RELIANCE TECHNOLOGIES",
+    "ctjCd": "YO0203",
+    "ctj": "BEGUMPET - III"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "KA005",
+    "lgnm": "RELIANCE STATIONERY MART",
+    "stj": "LGSTO 020 - Bengaluru",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "29AAAFR8876M1ZA",
+    "nba": ["Retail Business"],
+    "lstupdt": "10/07/2018",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "Reliance Stationery Mart",
+        "st": "Commercial Streer",
+        "loc": "Bangalore",
+        "bno": "55",
+        "stcd": "Karnataka",
+        "dst": "Bengaluru (Bangalore) Urban",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "560001",
+        "lg": ""
+      },
+      "ntr": "Retail Business"
+    },
+    "tradeNam": "THE RELIANCE STATIONERY MART",
+    "sts": "Active",
+    "ctjCd": "YW0202",
+    "ctj": "RANGE-BND2"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "KL118",
+    "dty": "Composition",
+    "lgnm": "RELIANCE POLY BAG INDUSTRIES",
+    "stj": "AIT & CT Office, Mannarkad",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "32AACFR7730G1ZF",
+    "nba": ["Factory / Manufacturing", "Retail Business"],
+    "lstupdt": "01/04/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "KUNTHIPUZHA",
+        "st": "MANNARKKAD",
+        "loc": "MANNARKKAD",
+        "bno": "MM 2/221",
+        "dst": "Palakkad",
+        "stcd": "Kerala",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "678582",
+        "lg": ""
+      },
+      "ntr": "Factory / Manufacturing, Retail Business"
+    },
+    "ctjCd": "TJ0504",
+    "tradeNam": "RELIANCE POLIBAG INDUSTRIRES",
+    "sts": "Active",
+    "ctj": "PALAKKAD NORTH RANGE"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE TECH",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE TECH",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "27AAEFR7703B1ZH",
+    "lstupdt": "19/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE PROJECTS & INFRASTURCTURE",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE PROJECTS & INFRASTRUCTURE",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "-",
+    "gstin": "27AAIFR3831N1ZR",
+    "lstupdt": "19/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "WB051",
+    "dty": "Regular",
+    "stj": "COSSIPUR",
+    "lgnm": "RELIANCE MOTORS",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "19AADFR8363A1Z7",
+    "nba": ["Wholesale Business", "Office / Sale Office", "Retail Business"],
+    "lstupdt": "27/07/2018",
+    "ctb": "Partnership",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "",
+        "st": "B T ROAD",
+        "loc": "COSSIPORE",
+        "bno": "57/6",
+        "dst": "Kolkata",
+        "stcd": "West Bengal",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "700002",
+        "lg": ""
+      },
+      "ntr": "Wholesale Business, Office / Sale Office, Retail Business"
+    },
+    "ctjCd": "WA0101",
+    "sts": "Active",
+    "tradeNam": "RELIANCE MOTORS",
+    "ctj": "RANGE-I"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0287",
+    "stj": "GOREGAON-EAST_704",
+    "lgnm": "RELIANCE MONEY PRECIOUS METALS PRIVATE LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AACCC9384N1ZY",
+    "nba": [
+      "Service Provision",
+      "Recipient of Goods or Services",
+      "Supplier of Services",
+      "Others"
+    ],
+    "lstupdt": "26/05/2022",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "R TECH PARK, NIRLON COMPOUND",
+        "st": "Off Western Express Highway",
+        "loc": "GOREGAON EAST",
+        "bno": "11TH FLOOR",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai",
+        "city": "",
+        "flno": "11",
+        "lt": "",
+        "pncd": "400063",
+        "lg": ""
+      },
+      "ntr": "Service Provision, Recipient of Goods or Services, Supplier of Services, Others"
+    },
+    "tradeNam": "RELIANCE MONEY PRECIOUS METALS PRIVATE LIMITED",
+    "sts": "Active",
+    "ctjCd": "VM0704",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG0612",
+    "lgnm": "RELIANCE BROKERS",
+    "stj": "MULUND-WEST_702",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "27AAHFR0827M1ZW",
+    "nba": ["Supplier of Services"],
+    "lstupdt": "07/03/2021",
+    "rgdt": "11/04/2018",
+    "ctb": "Partnership",
+    "pradr": {
+      "addr": {
+        "bnm": "EXIM LINK",
+        "st": "M G ROAD , OPP INDIRA CONTAINER YARD",
+        "loc": "BHANDUP",
+        "bno": "505",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai City",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "400078",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services"
+    },
+    "tradeNam": "RELIANCE BROKERS",
+    "sts": "Active",
+    "ctjCd": "VW0205",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "M/S RELIANCE TANKAGES PVT LTD",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE TANKAGES PRIVATE LIMITED",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "09AAACR2669H1Z6",
+    "lstupdt": "05/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "MHCG1277",
+    "dty": "Regular",
+    "stj": "DECCAN-GYMKHANA_701",
+    "lgnm": "RELIANCE ELECTRONICS",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "MANOLOKAR INDL ESTATE",
+          "st": "ERANDAWANA",
+          "loc": "ERANDAWANA",
+          "bno": "32/1-6A",
+          "stcd": "Maharashtra",
+          "dst": "Pune",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "411004",
+          "lg": ""
+        },
+        "ntr": "Recipient of Goods or Services, Service Provision, Retail Business, Factory / Manufacturing"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "27AACFR5373H1Z1",
+    "nba": [
+      "Recipient of Goods or Services",
+      "Service Provision",
+      "Retail Business",
+      "Factory / Manufacturing"
+    ],
+    "lstupdt": "07/01/2021",
+    "ctb": "Partnership",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "CO-OP HSG SOCIETY",
+        "st": "ERANDVANA",
+        "loc": "ERANDVANA",
+        "bno": "K3/3 S. NO. 14/4, 14/5",
+        "stcd": "Maharashtra",
+        "dst": "Pune",
+        "city": "",
+        "flno": "LANE 5",
+        "lt": "",
+        "pncd": "411004",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services, Service Provision, Retail Business, Factory / Manufacturing"
+    },
+    "ctjCd": "UD0405",
+    "sts": "Active",
+    "tradeNam": "RELIANCE ELECTRONICS",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "AP107",
+    "lgnm": "RELIANCE COMMERCIAL FINANCE LIMITED",
+    "stj": "BENZ CIRCLE",
+    "dty": "Regular",
+    "adadr": [
+      {
+        "addr": {
+          "bnm": "Mohiuddin Estate",
+          "st": "Labbi Peth, M.G.Road",
+          "loc": "Vijayawada",
+          "bno": "2nd Floor, JM 3",
+          "dst": "Krishna",
+          "stcd": "Andhra Pradesh",
+          "city": "",
+          "flno": "",
+          "lt": "",
+          "pncd": "520010",
+          "lg": ""
+        },
+        "ntr": "Office / Sale Office, Others, Supplier of Services, Recipient of Goods or Services"
+      }
+    ],
+    "cxdt": "",
+    "gstin": "37AABCR6898M1ZG",
+    "nba": [
+      "Office / Sale Office",
+      "Others",
+      "Supplier of Services",
+      "Recipient of Goods or Services"
+    ],
+    "lstupdt": "27/04/2022",
+    "rgdt": "02/07/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Sri Chakra Towers,",
+        "st": "Patatmata Road,Opp Durga Mahal,",
+        "loc": "Benz Circle, Vijaywada",
+        "bno": "Door No 73-1-10/2",
+        "dst": "Krishna",
+        "stcd": "Andhra Pradesh",
+        "city": "",
+        "flno": "2nd floor,",
+        "lt": "",
+        "pncd": "520010",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office, Others, Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "Reliance Commercial Finance Limited",
+    "sts": "Active",
+    "ctjCd": "YJ0205",
+    "ctj": "AKKAYYAPALEM"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "sts": "Cancelled",
+    "tradeNam": "RELIANCE SILICONES  INDIA  PVT LTD",
+    "dty": "Regular",
+    "stj": "",
+    "ctj": "",
+    "lgnm": "RELIANCE SILICONES INDIA LTD",
+    "cxdt": "01/07/2017",
+    "gstin": "27AAACR5091F1ZE",
+    "lstupdt": "18/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "sts": "Cancelled",
+    "tradeNam": "RELIANCE PETROLEUM PRIVATE LIMITED",
+    "dty": "Regular",
+    "stj": "",
+    "ctj": "",
+    "lgnm": "RELIANCE PETROLEUM PRIVATE LIMITED",
+    "cxdt": "01/07/2017",
+    "gstin": "33AABCR7666R1ZM",
+    "lstupdt": "06/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "sts": "Cancelled",
+    "tradeNam": "M/S RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "ctjCd": "",
+    "lgnm": "RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "37AADCR1890B1ZJ",
+    "lstupdt": "22/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "dty": "Regular",
+    "lgnm": "RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "cxdt": "01/07/2017",
+    "gstin": "29AADCR1890B1ZG",
+    "lstupdt": "21/12/2016"
+  },
+  {
+    "isAvailble": true,
+    "stjCd": "MHCG0339",
+    "stj": "SANTACRUZ-EAST_701",
+    "lgnm": "DASSAULT RELIANCE AEROSPACE LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "30/06/2020",
+    "gstin": "27AAGCD0099M1Z9",
+    "nba": [
+      "Factory / Manufacturing",
+      "Import",
+      "Supplier of Services",
+      "Recipient of Goods or Services"
+    ],
+    "lstupdt": "01/08/2020",
+    "rgdt": "24/08/2017",
+    "ctb": "Public Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Prabhat Colony",
+        "st": "Santa Cruz",
+        "loc": "Mumbai",
+        "bno": "502",
+        "stcd": "Maharashtra",
+        "dst": "Mumbai City",
+        "city": "",
+        "flno": "91-94",
+        "lt": "",
+        "pncd": "400055",
+        "lg": ""
+      },
+      "ntr": "Factory / Manufacturing, Import, Supplier of Services, Recipient of Goods or Services"
+    },
+    "tradeNam": "DASSAULT RELIANCE AEROSPACE LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "VP0601",
+    "ctj": "RANGE-I"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "GA005",
+    "stj": "Panaji",
+    "lgnm": "RELIANCE PAUL & SHARK FASHIONS PRIVATE LIMITED",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "nba": ["Office / Sale Office"],
+    "gstin": "30AAECR0315G1Z4",
+    "lstupdt": "17/08/2021",
+    "rgdt": "01/07/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "CMM Arena",
+        "st": "Renovadi",
+        "loc": "Merces",
+        "bno": "RCITPL Premises, Ground Floor",
+        "stcd": "Goa",
+        "dst": "North Goa",
+        "city": "",
+        "flno": "",
+        "lt": "",
+        "pncd": "403005",
+        "lg": ""
+      },
+      "ntr": "Office / Sale Office"
+    },
+    "tradeNam": "Reliance Paul And Shark Fashions Private Limited",
+    "sts": "Active",
+    "ctjCd": "UF0204",
+    "ctj": "RANGE-IV"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "CREST LOGISTICS AND ENGINEERS PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE UTILITY ENGINEERS PRIVATE LIMITED",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "37AADCP9412D1ZJ",
+    "lstupdt": "21/02/2017"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE PETRO DISTRIBUTION PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE PETRO DISTRIBUTION PRIVATE LIMITED",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "08AABCR7666R1ZF",
+    "lstupdt": "12/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "M/S RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "36AADCR1890B1ZL",
+    "lstupdt": "21/12/2016"
+  },
+  {
+    "isAvailble": true,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE TANKAGES PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "lgnm": "RELIANCE TANKAGES PRIVATE LIMITED",
+    "cxdt": "01/07/2017",
+    "gstin": "33AAACR2669H1ZF",
+    "lstupdt": "22/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "M/S RELIANCE INNOVENTURES PRIVATE LTD.",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "20AADCR1890B1ZY",
+    "lstupdt": "29/11/2016"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "sts": "Cancelled",
+    "tradeNam": "RELIANCE PETROLEUM PRIVATE LIMITED",
+    "dty": "Regular",
+    "lgnm": "RELIANCE PETROLEUM PRIVATE LIMITED",
+    "cxdt": "01/07/2017",
+    "gstin": "30AABCR7666R1ZS",
+    "lstupdt": "06/01/2017"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "TG109",
+    "lgnm": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "stj": "BASHEERBAGH - NAMPALLY",
+    "dty": "Regular",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "36AAACR3168H1ZD",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "16/09/2019",
+    "rgdt": "29/06/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "LAKE SHORE TOWERS",
+        "st": "RAJBHAVAN ROAD",
+        "loc": "SOMAJIGUDA",
+        "bno": "6- 3- 1090 / B",
+        "stcd": "Telangana",
+        "dst": "Hyderabad",
+        "city": "",
+        "flno": "4",
+        "lt": "",
+        "pncd": "500082",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "sts": "Active",
+    "tradeNam": "RELIANCE GROUP SUPPORT SERVICES PRIVATE LIMITED",
+    "ctjCd": "YN0801",
+    "ctj": "SOMAJIGUDA"
+  },
+  {
+    "isAvailble": true,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE BPO PRIVATE  LIMITED",
+    "dty": "Regular",
+    "lgnm": "RELIANCE BPO PRIVATE LIMITED",
+    "cxdt": "01/07/2017",
+    "gstin": "36AABCR7392A1ZG",
+    "lstupdt": "21/12/2016"
+  },
+  {
+    "isAvailble": true,
+    "rgdt": "01/07/2017",
+    "stjCd": "",
+    "tradeNam": "RELIANCE PETRO DISTRIBUTION  PRIVATE LIMITED",
+    "sts": "Cancelled",
+    "ctjCd": "",
+    "lgnm": "RELIANCE PETRO DISTRIBUTION PRIVATE LIMITED",
+    "stj": "",
+    "ctj": "",
+    "dty": "Regular",
+    "cxdt": "01/07/2017",
+    "gstin": "32AABCR7666R1ZO",
+    "lstupdt": "21/12/2016"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "",
+    "rgdt": "01/07/2017",
+    "ctjCd": "",
+    "tradeNam": "RELIANCE INNOVENTURES PVT.LTD",
+    "sts": "Cancelled",
+    "dty": "Regular",
+    "lgnm": "RELIANCE INNOVENTURES PRIVATE LIMITED",
+    "cxdt": "01/07/2017",
+    "gstin": "23AADCR1890B1ZS",
+    "lstupdt": "30/11/2016"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "CT021",
+    "stj": "Raipur  - 1",
+    "dty": "Regular",
+    "lgnm": "Reliance Group Support Services Private Limited",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "22AAACR3168H1ZM",
+    "nba": ["Supplier of Services", "Recipient of Goods or Services"],
+    "lstupdt": "14/09/2018",
+    "rgdt": "30/06/2017",
+    "ctb": "Private Limited Company",
+    "pradr": {
+      "addr": {
+        "bnm": "Office Block Ambuja City Centre",
+        "st": "Vidhan Sabha Road",
+        "loc": "Mowa",
+        "bno": "Office No 401 to 405",
+        "stcd": "Chhattisgarh",
+        "dst": "Raipur",
+        "city": "",
+        "flno": "4th Floor",
+        "lt": "",
+        "pncd": "492007",
+        "lg": ""
+      },
+      "ntr": "Supplier of Services, Recipient of Goods or Services"
+    },
+    "sts": "Active",
+    "ctjCd": "UM0105",
+    "tradeNam": "",
+    "ctj": "RANGE-V"
+  },
+  {
+    "isAvailble": false,
+    "stjCd": "UT004",
+    "lgnm": "RELIANCE COMMERCIAL FINANCE LIMITED",
+    "dty": "Regular",
+    "stj": "Dehradun - Sector 1",
+    "adadr": [],
+    "cxdt": "",
+    "gstin": "05AABCR6898M1ZN",
+    "nba": [
+      "Recipient of Goods or Services",
+      "Others",
+      "Supplier of Services",
+      "Leasing Business"
+    ],
+    "lstupdt": "22/10/2021",
+    "ctb": "Public Limited Company",
+    "rgdt": "01/07/2017",
+    "pradr": {
+      "addr": {
+        "bnm": "Shiva Palace",
+        "st": "opp. Uttarakhand secretariat, Rajpur Road",
+        "loc": "Deheradun",
+        "bno": "office no. 8,9,10,",
+        "stcd": "Uttarakhand",
+        "dst": "Dehradun",
+        "city": "",
+        "flno": "1 st Floor",
+        "lt": "",
+        "pncd": "248001",
+        "lg": ""
+      },
+      "ntr": "Recipient of Goods or Services, Others, Supplier of Services, Leasing Business"
+    },
+    "tradeNam": "RELIANCE COMMERCIAL FINANCE LIMITED",
+    "ctjCd": "YF0101",
+    "sts": "Active",
+    "ctj": "RANGE - I MUSSOORIE"
+  }
+]

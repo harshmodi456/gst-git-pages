@@ -34,39 +34,32 @@ const Login = () => {
   // }, []);
 
   const validationSchema = Yup.object().shape({
-    gstNumber: Yup.string()
-      .min(15, "GST must be at least 15 characters")
-      .max(15, "GST must be at least 15 characters")
-      .required("GST Number is required"),
-    password: Yup.string().required("Password required"),
+    mobileNo: Yup.string()
+      .min(10, "Mobile number must be a 10 digits")
+      .max(10, "Mobile number must be a 10 digits")
+      .required("Mobile number Number is Required."),
+    password: Yup.string().required("Password required")
   });
 
   const signInHandler = (takeValue) => {
-    // dispatch(
-    //   gstVerify({
-    //     gstin: takeValue.gstNumber
-    //   })
-    // ).then((res) => {
-    //   if (res?.payload?.status === "success") {
-    //     // navigate("/login");
-    //     alert(res.payload.message);
-    //   }
-    // });
     isLoading(true);
     dispatch(
       signInUser({
-        gstin: takeValue.gstNumber,
-        password: takeValue.password,
+        mobileNo: takeValue.mobileNo,
+        password: takeValue.password
       })
     ).then((res) => {
       if (res?.payload?.status === true) {
-        // navigate("/search-gst-number");
-        navigate("/business-result");
+        // navigate("/business-result");
+        let getGstResult = JSON.parse(
+          localStorage.getItem("search-selectedGst")
+        );
+        navigate(`/gst-information/${getGstResult?.gstin}`, {
+          state: { getGstResult }
+        });
       }
       isLoading(false);
     });
-
-    // navigate("/search-gst-number");
   };
 
   return (
@@ -92,8 +85,8 @@ const Login = () => {
               <CardContent>
                 <Formik
                   initialValues={{
-                    gstNumber: "",
-                    password: "",
+                    mobileNo: "",
+                    password: ""
                   }}
                   validationSchema={validationSchema}
                   onSubmit={(values) => signInHandler(values)}
@@ -102,12 +95,12 @@ const Login = () => {
                     <Form>
                       <div className="form-group">
                         <Field
-                          name="gstNumber"
+                          name="mobileNo"
                           type="text"
                           // placeholder="Add New Task"
                           component={CustomTextField}
-                          id="gstNumber"
-                          label="Gst Number"
+                          id="mobileNo"
+                          label="Mobile Number"
                           variant="outlined"
                           className="form-control-textFiled"
                         />

@@ -15,13 +15,16 @@ import {
   Divider,
   CssBaseline,
   Box,
-  AppBar,
+  AppBar
 } from "@mui/material";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import BusinessIcon from "@mui/icons-material/Business";
 import useHeaderFooter from "./Hooks/useHeader.jsx";
 import { useNavigate } from "react-router-dom";
+import ReviewsIcon from "@mui/icons-material/Reviews";
+import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
+import Person2Icon from "@mui/icons-material/Person2";
 // import logo from "../../Assets/Images/logo192.png";
 import "./Header.scss";
 
@@ -32,19 +35,19 @@ const colorConfigs = {
     bg: "#233044",
     color: "#eeeeee",
     hoverBg: "#1e293a",
-    activeBg: "#1e253a",
+    activeBg: "#1e253a"
   },
   topbar: {
     bg: "#fff",
-    color: "#000",
+    color: "#000"
   },
-  mainBg: colors.grey["100"],
+  mainBg: colors.grey["100"]
 };
 const sizeConfigs = {
   sidebar: {
     // width: "300px"
-    width: "240px",
-  },
+    width: "240px"
+  }
 };
 
 const Header = (props) => {
@@ -56,11 +59,17 @@ const Header = (props) => {
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
 
-  const navItems = [
-    "Home",
-    "Business",
-    getUserInfo !== undefined && getUserInfo !== null ? "Log Out" : "Log In",
-  ];
+  const navItems =
+    getUserInfo !== undefined && getUserInfo !== null
+      ? [
+          "Home",
+          "Business",
+          "My Reviews",
+          "My Business",
+          "User Profile",
+          "Log Out"
+        ]
+      : ["Home", "Business", "Log In"];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -77,6 +86,12 @@ const Header = (props) => {
       navigate("/");
     } else if (getVal === "Log In") {
       navigate("/login");
+    } else if (getVal === "My Reviews") {
+      navigate("/my-reviews");
+    } else if (getVal === "My Business") {
+      navigate("/my-business");
+    } else if (getVal === "User Profile") {
+      navigate("/user-profile");
     }
   };
 
@@ -96,20 +111,20 @@ const Header = (props) => {
             <ListItemButton
               sx={{
                 "&: hover": {
-                  backgroundColor: colorConfigs.sidebar.hoverBg,
+                  backgroundColor: colorConfigs.sidebar.hoverBg
                 },
                 backgroundColor:
                   appState === item.state
                     ? colorConfigs.sidebar.activeBg
                     : "unset",
                 paddingY: "12px",
-                paddingX: "24px",
+                paddingX: "24px"
               }}
               onClick={() => handleRoute(item)}
             >
               <ListItemIcon
                 sx={{
-                  color: colorConfigs.sidebar.color,
+                  color: colorConfigs.sidebar.color
                 }}
                 className="d-flex align-items-center justify-content-center"
               >
@@ -121,6 +136,21 @@ const Header = (props) => {
                 ) : item === "Business" ? (
                   <>
                     <BusinessIcon />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                ) : item === "My Reviews" ? (
+                  <>
+                    <ReviewsIcon />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                ) : item === "My Business" ? (
+                  <>
+                    <BusinessCenterIcon />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                ) : item === "User Profile" ? (
+                  <>
+                    <Person2Icon />
                     <ListItemText primary={item} className="ml-3" />
                   </>
                 ) : (
@@ -209,7 +239,7 @@ const Header = (props) => {
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
                 ModalProps={{
-                  keepMounted: true, // Better open performance on mobile.
+                  keepMounted: true // Better open performance on mobile.
                 }}
                 // sx={{
                 //   display: { xs: "block", sm: "none" },
@@ -226,8 +256,8 @@ const Header = (props) => {
                     boxSizing: "border-box",
                     borderRight: "0px",
                     backgroundColor: colorConfigs.sidebar.bg,
-                    color: colorConfigs.sidebar.color,
-                  },
+                    color: colorConfigs.sidebar.color
+                  }
                 }}
               >
                 {drawer}

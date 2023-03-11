@@ -6,115 +6,70 @@ import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import {
-  Box,
   Button,
   Card,
   CardContent,
   CardHeader,
-  Grid,
-  Step,
-  StepLabel,
-  Stepper,
-  Typography
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Grid
 } from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { signUpUser } from "../../Redux/Reducers/SignInUpReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-
-const steps = ["Enter GST", "Create an ad"];
+import OtpViewComponents from "../../Components/OtpViewComponents/OtpViewComponents";
 
 const Signup = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const [loading, isLoading] = React.useState(false);
-
-  const [activeStep, setActiveStep] = React.useState(0);
-  const [skipped, setSkipped] = React.useState(new Set());
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  // for steppers
-  const isStepOptional = (step) => {
-    return step === 1;
+  const [showPassword, setShowPassword] = React.useState(false);
+  const [loading, isLoading] = React.useState(false);
+  const [formValues, setFormValues] = React.useState({});
+  const [open, setOpen] = React.useState(false);
+  const [otp, setOtp] = React.useState("");
+
+  const handleClickShowPassword = () => setShowPassword((show) => !show);
+
+  const handleClickOpen = (takeValue) => {
+    setOpen(true);
+    setFormValues(takeValue);
   };
 
-  const isStepSkipped = (step) => {
-    return skipped.has(step);
-  };
-
-  const handleNext = () => {
-    let newSkipped = skipped;
-    if (isStepSkipped(activeStep)) {
-      newSkipped = new Set(newSkipped.values());
-      newSkipped.delete(activeStep);
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped(newSkipped);
-  };
-
-  const handleBack = () => {
-    setActiveStep((prevActiveStep) => prevActiveStep - 1);
-  };
-
-  const handleSkip = () => {
-    if (!isStepOptional(activeStep)) {
-      // You probably want to guard against something like this,
-      // it should never occur unless someone's actively trying to break something.
-      throw new Error("You can't skip a step that isn't optional.");
-    }
-
-    setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    setSkipped((prevSkipped) => {
-      const newSkipped = new Set(prevSkipped.values());
-      newSkipped.add(activeStep);
-      return newSkipped;
-    });
-  };
-
-  const handleReset = () => {
-    setActiveStep(0);
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const validationSchema = Yup.object({
-    gstin: Yup.string()
-      .min(15, "GST must be at least 15 characters")
-      .max(15, "GST must be at least 15 characters")
-      .required("Gst Number is Required."),
+    mobileNo: Yup.string()
+      .min(10, "Mobile number must be a 10 digits")
+      .max(10, "Mobile number must be a 10 digits")
+      .required("Mobile number Number is Required."),
     password: Yup.string()
       .required("Password is required")
       .min(5, "Your password is too short.")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-    confirmPassword: Yup.string().oneOf(
-      [Yup.ref("password"), null],
-      "Passwords must match"
-    )
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .required("Confirm Password is required")
   });
 
-  const signupHandler = (takeValue) => {
-    // dispatch(
-    //   gstVerify({
-    //     gstin: takeValue.gstin
-    //   })
-    // ).then((res) => {
-    //   if (res?.payload?.status === "success") {
-    //     // navigate("/login");
-    //     alert(res.payload.message);
-    //   }
-    // });
+  const signupHandler = () => {
     isLoading(true);
     dispatch(
       signUpUser({
-        gstin: takeValue.gstin,
-        password: takeValue.password,
-        passwordConfirm: takeValue.confirmPassword
+        mobileNo: formValues?.mobileNo?.toString(),
+        password: formValues?.password,
+        passwordConfirm: formValues?.confirmPassword
       })
     ).then((res) => {
       if (res?.payload?.status === true) {
-        navigate("/");
+        navigate("/login");
       }
       isLoading(false);
     });
@@ -138,91 +93,30 @@ const Signup = () => {
             <img src={loginImg} alt="sign up" />
           </Grid>
           <Grid item xs={4} md={5}>
-            <div className="text-center">
-              <Stepper activeStep={activeStep}>
-                {steps.map((label, index) => {
-                  const stepProps = {};
-                  const labelProps = {};
-                  if (isStepOptional(index)) {
-                    labelProps.optional = (
-                      <Typography variant="caption">Optional</Typography>
-                    );
-                  }
-                  if (isStepSkipped(index)) {
-                    stepProps.completed = false;
-                  }
-                  return (
-                    <Step key={label} {...stepProps}>
-                      <StepLabel {...labelProps}>{label}</StepLabel>
-                    </Step>
-                  );
-                })}
-              </Stepper>
-              {activeStep === steps.length ? (
-                <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    All steps completed - you&apos;re finished
-                  </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                    <Box sx={{ flex: "1 1 auto" }} />
-                    <Button onClick={handleReset}>Reset</Button>
-                  </Box>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    Step {activeStep + 1}
-                  </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                    <Button
-                      color="inherit"
-                      disabled={activeStep === 0}
-                      onClick={handleBack}
-                      sx={{ mr: 1 }}
-                    >
-                      Back
-                    </Button>
-                    <Box sx={{ flex: "1 1 auto" }} />
-                    {isStepOptional(activeStep) && (
-                      <Button
-                        color="inherit"
-                        onClick={handleSkip}
-                        sx={{ mr: 1 }}
-                      >
-                        Skip
-                      </Button>
-                    )}
-
-                    <Button onClick={handleNext}>
-                      {activeStep === steps.length - 1 ? "Finish" : "Next"}
-                    </Button>
-                  </Box>
-                </React.Fragment>
-              )}
-            </div>
             <Card sx={{ width: 450 }}>
               <CardHeader title="Sign Up" className="card-header text-center" />
               <CardContent className="mt-2">
                 <Formik
                   initialValues={{
-                    gstin: "",
+                    mobileNo: "",
                     password: "",
                     confirmPassword: ""
                   }}
                   validationSchema={validationSchema}
                   onSubmit={async (values) => {
-                    signupHandler(values);
+                    // signupHandler(values);
+                    handleClickOpen(values);
                   }}
                 >
                   {/* className="w-50 mx-auto m-5 p-5 border rounded" */}
                   <Form>
                     <div className="form-group">
                       <Field
-                        name="gstin"
-                        type="text"
+                        name="mobileNo"
+                        type="number"
                         component={CustomTextField}
-                        id="gstin"
-                        label="Gst Number"
+                        id="mobileNo"
+                        label="Mobile Number"
                         variant="outlined"
                         className="form-control-textFiled"
                       />
@@ -268,7 +162,7 @@ const Signup = () => {
                         Already have an account?
                       </span>{" "}
                       &nbsp;{" "}
-                      <Link to="/" className="have-account">
+                      <Link to="/login" className="have-account">
                         Login
                       </Link>
                     </div>
@@ -288,6 +182,33 @@ const Signup = () => {
           </Grid>
         </Grid>
       </div>
+      <Dialog
+        open={open}
+        onClose={(event, reason) => {
+          if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
+            // Set 'open' to false, however you would do that with your particular code.
+            handleClose();
+          }
+        }}
+        PaperProps={{
+          sx: {
+            width: "100%"
+          }
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          <div className="text-center mt-2 mb-4">{"Otp verification"}</div>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <OtpViewComponents handleChange={(evt) => setOtp(evt)} otp={otp} />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={signupHandler}>Submit</Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

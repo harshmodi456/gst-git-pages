@@ -12,20 +12,20 @@ import {
   Grid,
   IconButton,
   Rating,
-  TextField,
+  TextField
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useMemo } from "react";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import "./GstInformation.scss";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   getRecordGstById,
   getWriteReview,
   updateReview,
-  writeReview,
+  writeReview
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import moment from "moment/moment";
 import Backdrop from "@mui/material/Backdrop";
@@ -36,6 +36,7 @@ import EditIcon from "@mui/icons-material/Edit";
 const GstInformation = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
+  const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
   const [getFormValue, setFormValue] = React.useState("");
@@ -58,7 +59,7 @@ const GstInformation = () => {
         console.log("res?.payload?.data", res?.payload?.data);
         setAddressData(res?.payload?.data?.gstData?.adadr);
         const request = {
-          gstId: res?.payload?.data?._id,
+          gstId: res?.payload?.data?._id
         };
         dispatch(getWriteReview(request)).then((res) => {
           setReviewData(res?.payload?.reviews);
@@ -85,7 +86,7 @@ const GstInformation = () => {
     if (takeItems) {
       const request = {
         gstId: getFormValue?._id,
-        address: takeItems.value,
+        address: takeItems.value
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
@@ -97,7 +98,7 @@ const GstInformation = () => {
       }
     } else {
       const request = {
-        gstId: getFormValue?._id,
+        gstId: getFormValue?._id
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
@@ -125,14 +126,14 @@ const GstInformation = () => {
       gstId: getFormValue._id,
       address: selectedAddress?.value,
       reviewText: reviewTextDesc,
-      rating: value,
+      rating: value
     };
     if (isEditable) {
       const updateReviewInput = {
         _id: modalObject._id,
         address: selectedAddress?.value,
         reviewText: reviewTextDesc,
-        rating: value,
+        rating: value
       };
       dispatch(updateReview(updateReviewInput)).then((res) => {
         if (res?.payload?.status === true) {
@@ -162,7 +163,7 @@ const GstInformation = () => {
   const formInitialValues = {
     name: getFormValue?.gstData?.tradeNam,
     businessName: getFormValue?.gstData?.lgnm,
-    address: getFormValue?.gstData?.pradr?.addr?.bnm,
+    address: getFormValue?.gstData?.pradr?.addr?.bnm
   };
 
   const addressOptions = useMemo(
@@ -171,7 +172,7 @@ const GstInformation = () => {
         return {
           ...item,
           label: item.addr.bnm,
-          value: item.addr.bnm,
+          value: item.addr.bnm
         };
       }),
     [addressData]
@@ -294,7 +295,7 @@ const GstInformation = () => {
                   <div
                     style={{
                       textAlign: "center",
-                      color: "black",
+                      color: "black"
                     }}
                   >
                     Data not found!
@@ -369,8 +370,8 @@ const GstInformation = () => {
           }}
           PaperProps={{
             sx: {
-              width: "100%",
-            },
+              width: "100%"
+            }
           }}
           disableEscapeKeyDown={true}
           disableBackdropClick={true}

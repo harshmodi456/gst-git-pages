@@ -1,0 +1,19 @@
+.text-center {
+  .container-style {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 20px;
+  }
+  .input-style {
+    text-align: center;
+    width: 60px !important;
+    height: 38px;
+    border-radius: 12px;
+    font-weight: 100;
+    border-color: skyblue;
+    border-width: 1px;
+    .input-style:focus {
+      border-color: skyblue !important;
+    }
+  }
+}

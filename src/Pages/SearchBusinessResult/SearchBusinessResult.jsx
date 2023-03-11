@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   SearchByGstNumber,
-  getAllGstRecord,
+  getAllGstRecord
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -38,16 +38,12 @@ const SearchBusinessResult = () => {
   useEffect(() => {
     getAllGstRecordFn({
       size: 10,
-      page: 1,
+      page: 1
     });
   }, []);
 
   const getAllGstRecordFn = async (queryBody) => {
     isLoading(true);
-    // const queryBody = {
-    //   size: size,
-    //   page: page
-    // };
     await dispatch(getAllGstRecord(queryBody)).then((res) => {
       if (queryBody?.page === 1) {
         setSearchData(res?.payload?.gst || []);
@@ -71,30 +67,20 @@ const SearchBusinessResult = () => {
 
   const handleSelectBusiness = (getRow) => {
     navigate(`/gst-information/${getRow?.gstData?.gstin}`, {
-      state: { getRow },
+      state: { getRow }
     });
   };
-
-  // const rowObj = {
-  //   tradeNam: "CANON INDIA PVT.LTD.",
-  //   lgnm: "CANON INDIA PRIVATE LIMITED",
-  //   gstin: "24AAACC4175D1Z4",
-  //   addr: "Block H, TPS 14, SUMEL Business Park -6"
-  // };
 
   const fetchMoreData = async () => {
     if (page === totalPage) {
       setHasMore(false);
       return;
     }
-    // a fake async api call like which sends
-    // 20 more records in .5 secs
     await setTimeout(async () => {
-      // setSize((prev) => prev + 10);
       setPage((prev) => prev + 1);
       await getAllGstRecordFn({
         size: 10,
-        page: page + 1,
+        page: page + 1
       });
     }, 500);
   };
@@ -148,7 +134,7 @@ const SearchBusinessResult = () => {
                             ) {
                               getAllGstRecordFn({
                                 size: 10,
-                                page: 1,
+                                page: 1
                               });
                             }
                             setSearchInput(e.target.value);
@@ -237,7 +223,7 @@ const SearchBusinessResult = () => {
                     <div
                       style={{
                         textAlign: "center",
-                        color: "black",
+                        color: "black"
                       }}
                     >
                       Data not found!

@@ -6,20 +6,23 @@ import Login from "../Pages/Login/Login.jsx";
 import SearchGstNumber from "../Pages/SearchGstNumber/SearchGstNumber.jsx";
 import SearchBusinessResult from "../Pages/SearchBusinessResult/SearchBusinessResult.jsx";
 import GstInformation from "../Pages/GstInformation/GstInformation.jsx";
+import MyReviews from "../Pages/MyReviews/MyReviews.jsx";
+import MyBusiness from "../Pages/MyBusiness/MyBusiness.jsx";
+import UserProfile from "../Pages/UserProfile/UserProfile.jsx";
 
 export const routeData = [
   {
     path: "/signup",
     // route: PublicRoute,
     isAuthenticated: false,
-    element: Signup,
+    element: Signup
   },
   {
     path: "/login",
     // path: "/",
     // route: PublicRoute,
     isAuthenticated: false,
-    element: Login,
+    element: Login
   },
   {
     path: "/",
@@ -27,22 +30,37 @@ export const routeData = [
     // route: AuthorizedRoute,
     // isAuthenticated: true,
     isAuthenticated: false,
-    element: SearchGstNumber,
+    element: SearchGstNumber
   },
   {
     path: "/business-result",
     // route: AuthorizedRoute,
     // isAuthenticated: true,
     isAuthenticated: false,
-    element: SearchBusinessResult,
+    element: SearchBusinessResult
   },
   {
     // path: "/gst-information",
     path: "/gst-information/:gstNumber",
     // route: AuthorizedRoute,
     isAuthenticated: true,
-    element: GstInformation,
+    element: GstInformation
   },
+  {
+    path: "/my-reviews",
+    isAuthenticated: true,
+    element: MyReviews
+  },
+  {
+    path: "/my-business",
+    isAuthenticated: true,
+    element: MyBusiness
+  },
+  {
+    path: "/user-profile",
+    isAuthenticated: true,
+    element: UserProfile
+  }
 ];
 
 // export const publicRouteData = [
