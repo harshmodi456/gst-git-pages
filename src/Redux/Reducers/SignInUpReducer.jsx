@@ -33,6 +33,34 @@ export const signUpUser = createAsyncThunk(
   }
 );
 
+// for send otp action and state declaration
+export const sendOtpUser = createAsyncThunk(
+  "user/sendOtp",
+  async (data, thunkApi) => {
+    try {
+      return await (
+        await axios.post(`${api}users/sendOtp/${data}`)
+      ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+// for otp verify action and state declaration
+export const userVerifyWithOtp = createAsyncThunk(
+  "user/verifyUser",
+  async (data, thunkApi) => {
+    try {
+      return await (
+        await axios.post(`${api}users/verifyUser`, data)
+      ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   userInfo: {},
@@ -96,7 +124,22 @@ const signUpUserSlice = createSlice({
     builder.addCase(signUpUser.fulfilled, (state, action) => {
       state.loading = false;
       state.success = true;
-      toast.success("Sign up successfully!", {
+      // toast.success("Sign up successfully!", {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light"
+      // });
+      // <Navigate to="/signIn" />;
+    });
+    builder.addCase(signUpUser.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
+      state.loading = false;
+      toast.error(action?.payload?.response?.data?.message, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -106,9 +149,62 @@ const signUpUserSlice = createSlice({
         progress: undefined,
         theme: "light"
       });
-      <Navigate to="/signIn" />;
     });
-    builder.addCase(signUpUser.rejected, (state, action) => {
+
+    // for send Otp
+    builder.addCase(sendOtpUser.pending, (state, action) => {
+      state.loading = true;
+      state.error = {};
+    });
+    builder.addCase(sendOtpUser.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      toast.success(action?.payload?.response?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    });
+    builder.addCase(sendOtpUser.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
+      state.loading = false;
+      toast.error(action?.payload?.response?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    });
+
+    // for verify Otp
+    builder.addCase(userVerifyWithOtp.pending, (state, action) => {
+      state.loading = true;
+      state.error = {};
+    });
+    builder.addCase(userVerifyWithOtp.fulfilled, (state, action) => {
+      state.loading = false;
+      state.success = true;
+      toast.success(action?.payload?.response?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
+    });
+    builder.addCase(userVerifyWithOtp.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
       state.loading = false;
       toast.error(action?.payload?.response?.data?.message, {

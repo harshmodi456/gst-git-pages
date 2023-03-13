@@ -19,7 +19,11 @@ import {
 } from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
-import { signUpUser } from "../../Redux/Reducers/SignInUpReducer";
+import {
+  sendOtpUser,
+  signUpUser,
+  userVerifyWithOtp
+} from "../../Redux/Reducers/SignInUpReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import OtpViewComponents from "../../Components/OtpViewComponents/OtpViewComponents";
@@ -36,9 +40,9 @@ const Signup = () => {
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
 
-  const handleClickOpen = (takeValue) => {
+  const handleClickOpen = (takeRecord) => {
     setOpen(true);
-    setFormValues(takeValue);
+    dispatch(sendOtpUser(takeRecord?.data?._id));
   };
 
   const handleClose = () => {
@@ -59,19 +63,31 @@ const Signup = () => {
       .required("Confirm Password is required")
   });
 
-  const signupHandler = () => {
+  const signupHandler = (takeValue) => {
     isLoading(true);
     dispatch(
       signUpUser({
-        mobileNo: formValues?.mobileNo?.toString(),
-        password: formValues?.password,
-        passwordConfirm: formValues?.confirmPassword
+        mobileNo: takeValue?.mobileNo?.toString(),
+        password: takeValue?.password,
+        passwordConfirm: takeValue?.confirmPassword
       })
     ).then((res) => {
       if (res?.payload?.status === true) {
-        navigate("/login");
+        handleClickOpen(res?.payload);
+        setFormValues(res?.payload);
+        // navigate("/login");
       }
       isLoading(false);
+    });
+  };
+
+  const otpSubmitHandler = () => {
+    const request = {
+      userId: formValues?.data?._id,
+      otp: otp
+    };
+    dispatch(userVerifyWithOtp(request)).then((res) => {
+      console.log("res==opt", res);
     });
   };
 
@@ -104,8 +120,7 @@ const Signup = () => {
                   }}
                   validationSchema={validationSchema}
                   onSubmit={async (values) => {
-                    // signupHandler(values);
-                    handleClickOpen(values);
+                    signupHandler(values);
                   }}
                 >
                   {/* className="w-50 mx-auto m-5 p-5 border rounded" */}
@@ -206,7 +221,7 @@ const Signup = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={signupHandler}>Submit</Button>
+          <Button onClick={otpSubmitHandler}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>
