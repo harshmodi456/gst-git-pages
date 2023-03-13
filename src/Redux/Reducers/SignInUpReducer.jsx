@@ -159,7 +159,7 @@ const signUpUserSlice = createSlice({
     builder.addCase(sendOtpUser.fulfilled, (state, action) => {
       state.loading = false;
       state.success = true;
-      toast.success(action?.payload?.response?.data?.message, {
+      toast.success(action?.payload?.message, {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
