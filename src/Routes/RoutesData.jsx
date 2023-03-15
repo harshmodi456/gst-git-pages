@@ -32,13 +32,12 @@ export const routeData = [
     isAuthenticated: false,
     element: SearchGstNumber
   },
-  {
-    path: "/business-result",
-    // route: AuthorizedRoute,
-    // isAuthenticated: true,
-    isAuthenticated: false,
-    element: SearchBusinessResult
-  },
+  /* ------- Currently disable for now ------- */
+  // {
+  //   path: "/business-result",
+  //   isAuthenticated: false,
+  //   element: SearchBusinessResult
+  // },
   {
     // path: "/gst-information",
     path: "/gst-information/:gstNumber",

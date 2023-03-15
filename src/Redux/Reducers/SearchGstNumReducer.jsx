@@ -10,7 +10,8 @@ export const gstVerify = createAsyncThunk(
     try {
       return await (
         // await instance.post(`${api}gst/verify`, data)
-        await instance.get(`${api}gst/verify/${data}`)
+        await instance.get(`${
+          api}gst/verify/${data}`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -139,6 +140,24 @@ export const getWriteReview = createAsyncThunk(
   }
 );
 
+// for get write review by id
+export const getReviewByUser = createAsyncThunk(
+  "Gst/getReviewByUser",
+  async (userId, thunkApi) => {
+    try {
+      return await // await doFetch(`${api}/auth/login`,'POST',data)
+      // await axios.get(`${api}gst/getGst/${data}`)
+      (
+        await instance.get(
+          `${api}review/user/${userId}`
+        )
+      ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   gstInfo: {},
@@ -226,16 +245,16 @@ const SearchGstNumber = createSlice({
       state.gstInfo = action.payload;
       state.loading = false;
       state.success = true;
-      toast.success(action?.payload?.message, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+      // toast.success(action?.payload?.message, {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light",
+      // });
     });
     builder.addCase(postGstRecord.rejected, (state, action) => {
       state.error = JSON.parse(JSON.stringify(action.payload));

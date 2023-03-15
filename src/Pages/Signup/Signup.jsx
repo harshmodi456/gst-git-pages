@@ -1,5 +1,6 @@
-import React from "react";
+import React, {useState} from "react";
 import "./Signup.scss";
+import "./Signup.css";
 import { Link, useNavigate } from "react-router-dom";
 // import TextField from '@mui/material/TextField';
 import { Formik, Field, Form } from "formik";
@@ -27,18 +28,19 @@ import {
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import OtpViewComponents from "../../Components/OtpViewComponents/OtpViewComponents";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
+  const [showConPassword, setShowConPassword] = React.useState(false);
+  const [isLoadingOtpContainer, setIsLoadingOtpContainer] = useState(false);
   const [loading, isLoading] = React.useState(false);
   const [formValues, setFormValues] = React.useState({});
   const [open, setOpen] = React.useState(false);
   const [otp, setOtp] = React.useState("");
-
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
 
   const handleClickOpen = (takeRecord) => {
     setOpen(true);
@@ -54,12 +56,12 @@ const Signup = () => {
       .min(10, "Mobile number must be a 10 digits")
       .max(10, "Mobile number must be a 10 digits")
       .required("Mobile number Number is Required."),
-    password: Yup.string()
+    userPassword: Yup.string()
       .required("Password is required")
       .min(5, "Your password is too short.")
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     confirmPassword: Yup.string()
-      .oneOf([Yup.ref("password"), null], "Passwords must match")
+      .oneOf([Yup.ref("userPassword"), null], "Passwords must match")
       .required("Confirm Password is required")
   });
 
@@ -68,28 +70,33 @@ const Signup = () => {
     dispatch(
       signUpUser({
         mobileNo: takeValue?.mobileNo?.toString(),
-        password: takeValue?.password,
+        password: takeValue?.userPassword,
         passwordConfirm: takeValue?.confirmPassword
       })
     ).then((res) => {
       if (res?.payload?.status === true) {
         handleClickOpen(res?.payload);
         setFormValues(res?.payload);
-        // navigate("/login");
       }
       isLoading(false);
     });
   };
 
   const otpSubmitHandler = () => {
+    // setIsLoadingOtpContainer(true);
     const request = {
       userId: formValues?.data?._id,
       otp: otp
     };
     dispatch(userVerifyWithOtp(request)).then((res) => {
-      console.log("res==opt", res);
+      if (res?.payload?.status === true) {
+        navigate('/login')
+      }
     });
+    // setIsLoadingOtpContainer(false);
   };
+
+  console.log('isLoadingOtpContainer', isLoadingOtpContainer)
 
   return (
     <div className="form-signup">
@@ -115,7 +122,7 @@ const Signup = () => {
                 <Formik
                   initialValues={{
                     mobileNo: "",
-                    password: "",
+                    userPassword: "",
                     confirmPassword: ""
                   }}
                   validationSchema={validationSchema}
@@ -123,7 +130,6 @@ const Signup = () => {
                     signupHandler(values);
                   }}
                 >
-                  {/* className="w-50 mx-auto m-5 p-5 border rounded" */}
                   <Form>
                     <div className="form-group">
                       <Field
@@ -138,32 +144,53 @@ const Signup = () => {
                     </div>
                     <div className="form-group">
                       <Field
-                        name="password"
+                        name="userPassword"
                         type={showPassword ? "text" : "password"}
                         component={CustomTextField}
                         id="password"
                         label="Password"
                         variant="outlined"
-                        // className="form-control-textFiled"
-                        setShowPassword={setShowPassword}
-                        showPassword={showPassword}
-                        handleClickShowPassword={handleClickShowPassword}
                       />
+                      {
+                        showPassword ? (
+                          <FaEyeSlash
+                            size={25}
+                            className="password-icon"
+                            onClick={() => setShowPassword(!showPassword)}
+                          />
+                        ) : (
+                          <FaEye
+                            size={25}
+                            onClick={() => setShowPassword(!showPassword)}
+                            className="password-icon"
+                          />
+                        )
+                      }
                     </div>
-
                     <div className="form-group">
                       <Field
                         name="confirmPassword"
-                        type={showPassword ? "text" : "password"}
+                        type={showConPassword ? "text" : "password"}
                         component={CustomTextField}
-                        id="confirmPassword"
+                        id="password"
                         label="Confirm Password"
                         variant="outlined"
-                        className="form-control-textFiled"
-                        // setShowPassword={setShowPassword}
-                        // showPassword={showPassword}
-                        // handleClickShowPassword={handleClickShowPassword}
                       />
+                      {
+                        showConPassword ? (
+                          <FaEyeSlash
+                            size={25}
+                            className="password-icon"
+                            onClick={() => setShowConPassword(!showConPassword)}
+                          />
+                        ) : (
+                          <FaEye
+                            size={25}
+                            onClick={() => setShowConPassword(!showConPassword)}
+                            className="password-icon"
+                          />
+                        )
+                      }
                     </div>
 
                     <div className="w-50">
@@ -181,15 +208,6 @@ const Signup = () => {
                         Login
                       </Link>
                     </div>
-
-                    {/* <div className="w-100">
-                  <button
-                    type="submit"
-                    className="btn btn-success mx-auto d-block mt-5"
-                  >
-                    Login
-                  </button>
-                </div> */}
                   </Form>
                 </Formik>
               </CardContent>
@@ -216,12 +234,18 @@ const Signup = () => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
+            <Backdrop
+              open={isLoadingOtpContainer}
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
             <OtpViewComponents handleChange={(evt) => setOtp(evt)} otp={otp} />
           </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={otpSubmitHandler}>Submit</Button>
+          <Button onClick={() => otpSubmitHandler()}>Submit</Button>
         </DialogActions>
       </Dialog>
     </div>

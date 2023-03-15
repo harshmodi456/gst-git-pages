@@ -8,6 +8,12 @@ import { Grid } from "@mui/material";
 import gstData from "../../Constant/GstData.json";
 import "./MyReviews.scss";
 import CommonGstList from "../../Components/CommonGstList/CommonGstList";
+import {
+  getReviewByUser
+} from "../../Redux/Reducers/SearchGstNumReducer";
+import { useAppDispatch } from "../../Redux/Store/Store";
+import Review from "../../Components/ReviewList/Review";
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -43,7 +49,18 @@ function a11yProps(index) {
 }
 
 const MyReviews = () => {
+
+  const dispatch = useAppDispatch();
   const [value, setValue] = React.useState(0);
+  const user = localStorage.getItem('userInfo');
+  const userId = JSON.parse(user)?.userInfo?.data?._id;
+  const [reviewData, setReviewData] = React.useState([]);
+
+  React.useEffect(() => {
+    dispatch(getReviewByUser(userId)).then((res) => {
+      setReviewData(res?.payload?.reviews);
+    });
+  })
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -66,15 +83,13 @@ const MyReviews = () => {
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <CommonGstList
-                cardListData={gstData}
-                onCardClick={(row) => alert("called")}
-              />
+              <Review reviewList={reviewData}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
               <CommonGstList
                 cardListData={gstData}
                 onCardClick={(row) => alert("called")}
+                visibleReview={false}
               />
             </TabPanel>
           </Box>

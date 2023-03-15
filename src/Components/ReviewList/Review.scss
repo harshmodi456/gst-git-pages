@@ -1,0 +1,21 @@
+.review-card-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.review-card {
+    padding: 10px;
+    border: 1px solid #002fa5 !important;
+    border-radius: 10px;
+    width: 350px;
+    margin: 15px 10px;
+
+    .label {
+        color: gray;
+        margin: 0px;
+    }
+    .value {
+        margin: 0px;
+    }
+}

@@ -61,15 +61,20 @@ const Header = (props) => {
 
   const navItems =
     getUserInfo !== undefined && getUserInfo !== null
+    /* ------ Business is currently disabled ------ */
       ? [
-          "Home",
-          "Business",
-          "My Reviews",
-          "My Business",
-          "User Profile",
-          "Log Out"
-        ]
-      : ["Home", "Business", "Log In"];
+        "Home",
+        // "Business",
+        "My Reviews",
+        "My Business",
+        "User Profile",
+        "Log Out"
+      ]
+      : [
+        "Home",
+        // "Business",
+        "Log In"
+      ];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);

@@ -1,3 +1,19 @@
 .signup-container {
     height: 100vh !important;
 }
+
+.form-group {
+    position: relative;
+}
+
+.password-icon {
+    position: absolute;
+    top: 25%;
+    right: 5%;
+    cursor: pointer;
+    color: rgb(153, 153, 153);
+}
+
+.password-icon:hover {
+    color: gray;
+}

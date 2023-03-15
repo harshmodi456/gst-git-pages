@@ -3,7 +3,10 @@ import "./CommonGstList.scss";
 import { Rating } from "@mui/material";
 
 const CommonGstList = (props) => {
-  const { cardListData, onCardClick } = props;
+  const { cardListData, onCardClick, visibleReview } = props;
+
+  console.log(cardListData)
+
   return (
     <div className="main-common-div">
       <div className={`table-view`}>
@@ -33,17 +36,21 @@ const CommonGstList = (props) => {
                 <div className="data-view-title">
                   Address : {row?.pradr?.addr?.bnm}
                 </div>
-                <div className="data-view-title review-main">
-                  <span className="review-average">3.0 </span>
-                  <span className="review-rating ml-2">
-                    <Rating
-                      name="simple-controlled"
-                      value={"3"}
-                      //   disabled={true}
-                    />
-                  </span>{" "}
-                  <span className="review-text-span ml-2"> 77 reviews</span>
-                </div>
+                {
+                  visibleReview && (
+                    <div className="data-view-title review-main">
+                      <span className="review-average">3.0 </span>
+                      <span className="review-rating ml-2">
+                        <Rating
+                          name="simple-controlled"
+                          value={"3"}
+                        //   disabled={true}
+                        />
+                      </span>{" "}
+                      <span className="review-text-span ml-2"> 77 reviews</span>
+                    </div>
+                  )
+                }
               </div>
             </>
           ))
