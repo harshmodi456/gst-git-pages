@@ -56,19 +56,24 @@ const SearchGstNumber = () => {
         einvoiceStatus: getRow.einvoiceStatus
       }
     };
-    dispatch(postGstRecord(reqeObj)).then((res) => {
-      if (res?.payload?.status === true) {
-        if (getUserInfo !== undefined && getUserInfo !== null) {
-          navigate(`/gst-information/${getRow?.gstin}`, {
-            state: { getRow }
-          });
-        } else {
-          navigate("/login");
-          localStorage.setItem("search-selectedGst", JSON.stringify(getRow));
+
+    if (getRow?._doc) {
+      navigate(`/gst-information/${getRow?._doc?.gstin}`)
+    } else {
+      dispatch(postGstRecord(reqeObj)).then((res) => {
+        if (res?.payload?.status === true) {
+          if (getUserInfo !== undefined && getUserInfo !== null) {
+            navigate(`/gst-information/${getRow?.gstin || getRow?._doc?.gstin}`, {
+              state: { getRow }
+            });
+          } else {
+            navigate("/login");
+            localStorage.setItem("search-selectedGst", JSON.stringify(getRow));
+          }
         }
-      }
-      isLoading(false);
-    });
+        isLoading(false);
+      });
+    }
   };
 
   return (

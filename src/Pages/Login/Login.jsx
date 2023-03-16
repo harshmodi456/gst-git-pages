@@ -54,9 +54,13 @@ const Login = () => {
         let getGstResult = JSON.parse(
           localStorage.getItem("search-selectedGst")
         );
-        navigate(`/gst-information/${getGstResult?.gstin}`, {
-          state: { getGstResult }
-        });
+        if (getGstResult?.gstin) { 
+          navigate(`/gst-information/${getGstResult?.gstin}`, {
+            state: { getGstResult }
+          });
+        } else {
+          navigate('/')
+        }
       }
       isLoading(false);
     });

@@ -15,17 +15,18 @@ import {
   TextField
 } from "@mui/material";
 import { Field, Form, Formik } from "formik";
-import React, { useEffect, useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import SearchImg from "../../Assets/Images/img2.png";
 import "./GstInformation.scss";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   getRecordGstById,
   getWriteReview,
   updateReview,
-  writeReview
+  writeReview,
+  gstVerify
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import moment from "moment/moment";
 import Backdrop from "@mui/material/Backdrop";
@@ -36,6 +37,7 @@ import EditIcon from "@mui/icons-material/Edit";
 const GstInformation = () => {
   const dispatch = useAppDispatch();
   const params = useParams();
+  const location = useLocation();
   const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -48,26 +50,74 @@ const GstInformation = () => {
   const [loading, isLoading] = React.useState(false);
   const [isEditable, setIsEditable] = React.useState(false);
   const [modalObject, setModalObject] = React.useState("");
-
   const getUserToken = JSON.parse(localStorage.getItem("userInfo"));
+  const pathArray = (location.pathname).split('/');
+  const gstIn = pathArray[2] || null;
+  const [gst, setGst] = useState({});
+  // let businessAddress = [];
+  const [businessAddress, setBusinessAddress] = useState([]);
 
   useEffect(() => {
     isLoading(true);
-    dispatch(getRecordGstById(params.gstNumber)).then((res) => {
-      if (res?.payload?.data) {
-        setFormValue(res?.payload?.data);
-        console.log("res?.payload?.data", res?.payload?.data);
-        setAddressData(res?.payload?.data?.gstData?.adadr);
-        const request = {
-          gstId: res?.payload?.data?._id
-        };
-        dispatch(getWriteReview(request)).then((res) => {
-          setReviewData(res?.payload?.reviews);
-        });
+    dispatch(gstVerify(gstIn)).then((res) => {
+      if (res?.payload?.status === true) {
+        setGst(res?.payload?.data[0]);
+
+        if (res?.payload?.data[0]?.adadr || res?.payload?.data[0]?._doc?.gstData?.adadr) {
+          (res?.payload?.data[0]?.adadr || res?.payload?.data[0]?._doc?.gstData?.adadr)?.map((addr) => {
+            if (businessAddress?.length > 0) {
+              businessAddress?.map((availableAddr) => {
+                if (availableAddr !== addr) {
+                  setBusinessAddress([addr?.addr, ...businessAddress]);
+                }
+              })
+            } else {
+              setBusinessAddress([addr?.addr, ...businessAddress]);
+            }
+          })
+        }
+
+        if (Array.isArray(res?.payload?.data[0]?.pradr || res?.payload?.data[0]?._doc?.gstData?.pradr)) {
+          (res?.payload?.data[0]?.pradr || res?.payload?.data[0]?._doc?.gstData?.pradr)?.map((addr) => {
+            if (businessAddress?.length > 0) {
+              businessAddress?.map((availableAddr) => {
+                if (availableAddr !== addr) {
+                  setBusinessAddress([addr?.addr, ...businessAddress]);
+                }
+              })
+            } else {
+              setBusinessAddress([addr?.addr, ...businessAddress]);
+            }
+          })
+        } else {
+          setBusinessAddress([res?.payload?.data[0]?.pradr?.addr || res?.payload?.data[0]?._doc?.gstData?.pradr?.addr, ...businessAddress])
+        }
+      } else {
+        setGst({});
       }
       isLoading(false);
     });
-  }, []);
+  }, [])
+
+  useEffect(()=>{
+    setSelectedAddress(gst?.pradr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm)
+  }, [gst])
+  // useEffect(() => {
+  //   isLoading(true);
+  //   dispatch(getRecordGstById(params.gstNumber)).then((res) => {
+  //     if (res?.payload?.data) {
+  //       setFormValue(res?.payload?.data);
+  //       setAddressData(res?.payload?.data?.gstData?.adadr);
+  //       const request = {
+  //         gstId: res?.payload?.data?._id
+  //       };
+  //       dispatch(getWriteReview(request)).then((res) => {
+  //         setReviewData(res?.payload?.reviews);
+  //       });
+  //     }
+  //     isLoading(false);
+  //   });
+  // }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -85,7 +135,7 @@ const GstInformation = () => {
     setSelectedAddress(takeItems);
     if (takeItems) {
       const request = {
-        gstId: getFormValue?._id,
+        gstId: gst?._id,
         address: takeItems.value
       };
       try {
@@ -98,7 +148,7 @@ const GstInformation = () => {
       }
     } else {
       const request = {
-        gstId: getFormValue?._id
+        gstId: gst?._id
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
@@ -123,15 +173,15 @@ const GstInformation = () => {
   const handlePost = () => {
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
-      gstId: getFormValue._id,
-      address: selectedAddress?.value,
+      gstId: gst?._id || gst?._doc?._id,
+      address: selectedAddress,
       reviewText: reviewTextDesc,
       rating: value
     };
     if (isEditable) {
       const updateReviewInput = {
         _id: modalObject._id,
-        address: selectedAddress?.value,
+        address: selectedAddress,
         reviewText: reviewTextDesc,
         rating: value
       };
@@ -161,9 +211,9 @@ const GstInformation = () => {
   };
 
   const formInitialValues = {
-    name: getFormValue?.gstData?.tradeNam,
-    businessName: getFormValue?.gstData?.lgnm,
-    address: getFormValue?.gstData?.pradr?.addr?.bnm
+    name: gst?.tradeNam || gst?._doc?.gstData?.tradeNam,
+    businessName: gst?.lgnm || gst?._doc?.gstData?.lgnm,
+    address: gst?.pradr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm
   };
 
   const addressOptions = useMemo(
@@ -190,7 +240,7 @@ const GstInformation = () => {
         container
         spacing={{ xs: 0, md: 3 }}
         columns={{ xs: 0, sm: 8, md: 12 }}
-        // mt={0px}
+      // mt={0px}
       >
         <Grid item xs={4} className="grid-first">
           <img src={SearchImg} alt="SearchImg" />
@@ -217,7 +267,6 @@ const GstInformation = () => {
                         type="text"
                         component={CustomTextField}
                         id="name"
-                        // label="Name"
                         placeholder="Name"
                         variant="outlined"
                         className="form-control-textFiled"
@@ -231,7 +280,6 @@ const GstInformation = () => {
                         type="text"
                         component={CustomTextField}
                         id="businessName"
-                        // label="Business Name"
                         placeholder="Business Name"
                         variant="outlined"
                         className="form-control-textFiled"
@@ -239,8 +287,27 @@ const GstInformation = () => {
                       />
                     </div>
                     <div className="form-group">
-                      <label>Address</label>
+                      <label>Address</label><br />
                       <Field
+                        name="address"
+                        id="address"
+                        placeholder="Address"
+                        variant="outlined"
+                        className="form-control-select"
+                        as="select"
+                        onChange={(e) => onFilterHandler(e.target.value)}
+                      >
+                        {businessAddress &&
+                          (
+                            businessAddress?.map((address, index) => {
+                              return (
+                                <option key={index} value={address?.bnm}>{address?.bnm}</option>
+                              )
+                            })
+                          )
+                        }
+                      </Field>
+                      {/* <Field
                         name="address"
                         type="text"
                         // component={CustomTextField}
@@ -250,8 +317,8 @@ const GstInformation = () => {
                               isClearable={true}
                               className="basic-single"
                               classNamePrefix="select"
-                              options={addressOptions}
-                              onChange={(items) => onFilterHandler(items)}
+                            // options={businessAddress}
+                            // onChange={(items) => onFilterHandler(items?.bnm)}
                             />
                           </FormControl>
                         )}
@@ -260,7 +327,7 @@ const GstInformation = () => {
                         variant="outlined"
                         className="form-control-textFiled"
                         disabled={true}
-                      />
+                      /> */}
                     </div>
                   </Form>
                 )}

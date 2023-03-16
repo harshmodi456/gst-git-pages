@@ -186,16 +186,16 @@ const SearchGstNumber = createSlice({
       //   action?.payload.data !== null;
 
       if (action?.payload?.status === true) {
-        toast.success("Gst number or name is valid!", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        // toast.success("Gst number or name is valid!", {
+        //   position: "top-right",
+        //   autoClose: 2000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
       } else {
         toast.success("Gst number or name is not valid!", {
           position: "top-right",

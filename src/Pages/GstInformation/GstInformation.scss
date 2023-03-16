@@ -66,11 +66,24 @@
       box-shadow: none;
       transition: background 0.5s;
     }
-
     .btn-primary {
       border-color: #193c98;
       background-color: #193c98;
     }
+  }
+
+  .form-control-select {
+    padding: 16px 10px;
+    width: 100%;
+    font-size: 18px;
+    background-color: #f6f8f9;
+    color: #4e5e6a;
+    transition: background 0.5s;
+    border-radius: 5px;
+  }
+
+  .form-control-select:focus {
+    outline: none;
   }
 
   .card-header {
