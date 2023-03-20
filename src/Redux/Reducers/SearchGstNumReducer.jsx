@@ -10,8 +10,7 @@ export const gstVerify = createAsyncThunk(
     try {
       return await (
         // await instance.post(`${api}gst/verify`, data)
-        await instance.get(`${
-          api}gst/verify/${data}`)
+        await instance.get(`${api}gst/verify/${data}`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -26,8 +25,7 @@ export const getGstByUserId = createAsyncThunk(
     try {
       return await (
         // await instance.post(`${api}gst/verify`, data)
-        await instance.get(`${
-          api}gst/user/${userId}`)
+        await instance.get(`${api}gst/user/${userId}`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -41,10 +39,10 @@ export const postGstRecord = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.post(`${api}gst/recordGst`, data)
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.post(`${api}gst/recordGst`, data)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -57,10 +55,10 @@ export const SearchByGstNumber = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.get(`${api}gst/searchGst/${data}`)
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.get(`${api}gst/searchGst/${data}`)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -73,10 +71,10 @@ export const getAllGstRecord = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.get(`${api}gst?size=${data.size}?page=${data.page}`)
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.get(`${api}gst?size=${data.size}?page=${data.page}`)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -89,10 +87,10 @@ export const getRecordGstById = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.get(`${api}gst/${data}`)
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.get(`${api}gst/${data}`)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -105,10 +103,10 @@ export const writeReview = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.post(`${api}review/write`, data)
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.post(`${api}review/write`, data)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -126,10 +124,10 @@ export const updateReview = createAsyncThunk(
     };
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.put(`${api}review/${data._id}`, updateData)
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.put(`${api}review/${data._id}`, updateData)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -142,14 +140,13 @@ export const getWriteReview = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.get(
-          `${api}review/${data?.gstId}${
-            data?.address ? `?address=${data?.address}` : ""
-          }`
-        )
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.get(
+            `${api}review/${data?.gstId}${data?.address ? `?address=${data?.address}` : ""
+            }`
+          )
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -162,12 +159,28 @@ export const getReviewByUser = createAsyncThunk(
   async (userId, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      // await axios.get(`${api}gst/getGst/${data}`)
-      (
-        await instance.get(
-          `${api}review/user/${userId}`
-        )
-      ).data;
+        // await axios.get(`${api}gst/getGst/${data}`)
+        (
+          await instance.get(
+            `${api}review/user/${userId}`
+          )
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+// for get write review by id
+export const updateUser = createAsyncThunk(
+  "Get/updateUser",
+  async (data, thunkApi) => {
+    console.log(data, 'aaa')
+    try {
+      return await
+        (
+          await instance.post(`${api}users/update/${data?.userId}`, data)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
