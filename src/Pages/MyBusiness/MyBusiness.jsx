@@ -1,104 +1,132 @@
 import * as React from "react";
+import Box from "@mui/material/Box";
+import { Grid } from "@mui/material";
+import "./MyBusiness.scss";
+import { useNavigate } from 'react-router-dom';
+import CommonGstList from "../../Components/CommonGstList/CommonGstList";
+import { getGstByUserId, gstVerify, postGstRecord } from "../../Redux/Reducers/SearchGstNumReducer";
+import { useAppDispatch } from "../../Redux/Store/Store";
+import { TextField } from "@mui/material";
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
-import gstData from "../../Constant/GstData.json";
-import "./MyBusiness.scss";
-import CommonGstList from "../../Components/CommonGstList/CommonGstList";
-import { getAllGstRecord } from "../../Redux/Reducers/SearchGstNumReducer";
-import { useAppDispatch } from "../../Redux/Store/Store";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { Rating } from "@mui/material";
-
-function TabPanel(props) {
-
-  const { children, value, index, ...other } = props;
-
-  return (
-    <div
-      role="tabpanel"
-      hidden={value !== index}
-      id={`simple-tabpanel-${index}`}
-      aria-labelledby={`simple-tab-${index}`}
-      {...other}
-    >
-      {value === index && (
-        <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
-        </Box>
-      )}
-    </div>
-  );
-}
-
-TabPanel.propTypes = {
-  children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
-  };
-}
 
 const MyBusiness = () => {
-  const [value, setValue] = React.useState(0);
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [value, setValue] = React.useState(0);
   const [businessData, setBusinessData] = React.useState([]);
   const [page, setPage] = React.useState(1);
   const [hasMore, setHasMore] = React.useState(true);
   const [totalPage, setTotalPage] = React.useState(0);
+  const [loading, isLoading] = React.useState(false);
+  const [verificationValue, setVerificationValue] = React.useState("");
+  const [gstSearchData, setGstSearchData] = React.useState([]);
+  const [myBusinessData, setMyBusinessData] = React.useState([]);
+  const takeUserInfo = localStorage.getItem("userInfo");
+  const getUserInfo = JSON.parse(takeUserInfo);
 
-  console.log(page, totalPage)
+  const myBusinessHandler = async () => {
+    dispatch(getGstByUserId(getUserInfo?.userInfo?.data?._id)).then((res) => {
+      if (res?.payload?.status === true) {
+        setMyBusinessData(res?.payload?.data);
+      } else {
+        setMyBusinessData([]);
+      }
+      isLoading(false);
+    });
+  }
 
   React.useEffect(() => {
-    getAllGstRecordFn({
-      size: 10,
-      page: 1
-    });
+    myBusinessHandler();
   }, []);
-
-  const getAllGstRecordFn = async (queryBody) => {
-    await dispatch(getAllGstRecord(queryBody)).then((res) => {
-      setTotalPage(res.payload.total_page);
-      if (queryBody?.page === 1) {
-        setBusinessData(res?.payload?.gst || []);
-      } else {
-        setBusinessData([...businessData, ...res.payload.gst]);
-      }
-    });
-  };
-
-  const fetchMoreData = async () => {
-    if (page === totalPage) {
-      setHasMore(false);
-      return;
-    }
-    await setTimeout(async () => {
-      setPage((prev) => prev + 1);
-      await getAllGstRecordFn({
-        size: 10,
-        page: page + 1
-      });
-    }, 500);
-  };
-
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
+
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired
+  };
+
+  function a11yProps(index) {
+    return {
+      id: `simple-tab-${index}`,
+      "aria-controls": `simple-tabpanel-${index}`
+    };
+  }
+
+  const searchGstHandler = (takeValue) => {
+    isLoading(true);
+    dispatch(gstVerify(takeValue)).then((res) => {
+      if (res?.payload?.status === true) {
+        setGstSearchData(res?.payload?.data);
+      } else {
+        setGstSearchData([]);
+      }
+      isLoading(false);
+    });
+  };
+
+  const onPostHandle = (getRow) => {
+    isLoading(true);
+    const reqeObj = {
+      gstin: getRow.gstin,
+      userId: getUserInfo?.userInfo?.data?._id,
+      isMyBusiness: true,
+      gstData: getRow,
+    };
+
+    dispatch(postGstRecord(reqeObj)).then((res) => {
+      if (res?.payload?.status === true) {
+        if (getUserInfo !== undefined && getUserInfo !== null) {
+          navigate(`/gst-information/${getRow?.gstin || getRow?._doc?.gstin}`, {
+            state: { getRow }
+          });
+        } else {
+          navigate("/login");
+        }
+      }
+      isLoading(false);
+    });
+  };
+
   return (
     <div className="my-business-div">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Grid className="container-div" columns={{ xs: 0, sm: 8, md: 12 }}>
         <div className="main-div container">
-          <h5>My Business</h5>
+          <h5 className="mb-4">My Business</h5>
           <Box sx={{ width: "100%" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
               <Tabs
@@ -106,79 +134,60 @@ const MyBusiness = () => {
                 onChange={handleChange}
                 aria-label="basic tabs example"
               >
-                <Tab label="Own Business" {...a11yProps(0)} />
-                <Tab label="Other Business" {...a11yProps(1)} />
+                <Tab label="Add Business" {...a11yProps(0)} />
+                <Tab label="My Business" {...a11yProps(1)} />
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <CommonGstList
-                cardListData={gstData}
-                onCardClick={(row) => alert("called")}
-              />
+              <div className="d-flex container justify-content-start align-items-center my-5">
+                <div className="form-group w-100">
+                  <p className="m-0">Gst Number / Business Name</p>
+                  <TextField
+                    name="verificationValue"
+                    type="text"
+                    id="verificationValue"
+                    placeholder="Search Gst Number Or Business Name"
+                    variant="outlined"
+                    className="form-control-textFiled w-100 pr-4"
+                    value={verificationValue}
+                    onChange={(event) => {
+                      setVerificationValue(event.target.value);
+                    }}
+                  />
+                </div>
+                <div className="w-25 btn-div">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      searchGstHandler(verificationValue);
+                    }}
+                    className="w-100 btn btn-lg btn-primary"
+                    disabled={verificationValue ? false : true}
+                  >
+                    Search
+                  </button>
+                </div>
+              </div>
+              <Box sx={{ width: "100%" }}>
+                <CommonGstList
+                  cardListData={gstSearchData}
+                  onCardClick={(row) => onPostHandle(row)}
+                />
+              </Box>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <InfiniteScroll
-                dataLength={businessData?.length}
-                scrollableTarget="scrollableDiv"
-                next={fetchMoreData}
-                hasMore={hasMore}
-                loader={<h6 className="text-center">Loading...</h6>}
-                className="gst-data-conatiner"
-              >
-                {businessData?.map((business, index) => (
-                  < div>
-                    {/* <span className="main-title ml-2" key={index}>
-                      {business?.tradeNam}
-                    </span>
-                    <div
-                      className="data-view"
-                    >
-                      <div className="data-view-title media-view-title-first">
-                        Name : {business?.gstData?.lgnm}
-                      </div>{" "}
-                      <div className="data-view-title media-view-title">
-                        Gst Number : {business?.gstData?.gstin}
-                      </div>
-                      <div className="data-view-title">
-                        Address : {business?.gstData?.pradr?.addr?.bnm}
-                      </div>
-                    </div> */}
-                    <div
-                      className="data-view"
-                      key={index}
-                    >
-                      <div className="data-view-title media-view-title-first">
-                        <div className="dataview-div-name">Name : {business?.gstData?.lgnm || business?.gst?.gstData?.lgnm}</div>
-                      </div>{" "}
-                      <div className="data-view-title media-view-title">
-                        Gst Number : {business?.gstin || business?.gst?.gstin}
-                      </div>
-                      <div className="data-view-title">
-                        Address : {business?.gstData?.pradr?.addr?.bnm || business?.gst?.gstData?.pradr?.addr?.bnm}
-                      </div>
-                      <div className="data-view-title review-main mt-2">
-                        <span className="review-average">{Math.round(business?.avgRating) || 0}</span>
-                        <span className="review-rating ml-2">
-                          <Rating
-                            name="simple-controlled"
-                            value={Math.round(business?.avgRating) || 0}
-                          />
-                        </span>{" "}
-                        <span className="review-text-span ml-2"> {business?.totalReview || 0} reviews</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </InfiniteScroll>
-              {/* <CommonGstList
-                cardListData={gstData}
-                onCardClick={(row) => alert("called")}
-              /> */}
+              <Box sx={{ width: "100%" }}>
+                <div className='my-5'>
+                  <CommonGstList
+                    cardListData={myBusinessData}
+                  />
+                </div>
+              </Box>
             </TabPanel>
           </Box>
         </div>
-      </Grid>
-    </div>
+      </Grid >
+    </div >
   );
 };
 

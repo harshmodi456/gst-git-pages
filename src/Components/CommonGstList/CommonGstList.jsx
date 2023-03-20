@@ -26,14 +26,13 @@ const CommonGstList = (props) => {
                 key={index}
               >
                 <div className="data-view-title media-view-title-first">
-                  <div className="dataview-div-name">Name : {row?.lgnm || row?._doc?.gstData?.lgnm}</div>
+                  <div className="dataview-div-name">Name : {row?.lgnm || row?.gstData?.lgnm || row?._doc?.gstData?.lgnm}</div>
                 </div>{" "}
                 <div className="data-view-title media-view-title">
                   Gst Number : {row?.gstin || row?._doc?.gstData?.gstin}
                 </div>
                 <div className="data-view-title">
-                  Address : {row?.adadr?.length > 0 ? row?.adadr[0]?.addr?.bnm : row?.pradr?.addr?.bnm  || 
-                  row?._doc?.gstData?.adadr?.length > 0 ? row?._doc?.gstData?.adadr[0]?.addr?.bnm : row?._doc?.gstData?.pradr?.addr?.bnm}
+                  Address : { row?._doc?.gstData?.adadr?.addr?.bnm || row?._doc?.gstData?.pradr?.addr?.bnm || row?.adadr?.addr?.bnm || row?.pradr?.addr?.bnm || row?.gstData?.adadr[0]?.addr?.bnm || row?.gstData?.pradr?.addr?.bnm}
                 </div>
                 <div className="data-view-title review-main">
                   <span className="review-average">{Math.round(row?.avgRating) || 0}</span>
@@ -44,7 +43,7 @@ const CommonGstList = (props) => {
                     //   disabled={true}
                     />
                   </span>{" "}
-                  <span className="review-text-span ml-2"> {row?.totalReview || 0 } reviews</span>
+                  <span className="review-text-span ml-2"> {row?.totalReview || 0} reviews</span>
                 </div>
               </div>
             </>

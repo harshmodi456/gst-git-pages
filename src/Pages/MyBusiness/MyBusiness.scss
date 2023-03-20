@@ -33,5 +33,9 @@
           }
         }
       }
+
+      .MuiTabs-flexContainer button:focus {
+        outline: none !important;
+      }
   }
   

@@ -12,7 +12,6 @@ export default function Review(props) {
                     <>
                         {
                             reviewList?.map((review, index) => {
-                                console.log(review)
                                 return (
                                     <div className='review-card' key={index}>
                                         <div>

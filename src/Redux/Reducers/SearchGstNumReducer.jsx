@@ -19,6 +19,22 @@ export const gstVerify = createAsyncThunk(
   }
 );
 
+// for get gst by user id
+export const getGstByUserId = createAsyncThunk(
+  "user/getGstByUserId",
+  async (userId, thunkApi) => {
+    try {
+      return await (
+        // await instance.post(`${api}gst/verify`, data)
+        await instance.get(`${
+          api}gst/user/${userId}`)
+      ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 // for save gst record based on gst number
 export const postGstRecord = createAsyncThunk(
   "Gst/postGstRecord",

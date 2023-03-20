@@ -209,6 +209,12 @@
     }
   }
 
+  .img-container {
+    .MuiButton-outlined:hover {
+      outline: none !important;
+    }
+  }
+
   ::-webkit-scrollbar {
     width: 0px;
   }

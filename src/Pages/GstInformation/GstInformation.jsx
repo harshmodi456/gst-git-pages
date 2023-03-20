@@ -33,6 +33,7 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import Select from "react-select";
 import EditIcon from "@mui/icons-material/Edit";
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -56,6 +57,8 @@ const GstInformation = () => {
   const [gst, setGst] = useState({});
   // let businessAddress = [];
   const [businessAddress, setBusinessAddress] = useState([]);
+  const [imgFile, setImgFile] = useState([]);
+  const [profileImg, setProfileImg] = useState([]);
 
   useEffect(() => {
     isLoading(true);
@@ -99,7 +102,7 @@ const GstInformation = () => {
     });
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     setSelectedAddress(gst?.pradr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm)
   }, [gst])
   // useEffect(() => {
@@ -129,6 +132,18 @@ const GstInformation = () => {
     setValue("");
     setReviewTextDesc("");
   };
+
+  const fileChangeHandler = (event) => {
+    const file = event.target.files[0];
+    if (file != null) {
+      setProfileImg(URL.createObjectURL(file));
+      setImgFile(file);
+    }
+  }
+
+  const upload = () => {
+    document.getElementById("reviewImgUrl").click()
+  }
 
   const onFilterHandler = (takeItems) => {
     isLoading(true);
@@ -427,11 +442,10 @@ const GstInformation = () => {
 
       <div className="dialog-view">
         <Dialog
-          open={open}
-          // onClose={handleClose}
+          // open={open}
+          open={true}
           onClose={(event, reason) => {
             if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
-              // Set 'open' to false, however you would do that with your particular code.
               handleClose();
             }
           }}
@@ -463,7 +477,6 @@ const GstInformation = () => {
               autoFocus
               margin="dense"
               id="name"
-              // label="Email Address"
               type="text"
               placeholder="Share Details Of Your Own Experience At This Place"
               fullWidth
@@ -473,6 +486,20 @@ const GstInformation = () => {
                 setReviewTextDesc(event.target.value);
               }}
             />
+            <div className="img-container">
+              <input
+                id="reviewImgUrl"
+                name='reviewImgUrl'
+                accept="image/*"
+                hidden
+                type="file"
+                onChange={(event) => fileChangeHandler(event)}
+              />
+              <img src={profileImg} height={'50px'}/>
+              <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
+                Add Image
+              </Button>
+            </div>
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>
