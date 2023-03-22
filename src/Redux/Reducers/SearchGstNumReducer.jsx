@@ -172,14 +172,14 @@ export const getReviewByUser = createAsyncThunk(
 );
 
 // for get write review by id
+const user = JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.data;
 export const updateUser = createAsyncThunk(
   "Get/updateUser",
   async (data, thunkApi) => {
-    console.log(data, 'aaa')
     try {
       return await
         (
-          await instance.post(`${api}users/update/${data?.userId}`, data)
+          await instance.post(`${api}users/update/${user._id}`, data)
         ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);

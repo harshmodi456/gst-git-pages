@@ -7,20 +7,23 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import Avatar from 'react-avatar';
 import Button from '@mui/material/Button';
-import AddIcon from '@mui/icons-material/Add';
-import CloseIcon from '@mui/icons-material/Close';
+import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import IconButton from '@mui/material/IconButton';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   updateUser
 } from "../../Redux/Reducers/SearchGstNumReducer";
+import userImg from '../../Assets/Images/user.png';
 
 const UserProfile = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
   const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.data);
-  const [profileImg, setProfileImg] = useState(null);
+  const [profileImg, setProfileImg] = useState(userImg);
   const [imgFile, setImgFile] = useState(null);
+  const userName = user?.fName + ' ' + user?.lName;
 
   useEffect(() => {
     if (!user) {
@@ -41,7 +44,7 @@ const UserProfile = () => {
   }
 
   const removeImgHandler = () => {
-    setProfileImg(null);
+    setProfileImg(userImg);
     setImgFile(null);
   }
 
@@ -66,20 +69,27 @@ const UserProfile = () => {
   })
 
   const submitHandler = async (userCredentials) => {
-    // const formData = new FormData();
-    // formData.append("fName", userCredentials?.fName);
-    // formData.append("lName", userCredentials?.lName);
-    // formData.append("image", imgFile);
+    const formData = new FormData();
+    formData.append("fName", userCredentials?.fName);
+    formData.append("lName", userCredentials?.lName);
+    formData.append("image", imgFile);
+    // const params = {
+    //   userId: user?._id,
+    //   fName: userCredentials?.fName,
+    //   lName: userCredentials?.lName
+    // }
 
-    const params = {
-      userId: user?._id,
-      fName: userCredentials?.fName,
-      lName: userCredentials?.lName
-    }
-
-    dispatch(updateUser(params)).then((res) => {
+    dispatch(updateUser(formData)).then((res) => {
       if (res?.payload?.status) {
-        setUser(res?.payload?.data)
+        setUser(res?.payload?.data);
+
+        const user = {
+          userInfo: {
+            data: res?.payload?.data,
+            token: JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.token
+          }
+        }
+        localStorage.setItem('userInfo', JSON.stringify(user));
       }
     });
   }
@@ -148,32 +158,25 @@ const UserProfile = () => {
           <h1 className="px-5">Hello {user?.fName || ''},</h1>
           <hr />
           <div className="px-5 py-3">
+            <div>
+              <Avatar size={150} round src={profileImg} />
+            </div>
             <input
               id="profileImgUrl"
-              name='profileImgUrl'
+              name='image'
               accept="image/*"
               hidden
               type="file"
               onChange={(event) => fileChangeHandler(event)}
             />
-            <div>
-              <Avatar name={user?.fName + ' ' + user?.lName} size={150} round src={profileImg} />
+            <div className="mx-4 my-3 px-2">
+              <IconButton color="primary" onClick={upload} aria-label="upload picture" component="label">
+                <PhotoCamera />
+              </IconButton>
+              <IconButton color="primary" onClick={removeImgHandler} aria-label="upload picture" component="label">
+                <DeleteOutlineIcon />
+              </IconButton>
             </div>
-            {profileImg ?
-              (
-                <div className="mx-3">
-                  <Button className="my-3" onClick={removeImgHandler} variant="outlined" startIcon={<CloseIcon />}>
-                    Remove
-                  </Button>
-                </div>
-              ) : (
-                <div>
-                  <Button className="my-3" onClick={upload} variant="outlined" startIcon={<AddIcon />}>
-                    Update Image
-                  </Button>
-                </div>
-              )
-            }
           </div>
           <UpdateUserForm />
         </div>

@@ -1,5 +1,4 @@
 .form-searchGst {
-  //   background-color: #ffffff;
   color: #4e5e6a;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 13.5px;
@@ -7,16 +6,9 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  // overflow: hidden;
-  // overflow-x: hidden;
 
-  // .MuiGrid-container {
   .container-div {
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
     height: calc(100vh - 100px);
-    // margin-top: 0px;
     margin-top: 100px;
 
     .grid-first {
@@ -108,12 +100,11 @@
       color: #fff;
       background-color: #183a99;
       border-color: #007bff;
-      // margin-left: 50%;
       margin-left: 10%;
     }
   }
 
-  ::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 4px;
   }
 
@@ -207,6 +198,50 @@
 
     .MuiGrid-container {
       height: 100vh;
+    }
+  }
+}
+
+.home-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 165px);
+
+  .search-container {
+    background-color: #E6FDFF;
+    border-radius: 44px;
+    padding: 30px;
+
+    .search-bar {
+      width: 400px;
+      padding: 15px 20px;
+      font-size: 20px;
+      border: 2px solid rgb(168, 168, 168);
+      border-radius: 20px;
+    }
+
+    .tandc-checkbox {
+      cursor: pointer;
+      input {
+        height: 18px;
+        width: 18px;
+      }
+    }
+
+    .btn-search {
+      padding: 10px;
+      font-size: 25px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      background-color: #DA45FF;
+      font-weight: 600;
+
+    }
+    .btn-search:focus {
+      outline: none;
     }
   }
 }

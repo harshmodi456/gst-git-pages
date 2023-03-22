@@ -1,11 +1,10 @@
-// .header-container {
-//     padding: 5px 20px;
-//     height: 55px;
-//     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-// }
+.header-container {
+  height: 165px;
+}
 
 .MuiAppBar-root {
-  background-color: #fff !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
   color: rgba(0, 0, 0, 0.87) !important;
 
   .MuiButtonBase-root {
@@ -15,6 +14,55 @@
   button:focus {
     outline: none !important;
   }
+
+  .logo-backgroung {
+    position: absolute;
+    width: 291.13px;
+    height: 291.13px;
+    left: -100px;
+    top: -120px;
+    background: linear-gradient(191.1deg, rgba(249, 197, 0, 0.7) 34.74%, rgba(168, 217, 48, 0) 91.8%);
+    transform: rotate(-45deg);
+    border-radius: 50%;
+    z-index: -9;
+  }
+
+  .logo-container {
+    padding: 30px 0px 0px 50px;
+  }
+
+  .logo {
+    z-index: 11 !important;
+  }
+
+  .header-search-bar-container {
+    position: relative;
+    .search-icon {
+      position: absolute;
+      top: -3px;
+      left: 5px;
+    }
+  }
+
+  .header-search-bar {
+    background-color: #DCDCE0;
+    border: none;
+    border-radius: 15px;
+    padding: 5px 10px 5px 40px;
+    width: 200px;
+  }
+
+  .btn-navigation {
+    text-transform: capitalize;
+    font-size: 16px;
+    padding: 0px;
+    margin: 0px 20px;
+    font-weight: 600;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+  }
+
   @media (max-width: 480px) {
     .MuiButtonBase-root {
       display: flex;

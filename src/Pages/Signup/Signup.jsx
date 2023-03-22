@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "./Signup.scss";
 import "./Signup.css";
 import { Link, useNavigate } from "react-router-dom";
@@ -83,7 +83,7 @@ const Signup = () => {
   };
 
   const otpSubmitHandler = () => {
-    // setIsLoadingOtpContainer(true);
+    setIsLoadingOtpContainer(true);
     const request = {
       userId: formValues?.data?._id,
       otp: otp
@@ -91,9 +91,12 @@ const Signup = () => {
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
         navigate('/login')
+      } else {
+        setTimeout(() => {
+          setIsLoadingOtpContainer(false);
+        }, [500])
       }
     });
-    // setIsLoadingOtpContainer(false);
   };
 
   console.log('isLoadingOtpContainer', isLoadingOtpContainer)

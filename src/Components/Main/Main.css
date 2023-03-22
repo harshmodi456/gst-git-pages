@@ -1,4 +1,4 @@
-/* .main-container {
-    height: calc(100vh - 65px);
-    overflow-y: auto;
-} */
+.main-container {
+    height: calc(100vh - 165px);
+    overflow-y: hidden;
+}

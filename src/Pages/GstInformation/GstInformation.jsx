@@ -442,8 +442,8 @@ const GstInformation = () => {
 
       <div className="dialog-view">
         <Dialog
-          // open={open}
-          open={true}
+          open={open}
+          // open={true}
           onClose={(event, reason) => {
             if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
               handleClose();

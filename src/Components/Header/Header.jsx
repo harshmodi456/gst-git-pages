@@ -25,8 +25,9 @@ import { useNavigate } from "react-router-dom";
 import ReviewsIcon from "@mui/icons-material/Reviews";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import Person2Icon from "@mui/icons-material/Person2";
-// import logo from "../../Assets/Images/logo192.png";
+import logo from "../../Assets/Logos/logo.svg";
 import "./Header.scss";
+import SearchIcon from '@mui/icons-material/Search';
 
 // const drawerWidth = 240;
 
@@ -61,13 +62,13 @@ const Header = (props) => {
 
   const navItems =
     getUserInfo !== undefined && getUserInfo !== null
-    /* ------ Business is currently disabled ------ */
+      /* ------ Business is currently disabled ------ */
       ? [
         "Home",
         // "Business",
         "My Reviews",
         "My Business",
-        "User Profile",
+        // "User Profile",
         "Log Out"
       ]
       : [
@@ -103,13 +104,6 @@ const Header = (props) => {
   let appState = false;
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
-      <Typography variant="h6" sx={{ my: 2 }}>
-        <div className="d-flex h-100 justify-content-center">
-          <h3 className="m-0">G S T</h3>
-          <h3 className="m-0 ml-2 text-danger"> I N </h3>
-        </div>
-      </Typography>
-      <Divider />
       <List>
         {navItems.map((item) => (
           <ListItem key={item} disablePadding>
@@ -189,12 +183,7 @@ const Header = (props) => {
   return (
     <>
       {isVisibleHeader ? (
-        // <div className='header-container'>
-        //     <div className='d-flex h-100 align-items-center'>
-        //         <h3 className='m-0'>G S T</h3><h3 className='m-0 ml-2 text-danger'> I N </h3>
-        //     </div>
-        // </div>
-        <>
+        <div className="header-container">
           <Box sx={{ display: "flex" }}>
             <CssBaseline />
             <AppBar component="nav">
@@ -203,7 +192,6 @@ const Header = (props) => {
                   color="inherit"
                   aria-label="open drawer"
                   edge="start"
-                  // onClick={handleDrawerToggle}
                   sx={{ mr: 2, display: { sm: "none" } }}
                 >
                   <MenuIcon onClick={handleDrawerToggle} />
@@ -217,14 +205,19 @@ const Header = (props) => {
                   component="div"
                   sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
                 >
-                  <div className="d-flex h-100 align-items-center">
-                    <h3 className="m-0">G S T</h3>
-                    <h3 className="m-0 ml-2 text-danger"> I N </h3>
+                  <div className="logo-backgroung" ></div>
+                  <div className="logo-container" >
+                    <img src={logo} className="logo" alt="logo" />
                   </div>
                 </Typography>
                 <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                  <div className="header-search-bar-container d-inline">
+                    <SearchIcon className="search-icon" />
+                    <input className="header-search-bar" type="text" placeholder="Search" />
+                  </div>
                   {navItems.map((item) => (
-                    <Button
+                    <button
+                      className="btn-navigation"
                       key={item}
                       sx={{ color: "#fff" }}
                       onClick={(event) => {
@@ -232,7 +225,7 @@ const Header = (props) => {
                       }}
                     >
                       {item}
-                    </Button>
+                    </button>
                   ))}
                 </Box>
               </Toolbar>
@@ -269,7 +262,7 @@ const Header = (props) => {
               </Drawer>
             </Box>
           </Box>
-        </>
+        </div>
       ) : (
         <></>
       )}
