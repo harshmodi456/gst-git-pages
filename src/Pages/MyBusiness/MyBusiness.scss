@@ -1,3 +1,46 @@
+.my-business-container {
+  font-family: 'Outfit';
+
+  button:focus {
+    outline: none;
+  }
+
+  .add-business-btn {
+    color: white;
+    background-color: #1D1299;
+  }
+  
+  .add-business-btn:hover {
+    background-color: #1D1299;
+  }
+
+  .search-gst-modal {
+    padding: 10px 20px;
+    border: 1px solid blue;
+    border-radius: 15px;
+    text-transform: uppercase;
+  }
+
+  .modal-btn-container {
+    .btn-cancel,
+    .btn-add {
+      border: none;
+      padding: 10px 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .btn-add{
+      background-color: #DA45FF;
+    }
+    .btn-cancel {
+      background-color: #BFB7C0;
+    }
+  }
+}
+
 .my-business-div {
     .container-div {
         height: calc(100vh - 100px);
