@@ -45,11 +45,11 @@
   }
 
   .header-search-bar {
-    background-color: #DCDCE0;
+    background-color: #dcdce0;
     border: none;
     border-radius: 15px;
     padding: 5px 10px 5px 40px;
-    width: 200px;
+    width: 140px;
   }
 
   .btn-navigation {
@@ -68,6 +68,36 @@
       display: flex;
       width: 100%;
       justify-content: space-between;
+    }
+
+    .logo-backgroung-sm {
+      position: absolute;
+      width: 291.13px;
+      height: 291.13px;
+      right: -150px;
+      top: -150px;
+      background: linear-gradient(191.1deg, rgba(249, 197, 0, 0.7) 34.74%, rgba(168, 217, 48, 0) 91.8%);
+      border-radius: 50%;
+      z-index: -9;
+    }
+
+    .logo-container {
+      padding: 10px 0px 0px 50px;
+    }
+
+  }
+
+  // iPads, Tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    .btn-navigation {
+      margin: 0px 10px;
+    }
+  }
+
+  // Small screens, laptops
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .btn-navigation {
+      margin: 0px 15px;
     }
   }
 }

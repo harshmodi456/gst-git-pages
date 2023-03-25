@@ -103,7 +103,7 @@
     }
   }
 
- ::-webkit-scrollbar {
+  ::-webkit-scrollbar {
     width: 4px;
   }
 
@@ -208,12 +208,11 @@
   min-height: calc(100vh - 165px);
 
   .search-container {
-    background-color: #E6FDFF;
+    background-color: #e6fdff;
     border-radius: 44px;
     padding: 30px;
 
     .search-bar {
-      width: 400px;
       padding: 15px 20px;
       font-size: 20px;
       border: 2px solid rgb(168, 168, 168);
@@ -235,12 +234,19 @@
       border-radius: 20px;
       cursor: pointer;
       color: white;
-      background-color: #DA45FF;
+      background-color: #da45ff;
       font-weight: 600;
-
     }
     .btn-search:focus {
       outline: none;
+    }
+  }
+
+  //  Mobile devices
+  @media (max-width: 480px) {
+    img {
+      height: 350px;
+      width: 350px;
     }
   }
 }

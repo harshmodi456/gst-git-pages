@@ -14,6 +14,7 @@ import {
   Rating,
   TextField
 } from "@mui/material";
+import { FaEdit } from "react-icons/fa";
 import { Field, Form, Formik } from "formik";
 import React, { useEffect, useMemo, useState } from "react";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
@@ -34,6 +35,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Select from "react-select";
 import EditIcon from "@mui/icons-material/Edit";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -243,19 +245,93 @@ const GstInformation = () => {
     [addressData]
   );
 
+  console.log(gst)
+
   return (
-    <div className="form-searchGstInformation">
+    <div className="gst-information-container">
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+
+      <div className="gst-information m-lg-5 px-lg-5 py-2">
+        <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstin || gst?._doc?.gstin}</h3>
+        <div className="row pt-2 pb-5 px-lg-3 bg-gray">
+          <div className="col-4">
+            <h5 className="font-weight-bold">Legal Name of Business</h5>
+            <h5 className="value break-line-1">{gst?.lgnm || gst?._doc?.gstData?.lgnm}</h5>
+          </div>
+          <div className="col-4">
+            <h5 className="font-weight-bold">Trade Name</h5>
+            <h5 className="value break-line-1">{gst?.tradeNam || gst?._doc?.gstData?.tradeNam}</h5>
+          </div>
+          <div className="col-4">
+            <h5 className="font-weight-bold">Effective Date of registration</h5>
+            <h5 className="break-line-1">{gst?.rgdt || gst?._doc?.gstData?.rgdt}</h5>
+          </div>
+        </div>
+        <div className="row pt-2 pb-5 px-lg-3">
+          <div className="col-4">
+            <h5 className="font-weight-bold">Constitution of Business</h5>
+            <h5 className="break-line-1">{gst?.ctb || gst?._doc?.gstData?.ctb}</h5>
+          </div>
+          <div className="col-4">
+            <h5 className="font-weight-bold">GSTIN / UIN Status</h5>
+            <h5 className="break-line-1">{gst?.sts || gst?._doc?.gstData?.sts}</h5>
+          </div>
+          <div className="col-4">
+            <h5 className="font-weight-bold">Taxpayer Type</h5>
+            <h5 className="break-line-1">{gst?.dty || gst?._doc?.gstData?.dty}</h5>
+          </div>
+        </div>
+        <div className="row pt-2 pb-5 px-lg-3 bg-gray">
+          <div className="col-4">
+            <h5 className="font-weight-bold">Administrative Office</h5>
+            <h5 className="break-line-1">{gst?.ctb || gst?._doc?.gstData?.ctb}</h5>
+          </div>
+          <div className="col-4">
+            <h5 className="font-weight-bold">Other Office</h5>
+            <h5 className="break-line-1">{gst?.sts || gst?._doc?.gstData?.sts}</h5>
+          </div>
+          <div className="col-4">
+            <h5 className="font-weight-bold">Principal Place of Business</h5>
+            <h5 className="break-line-1">{gst?.dty || gst?._doc?.gstData?.dty}</h5>
+          </div>
+        </div>
+
+        <div className="feedback-container p-5">
+          <p className="title m-0 pb-0">Feedback</p>
+          <div className="d-flex justify-content-center align-items-center">
+            <p className="m-0 pr-3 lbl-review">REVIEW</p>
+            <p className="m-0 mr-2">{Math.round(gst?.avgRating || 0).toFixed(1)}</p>
+            <Rating
+              className="mt-1"
+              name="simple-controlled"
+              value={Math.round(gst?.avgRating).toFixed(1)}
+              disabled={true}
+            />
+            <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
+          </div>
+          <div className="text-right">
+            <button className="btn-write-review">
+              <FaEdit/> Write Review
+            </button>
+          </div>
+
+          <div className="row review-container p-5">
+            <ReviewCard/>
+            <ReviewCard/>
+          </div>
+        </div>
+
+      </div>
+
       <Grid
         container
         spacing={{ xs: 0, md: 3 }}
         columns={{ xs: 0, sm: 8, md: 12 }}
-      // mt={0px}
       >
         <Grid item xs={4} className="grid-first">
           <img src={SearchImg} alt="SearchImg" />
@@ -495,7 +571,7 @@ const GstInformation = () => {
                 type="file"
                 onChange={(event) => fileChangeHandler(event)}
               />
-              <img src={profileImg} height={'50px'}/>
+              <img src={profileImg} height={'50px'} />
               <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
                 Add Image
               </Button>

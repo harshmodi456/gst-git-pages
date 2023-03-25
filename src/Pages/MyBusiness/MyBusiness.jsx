@@ -15,6 +15,7 @@ import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
+import GstCard from "../../Components/GstCard/GstCard";
 
 const MyBusiness = () => {
   const navigate = useNavigate();
@@ -32,6 +33,7 @@ const MyBusiness = () => {
   const getUserInfo = JSON.parse(takeUserInfo);
 
   const myBusinessHandler = async () => {
+    isLoading(true);
     dispatch(getGstByUserId(getUserInfo?.userInfo?.data?._id)).then((res) => {
       if (res?.payload?.status === true) {
         setMyBusinessData(res?.payload?.data);
@@ -92,6 +94,8 @@ const MyBusiness = () => {
         setGstSearchData([]);
       }
       isLoading(false);
+      document.getElementById("btn-cancel").click();
+      setVerificationValue('');
     });
   };
 
@@ -120,100 +124,83 @@ const MyBusiness = () => {
 
   return (
     <>
-      <div className="my-business-container p-5">
-        <h2 className="font-weight-bold pl-5">
+      <div className="my-business-container py-5 px-lg-5 px-md-3">
+        <h2 className="font-weight-bold pl-lg-5 pl-3">
           My Business
           <IconButton className="ml-3 add-business-btn" data-toggle="modal" data-target="#staticBackdrop">
             <AddIcon />
           </IconButton>
         </h2>
 
+        <div className="px-lg-4 py-5 row px-4 m-0">
+          {gstSearchData?.length > 0 ? (
+            <>
+              {
+                gstSearchData?.map((gst, index) => (
+                  <GstCard key={index} gst={gst} />
+                ))
+              }
+            </>
+          ) : (
+            <>
+              {
+                myBusinessData?.length > 0 ? (
+                  <>
+                    {
+                      myBusinessData?.map((gst, index) => (
+                        <GstCard key={index} gst={gst} />
+                      ))
+                    }
+                  </>
+                ) : (
+                  <div className="w-100 text-center">
+                    <h4 className="text-muted">No data</h4>
+                  </div>
+                )
+              }
+            </>
+          )}
+        </div>
+
 
         {/* <!-- Modal --> */}
         <div className="modal fade" data-keyboard={true} tabindex="-1" id="staticBackdrop">
-          <div className="modal-dialog modal-dialog-centered">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
               <h5>Enter GST Number / Business Name</h5>
-              <input placeholder="Enter Number" className="mt-3 search-gst-modal" />
+              <input
+                placeholder="Enter Number"
+                className="mt-3 search-gst-modal"
+                value={verificationValue}
+                onChange={(event) => {
+                  setVerificationValue(event.target.value);
+                }}
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    searchGstHandler(verificationValue);
+                  }
+                }}
+              />
               <div className="modal-btn-container mt-4">
-                <button className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
-                <button className="btn-add" >Add</button>
+                <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
+                <button
+                  className="btn-add"
+                  onClick={() => { searchGstHandler(verificationValue) }}
+                  disabled={verificationValue ? false : true}
+                >
+                  Add
+                </button>
               </div>
             </div>
           </div>
         </div>
-        <div className="my-business-div">
-          <Backdrop
-            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            open={loading}
-          >
-            <CircularProgress color="inherit" />
-          </Backdrop>
-          <Grid className="container-div" columns={{ xs: 0, sm: 8, md: 12 }}>
-            <div className="main-div container">
-              <h5 className="mb-4">My Business</h5>
-              <Box sx={{ width: "100%" }}>
-                <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-                  <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    aria-label="basic tabs example"
-                  >
-                    <Tab label="Add Business" {...a11yProps(0)} />
-                    <Tab label="My Business" {...a11yProps(1)} />
-                  </Tabs>
-                </Box>
-                <TabPanel value={value} index={0}>
-                  <div className="d-flex container justify-content-start align-items-center my-5">
-                    <div className="form-group w-100">
-                      <p className="m-0">Gst Number / Business Name</p>
-                      <TextField
-                        name="verificationValue"
-                        type="text"
-                        id="verificationValue"
-                        placeholder="Search Gst Number Or Business Name"
-                        variant="outlined"
-                        className="form-control-textFiled w-100 pr-4"
-                        value={verificationValue}
-                        onChange={(event) => {
-                          setVerificationValue(event.target.value);
-                        }}
-                      />
-                    </div>
-                    <div className="w-25 btn-div">
-                      <button
-                        type="button"
-                        onClick={() => {
-                          searchGstHandler(verificationValue);
-                        }}
-                        className="w-100 btn btn-lg btn-primary"
-                        disabled={verificationValue ? false : true}
-                      >
-                        Search
-                      </button>
-                    </div>
-                  </div>
-                  <Box sx={{ width: "100%" }}>
-                    <CommonGstList
-                      cardListData={gstSearchData}
-                      onCardClick={(row) => onPostHandle(row)}
-                    />
-                  </Box>
-                </TabPanel>
-                <TabPanel value={value} index={1}>
-                  <Box sx={{ width: "100%" }}>
-                    <div className='my-5'>
-                      <CommonGstList
-                        cardListData={myBusinessData}
-                      />
-                    </div>
-                  </Box>
-                </TabPanel>
-              </Box>
-            </div>
-          </Grid >
-        </div >
       </div>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </>
   );
 };

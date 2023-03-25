@@ -1,12 +1,15 @@
-.gst-card-container {
-    border: 1px solid blue;
-    border-radius: 15px;
+.gst-card-container {   
+    background: #ffffff;
+    border: 1px solid rgba(35, 47, 108, 0.51);
+    box-shadow: 0px -1px 7px 1px rgba(29, 21, 80, 0.12);
+    border-radius: 20px;
+    font-size: 20px;
 
     .company-name {
         text-transform: uppercase;
         color: #00448b;
     }
-
+    
     .company-addr {
         color: #00448b;
         text-transform: capitalize;
@@ -19,4 +22,9 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
     }
+}
+
+.gst-card-container:hover {
+    outline: 2px solid rgb(0, 0, 104);
+    cursor: pointer;
 }

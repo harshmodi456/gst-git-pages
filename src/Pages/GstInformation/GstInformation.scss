@@ -1,3 +1,58 @@
+.gst-information {
+  .title {
+    color: #122c72;
+    padding: 10px 0px;
+    border-bottom: 1px solid gray;
+  }
+  .value {
+    text-transform: uppercase;
+  }
+
+  .bg-gray {
+    background-color: rgb(240, 239, 239);
+  }
+
+  .break-line-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+  }
+
+  .feedback-container {
+    .title {
+      font-size: 40px;
+      font-weight: 600;
+      text-transform: uppercase;
+      text-align: center;
+      border: none;
+    }
+    .lbl-review {
+      color: #4CBE24;
+      font-weight: 600;
+    }
+    .MuiRating-sizeMedium {
+      color: #4CBE24;
+      opacity: 1;
+    }
+    .btn-write-review {
+      border: none;
+      background-color: #DA45FF;
+      color: white;
+      padding: 15px 20px;
+      font-weight: 600;
+      font-size: 20px;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .btn-write-review:focus {
+      outline: none;
+    }
+  }
+}
+
 .form-searchGstInformation {
   //   background-color: #ffffff;
   color: #4e5e6a;

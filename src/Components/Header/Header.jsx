@@ -196,8 +196,12 @@ const Header = (props) => {
                 >
                   <MenuIcon onClick={handleDrawerToggle} />
                   <div className="d-flex h-100 justify-content-center">
-                    <h3 className="m-0">G S T</h3>
-                    <h3 className="m-0 ml-2 text-danger"> I N </h3>
+                    {/* <h3 className="m-0">G S T</h3>
+                    <h3 className="m-0 ml-2 text-danger"> I N </h3> */}
+                    <div className="logo-backgroung-sm" ></div>
+                    <div className="logo-container" >
+                      <img src={logo} className="logo" alt="logo" />
+                    </div>
                   </div>
                 </IconButton>
                 <Typography

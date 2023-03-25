@@ -89,7 +89,7 @@ const SearchGstNumber = () => {
           <div className="mt-5">
             {
               gstSearchData?.length > 0 ? (
-                <div className="row px-4 m-0">
+                <div className="row px-lg-4 m-0">
                   {
                     gstSearchData?.map((gst, index) => (
                       <GstCard key={index} gst={gst} />
@@ -108,7 +108,7 @@ const SearchGstNumber = () => {
         ) : (
           <div className="home-container">
             <div className="row m-0 p-0 w-100">
-              <div className="col-6 d-flex align-items-center justify-content-center">
+              <div className="col-lg-6 d-flex align-items-center justify-content-center">
                 <div className="search-container">
                   <h3 className="m-0 pt-5 pb-2 font-weight-bold">Search GST Taxpayer</h3>
                   <input
@@ -129,7 +129,7 @@ const SearchGstNumber = () => {
                     <label className="tandc-checkbox d-flex align-items-center justify-content-center">
                       <input type="checkbox" className="mr-3" />
                       <p className="m-0">
-                        By clicking, I accept the<a href="/"> terms of the service</a> and<br /> <a href="/">privacy policy</a>
+                        By clicking, I accept the<a href="/"> terms of the service</a> and <a href="/">privacy policy</a>
                       </p>
                     </label>
                   </div>
@@ -146,7 +146,7 @@ const SearchGstNumber = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-6">
+              <div className="col-lg-6 d-flex justify-content-center">
                 <img className="pb-5" src={homeBackgroung} alt="background" />
               </div>
             </div>

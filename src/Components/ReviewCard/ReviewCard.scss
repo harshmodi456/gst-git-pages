@@ -1,0 +1,43 @@
+.review-card-container {
+    background: #ffffff;
+    border: 1px solid rgba(35, 47, 108, 0.51);
+    box-shadow: 0px -1px 7px 1px rgba(29, 21, 80, 0.12);
+    border-radius: 20px;
+    width: 100% !important;
+
+    .header {
+        .user-name {
+            color: #00448B;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        .thumsup-icon {
+            color: #541495 !important;
+        }
+    }
+    .body {
+        .review-text {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    }
+    .review-img-container {
+        display: flex;
+        justify-content: flex-start !important;
+
+        .review-img {
+            height: 50px;
+            width: 50px;
+            border: 1px solid rgb(165, 165, 165);
+            border-radius: 3px;
+        }
+    }
+}
+
+.review-card-container:hover {
+    outline: 2px solid rgb(0, 0, 104);
+    cursor: pointer;
+}
