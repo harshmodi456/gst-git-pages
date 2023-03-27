@@ -15,9 +15,9 @@ export default function ReviewCard(props) {
             <div className='review-card-container p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
                     <div className='d-flex justify-content-start'>
-                        <Avatar className='mr-2' size='52' round name={`${review?.userId?.fName} ${review?.userId?.lName}`} />
+                        <Avatar className='mr-2' size='52' round name="Web Ashlar" />
                         <div>
-                            <p className='user-name m-0 break-line-1'>{review?.userId?.fName} {review?.userId?.lName}</p>
+                            <p className='user-name m-0 break-line-1'>Web Ashlar</p>
                             <p className='text-muted m-0'>1 day ago</p>
                         </div>
                     </div>
