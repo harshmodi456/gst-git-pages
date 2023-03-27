@@ -36,6 +36,8 @@ import Select from "react-select";
 import EditIcon from "@mui/icons-material/Edit";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Box } from "@mui/system";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -136,11 +138,18 @@ const GstInformation = () => {
   };
 
   const fileChangeHandler = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files;
     if (file != null) {
-      setProfileImg(URL.createObjectURL(file));
-      setImgFile(file);
+      for (let i = 0; i < event.target.files?.length; i++) {
+        setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
+        setImgFile(file[i]);
+      }
     }
+  }
+
+  const removeImage = (imgage) => {
+    const deleteImage = profileImg?.filter((data) => data !== imgage);
+    setProfileImg(deleteImage);
   }
 
   const upload = () => {
@@ -316,13 +325,13 @@ const GstInformation = () => {
           </div>
           <div className="text-right">
             <button className="btn-write-review">
-              <FaEdit/> Write Review
+              <FaEdit /> Write Review
             </button>
           </div>
 
           <div className="row review-container p-5">
-            <ReviewCard/>
-            <ReviewCard/>
+            <ReviewCard />
+            <ReviewCard />
           </div>
         </div>
 
@@ -564,6 +573,7 @@ const GstInformation = () => {
             />
             <div className="img-container">
               <input
+                multiple
                 id="reviewImgUrl"
                 name='reviewImgUrl'
                 accept="image/*"
@@ -571,7 +581,16 @@ const GstInformation = () => {
                 type="file"
                 onChange={(event) => fileChangeHandler(event)}
               />
-              <img src={profileImg} height={'50px'} />
+              {
+                profileImg?.map((image, index) => {
+                  return (
+                    <Box sx={{ display: 'flex', m: 1, alignItems: 'center', flexDirection: 'row'}}>
+                        <img key={index} src={image} height={'50px'} width={'50px'} />
+                        <DeleteIcon onClick={() => removeImage(image)} sx={{ color: 'red' }} />
+                    </Box>
+                  )
+                })
+              }
               <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
                 Add Image
               </Button>
