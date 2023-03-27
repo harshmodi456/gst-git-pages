@@ -20,6 +20,52 @@
     -webkit-box-orient: vertical;
   }
 
+  .modal-content {
+    .css-jue3ft-MuiRating-root {
+      color: #4CBE24 !important;
+    }
+
+    .write-review-title h2 {
+      color: #00448B;
+      font-weight: 600;
+    }
+    .review-textarea {
+      background-color: #F3ECEC;
+      border: none;
+      border-radius: 15px;
+      resize: none;
+      padding: 20px;
+    }
+    .review-textarea:focus {
+      outline: none;
+    }
+
+    .btn-container {
+      button {
+        border: none;
+        color: white;
+        font-weight: 600;
+        padding: 10px 20px;
+        font-size: 20px;
+        text-transform: uppercase;
+        border-radius: 15px;
+        cursor: pointer;
+      }
+
+      button:focus {
+        outline: none;  
+      }
+
+      .btn-cancel {
+        background: #BFB7C0;
+      }
+
+      .btn-submit {
+        background: #DA45FF;
+      }
+    }
+  }
+
   .feedback-container {
     .title {
       font-size: 40px;

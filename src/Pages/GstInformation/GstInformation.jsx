@@ -106,23 +106,23 @@ const GstInformation = () => {
 
   useEffect(() => {
     setSelectedAddress(gst?.pradr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm)
+
+    isLoading(true);
+    dispatch(getRecordGstById(params.gstNumber)).then((res) => {
+      if (res?.payload?.data) {
+        setFormValue(res?.payload?.data);
+        setAddressData(res?.payload?.data?.gstData?.adadr);
+        const request = {
+          gstId: gst?._id || gst?._doc?._id,
+          address: businessAddress[0]
+        };
+        dispatch(getWriteReview(request)).then((res) => {
+          setReviewData(res?.payload?.reviews);
+        });
+      }
+      isLoading(false);
+    });
   }, [gst])
-  // useEffect(() => {
-  //   isLoading(true);
-  //   dispatch(getRecordGstById(params.gstNumber)).then((res) => {
-  //     if (res?.payload?.data) {
-  //       setFormValue(res?.payload?.data);
-  //       setAddressData(res?.payload?.data?.gstData?.adadr);
-  //       const request = {
-  //         gstId: res?.payload?.data?._id
-  //       };
-  //       dispatch(getWriteReview(request)).then((res) => {
-  //         setReviewData(res?.payload?.reviews);
-  //       });
-  //     }
-  //     isLoading(false);
-  //   });
-  // }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -152,11 +152,12 @@ const GstInformation = () => {
     setSelectedAddress(takeItems);
     if (takeItems) {
       const request = {
-        gstId: gst?._id,
+        gstId: gst?._id || gst?._doc?._id,
         address: takeItems.value
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
+          console.log('----------', res?.payload?.reviews)
           setReviewData(res?.payload?.reviews);
           isLoading(false);
         });
@@ -218,8 +219,9 @@ const GstInformation = () => {
         if (res?.payload?.status === true) {
           handleClose();
           isLoading(true);
-          dispatch(getWriteReview(getFormValue._id)).then((res) => {
+          dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
             setReviewData(res?.payload?.reviews);
+            document.getElementById("btn-cancel").click();
             isLoading(false);
           });
         }
@@ -256,52 +258,52 @@ const GstInformation = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <div className="gst-information m-lg-5 px-lg-5 py-2">
+      <div className="gst-information m-lg-5 px-lg-5 px-4 py-2">
         <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstin || gst?._doc?.gstin}</h3>
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
-          <div className="col-4">
-            <h5 className="font-weight-bold">Legal Name of Business</h5>
+          <div className="col-md-4 col-12">
+            <h5 className="font-weight-bold break-line-1">Legal Name of Business</h5>
             <h5 className="value break-line-1">{gst?.lgnm || gst?._doc?.gstData?.lgnm}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Trade Name</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Trade Name</h5>
             <h5 className="value break-line-1">{gst?.tradeNam || gst?._doc?.gstData?.tradeNam}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Effective Date of registration</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Effective Date of registration</h5>
             <h5 className="break-line-1">{gst?.rgdt || gst?._doc?.gstData?.rgdt}</h5>
           </div>
         </div>
         <div className="row pt-2 pb-5 px-lg-3">
-          <div className="col-4">
-            <h5 className="font-weight-bold">Constitution of Business</h5>
+          <div className="col-md-4 col-12">
+            <h5 className="font-weight-bold break-line-1">Constitution of Business</h5>
             <h5 className="break-line-1">{gst?.ctb || gst?._doc?.gstData?.ctb}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">GSTIN / UIN Status</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">GSTIN / UIN Status</h5>
             <h5 className="break-line-1">{gst?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Taxpayer Type</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3s">
+            <h5 className="font-weight-bold break-line-1">Taxpayer Type</h5>
             <h5 className="break-line-1">{gst?.dty || gst?._doc?.gstData?.dty}</h5>
           </div>
         </div>
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
-          <div className="col-4">
-            <h5 className="font-weight-bold">Administrative Office</h5>
+          <div className="col-md-4 col-12">
+            <h5 className="font-weight-bold break-line-1">Administrative Office</h5>
             <h5 className="break-line-1">{gst?.ctb || gst?._doc?.gstData?.ctb}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Other Office</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Other Office</h5>
             <h5 className="break-line-1">{gst?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Principal Place of Business</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Principal Place of Business</h5>
             <h5 className="break-line-1">{gst?.dty || gst?._doc?.gstData?.dty}</h5>
           </div>
         </div>
 
-        <div className="feedback-container p-5">
+        <div className="feedback-container p-lg-5">
           <p className="title m-0 pb-0">Feedback</p>
           <div className="d-flex justify-content-center align-items-center">
             <p className="m-0 pr-3 lbl-review">REVIEW</p>
@@ -315,14 +317,75 @@ const GstInformation = () => {
             <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
           </div>
           <div className="text-right">
-            <button className="btn-write-review">
-              <FaEdit/> Write Review
+            <button className="btn-write-review" data-toggle="modal" data-target="#write-review-modal">
+              <FaEdit /> Write Review
             </button>
           </div>
 
-          <div className="row review-container p-5">
-            <ReviewCard/>
-            <ReviewCard/>
+          <div className="row review-container p-md-5">
+            {
+              getReviewData?.length > 0 ? (
+                getReviewData?.map((review, index) => (
+                  <ReviewCard key={index} review={review} />
+                ))
+              ) : (
+                <div className="text-muted text-center">
+                  <h3>No reviews</h3>
+                </div>
+              )
+            }
+          </div>
+        </div>
+
+        {/* <!-- Modal --> */}
+        <div className="modal fade" data-keyboard={true} tabindex="-1" id="write-review-modal">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-content p-5">
+              <div className="write-review-title">
+                <h2>{gst?.lgnm || gst?._doc?.gstData?.lgnm}</h2>
+                <p className="text-muted">Posting Publicity</p>
+              </div>
+              <div className="rate-view">
+                <Rating
+                  className="mt-1 mb-4"
+                  name="simple-controlled"
+                  value={value}
+                  onChange={(event, newValue) => {
+                    setValue(newValue);
+                  }}
+                  size="large"
+                />
+              </div>
+              <textarea
+                className="review-textarea"
+                as='textarea'
+                autoComplete="off"
+                rows={6}
+                placeholder="Write Review..."
+                value={reviewTextDesc}
+                onChange={(event) => {
+                  setReviewTextDesc(event.target.value);
+                }}
+              />
+              <div className="img-container">
+                <input
+                  id="reviewImgUrl"
+                  name='reviewImgUrl'
+                  accept="image/*"
+                  hidden
+                  type="file"
+                  onChange={(event) => fileChangeHandler(event)}
+                />
+                <img src={profileImg} height={'50px'} />
+                <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
+                  Add Image
+                </Button>
+              </div>
+              <div className="btn-container text-right w-100">
+                <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
+                <button className="btn-submit" onClick={handlePost}>Post</button>
+              </div>
+            </div>
           </div>
         </div>
 

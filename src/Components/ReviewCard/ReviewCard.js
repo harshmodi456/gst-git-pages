@@ -5,15 +5,19 @@ import Avatar from 'react-avatar';
 import { FaThumbsUp } from "react-icons/fa";
 import Image from '../../Assets/Images/img1.png';
 
-export default function ReviewCard() {
+export default function ReviewCard(props) {
+
+    const { review } = props;
+    console.log(review);
+
     return (
-        <div className='col-lg-6 col-md-6 px-md-3 my-3 px-0'>
+        <div className='col-lg-6 col-md-12 px-md-3 my-3 px-0'>
             <div className='review-card-container p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
                     <div className='d-flex justify-content-start'>
-                        <Avatar className='mr-2' size='52' round name="Web Ashlar" />
+                        <Avatar className='mr-2' size='52' round name={`${review?.userId?.fName} ${review?.userId?.lName}`} />
                         <div>
-                            <p className='user-name m-0'>Jack Sans</p>
+                            <p className='user-name m-0 break-line-1'>{review?.userId?.fName} {review?.userId?.lName}</p>
                             <p className='text-muted m-0'>1 day ago</p>
                         </div>
                     </div>
@@ -33,8 +37,8 @@ export default function ReviewCard() {
                     </div>
                 </div>
                 <div className='body px-2 py-3'>
-                    <p className='m-0 review-text'>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has 
+                    <p className='m-0 review-text' data-toggle="modal" data-target="#review-text-modal">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                         been the industry's standard dummy text ever since the 1500s, when an unknown printer took  and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownz
                     </p>
                 </div>
@@ -43,6 +47,18 @@ export default function ReviewCard() {
                     <img className='review-img mx-2' src={Image} alt='review-img' />
                     <img className='review-img mx-2' src={Image} alt='review-img' />
                     <img className='review-img' src={Image} alt='review-img' />
+                </div>
+            </div>
+
+            {/* <!-- Modal --> */}
+            <div className="modal fade" data-keyboard={true} tabindex="-1" id="review-text-modal">
+                <div className="modal-dialog modal-dialog-centered modal-lg">
+                    <div className="modal-content p-5">
+                        <p className='m-0 review-text'>
+                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took  and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownz
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
