@@ -311,6 +311,7 @@
   }
 
   .img-container {
+   
     .MuiButton-outlined:hover {
       outline: none !important;
     }
@@ -433,4 +434,9 @@
       margin-top: 65px;
     }
   }
+}
+.img-container {
+  max-height: 250px;
+  overflow: auto;
+  
 }

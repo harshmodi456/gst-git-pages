@@ -18,6 +18,8 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
+import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -41,6 +43,9 @@ const GstInformation = () => {
   const [businessAddress, setBusinessAddress] = useState([]);
   const [imgFile, setImgFile] = useState([]);
   const [profileImg, setProfileImg] = useState([]);
+  const [deleteBar, setDeleteBar] = useState(false);
+  const [imageUrl, setImageUrl] = useState();
+
 
   useEffect(() => {
     isLoading(true);
@@ -52,14 +57,23 @@ const GstInformation = () => {
     });
   }, [gstIn])
 
+  const bottomMenu = (toggle, url) => {
+    setDeleteBar(toggle);
+    setImageUrl(url);
+  }
+
+  const removeImage = (url) => {
+      const deleteImage = profileImg?.filter((data) => data !== url);
+      setProfileImg(deleteImage);
+  }
+
   const fetchReview = (gstId) => {
     isLoading(true);
-    if (gst) { 
+    if (gst) {
       const request = {
         gstId: gstId,
       };
       dispatch(getWriteReview(request)).then((res) => {
-        console.log(res?.payload?.reviews, '-------------------------')
         setReviewData(res?.payload?.reviews);
         isLoading(false);
       });
@@ -74,10 +88,12 @@ const GstInformation = () => {
   };
 
   const fileChangeHandler = (event) => {
-    const file = event.target.files[0];
+    const file = event.target.files;
     if (file != null) {
-      setProfileImg(URL.createObjectURL(file));
-      setImgFile(file);
+      for(let i =0; i<event.target.files?.length; i++){
+        setProfileImg((current) => [...current,URL.createObjectURL(file[i])]);
+        setImgFile(file[i]);
+      }
     }
   }
 
@@ -195,7 +211,7 @@ const GstInformation = () => {
         </div>
 
         {/* <!-- Modal --> */}
-        <div className="modal fade" data-keyboard={true} tabindex="-1" id="write-review-modal">
+        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={true} tabindex="-1" id="write-review-modal">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
               <div className="write-review-title">
@@ -224,7 +240,7 @@ const GstInformation = () => {
                   setReviewTextDesc(event.target.value);
                 }}
               />
-              <div className="img-container">
+              <div className="img-container d-flex flex-wrap">
                 <input
                   multiple
                   id="reviewImgUrl"
@@ -234,18 +250,27 @@ const GstInformation = () => {
                   type="file"
                   onChange={(event) => fileChangeHandler(event)}
                 />
-                <Box sx={{ display: 'flex' }}>
+                <Box className='d-flex flex-wrap'>
                   {
                     profileImg?.map((image, index) => {
                       return (
-                        <Box key={index} sx={{ display: 'flex', alignItems: 'center', m: 1 }} >
-                          <img src={image} height={'50px'} width={'50px'} />
-                          <DeleteIcon onClick={() => removeImage(image)} sx={{ color: 'red' }} />
+                        <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
+                          <img src={image} height={'150px'} width={'150px'} />
+                          {
+                            deleteBar && imageUrl === image && (
+                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
+                                <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
+                              </Box>
+                            )
+                          }
                         </Box>
                       )
                     })
                   }
                 </Box>
+
+              </div>
+              <div className="">
                 <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
                   Add Image
                 </Button>
