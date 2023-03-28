@@ -26,7 +26,7 @@ const SearchGstNumber = () => {
       verificationValue: '',
     },
     validationSchema: Yup.object({
-      verificationValue: Yup.number().required('GST number is required')
+      verificationValue: Yup.string().required('GST number is required')
     }),
     onSubmit: values => {
       isLoading(true);
@@ -140,26 +140,26 @@ const SearchGstNumber = () => {
                         </span>
                       </div>
                     )}
-                      < div >
+                    < div >
                     </div>
-                  <div className="py-4">
-                    <button
-                      type="submit"
-                      className="btn-search w-100"
-                    >
-                      Search
-                    </button>
+                    <div className="py-4">
+                      <button
+                        type="submit"
+                        className="btn-search w-100"
+                      >
+                        Search
+                      </button>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-6 d-flex justify-content-center">
-                <img className="pb-5" src={homeBackgroung} alt="background" />
+                <div className="col-lg-6 d-flex justify-content-center">
+                  <img className="pb-5" src={homeBackgroung} alt="background" />
+                </div>
               </div>
             </div>
-            </div>
-      )
+          )
         }
-    </div>
+      </div>
     </form >
   );
 };

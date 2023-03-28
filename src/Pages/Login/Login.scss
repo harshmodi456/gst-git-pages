@@ -1,3 +1,44 @@
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 165px);
+
+  .login-form-container{
+    background-color: #e6fdff;
+    border-radius: 44px;
+    padding: 30px;
+    width: 495px;
+
+    .form-group {
+      background-color: white;
+      
+      .form-control-textFiled {
+        width: 435px;
+      }
+      
+      input {
+        background-color: white;
+        width:  370px;
+      }
+    }
+    .btn-signin {
+      padding: 10px 50px;
+      font-size: 25px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      color: white;
+      background-color: #da45ff;
+      font-weight: 600;
+    }
+
+    .btn-signin:focus {
+      outline: none;
+    }
+  }
+}
+
 .form-signin {
   // height: 100vh;
 

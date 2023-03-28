@@ -12,6 +12,7 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import TimeAgo from 'react-timeago';
 
 export default function ReviewCard(props) {
 
@@ -45,10 +46,10 @@ export default function ReviewCard(props) {
             <div className='review-card-container p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
                     <div className='d-flex justify-content-start'>
-                        <Avatar className='mr-2' size='52' round name="Web Ashlar" />
+                        <Avatar className='mr-2' size='52' round name={`${review?.userId?.fName} ${review?.userId?.lName}`} />
                         <div>
-                            <p className='user-name m-0 break-line-1'>Web Ashlar</p>
-                            <p className='text-muted m-0'>1 day ago</p>
+                            <p className='user-name m-0 break-line-1'>{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
+                            <p className='text-muted m-0'><TimeAgo date={review?.createdAt} /></p>
                         </div>
                     </div>
                     <div>

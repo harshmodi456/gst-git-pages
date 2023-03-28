@@ -19,11 +19,16 @@ export default function GstCard(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [address, setAddress] = useState('');
 
+    console.log(gst)
+
     useEffect(() => {
         if (gst) {
             let gstObj = gst;
             if (gst?._doc) {
                 gstObj = gst?._doc?.gstData;
+            }
+            if(gst?.gstData) {
+                gstObj = gst?.gstData;
             }
             if (gst?.adadr?.length > 0) {
                 let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno}${gstObj?.adadr[0]?.addr?.bno && ', '}

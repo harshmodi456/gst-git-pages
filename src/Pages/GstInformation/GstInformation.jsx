@@ -115,7 +115,7 @@ const GstInformation = () => {
         dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
           setReviewData(res?.payload?.reviews);
           document.getElementById("btn-cancel").click();
-          fetchReview();
+          fetchReview(gst?._id || gst?._doc?._id);
           isLoading(false);
         });
       }

@@ -182,81 +182,78 @@ const Header = (props) => {
     window !== undefined ? () => window().document.body : undefined;
   return (
     <>
-      {isVisibleHeader ? (
-        <div className="header-container">
-          <Box sx={{ display: "flex" }}>
-            <CssBaseline />
-            <AppBar component="nav">
-              <Toolbar>
-                <IconButton
-                  color="inherit"
-                  aria-label="open drawer"
-                  edge="start"
-                  sx={{ mr: 2, display: { sm: "none" } }}
-                >
-                  <MenuIcon onClick={handleDrawerToggle} />
-                  <div className="d-flex h-100 justify-content-center">
-                    <div className="logo-backgroung-sm" ></div>
-                    <div className="logo-container" >
-                      <img src={logo} className="logo" alt="logo" />
-                    </div>
-                  </div>
-                </IconButton>
-                <Typography
-                  variant="h6"
-                  component="div"
-                  sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
-                >
-                  <div className="logo-backgroung" ></div>
+      <div className="header-container">
+        <Box sx={{ display: "flex" }}>
+          <CssBaseline />
+          <AppBar component="nav">
+            <Toolbar>
+              <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                sx={{ mr: 2, display: { sm: "none" } }}
+              >
+                <MenuIcon onClick={handleDrawerToggle} />
+                <div className="d-flex h-100 justify-content-center">
+                  <div className="logo-backgroung-sm" ></div>
                   <div className="logo-container" >
                     <img src={logo} className="logo" alt="logo" />
                   </div>
-                </Typography>
-                <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                  {navItems.map((item) => (
-                    <button
-                      className="btn-navigation"
-                      key={item}
-                      sx={{ color: "#fff" }}
-                      onClick={(event) => {
-                        handleRoute(item);
-                      }}
-                    >
-                      {item}
-                    </button>
-                  ))}
-                </Box>
-              </Toolbar>
-            </AppBar>
-            <Box component="nav">
-              <Drawer
-                container={container}
-                variant="temporary"
-                open={mobileOpen}
-                onClose={handleDrawerToggle}
-                ModalProps={{
-                  keepMounted: true // Better open performance on mobile.
-                }}
-                sx={{
-                  width: sizeConfigs.sidebar.width,
-                  flexShrink: 0,
-                  "& .MuiDrawer-paper": {
-                    width: sizeConfigs.sidebar.width,
-                    boxSizing: "border-box",
-                    borderRight: "0px",
-                    backgroundColor: colorConfigs.sidebar.bg,
-                    color: colorConfigs.sidebar.color
-                  }
-                }}
+                </div>
+              </IconButton>
+              <Typography
+                variant="h6"
+                component="div"
+                sx={{ flexGrow: 1, display: { xs: "none", sm: "block" } }}
               >
-                {drawer}
-              </Drawer>
-            </Box>
+                <div className="logo-backgroung" ></div>
+                <div className="logo-container" >
+                  <img src={logo} className="logo" alt="logo" />
+                </div>
+              </Typography>
+              <Box sx={{ display: { xs: "none", sm: "block" } }}>
+                {navItems.map((item) => (
+                  <button
+                    className="btn-navigation"
+                    key={item}
+                    sx={{ color: "#fff" }}
+                    onClick={(event) => {
+                      handleRoute(item);
+                    }}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </Box>
+            </Toolbar>
+          </AppBar>
+          <Box component="nav">
+            <Drawer
+              container={container}
+              variant="temporary"
+              open={mobileOpen}
+              onClose={handleDrawerToggle}
+              ModalProps={{
+                keepMounted: true // Better open performance on mobile.
+              }}
+              sx={{
+                width: sizeConfigs.sidebar.width,
+                flexShrink: 0,
+                "& .MuiDrawer-paper": {
+                  width: sizeConfigs.sidebar.width,
+                  boxSizing: "border-box",
+                  borderRight: "0px",
+                  backgroundColor: colorConfigs.sidebar.bg,
+                  color: colorConfigs.sidebar.color
+                }
+              }}
+            >
+              {drawer}
+            </Drawer>
           </Box>
-        </div>
-      ) : (
-        <></>
-      )}
+        </Box>
+      </div>
+
     </>
   );
 };
