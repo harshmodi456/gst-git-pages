@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './GstCard.scss';
 import { Rating } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -17,6 +17,39 @@ export default function GstCard(props) {
     const takeUserInfo = localStorage.getItem("userInfo");
     const getUserInfo = JSON.parse(takeUserInfo);
     const [isLoading, setIsLoading] = useState(false);
+    const [address, setAddress] = useState('');
+
+    useEffect(() => {
+        if (gst) {
+            let gstObj = gst;
+            if (gst?._doc) {
+                gstObj = gst?._doc?.gstData;
+            }
+            if (gst?.adadr?.length > 0) {
+                let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno}${gstObj?.adadr[0]?.addr?.bno && ', '}
+                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${gstObj?.adadr[0]?.addr?.bnm && ', '}
+                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${gstObj?.adadr[0]?.addr?.loc && ', '}
+                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${gstObj?.adadr[0]?.addr?.st && ', '}
+                ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city}${gstObj?.adadr[0]?.addr?.city && ', '}
+                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ', '}
+                ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd}${gstObj?.adadr[0]?.addr?.stcd && ', '}
+                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd}${gstObj?.adadr[0]?.addr?.pncd && ', '}.`;
+
+                setAddress(addressStr);
+            } else {
+                let addressStr = `${gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno}${gstObj?.pradr?.addr?.flno && ', '}
+                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${gstObj?.pradr?.addr?.bno && ', '}
+                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${gstObj?.pradr?.addr?.bnm && ', '}
+                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${gstObj?.pradr?.addr?.st && ', '}
+                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ', '}
+                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ', '}
+                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ', '}
+                ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}${gstObj?.pradr?.addr?.pncd && ', '}.`;
+
+                setAddress(addressStr);
+            }
+        }
+    }, [gst]);
 
     const onPostHandle = () => {
         setIsLoading(true);
@@ -69,7 +102,8 @@ export default function GstCard(props) {
                         Address:
                     </div>
                     <div className='col-lg-10 col-9 company-addr mr-0 pl-lg-4 break-line-1'>
-                        {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm}
+                        {address.slice(0,9) == 'undefined' ? ' ' : address}
+                        {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
                     </div>
                 </div>
                 <div className='d-flex justify-content-end'>

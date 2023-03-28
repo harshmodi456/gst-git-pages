@@ -1,17 +1,12 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import { Grid } from "@mui/material";
 import "./MyBusiness.scss";
 import { useNavigate } from 'react-router-dom';
-import CommonGstList from "../../Components/CommonGstList/CommonGstList";
 import { getGstByUserId, gstVerify, postGstRecord } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useAppDispatch } from "../../Redux/Store/Store";
-import { TextField } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 import Typography from "@mui/material/Typography";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';

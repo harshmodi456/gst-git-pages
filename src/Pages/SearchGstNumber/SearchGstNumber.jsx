@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Grid, TextField } from "@mui/material";
 import "./SearchGstNumber.scss";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
@@ -9,30 +8,39 @@ import {
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import CommonGstList from "../../Components/CommonGstList/CommonGstList";
 import homeBackgroung from '../../Assets/Images/home-bg.svg';
 import GstCard from "../../Components/GstCard/GstCard";
+import { useFormik } from 'formik';
+import * as Yup from "yup";
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loading, isLoading] = useState(false);
-  const [verificationValue, setVerificationValue] = useState("");
   const [gstSearchData, setGstSearchData] = useState([]);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
 
-  const searchGstHandler = (takeValue) => {
-    isLoading(true);
-    dispatch(gstVerify(takeValue)).then((res) => {
-      if (res?.payload?.status === true) {
-        setGstSearchData(res?.payload?.data);
-      } else {
-        setGstSearchData([]);
-      }
-      isLoading(false);
-    });
-  };
+  const formik = useFormik({
+    initialValues: {
+      verificationValue: '',
+    },
+    validationSchema: Yup.object({
+      verificationValue: Yup.number().required('GST number is required')
+    }),
+    onSubmit: values => {
+      isLoading(true);
+      dispatch(gstVerify(values?.verificationValue)).then((res) => {
+        if (res?.payload?.status === true) {
+          setGstSearchData(res?.payload?.data);
+        } else {
+          setGstSearchData([]);
+        }
+        isLoading(false);
+      });
+    },
+  });
+
 
   const onPostHandle = (getRow) => {
     isLoading(true);
@@ -77,69 +85,67 @@ const SearchGstNumber = () => {
   };
 
   return (
-    <div>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      {
-        gstSearchData?.length > 0 ? (
-          <div className="mt-5">
-            {
-              gstSearchData?.length > 0 ? (
-                <div className="row px-lg-4 m-0">
-                  {
-                    gstSearchData?.map((gst, index) => (
-                      <GstCard key={index} gst={gst} />
-                    ))
-                  }
-                </div>
-              ) : (
-                <div className="p-5 text-center w-100">
-                  <h4 className="text-muted pt-5">
-                    No data
-                  </h4>
-                </div>
-              )
-            }
-          </div>
-        ) : (
-          <div className="home-container">
-            <div className="row m-0 p-0 w-100">
-              <div className="col-lg-6 d-flex align-items-center justify-content-center">
-                <div className="search-container">
-                  <h3 className="m-0 pt-5 pb-2 font-weight-bold">Search GST Taxpayer</h3>
-                  <input
-                    className="my-4 search-bar"
-                    type="text"
-                    placeholder="Enter GST No."
-                    value={verificationValue}
-                    onKeyPress={(e) => {
-                      if (e.key === "Enter") {
-                        searchGstHandler(verificationValue);
-                      }
-                    }}
-                    onChange={(event) => {
-                      setVerificationValue(event.target.value);
-                    }}
-                  />
-                  <div>
-                    <label className="tandc-checkbox d-flex align-items-center justify-content-center">
-                      <input type="checkbox" className="mr-3" />
-                      <p className="m-0">
-                        By clicking, I accept the<a href="/"> terms of the service</a> and <a href="/">privacy policy</a>
-                      </p>
-                    </label>
+    <form onSubmit={formik.handleSubmit}>
+      <div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        {
+          gstSearchData?.length > 0 ? (
+            <div className="mt-5">
+              {
+                gstSearchData?.length > 0 ? (
+                  <div className="row px-lg-4 m-0">
+                    {
+                      gstSearchData?.map((gst, index) => (
+                        <GstCard key={index} gst={gst} />
+                      ))
+                    }
                   </div>
+                ) : (
+                  <div className="p-5 text-center w-100">
+                    <h4 className="text-muted pt-5">
+                      No data
+                    </h4>
+                  </div>
+                )
+              }
+            </div>
+          ) : (
+            <div className="home-container">
+              <div className="row m-0 p-0 w-100">
+                <div className="col-lg-6 d-flex align-items-center justify-content-center">
+                  <div className="search-container">
+                    <h3 className="m-0 pt-5 pb-2 font-weight-bold">Search GST Taxpayer</h3>
+                    <input
+                      className="my-4 search-bar"
+                      id="verificationValue"
+                      name="verificationValue"
+                      placeholder="Enter GST No."
+                      onChange={formik.handleChange}
+                      value={formik.values.verificationValue}
+                    // onKeyPress={(e) => {
+                    //   if (e.key === "Enter") {
+                    //     searchGstHandler(formik.values.verificationValue);
+                    //   }
+                    // }}
+                    />
+                    {formik.errors.verificationValue && (
+                      <div>
+                        <span style={{ color: 'red' }}>
+                          {formik.errors.verificationValue}
+                        </span>
+                      </div>
+                    )}
+                      < div >
+                    </div>
                   <div className="py-4">
                     <button
+                      type="submit"
                       className="btn-search w-100"
-                      onClick={() => {
-                        searchGstHandler(verificationValue);
-                      }}
-                      disabled={verificationValue ? false : true}
                     >
                       Search
                     </button>
@@ -150,10 +156,11 @@ const SearchGstNumber = () => {
                 <img className="pb-5" src={homeBackgroung} alt="background" />
               </div>
             </div>
-          </div>
-        )
-      }
+            </div>
+      )
+        }
     </div>
+    </form >
   );
 };
 

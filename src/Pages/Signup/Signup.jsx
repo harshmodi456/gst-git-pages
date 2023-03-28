@@ -195,7 +195,12 @@ const Signup = () => {
                         )
                       }
                     </div>
-
+                    <label className="tandc-checkbox d-flex align-items-center justify-content-center">
+                        <input type="checkbox" className="mr-3" />
+                        <p className="m-0">
+                          By clicking, I accept the<a href="/"> terms of the service</a> and <a href="/">privacy policy</a>
+                        </p>
+                      </label>
                     <div className="w-50">
                       <button className="w-100 btn btn-lg btn-primary">
                         Sign Up

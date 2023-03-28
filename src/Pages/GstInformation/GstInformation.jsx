@@ -1,24 +1,9 @@
 import {
   Button,
-  Card,
-  CardContent,
-  CardHeader,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  FormControl,
-  Grid,
-  IconButton,
   Rating,
-  TextField
 } from "@mui/material";
 import { FaEdit } from "react-icons/fa";
-import { Field, Form, Formik } from "formik";
 import React, { useEffect, useMemo, useState } from "react";
-import CustomTextField from "../../Components/CustomTextField/CustomTextField";
-import SearchImg from "../../Assets/Images/img2.png";
 import "./GstInformation.scss";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
@@ -29,11 +14,8 @@ import {
   writeReview,
   gstVerify
 } from "../../Redux/Reducers/SearchGstNumReducer";
-import moment from "moment/moment";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import Select from "react-select";
-import EditIcon from "@mui/icons-material/Edit";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -48,7 +30,6 @@ const GstInformation = () => {
   const [open, setOpen] = React.useState(false);
   const [getFormValue, setFormValue] = React.useState("");
   const [reviewTextDesc, setReviewTextDesc] = React.useState("");
-  // const [gstDbId, setGstDbId] = React.useState("");
   const [getReviewData, setReviewData] = React.useState([]);
   const [addressData, setAddressData] = React.useState([]);
   const [selectedAddress, setSelectedAddress] = React.useState("");
@@ -59,7 +40,6 @@ const GstInformation = () => {
   const pathArray = (location.pathname).split('/');
   const gstIn = pathArray[2] || null;
   const [gst, setGst] = useState({});
-  // let businessAddress = [];
   const [businessAddress, setBusinessAddress] = useState([]);
   const [imgFile, setImgFile] = useState([]);
   const [profileImg, setProfileImg] = useState([]);
@@ -108,23 +88,23 @@ const GstInformation = () => {
 
   useEffect(() => {
     setSelectedAddress(gst?.pradr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm)
+
+    isLoading(true);
+    dispatch(getRecordGstById(params.gstNumber)).then((res) => {
+      if (res?.payload?.data) {
+        setFormValue(res?.payload?.data);
+        setAddressData(res?.payload?.data?.gstData?.adadr);
+        const request = {
+          gstId: gst?._id || gst?._doc?._id,
+          address: businessAddress[0]
+        };
+        dispatch(getWriteReview(request)).then((res) => {
+          setReviewData(res?.payload?.reviews);
+        });
+      }
+      isLoading(false);
+    });
   }, [gst])
-  // useEffect(() => {
-  //   isLoading(true);
-  //   dispatch(getRecordGstById(params.gstNumber)).then((res) => {
-  //     if (res?.payload?.data) {
-  //       setFormValue(res?.payload?.data);
-  //       setAddressData(res?.payload?.data?.gstData?.adadr);
-  //       const request = {
-  //         gstId: res?.payload?.data?._id
-  //       };
-  //       dispatch(getWriteReview(request)).then((res) => {
-  //         setReviewData(res?.payload?.reviews);
-  //       });
-  //     }
-  //     isLoading(false);
-  //   });
-  // }, []);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -161,11 +141,12 @@ const GstInformation = () => {
     setSelectedAddress(takeItems);
     if (takeItems) {
       const request = {
-        gstId: gst?._id,
+        gstId: gst?._id || gst?._doc?._id,
         address: takeItems.value
       };
       try {
         dispatch(getWriteReview(request)).then((res) => {
+          console.log('----------', res?.payload?.reviews)
           setReviewData(res?.payload?.reviews);
           isLoading(false);
         });
@@ -227,8 +208,9 @@ const GstInformation = () => {
         if (res?.payload?.status === true) {
           handleClose();
           isLoading(true);
-          dispatch(getWriteReview(getFormValue._id)).then((res) => {
+          dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
             setReviewData(res?.payload?.reviews);
+            document.getElementById("btn-cancel").click();
             isLoading(false);
           });
         }
@@ -265,52 +247,52 @@ const GstInformation = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
 
-      <div className="gst-information m-lg-5 px-lg-5 py-2">
+      <div className="gst-information m-lg-5 px-lg-5 px-4 py-2">
         <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstin || gst?._doc?.gstin}</h3>
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
-          <div className="col-4">
-            <h5 className="font-weight-bold">Legal Name of Business</h5>
+          <div className="col-md-4 col-12">
+            <h5 className="font-weight-bold break-line-1">Legal Name of Business</h5>
             <h5 className="value break-line-1">{gst?.lgnm || gst?._doc?.gstData?.lgnm}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Trade Name</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Trade Name</h5>
             <h5 className="value break-line-1">{gst?.tradeNam || gst?._doc?.gstData?.tradeNam}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Effective Date of registration</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Effective Date of registration</h5>
             <h5 className="break-line-1">{gst?.rgdt || gst?._doc?.gstData?.rgdt}</h5>
           </div>
         </div>
         <div className="row pt-2 pb-5 px-lg-3">
-          <div className="col-4">
-            <h5 className="font-weight-bold">Constitution of Business</h5>
+          <div className="col-md-4 col-12">
+            <h5 className="font-weight-bold break-line-1">Constitution of Business</h5>
             <h5 className="break-line-1">{gst?.ctb || gst?._doc?.gstData?.ctb}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">GSTIN / UIN Status</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">GSTIN / UIN Status</h5>
             <h5 className="break-line-1">{gst?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Taxpayer Type</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3s">
+            <h5 className="font-weight-bold break-line-1">Taxpayer Type</h5>
             <h5 className="break-line-1">{gst?.dty || gst?._doc?.gstData?.dty}</h5>
           </div>
         </div>
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
-          <div className="col-4">
-            <h5 className="font-weight-bold">Administrative Office</h5>
+          <div className="col-md-4 col-12">
+            <h5 className="font-weight-bold break-line-1">Administrative Office</h5>
             <h5 className="break-line-1">{gst?.ctb || gst?._doc?.gstData?.ctb}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Other Office</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Other Office</h5>
             <h5 className="break-line-1">{gst?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
-          <div className="col-4">
-            <h5 className="font-weight-bold">Principal Place of Business</h5>
+          <div className="col-md-4 col-12 pt-md-0 pt-3">
+            <h5 className="font-weight-bold break-line-1">Principal Place of Business</h5>
             <h5 className="break-line-1">{gst?.dty || gst?._doc?.gstData?.dty}</h5>
           </div>
         </div>
 
-        <div className="feedback-container p-5">
+        <div className="feedback-container p-lg-5">
           <p className="title m-0 pb-0">Feedback</p>
           <div className="d-flex justify-content-center align-items-center">
             <p className="m-0 pr-3 lbl-review">REVIEW</p>
@@ -324,231 +306,37 @@ const GstInformation = () => {
             <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
           </div>
           <div className="text-right">
-            <button className="btn-write-review">
+            <button className="btn-write-review" data-toggle="modal" data-target="#write-review-modal">
               <FaEdit /> Write Review
             </button>
           </div>
 
-          <div className="row review-container p-5">
-            <ReviewCard />
-            <ReviewCard />
+          <div className="row review-container p-md-5">
+            {
+              getReviewData?.length > 0 ? (
+                getReviewData?.map((review, index) => (
+                  <ReviewCard key={index} review={review} />
+                ))
+              ) : (
+                <div className="text-muted text-center">
+                  <h3>No reviews</h3>
+                </div>
+              )
+            }
           </div>
         </div>
 
-      </div>
-
-      <Grid
-        container
-        spacing={{ xs: 0, md: 3 }}
-        columns={{ xs: 0, sm: 8, md: 12 }}
-      >
-        <Grid item xs={4} className="grid-first">
-          <img src={SearchImg} alt="SearchImg" />
-        </Grid>
-        <Grid item xs={4} md={5}>
-          <Card sx={{ width: 450 }}>
-            <CardHeader
-              title="GST Information"
-              className="card-header text-center"
-            />
-            <CardContent>
-              <Formik
-                initialValues={formInitialValues}
-                // validationSchema={validationSchema}
-                // onSubmit={(values) => searchGstHandler(values)}
-                enableReinitialize={true}
-              >
-                {(props) => (
-                  <Form>
-                    <div className="form-group">
-                      <label>Trade Name</label>
-                      <Field
-                        name="name"
-                        type="text"
-                        component={CustomTextField}
-                        id="name"
-                        placeholder="Name"
-                        variant="outlined"
-                        className="form-control-textFiled"
-                        disabled={true}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Business Name</label>
-                      <Field
-                        name="businessName"
-                        type="text"
-                        component={CustomTextField}
-                        id="businessName"
-                        placeholder="Business Name"
-                        variant="outlined"
-                        className="form-control-textFiled"
-                        disabled={true}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label>Address</label><br />
-                      <Field
-                        name="address"
-                        id="address"
-                        placeholder="Address"
-                        variant="outlined"
-                        className="form-control-select"
-                        as="select"
-                        onChange={(e) => onFilterHandler(e.target.value)}
-                      >
-                        {businessAddress &&
-                          (
-                            businessAddress?.map((address, index) => {
-                              return (
-                                <option key={index} value={address?.bnm}>{address?.bnm}</option>
-                              )
-                            })
-                          )
-                        }
-                      </Field>
-                      {/* <Field
-                        name="address"
-                        type="text"
-                        // component={CustomTextField}
-                        render={(props) => (
-                          <FormControl>
-                            <Select
-                              isClearable={true}
-                              className="basic-single"
-                              classNamePrefix="select"
-                            // options={businessAddress}
-                            // onChange={(items) => onFilterHandler(items?.bnm)}
-                            />
-                          </FormControl>
-                        )}
-                        id="address"
-                        placeholder="Address"
-                        variant="outlined"
-                        className="form-control-textFiled"
-                        disabled={true}
-                      /> */}
-                    </div>
-                  </Form>
-                )}
-              </Formik>
-              <div className="w-100 mt-4 mb-3 footer-div">
-                <div className="text-feedback mr-4">Feedback</div>
-                <button
-                  className="btn"
-                  onClick={handleClickOpen}
-                  disabled={selectedAddress ? false : true}
-                >
-                  Write Review
-                </button>
+        {/* <!-- Modal --> */}
+        <div className="modal fade" data-keyboard={true} tabindex="-1" id="write-review-modal">
+          <div className="modal-dialog modal-dialog-centered modal-lg">
+            <div className="modal-content p-5">
+              <div className="write-review-title">
+                <h2>{gst?.lgnm || gst?._doc?.gstData?.lgnm}</h2>
+                <p className="text-muted">Posting Publicity</p>
               </div>
-              {/* <div className="rate-div-main">
-                <div className="start-rate-title">Click The Star To Rate</div>
-                <div className="rate-view">
-                  <label className="num-review mr-2">2.0 </label>
-                  <Rating
-                    name="simple-controlled"
-                    value={value}
-                    onChange={(event, newValue) => {
-                      setValue(newValue);
-                    }}
-                    size="large"
-                  />
-                  <label className="num-review ml-2"> {value} Reviews</label>
-                </div>
-              </div> */}
-              <div className="footer-card-view mt-3">
-                {getReviewData?.length === 0 ? (
-                  <div
-                    style={{
-                      textAlign: "center",
-                      color: "black"
-                    }}
-                  >
-                    Data not found!
-                  </div>
-                ) : (
-                  getReviewData?.map((items, index) => (
-                    <Card sx={{ maxWidth: 345 }} key={index}>
-                      <CardHeader
-                        action={
-                          <IconButton
-                            aria-label="settings"
-                            onClick={() => {
-                              setOpen(true);
-                              setIsEditable(true);
-                              setValue(items?.rating);
-                              setReviewTextDesc(items?.reviewText);
-                              setModalObject(items);
-                            }}
-                            disabled={selectedAddress ? false : true}
-                          >
-                            <EditIcon />
-                          </IconButton>
-                        }
-                        title={items?.address}
-                        subheader={moment(items?.updatedAt).format(
-                          "MMMM d, YYYY"
-                        )}
-                      />
-                      <CardContent>
-                        <div className="text-aria">
-                          <textarea className="textarea-cls">
-                            {items?.reviewText}
-                          </textarea>
-                          {/* <IconButton
-                            aria-label="settings"
-                            onClick={() => {
-                              setOpen(true);
-                              setValue(items?.rating);
-                              setReviewTextDesc(items?.reviewText);
-                            }}
-                            disabled={selectedAddress ? false : true}
-                          >
-                            <EditIcon />
-                          </IconButton> */}
-                        </div>
-                        <div className="rate-view">
-                          <Rating
-                            name="simple-controlled"
-                            value={items?.rating}
-                            disabled={true}
-                          />
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))
-                )}
-              </div>
-            </CardContent>
-          </Card>
-        </Grid>
-      </Grid>
-
-      <div className="dialog-view">
-        <Dialog
-          open={open}
-          // open={true}
-          onClose={(event, reason) => {
-            if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
-              handleClose();
-            }
-          }}
-          PaperProps={{
-            sx: {
-              width: "100%"
-            }
-          }}
-          disableEscapeKeyDown={true}
-          disableBackdropClick={true}
-        >
-          <DialogTitle id="alert-dialog-title">
-            <Title>{getFormValue?.gstData?.lgnm || "Bharat Info"}</Title>
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
               <div className="rate-view">
                 <Rating
+                  className="mt-1 mb-4"
                   name="simple-controlled"
                   value={value}
                   onChange={(event, newValue) => {
@@ -557,50 +345,51 @@ const GstInformation = () => {
                   size="large"
                 />
               </div>
-            </DialogContentText>
-            <TextField
-              autoFocus
-              margin="dense"
-              id="name"
-              type="text"
-              placeholder="Share Details Of Your Own Experience At This Place"
-              fullWidth
-              variant="outlined"
-              value={reviewTextDesc}
-              onChange={(event) => {
-                setReviewTextDesc(event.target.value);
-              }}
-            />
-            <div className="img-container">
-              <input
-                multiple
-                id="reviewImgUrl"
-                name='reviewImgUrl'
-                accept="image/*"
-                hidden
-                type="file"
-                onChange={(event) => fileChangeHandler(event)}
+              <textarea
+                className="review-textarea"
+                as='textarea'
+                autoComplete="off"
+                rows={6}
+                placeholder="Write Review..."
+                value={reviewTextDesc}
+                onChange={(event) => {
+                  setReviewTextDesc(event.target.value);
+                }}
               />
-              {
-                profileImg?.map((image, index) => {
-                  return (
-                    <Box sx={{ display: 'flex', m: 1, alignItems: 'center', flexDirection: 'row'}}>
-                        <img key={index} src={image} height={'50px'} width={'50px'} />
-                        <DeleteIcon onClick={() => removeImage(image)} sx={{ color: 'red' }} />
-                    </Box>
-                  )
-                })
-              }
-              <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
-                Add Image
-              </Button>
+              <div className="img-container">
+                <input
+                  multiple
+                  id="reviewImgUrl"
+                  name='reviewImgUrl'
+                  accept="image/*"
+                  hidden
+                  type="file"
+                  onChange={(event) => fileChangeHandler(event)}
+                />
+                <Box sx={{ display: 'flex' }}>
+                  {
+                    profileImg?.map((image, index) => {
+                      return (
+                        <Box key={index} sx={{ display: 'flex', alignItems: 'center', m: 1 }} >
+                          <img src={image} height={'50px'} width={'50px'} />
+                          <DeleteIcon onClick={() => removeImage(image)} sx={{ color: 'red' }} />
+                        </Box>
+                      )
+                    })
+                  }
+                </Box>
+                <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
+                  Add Image
+                </Button>
+              </div>
+              <div className="btn-container text-right w-100">
+                <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
+                <button className="btn-submit" onClick={handlePost}>Post</button>
+              </div>
             </div>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={handlePost}>Post</Button>
-          </DialogActions>
-        </Dialog>
+          </div>
+        </div>
+
       </div>
     </div>
   );
