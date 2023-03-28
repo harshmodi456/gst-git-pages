@@ -35,23 +35,6 @@
     z-index: 11 !important;
   }
 
-  .header-search-bar-container {
-    position: relative;
-    .search-icon {
-      position: absolute;
-      top: -3px;
-      left: 10px;
-    }
-  }
-
-  .header-search-bar {
-    background-color: #dcdce0;
-    border: none;
-    border-radius: 15px;
-    padding: 5px 10px 5px 40px;
-    width: 140px;
-  }
-
   .btn-navigation {
     text-transform: capitalize;
     font-size: 16px;

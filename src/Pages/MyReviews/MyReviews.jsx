@@ -16,12 +16,16 @@ const MyReviews = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [reviewData, setReviewData] = React.useState([]);
 
-  useEffect(() => {
+  const fetchMyReviews = () => {
     setIsLoading(true);
     dispatch(getReviewByUser(userId)).then((res) => {
       setReviewData(res?.payload?.reviews);
       setIsLoading(false);
     });
+  }
+
+  useEffect(() => {
+    fetchMyReviews();
   }, [])
 
   return (
@@ -41,7 +45,7 @@ const MyReviews = () => {
         {
           reviewData?.length > 0 ? (
             reviewData?.map((review, index) => (
-              <ReviewCard key={index} review={review} />
+              <ReviewCard key={index} review={review} updateData={fetchMyReviews} />
             ))
           ) : (
             <div className="text-muted text-center w-100">
