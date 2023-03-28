@@ -123,8 +123,7 @@ export const updateReview = createAsyncThunk(
       rating: data?.rating,
     };
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await
         (
           await instance.put(`${api}review/${data._id}`, updateData)
         ).data;
