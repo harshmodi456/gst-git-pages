@@ -36,6 +36,7 @@ const MyBusiness = () => {
   }
 
   React.useEffect(() => {
+    
     myBusinessHandler();
   }, []);
 
@@ -46,7 +47,8 @@ const MyBusiness = () => {
     validationSchema: Yup.object({
       verificationValue: Yup.string().required('GST number or name is required')
     }),
-    onSubmit: values => {
+    onSubmit: (values, actions) => {
+      actions.resetForm()
       isLoading(true);
       dispatch(gstVerify(values?.verificationValue)).then((res) => {
         if (res?.payload?.status === true) {
@@ -183,7 +185,7 @@ const MyBusiness = () => {
                 </div>
               )}
               <div className="modal-btn-container mt-4">
-                <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
+                <button id="btn-cancel" type="reset" className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
                 <button
                   className="btn-add"
                   type="submit"
