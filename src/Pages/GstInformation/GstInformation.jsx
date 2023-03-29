@@ -3,16 +3,14 @@ import {
   Rating,
 } from "@mui/material";
 import { FaEdit } from "react-icons/fa";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./GstInformation.scss";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   getRecordGstById,
   getWriteReview,
-  updateReview,
   writeReview,
-  gstVerify
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -23,31 +21,27 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
-  const params = useParams();
   const location = useLocation();
-  const navigate = useNavigate();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const [getFormValue, setFormValue] = React.useState("");
   const [reviewTextDesc, setReviewTextDesc] = React.useState("");
   const [getReviewData, setReviewData] = React.useState([]);
-  const [addressData, setAddressData] = React.useState([]);
-  const [selectedAddress, setSelectedAddress] = React.useState("");
   const [loading, isLoading] = React.useState(false);
   const [isEditable, setIsEditable] = React.useState(false);
-  const [modalObject, setModalObject] = React.useState("");
   const getUserToken = JSON.parse(localStorage.getItem("userInfo"));
   const pathArray = (location.pathname).split('/');
   const gstIn = pathArray[2] || null;
   const [gst, setGst] = useState({});
-  const [businessAddress, setBusinessAddress] = useState([]);
   const [imgFile, setImgFile] = useState([]);
   const [profileImg, setProfileImg] = useState([]);
   const [deleteBar, setDeleteBar] = useState(false);
   const [imageUrl, setImageUrl] = useState();
+  const [gstAddress, setGstAddress] = useState('');
+  const [gstCenter, setGstCenter] = useState('');
+  const [gstState, setGstState] = useState('');
+  const [gstRange, setGstRange] = useState('');
 
-
-  useEffect(() => {
+  const fetchGst = () => {
     isLoading(true);
     dispatch(getRecordGstById(gstIn)).then((res) => {
       if (res?.payload?.data) {
@@ -55,6 +49,56 @@ const GstInformation = () => {
         fetchReview(res?.payload?.data?._id || res?.payload?.data?._doc?._id);
       }
     });
+  }
+
+  const gstAddressHandler = () => {
+    if (gst) {
+      let gstObj = gst;
+      if (gst?._doc) {
+        gstObj = gst?._doc?.gstData;
+      }
+      if (gst?.gstData) {
+        gstObj = gst?.gstData;
+      }
+      setGstRange(gstObj?.ctj)
+      if (gst?.adadr?.length > 0) {
+        let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno}${gstObj?.adadr[0]?.addr?.bno && ', '}
+                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${gstObj?.adadr[0]?.addr?.bnm && ', '}
+                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${gstObj?.adadr[0]?.addr?.loc && ', '}
+                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${gstObj?.adadr[0]?.addr?.st && ', '}
+                ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city}${gstObj?.adadr[0]?.addr?.city && ', '}
+                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ', '}
+                ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd}${gstObj?.adadr[0]?.addr?.stcd && ', '}
+                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd}.`;
+
+        setGstAddress(addressStr);
+
+      } else {
+        let addressStr = `${gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno}${gstObj?.pradr?.addr?.flno && ', '}
+        ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${gstObj?.pradr?.addr?.bno && ', '}
+        ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${gstObj?.pradr?.addr?.bnm && ', '}
+        ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${gstObj?.pradr?.addr?.st && ', '}
+        ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ', '}
+        ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ', '}
+        ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ', '}
+        ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}.`;
+
+        let center = gstObj?.pradr?.addr?.loc;
+        let state = gstObj?.pradr?.addr?.stcd;
+
+        setGstAddress(addressStr);
+        setGstCenter(center);
+        setGstState(state);
+      }
+    }
+  }
+
+  useEffect(() => {
+    gstAddressHandler();
+  }, [gst])
+
+  useEffect(() => {
+    fetchGst();
   }, [gstIn])
 
   const bottomMenu = (toggle, url) => {
@@ -63,20 +107,24 @@ const GstInformation = () => {
   }
 
   const removeImage = (url) => {
-      const deleteImage = profileImg?.filter((data) => data !== url);
-      setProfileImg(deleteImage);
+    const deleteImage = profileImg?.filter((data) => data !== url);
+    setProfileImg(deleteImage);
   }
 
-  const fetchReview = (gstId) => {
-    isLoading(true);
-    if (gst) {
-      const request = {
-        gstId: gstId,
-      };
-      dispatch(getWriteReview(request)).then((res) => {
-        setReviewData(res?.payload?.reviews);
-        isLoading(false);
-      });
+  const fetchReview = (gstId, isGst) => {
+    if (isGst === true) {
+      fetchGst();
+    } else {
+      isLoading(true);
+      if (gst) {
+        const request = {
+          gstId: gstId,
+        };
+        dispatch(getWriteReview(request)).then((res) => {
+          setReviewData(res?.payload?.reviews);
+          isLoading(false);
+        });
+      }
     }
   }
 
@@ -90,8 +138,8 @@ const GstInformation = () => {
   const fileChangeHandler = (event) => {
     const file = event.target.files;
     if (file != null) {
-      for(let i =0; i<event.target.files?.length; i++){
-        setProfileImg((current) => [...current,URL.createObjectURL(file[i])]);
+      for (let i = 0; i < event.target.files?.length; i++) {
+        setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
         setImgFile(file[i]);
       }
     }
@@ -102,6 +150,7 @@ const GstInformation = () => {
   }
 
   const handlePost = () => {
+    setProfileImg([]);
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
       gstId: gst?._id || gst?._doc?._id,
@@ -115,7 +164,7 @@ const GstInformation = () => {
         dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
           setReviewData(res?.payload?.reviews);
           document.getElementById("btn-cancel").click();
-          fetchReview(gst?._id || gst?._doc?._id);
+          fetchReview(gst?._id || gst?._doc?._id, true);
           isLoading(false);
         });
       }
@@ -164,15 +213,22 @@ const GstInformation = () => {
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
           <div className="col-md-4 col-12">
             <h5 className="font-weight-bold break-line-1">Administrative Office</h5>
-            <h5 className="break-line-1">{gst?.gstData?.ctb || gst?._doc?.gstData?.ctb}</h5>
+            <h5>
+              (JURISDICTION - CENTER)<br />
+              Commissionerete - {gstCenter}<br />
+              Range - {gstRange}
+            </h5>
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">Other Office</h5>
-            <h5 className="break-line-1">{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
+            <h5>
+              (JURISDICTION - STATE)<br />
+              State - {gstState}<br />
+            </h5>
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">Principal Place of Business</h5>
-            <h5 className="break-line-1">{gst?.gstData?.dty || gst?._doc?.gstData?.dty}</h5>
+            <h5>{gstAddress.slice(0,9) == 'undefined' ? ' ' : gstAddress}</h5>
           </div>
         </div>
 
@@ -276,7 +332,7 @@ const GstInformation = () => {
                 </Button>
               </div>
               <div className="btn-container text-right w-100">
-                <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
+                <button id="btn-cancel" onClick={() => setProfileImg([])} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
                 <button className="btn-submit" onClick={handlePost}>Post</button>
               </div>
             </div>

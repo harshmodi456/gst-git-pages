@@ -13,6 +13,20 @@ import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import TimeAgo from 'react-timeago';
+import AddIcon from '@mui/icons-material/Add';
+import { Box } from "@mui/system";
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Swiper, SwiperSlide } from "swiper/react";
+import CameraAltIcon from '@mui/icons-material/CameraAlt';
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./styles.css";
+
+// import required modules
+import { Keyboard, Pagination, Navigation } from "swiper";
+
 
 export default function ReviewCard(props) {
 
@@ -24,6 +38,94 @@ export default function ReviewCard(props) {
     const takeUserInfo = localStorage.getItem("userInfo");
     const getUserInfo = JSON.parse(takeUserInfo)?.userInfo?.data;
     const userId = getUserInfo?._id;
+    const [imgFile, setImgFile] = useState([]);
+    const [imageUrl, setImageUrl] = useState();
+    const [profileImg, setProfileImg] = useState([]);
+    const [deleteBar, setDeleteBar] = useState(false);
+
+    const images = [
+        {
+            id: 0,
+            img: Image
+        },
+        {
+            id: 1,
+            img: Image
+        },
+        {
+            id: 2,
+            img: Image
+        },
+        {
+            id: 3,
+            img: Image
+        },
+        {
+            id: 4,
+            img: Image
+        },
+        {
+            id: 5,
+            img: Image
+        },
+        {
+            id: 6,
+            img: Image
+        },
+        {
+            id: 7,
+            img: Image
+        },
+        {
+            id: 8,
+            img: Image
+        },
+        {
+            id: 9,
+            img: Image
+        },
+        ,
+        {
+            id: 6,
+            img: Image
+        },
+        {
+            id: 7,
+            img: Image
+        },
+        {
+            id: 8,
+            img: Image
+        },
+        {
+            id: 9,
+            img: Image
+        },
+    ]
+
+    const fileChangeHandler = (event) => {
+        const file = event.target.files;
+        if (file != null) {
+            for (let i = 0; i < event.target.files?.length; i++) {
+                setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
+                setImgFile(file[i]);
+            }
+        }
+    }
+
+    const removeImage = (url) => {
+        const deleteImage = profileImg?.filter((data) => data !== url);
+        setProfileImg(deleteImage);
+    }
+
+    const bottomMenu = (toggle, url) => {
+        setDeleteBar(toggle);
+        setImageUrl(url);
+    }
+
+    const upload = () => {
+        document.getElementById("reviewImgUrl").click()
+    }
 
     const updateHandler = () => {
         setIsLoading(true);
@@ -35,7 +137,7 @@ export default function ReviewCard(props) {
         dispatch(updateReview(params)).then((res) => {
             if (res?.payload?.status) {
                 document.getElementById(`btn-cancel-${review?._id}`).click();
-                props.updateData();
+                props.updateData(review?.gstId?._id, true);
                 setIsLoading(false);
             }
         });
@@ -45,11 +147,12 @@ export default function ReviewCard(props) {
         <div className='col-lg-6 col-md-12 px-md-3 my-3 px-0'>
             <div className='review-card-container p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
-                    <div className='d-flex justify-content-start'>
+                    <div className='d-flex justify-content-start align-items-center'>
                         <Avatar className='mr-2' size='52' round name={`${review?.userId?.fName} ${review?.userId?.lName}`} />
                         <div>
                             <p className='user-name m-0 break-line-1'>{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
-                            <p className='text-muted m-0'><TimeAgo date={review?.createdAt} /></p>
+                            <p className='company-name m-0'>{review?.gstId?.gstData?.lgnm}</p>
+                            <p className='time-lable text-muted m-0'><TimeAgo date={review?.createdAt} /></p>
                         </div>
                     </div>
                     <div>
@@ -84,10 +187,63 @@ export default function ReviewCard(props) {
                     </p>
                 </div>
                 <div className='review-img-container pt-2 px-2 w-100'>
-                    <img className='review-img' src={Image} alt='review-img' />
-                    <img className='review-img mx-2' src={Image} alt='review-img' />
-                    <img className='review-img mx-2' src={Image} alt='review-img' />
-                    <img className='review-img' src={Image} alt='review-img' />
+                    {
+                        images.slice(0, 4)?.map((data, index) => {
+                            return (
+                                <div className='m-1'>
+                                    <img key={index} className='review-img' src={data?.img} alt='review-img' />
+                                </div>
+                            )
+                        })
+                    }
+                    {
+                        images?.length > 4 && (
+                            <div class="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>5</span>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+
+            {/* <!-- Modal --> */}
+            <div class="modal fade bd-example-modal-lg" size="lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+                    <div class="modal-content modal-lg">
+                        <div class="modal-header p-10">
+                            <h5 class="modal-title" id="exampleModalLongTitle">All Images</h5>
+                        </div>
+                        <div class="modal-body p-10">
+                            <>
+                                <Swiper
+                                    slidesPerView={3}
+                                    spaceBetween={30}
+                                    keyboard={{
+                                        enabled: true,
+                                    }}
+                                    pagination={{
+                                        clickable: true,
+                                    }}
+                                    navigation={true}
+                                    modules={[Keyboard, Pagination, Navigation]}
+                                    className="mySwiper"
+                                >
+                                    {
+                                        images?.map((data, index) => {
+                                            return (
+                                                <SwiperSlide key={index} className='m-1 swiper-block'>
+                                                    <img src={data?.img} style={{ height: "200px", width: "200px" }} />
+                                                </SwiperSlide>
+                                            )
+                                        })
+                                    }
+                                </Swiper>
+                            </>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -109,7 +265,7 @@ export default function ReviewCard(props) {
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content p-5">
                         <div className="write-review-title">
-                            <h2>Company name</h2>
+                            <h2>{review?.gstId?.gstData?.lgnm}</h2>
                             <p className="text-muted">Posting Publicity</p>
                         </div>
                         <div className="rate-view">
@@ -134,6 +290,41 @@ export default function ReviewCard(props) {
                                 setReviewText(event.target.value);
                             }}
                         />
+                        <div className="img-container d-flex flex-wrap">
+                            <input
+                                multiple
+                                id="reviewImgUrl"
+                                name='reviewImgUrl'
+                                accept="image/*"
+                                hidden
+                                type="file"
+                                onChange={(event) => fileChangeHandler(event)}
+                            />
+                            <Box className='d-flex flex-wrap'>
+                                {
+                                    profileImg?.map((image, index) => {
+                                        return (
+                                            <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
+                                                <img src={image} height={'150px'} width={'150px'} />
+                                                {
+                                                    deleteBar && imageUrl === image && (
+                                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
+                                                            <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
+                                                        </Box>
+                                                    )
+                                                }
+                                            </Box>
+                                        )
+                                    })
+                                }
+                            </Box>
+
+                        </div>
+                        <div className="">
+                            <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
+                                Add Image
+                            </Button>
+                        </div>
                         <div className="btn-container text-right w-100 mt-4">
                             <button id={`btn-cancel-${review?._id}`} className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
                             <button className="btn-submit" onClick={updateHandler}>Post</button>

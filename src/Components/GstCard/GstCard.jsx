@@ -19,8 +19,6 @@ export default function GstCard(props) {
     const [isLoading, setIsLoading] = useState(false);
     const [address, setAddress] = useState('');
 
-    console.log(gst)
-
     useEffect(() => {
         if (gst) {
             let gstObj = gst;
@@ -38,7 +36,7 @@ export default function GstCard(props) {
                 ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city}${gstObj?.adadr[0]?.addr?.city && ', '}
                 ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ', '}
                 ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd}${gstObj?.adadr[0]?.addr?.stcd && ', '}
-                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd}${gstObj?.adadr[0]?.addr?.pncd && ', '}.`;
+                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd}.`;
 
                 setAddress(addressStr);
             } else {
@@ -49,7 +47,7 @@ export default function GstCard(props) {
                 ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ', '}
                 ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ', '}
                 ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ', '}
-                ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}${gstObj?.pradr?.addr?.pncd && ', '}.`;
+                ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}.`;
 
                 setAddress(addressStr);
             }

@@ -26,7 +26,7 @@ const SearchGstNumber = () => {
       verificationValue: '',
     },
     validationSchema: Yup.object({
-      verificationValue: Yup.string().required('GST number is required')
+      verificationValue: Yup.string().required('GST number or name is required')
     }),
     onSubmit: values => {
       isLoading(true);
@@ -121,10 +121,11 @@ const SearchGstNumber = () => {
                   <div className="search-container">
                     <h3 className="m-0 pt-5 pb-2 font-weight-bold">Search GST Taxpayer</h3>
                     <input
-                      className="my-4 search-bar"
+                      autoComplete="off"
+                      className="my-4 search-bar w-100"
                       id="verificationValue"
                       name="verificationValue"
-                      placeholder="Enter GST No."
+                      placeholder="Enter GST No. / Name"
                       onChange={formik.handleChange}
                       value={formik.values.verificationValue}
                     // onKeyPress={(e) => {

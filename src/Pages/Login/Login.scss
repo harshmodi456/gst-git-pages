@@ -4,7 +4,7 @@
   justify-content: center;
   min-height: calc(100vh - 165px);
 
-  .login-form-container{
+  .login-form-container {
     background-color: #e6fdff;
     border-radius: 44px;
     padding: 30px;
@@ -12,14 +12,18 @@
 
     .form-group {
       background-color: white;
-      
+
       .form-control-textFiled {
         width: 435px;
       }
-      
+
       input {
         background-color: white;
-        width:  370px;
+        width: 370px;
+      }
+
+      .invalid-feedback {
+        background-color: #e6fdff;
       }
     }
     .btn-signin {
@@ -157,26 +161,41 @@
     border-color: #007bff;
     margin-left: 50%;
   }
+
   //  Mobile devices
-  @media (max-width: 480px) {
-    .form-signin {
-      // background-color: #de3163;
-    }
-    .grid-first {
-      display: none !important;
-
-      img {
-        margin-left: 0px !important;
+  @media (min-width: 300px) and (max-width: 480px) {
+    .login-container {
+      .login-img {
+        img {
+          width: 300px !important;
+          height: 300px !important;
+          margin-bottom: 50px;
+        }
       }
-    }
 
-    .MuiPaper-elevation {
-      width: 100%;
+      .form-group {
+        background-color: white;
+
+        .form-control-textFiled {
+          width: 235px !important;
+        }
+
+        input {
+          background-color: white;
+          width: 170px !important;
+        }
+      }
     }
   }
 
   // iPads, Tablets
-  @media (max-width: 768px) {
+  @media (min-width: 481px) and (max-width: 768px) {
+    .login-img {
+      img {
+        width: 600px;
+        margin-bottom: 50px;
+      }
+    }
     .grid-first {
       display: none !important;
       img {
@@ -187,32 +206,9 @@
 
   // Small screens, laptops
   @media (max-width: 1024px) {
-    .grid-first {
-      img {
-        border-radius: 12px;
-        margin-left: 60px !important;
-        height: 312px;
-      }
-    }
-  }
-
-  // Desktops, large screens
-  @media (max-width: 1200px) {
-    .grid-first {
-      img {
-        border-radius: 12px;
-        margin-left: 100px !important;
-        height: 312px;
-      }
-    }
-  }
-
-  @media (max-width: 1919px) {
-    .grid-first {
-      img {
-        border-radius: 12px;
-        margin-left: 100px !important;
-      }
+    .login-img {
+      width: 600px;
+      margin-bottom: 50px;
     }
   }
 }

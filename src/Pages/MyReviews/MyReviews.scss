@@ -1,17 +1,17 @@
 .my-review-container {
-  font-family: 'Outfit';
+  font-family: "Outfit";
 
   .modal-content {
     .css-jue3ft-MuiRating-root {
-      color: #4CBE24 !important;
+      color: #4cbe24 !important;
     }
 
     .write-review-title h2 {
-      color: #00448B;
+      color: #00448b;
       font-weight: 600;
     }
     .review-textarea {
-      background-color: #F3ECEC;
+      background-color: #f3ecec;
       border: none;
       border-radius: 15px;
       resize: none;
@@ -34,20 +34,37 @@
       }
 
       button:focus {
-        outline: none;  
+        outline: none;
       }
 
       .btn-cancel {
-        background: #BFB7C0;
+        background: #bfb7c0;
       }
 
       .btn-submit {
-        background: #DA45FF;
+        background: #da45ff;
       }
     }
   }
-}
 
+  .title-container {
+    .MuiButtonBase-root {
+      color: black;
+      padding: 5px 40px !important;
+      text-transform: capitalize !important;
+      font-size: 20px !important;
+    }
+
+    .Mui-selected {
+      background-color: #ebd233 !important;
+      color: black !important;
+    }
+
+    .MuiButtonBase-root:focus {
+      outline: none !important;
+    }
+  }
+}
 
 .my-reviews-div {
   .container-div {

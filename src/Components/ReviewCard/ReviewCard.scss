@@ -7,14 +7,29 @@
 
     .header {
         .user-name {
-            color: #00448B;
+            color: #00448b;
             font-size: 20px;
             font-weight: 600;
+        }
+
+        .company-name {
+            font-size: 13px;
+            color: #798796;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+        .time-lable {
+            font-size: 13px;
+            color: #A38D8D;
         }
         .thumsup-icon {
             color: #541495 !important;
         }
     }
+
     .body {
         .review-text {
             overflow: hidden;
@@ -24,6 +39,7 @@
             -webkit-box-orient: vertical;
         }
     }
+
     .review-img-container {
         display: flex;
         justify-content: flex-start !important;
@@ -40,4 +56,31 @@
 .review-card-container:hover {
     outline: 2px solid rgb(0, 0, 104);
     cursor: pointer;
+}
+
+
+.more-box-view {
+    display: flex;
+    background-color: #e1dbdb;
+    height: 50px;
+    width: 50px;
+    border-radius: 3px;
+    align-items: center;
+    border: none;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.more-box-view:hover,
+.more-box-view:active {
+    background-color: #e1dbdb;
+}
+
+.more-text{
+    font-weight: bold;
+    color: #928585;
+}
+
+.swiper-block{
+    user-select: none;
 }

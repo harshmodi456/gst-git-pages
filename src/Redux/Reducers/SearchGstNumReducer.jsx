@@ -33,6 +33,21 @@ export const getGstByUserId = createAsyncThunk(
   }
 );
 
+// for review for my business by user id
+export const getReviewForMyBusiness = createAsyncThunk(
+  "user/getReviewForMyBusiness",
+  async (userId, thunkApi) => {
+    try {
+      return await (
+        // await instance.post(`${api}gst/verify`, data)
+        await instance.get(`${api}review/businessReview/${userId}`)
+      ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 // for save gst record based on gst number
 export const postGstRecord = createAsyncThunk(
   "Gst/postGstRecord",
@@ -143,7 +158,7 @@ export const getWriteReview = createAsyncThunk(
         (
           await instance.get(
             `${api}review/${data?.gstId}${data?.address ? `?address=${data?.address}` : ""
-            }`
+            }?size=${30}`
           )
         ).data;
     } catch (error) {
@@ -160,8 +175,8 @@ export const getReviewByUser = createAsyncThunk(
       return await // await doFetch(`${api}/auth/login`,'POST',data)
         // await axios.get(`${api}gst/getGst/${data}`)
         (
-          await instance.get(
-            `${api}review/user/${userId}`
+          await instance.get( // ---- testing
+            `${api}review/user/${userId}?size=30`
           )
         ).data;
     } catch (error) {
