@@ -11,10 +11,12 @@
             font-size: 20px;
             font-weight: 600;
         }
+
         .thumsup-icon {
             color: #541495 !important;
         }
     }
+
     .body {
         .review-text {
             overflow: hidden;
@@ -24,6 +26,7 @@
             -webkit-box-orient: vertical;
         }
     }
+
     .review-img-container {
         display: flex;
         justify-content: flex-start !important;
@@ -40,4 +43,24 @@
 .review-card-container:hover {
     outline: 2px solid rgb(0, 0, 104);
     cursor: pointer;
+}
+
+.more-box-view {
+    display: flex;
+    background-color: #e1dbdb;
+    height: 50px;
+    width: 50px;
+    border-radius: 3px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.more-text{
+    font-weight: bold;
+    color: #928585;
+}
+
+.swiper-block{
+    user-select: none;
 }

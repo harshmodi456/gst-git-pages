@@ -12,6 +12,17 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
+import AddIcon from '@mui/icons-material/Add';
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+
+import "./styles.css";
+
+// import required modules
+import { Keyboard, Pagination, Navigation } from "swiper";
+
 
 export default function ReviewCard(props) {
 
@@ -23,6 +34,66 @@ export default function ReviewCard(props) {
     const takeUserInfo = localStorage.getItem("userInfo");
     const getUserInfo = JSON.parse(takeUserInfo)?.userInfo?.data;
     const userId = getUserInfo?._id;
+
+    const images = [
+        {
+            id: 0,
+            img: Image
+        },
+        {
+            id: 1,
+            img: Image
+        },
+        {
+            id: 2,
+            img: Image
+        },
+        {
+            id: 3,
+            img: Image
+        },
+        {
+            id: 4,
+            img: Image
+        },
+        {
+            id: 5,
+            img: Image
+        },
+        {
+            id: 6,
+            img: Image
+        },
+        {
+            id: 7,
+            img: Image
+        },
+        {
+            id: 8,
+            img: Image
+        },
+        {
+            id: 9,
+            img: Image
+        },
+        ,
+        {
+            id: 6,
+            img: Image
+        },
+        {
+            id: 7,
+            img: Image
+        },
+        {
+            id: 8,
+            img: Image
+        },
+        {
+            id: 9,
+            img: Image
+        },
+    ]
 
     const updateHandler = () => {
         setIsLoading(true);
@@ -83,10 +154,64 @@ export default function ReviewCard(props) {
                     </p>
                 </div>
                 <div className='review-img-container pt-2 px-2 w-100'>
-                    <img className='review-img' src={Image} alt='review-img' />
-                    <img className='review-img mx-2' src={Image} alt='review-img' />
-                    <img className='review-img mx-2' src={Image} alt='review-img' />
-                    <img className='review-img' src={Image} alt='review-img' />
+                    {
+                        images.slice(0, 4)?.map((data, index) => {
+                            return (
+                                <div className='m-1'>
+                                    <img key={index} className='review-img' src={data?.img} alt='review-img' />
+                                </div>
+                            )
+                        })
+                    }
+                    {
+                        images?.length > 4 && (
+                            <div class="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>5</span>
+                            </div>
+                        )
+                    }
+                </div>
+            </div>
+
+            {/* <!-- Modal --> */}
+            <div class="modal fade bd-example-modal-lg" size="lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
+                    <div class="modal-content modal-lg">
+                        <div class="modal-header p-10">
+                            <h5 class="modal-title" id="exampleModalLongTitle">All Images</h5>
+                        </div>
+                        <div class="modal-body p-10">
+                            <>
+                                <Swiper
+                                    slidesPerView={3}
+                                    spaceBetween={30}
+                    
+                                    keyboard={{
+                                        enabled: true,
+                                    }}
+                                    pagination={{
+                                        clickable: true,
+                                    }}
+                                    navigation={true}
+                                    modules={[Keyboard, Pagination, Navigation]}
+                                    className="mySwiper"
+                                >
+                                    {
+                                        images?.map((data, index) => {
+                                            return (
+                                                <SwiperSlide key={index} className='m-1 swiper-block'>
+                                                    <img src={data?.img} style={{ height: "200px", width: "200px" }} />
+                                                </SwiperSlide>
+                                            )
+                                        })
+                                    }
+                                </Swiper>
+                            </>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -102,6 +102,7 @@ const GstInformation = () => {
   }
 
   const handlePost = () => {
+    setProfileImg([]);
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
       gstId: gst?._id || gst?._doc?._id,
@@ -276,7 +277,7 @@ const GstInformation = () => {
                 </Button>
               </div>
               <div className="btn-container text-right w-100">
-                <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
+                <button id="btn-cancel" onClick={() => setProfileImg([])} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
                 <button className="btn-submit" onClick={handlePost}>Post</button>
               </div>
             </div>

@@ -11,17 +11,13 @@ import Typography from "@mui/material/Typography";
 import IconButton from '@mui/material/IconButton';
 import AddIcon from '@mui/icons-material/Add';
 import GstCard from "../../Components/GstCard/GstCard";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
 const MyBusiness = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [value, setValue] = React.useState(0);
-  const [businessData, setBusinessData] = React.useState([]);
-  const [page, setPage] = React.useState(1);
-  const [hasMore, setHasMore] = React.useState(true);
-  const [totalPage, setTotalPage] = React.useState(0);
   const [loading, isLoading] = React.useState(false);
-  const [verificationValue, setVerificationValue] = React.useState("");
   const [gstSearchData, setGstSearchData] = React.useState([]);
   const [myBusinessData, setMyBusinessData] = React.useState([]);
   const takeUserInfo = localStorage.getItem("userInfo");
@@ -43,9 +39,26 @@ const MyBusiness = () => {
     myBusinessHandler();
   }, []);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const formik = useFormik({
+    initialValues: {
+      verificationValue: '',
+    },
+    validationSchema: Yup.object({
+      verificationValue: Yup.string().required('GST number or name is required')
+    }),
+    onSubmit: values => {
+      isLoading(true);
+      dispatch(gstVerify(values?.verificationValue)).then((res) => {
+        if (res?.payload?.status === true) {
+          setGstSearchData(res?.payload?.data);
+        } else {
+          setGstSearchData([]);
+        }
+        isLoading(false);
+        document.getElementById("btn-cancel").click();
+      });
+    },
+  });
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -80,20 +93,6 @@ const MyBusiness = () => {
     };
   }
 
-  const searchGstHandler = (takeValue) => {
-    isLoading(true);
-    dispatch(gstVerify(takeValue)).then((res) => {
-      if (res?.payload?.status === true) {
-        setGstSearchData(res?.payload?.data);
-      } else {
-        setGstSearchData([]);
-      }
-      isLoading(false);
-      document.getElementById("btn-cancel").click();
-      setVerificationValue('');
-    });
-  };
-
   const onPostHandle = (getRow) => {
     isLoading(true);
     const reqeObj = {
@@ -118,7 +117,7 @@ const MyBusiness = () => {
   };
 
   return (
-    <>
+    <form onSubmit={formik.handleSubmit}>
       <div className="my-business-container py-5 px-lg-5 px-md-3">
         <h2 className="font-weight-bold pl-lg-5 pl-3">
           My Business
@@ -164,24 +163,31 @@ const MyBusiness = () => {
             <div className="modal-content p-5">
               <h5>Enter GST Number / Business Name</h5>
               <input
-                placeholder="Enter Number"
+                placeholder="Enter GST No. / Name"
                 className="mt-3 search-gst-modal"
-                value={verificationValue}
-                onChange={(event) => {
-                  setVerificationValue(event.target.value);
-                }}
-                onKeyPress={(e) => {
-                  if (e.key === "Enter") {
-                    searchGstHandler(verificationValue);
-                  }
-                }}
+                id="verificationValue"
+                name="verificationValue"
+                value={formik.values.verificationValue}
+                onChange={formik.handleChange}
+              // onKeyPress={(e) => {
+              //   if (e.key === "Enter") {
+              //     searchGstHandler(verificationValue);
+              //   }
+              // }}
               />
+              {formik.errors.verificationValue && (
+                <div className="mt-1">
+                  <span style={{ color: 'red' }}>
+                    {formik.errors.verificationValue}
+                  </span>
+                </div>
+              )}
               <div className="modal-btn-container mt-4">
                 <button id="btn-cancel" className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
                 <button
                   className="btn-add"
-                  onClick={() => { searchGstHandler(verificationValue) }}
-                  disabled={verificationValue ? false : true}
+                  type="submit"
+                // disabled={verificationValue ? false : true}
                 >
                   Add
                 </button>
@@ -196,7 +202,7 @@ const MyBusiness = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-    </>
+    </form>
   );
 };
 
