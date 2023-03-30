@@ -118,11 +118,11 @@ const MyBusiness = () => {
   };
 
   return (
-    <form onSubmit={formik.handleSubmit}>
+    <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
       <div className="my-business-container py-5 px-lg-5 px-md-3">
         <h2 className="font-weight-bold pl-lg-5 pl-3">
           My Business
-          <IconButton className="ml-3 add-business-btn" data-toggle="modal" data-target="#staticBackdrop">
+          <IconButton type="reset" className="ml-3 add-business-btn" data-toggle="modal" data-target="#staticBackdrop">
             <AddIcon />
           </IconButton>
         </h2>
