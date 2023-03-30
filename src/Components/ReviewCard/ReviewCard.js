@@ -145,7 +145,7 @@ export default function ReviewCard(props) {
     }
 
     return (
-        <div className='col-lg-6 col-md-12 px-md-3 my-3 px-0'>
+        <div className='col-lg-6 col-md-12 px-md-3 my-3 px-3'>
             <div className='review-card-container p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
                     <div className='d-flex justify-content-start align-items-center'>

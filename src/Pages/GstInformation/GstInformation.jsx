@@ -149,24 +149,27 @@ const GstInformation = () => {
     document.getElementById("reviewImgUrl").click()
   }
 
-  const handlePost = () => {
+  const handlePost = async () => {
     // setProfileImg([]);
     let formData = new FormData();
     formData.append('userId', getUserToken?.userInfo?.data?._id);
     formData.append('gstId', gst?._id || gst?._doc?._id);
     formData.append('reviewText', reviewTextDesc);
     formData.append('rating', value);
-    formData.append('image', profileImg);
-    // formData.append('image', imgFile);
+    // formData.append('image', profileImg[0]);
+    // imgFile.map((image) => {
+    //   formData.append('image', imgFile[0])
+    //   console.log(image)
+    // })
+
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
       gstId: gst?._id || gst?._doc?._id,
       reviewText: reviewTextDesc,
       rating: value,
-      image: imgFile
     };
 
-    dispatch(writeReview(formData)).then((res) => {
+    dispatch(writeReview(writeReviewInput)).then((res) => {
       if (res?.payload?.status === true) {
         handleClose();
         isLoading(true);
@@ -335,7 +338,7 @@ const GstInformation = () => {
                 </Box>
 
               </div>
-              <div className="">
+              <div className="mt-2 mb-3">
                 <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
                   Add Image
                 </Button>
