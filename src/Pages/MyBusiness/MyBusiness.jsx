@@ -156,7 +156,7 @@ const MyBusiness = () => {
                 <div className="px-lg-4 py-5 row px-4 m-0">
                   {
                     gstSearchData?.map((gst, index) => (
-                      <GstCard key={index} gst={gst} />
+                      <GstCard key={index} gst={gst} isMyBusiness={true} />
                     ))
                   }
                 </div>
@@ -165,7 +165,7 @@ const MyBusiness = () => {
           }
         </div>
         {/* <!-- Modal --> */}
-        <div className="modal fade" data-keyboard={true} tabindex="-1" id="staticBackdrop">
+        <div className="modal fade" data-keyboard={true} tabIndex="-1" id="staticBackdrop">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
               <h5>Enter GST Number / Business Name</h5>

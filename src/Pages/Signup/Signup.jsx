@@ -102,6 +102,12 @@ const Signup = () => {
 
   return (
     <>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="login-container">
         <div className="row m-0 p-0 w-100">
           <div className="col-lg-6 login-img d-flex justify-content-center">
@@ -322,6 +328,7 @@ const Signup = () => {
             </Grid>
           </Grid>
         </div>
+      </div> */}
         <Dialog
           open={open}
           onClose={(event, reason) => {
@@ -355,7 +362,6 @@ const Signup = () => {
             <Button onClick={() => otpSubmitHandler()}>Submit</Button>
           </DialogActions>
         </Dialog>
-      </div> */}
     </>
   );
 };

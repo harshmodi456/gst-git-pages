@@ -12,6 +12,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 export default function GstCard(props) {
 
     const { gst } = props;
+    const { isMyBusiness } = props;
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const takeUserInfo = localStorage.getItem("userInfo");
@@ -25,7 +26,7 @@ export default function GstCard(props) {
             if (gst?._doc) {
                 gstObj = gst?._doc?.gstData;
             }
-            if(gst?.gstData) {
+            if (gst?.gstData) {
                 gstObj = gst?.gstData;
             }
             if (gst?.adadr?.length > 0) {
@@ -56,11 +57,19 @@ export default function GstCard(props) {
 
     const onPostHandle = () => {
         setIsLoading(true);
-        const reqeObj = {
-            gstin: gst.gstin || gst?._doc?.gstin,
-            gstData: gst?.gstData || gst?._doc?.gstData || gst
-        };
-
+        let reqeObj;
+        if (isMyBusiness) {
+            reqeObj = {
+                userId: getUserInfo?.userInfo?.data?._id,
+                gstin: gst.gstin || gst?._doc?.gstin,
+                gstData: gst?.gstData || gst?._doc?.gstData || gst
+            };
+        } else {
+            reqeObj = {
+                gstin: gst.gstin || gst?._doc?.gstin,
+                gstData: gst?.gstData || gst?._doc?.gstData || gst
+            };
+        }
         if (gst?._doc) {
             navigate(`/gst-information/${gst?._doc?.gstin}`)
         } else {
@@ -105,7 +114,7 @@ export default function GstCard(props) {
                         Address:
                     </div>
                     <div className='col-lg-10 col-9 company-addr mr-0 pl-lg-4 break-line-1'>
-                        {address.slice(0,9) == 'undefined' ? ' ' : address}
+                        {address.slice(0, 9) == 'undefined' ? ' ' : address}
                         {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
                     </div>
                 </div>

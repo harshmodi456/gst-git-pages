@@ -140,7 +140,7 @@ const GstInformation = () => {
     if (file != null) {
       for (let i = 0; i < event.target.files?.length; i++) {
         setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
-        setImgFile(file[i]);
+        setImgFile((current) => [...current, file[i]]);
       }
     }
   }
@@ -150,14 +150,23 @@ const GstInformation = () => {
   }
 
   const handlePost = () => {
-    setProfileImg([]);
+    // setProfileImg([]);
+    let formData = new FormData();
+    formData.append('userId', getUserToken?.userInfo?.data?._id);
+    formData.append('gstId', gst?._id || gst?._doc?._id);
+    formData.append('reviewText', reviewTextDesc);
+    formData.append('rating', value);
+    formData.append('image', profileImg);
+    // formData.append('image', imgFile);
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
       gstId: gst?._id || gst?._doc?._id,
       reviewText: reviewTextDesc,
-      rating: value
+      rating: value,
+      image: imgFile
     };
-    dispatch(writeReview(writeReviewInput)).then((res) => {
+
+    dispatch(writeReview(formData)).then((res) => {
       if (res?.payload?.status === true) {
         handleClose();
         isLoading(true);
@@ -228,7 +237,7 @@ const GstInformation = () => {
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">Principal Place of Business</h5>
-            <h5>{gstAddress.slice(0,9) == 'undefined' ? ' ' : gstAddress}</h5>
+            <h5>{gstAddress.slice(0, 9) == 'undefined' ? ' ' : gstAddress}</h5>
           </div>
         </div>
 
@@ -267,7 +276,7 @@ const GstInformation = () => {
         </div>
 
         {/* <!-- Modal --> */}
-        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={true} tabindex="-1" id="write-review-modal">
+        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={true} tabIndex="-1" id="write-review-modal">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
               <div className="write-review-title">
