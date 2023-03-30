@@ -206,6 +206,12 @@ const Signup = () => {
             </div>
           </div>
         </div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
       {/* <div className="form-signup">
         <Backdrop

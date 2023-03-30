@@ -233,7 +233,7 @@ export default function ReviewCard(props) {
                                         images?.map((data, index) => {
                                             return (
                                                 <SwiperSlide key={index} className='m-1 swiper-block'>
-                                                    <img src={data?.img} style={{ height: "200px", width: "200px" }} />
+                                                    <img src={data?.img} style={{ height: "200px", width: "200px", marginBottom: 60 }} />
                                                 </SwiperSlide>
                                             )
                                         })

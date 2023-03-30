@@ -15,6 +15,7 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import loginBackgroung from '../../Assets/Images/login.svg';
 
+
 const Login = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
@@ -125,6 +126,12 @@ const Login = () => {
             </div>
           </div>
         </div>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
       </div>
     </>
   );
