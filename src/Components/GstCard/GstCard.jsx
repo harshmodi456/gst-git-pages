@@ -61,12 +61,12 @@ export default function GstCard(props) {
         if (isMyBusiness) {
             reqeObj = {
                 userId: getUserInfo?.userInfo?.data?._id,
-                gstin: gst.gstin || gst?._doc?.gstin,
+                gstin: gst?.gstin || gst?._doc?.gstin,
                 gstData: gst?.gstData || gst?._doc?.gstData || gst
             };
         } else {
             reqeObj = {
-                gstin: gst.gstin || gst?._doc?.gstin,
+                gstin: gst?.gstin || gst?._doc?.gstin,
                 gstData: gst?.gstData || gst?._doc?.gstData || gst
             };
         }

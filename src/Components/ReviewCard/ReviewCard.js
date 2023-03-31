@@ -189,18 +189,18 @@ export default function ReviewCard(props) {
                 </div>
                 <div className='review-img-container pt-2 px-2 w-100'>
                     {
-                        images.slice(0, 4)?.map((data, index) => {
+                        review?.reviewImg?.slice(0, 4)?.map((data, index) => {
                             return (
                                 <div className='m-1' key={index}>
-                                    <img className='review-img' src={data?.img} alt='review-img' />
+                                    <img className='review-img' src={data?.imgUrl} alt='review-img' />
                                 </div>
                             )
                         })
                     }
                     {
-                        images?.length > 4 && (
+                        review?.reviewImg?.length > 4 && (
                             <div className="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>5</span>
+                                <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>{review?.reviewImg?.length - 4}</span>
                             </div>
                         )
                     }
@@ -230,10 +230,10 @@ export default function ReviewCard(props) {
                                     className="mySwiper"
                                 >
                                     {
-                                        images?.map((data, index) => {
+                                        review?.reviewImg?.map((data, index) => {
                                             return (
                                                 <SwiperSlide key={index} className='m-1 swiper-block'>
-                                                    <img src={data?.img} style={{ height: "200px", width: "200px", marginBottom: 60 }} />
+                                                    <img src={data?.imgUrl} style={{ height: "200px", width: "200px", marginBottom: 60 }} />
                                                 </SwiperSlide>
                                             )
                                         })

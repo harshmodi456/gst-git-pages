@@ -1,4 +1,5 @@
-.MuiRating-sizeMedium {
+.MuiRating-sizeMedium,
+.MuiRating-sizeLarge {
     color: #4cbe24 !important;
     opacity: 1 !important;
 }

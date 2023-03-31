@@ -149,18 +149,24 @@ const GstInformation = () => {
     document.getElementById("reviewImgUrl").click()
   }
 
-  const handlePost = async () => {
-    // setProfileImg([]);
+  const resetData = () => {
+    setReviewTextDesc('');
+    setValue(0);
+    setImageUrl([]);
+    setProfileImg([]);
+  }
+
+  const handlePost = async (e) => {
+    e.preventDefault();
     let formData = new FormData();
     formData.append('userId', getUserToken?.userInfo?.data?._id);
     formData.append('gstId', gst?._id || gst?._doc?._id);
     formData.append('reviewText', reviewTextDesc);
     formData.append('rating', value);
-    // formData.append('image', profileImg[0]);
-    // imgFile.map((image) => {
-    //   formData.append('image', imgFile[0])
-    //   console.log(image)
-    // })
+
+    for (const key of Object.keys(imgFile)) {
+      formData.append('image', imgFile[key]);
+    }
 
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
@@ -169,7 +175,7 @@ const GstInformation = () => {
       rating: value,
     };
 
-    dispatch(writeReview(writeReviewInput)).then((res) => {
+    dispatch(writeReview(formData)).then((res) => {
       if (res?.payload?.status === true) {
         handleClose();
         isLoading(true);
@@ -286,67 +292,69 @@ const GstInformation = () => {
                 <h2>{gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}</h2>
                 <p className="text-muted">Posting Publicity</p>
               </div>
-              <div className="rate-view">
-                <Rating
-                  className="mt-1 mb-4"
-                  name="simple-controlled"
-                  value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
+              <form onSubmit={handlePost}>
+                <div className="rate-view">
+                  <Rating
+                    className="mt-1 mb-4"
+                    name="simple-controlled"
+                    value={value}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                    size="large"
+                  />
+                </div>
+                <textarea
+                  className="review-textarea w-100"
+                  as='textarea'
+                  autoComplete="off"
+                  rows={6}
+                  placeholder="Write Review..."
+                  value={reviewTextDesc}
+                  onChange={(event) => {
+                    setReviewTextDesc(event.target.value);
                   }}
-                  size="large"
                 />
-              </div>
-              <textarea
-                className="review-textarea"
-                as='textarea'
-                autoComplete="off"
-                rows={6}
-                placeholder="Write Review..."
-                value={reviewTextDesc}
-                onChange={(event) => {
-                  setReviewTextDesc(event.target.value);
-                }}
-              />
-              <div className="img-container d-flex flex-wrap">
-                <input
-                  multiple
-                  id="reviewImgUrl"
-                  name='reviewImgUrl'
-                  accept="image/*"
-                  hidden
-                  type="file"
-                  onChange={(event) => fileChangeHandler(event)}
-                />
-                <Box className='d-flex flex-wrap'>
-                  {
-                    profileImg?.map((image, index) => {
-                      return (
-                        <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
-                          <img src={image} height={'150px'} width={'150px'} />
-                          {
-                            deleteBar && imageUrl === image && (
-                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
-                                <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
-                              </Box>
-                            )
-                          }
-                        </Box>
-                      )
-                    })
-                  }
-                </Box>
+                <div className="img-container d-flex flex-wrap">
+                  <input
+                    multiple
+                    id="reviewImgUrl"
+                    name='reviewImgUrl'
+                    accept="image/*"
+                    hidden
+                    type="file"
+                    onChange={(event) => fileChangeHandler(event)}
+                  />
+                  <Box className='d-flex flex-wrap'>
+                    {
+                      profileImg?.map((image, index) => {
+                        return (
+                          <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
+                            <img src={image} height={'150px'} width={'150px'} />
+                            {
+                              deleteBar && imageUrl === image && (
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
+                                  <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
+                                </Box>
+                              )
+                            }
+                          </Box>
+                        )
+                      })
+                    }
+                  </Box>
 
-              </div>
-              <div className="mt-2 mb-3">
-                <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
-                  Add Image
-                </Button>
-              </div>
-              <div className="btn-container text-right w-100">
-                <button id="btn-cancel" onClick={() => setProfileImg([])} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
-                <button className="btn-submit" onClick={handlePost}>Post</button>
-              </div>
+                </div>
+                <div className="mt-2 mb-3">
+                  <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
+                    Add Image
+                  </Button>
+                </div>
+                <div className="btn-container text-right w-100">
+                  <button id="btn-cancel" onClick={resetData} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
+                  <button className="btn-submit" type="submit">Post</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>
