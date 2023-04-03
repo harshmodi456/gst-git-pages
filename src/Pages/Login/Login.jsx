@@ -25,7 +25,7 @@ const Login = () => {
   const [loading, isLoading] = React.useState(false);
 
   const validationSchema = Yup.object().shape({
-    mobileNo: Yup.string()
+    mobileNo: Yup.string().matches(new RegExp('^[0-9]+$'), 'Invalid mobile number')
       .min(10, "Mobile number must be a 10 digits")
       .max(10, "Mobile number must be a 10 digits")
       .required("Mobile number Number is Required."),

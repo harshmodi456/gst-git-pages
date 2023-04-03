@@ -1,5 +1,8 @@
 {
   "projects": {
-    "default": "wa-gst"
-  }
+    "default": "wa-gst-90efc",
+    "wa-gst": "wa-gst-90efc"
+  },
+  "targets": {},
+  "etags": {}
 }

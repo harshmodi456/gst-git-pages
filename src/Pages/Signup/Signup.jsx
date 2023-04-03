@@ -29,6 +29,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import OtpViewComponents from "../../Components/OtpViewComponents/OtpViewComponents";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import signupBackgroung from '../../Assets/Images/login.svg';
+import { toast } from "react-toastify";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
@@ -59,28 +60,35 @@ const Signup = () => {
       .required("Mobile number Number is Required."),
     userPassword: Yup.string()
       .required("Password is required")
-      .min(5, "Your password is too short.")
+      .min(8, 'Password must be at least 8 characters')
       .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
     confirmPassword: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
       .oneOf([Yup.ref("userPassword"), null], "Passwords must match")
       .required("Confirm Password is required")
   });
 
   const signupHandler = (takeValue) => {
-    isLoading(true);
-    dispatch(
-      signUpUser({
-        mobileNo: takeValue?.mobileNo?.toString(),
-        password: takeValue?.userPassword,
-        passwordConfirm: takeValue?.confirmPassword
-      })
-    ).then((res) => {
-      if (res?.payload?.status === true) {
-        handleClickOpen(res?.payload);
-        setFormValues(res?.payload);
-      }
-      isLoading(false);
-    });
+
+    if (checkBox) {
+      isLoading(true);
+      dispatch(
+        signUpUser({
+          mobileNo: takeValue?.mobileNo?.toString(),
+          password: takeValue?.userPassword,
+          passwordConfirm: takeValue?.confirmPassword
+        })
+      ).then((res) => {
+        if (res?.payload?.status === true) {
+          handleClickOpen(res?.payload);
+          setFormValues(res?.payload);
+        }
+        isLoading(false);
+      });
+    } else if (!checkBox) {
+      toast.warning('Please check privacy policy!')
+    }
+
   };
 
   const otpSubmitHandler = () => {
@@ -196,7 +204,7 @@ const Signup = () => {
                       </p>
                     </label>
                     <div className="w-100 mt-4 mb-3">
-                      <button disabled={!checkBox} className="w-100 btn-signin">
+                      <button className="w-100 btn-signin">
                         Sign In
                       </button>
                     </div>
@@ -335,39 +343,39 @@ const Signup = () => {
           </Grid>
         </div>
       </div> */}
-        <Dialog
-          open={open}
-          onClose={(event, reason) => {
-            if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
-              // Set 'open' to false, however you would do that with your particular code.
-              handleClose();
-            }
-          }}
-          PaperProps={{
-            sx: {
-              width: "100%"
-            }
-          }}
-        >
-          <DialogTitle id="alert-dialog-title">
-            <div className="text-center mt-2 mb-4">{"Otp verification"}</div>
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              <Backdrop
-                open={isLoadingOtpContainer}
-                sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
-              <OtpViewComponents handleChange={(evt) => setOtp(evt)} otp={otp} />
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose}>Cancel</Button>
-            <Button onClick={() => otpSubmitHandler()}>Submit</Button>
-          </DialogActions>
-        </Dialog>
+      <Dialog
+        open={open}
+        onClose={(event, reason) => {
+          if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
+            // Set 'open' to false, however you would do that with your particular code.
+            handleClose();
+          }
+        }}
+        PaperProps={{
+          sx: {
+            width: "100%"
+          }
+        }}
+      >
+        <DialogTitle id="alert-dialog-title">
+          <div className="text-center mt-2 mb-4">{"Otp verification"}</div>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <Backdrop
+              open={isLoadingOtpContainer}
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+            <OtpViewComponents handleChange={(evt) => setOtp(evt)} otp={otp} />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={() => otpSubmitHandler()}>Submit</Button>
+        </DialogActions>
+      </Dialog>
     </>
   );
 };

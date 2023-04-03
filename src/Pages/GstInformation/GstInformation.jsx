@@ -18,6 +18,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
+import { toast } from "react-toastify";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -150,37 +151,41 @@ const GstInformation = () => {
   }
 
   const handlePost = async () => {
-    // setProfileImg([]);
-    let formData = new FormData();
-    formData.append('userId', getUserToken?.userInfo?.data?._id);
-    formData.append('gstId', gst?._id || gst?._doc?._id);
-    formData.append('reviewText', reviewTextDesc);
-    formData.append('rating', value);
-    // formData.append('image', profileImg[0]);
-    // imgFile.map((image) => {
-    //   formData.append('image', imgFile[0])
-    //   console.log(image)
-    // })
+    if (reviewTextDesc) {
+      // setProfileImg([]);
+      let formData = new FormData();
+      formData.append('userId', getUserToken?.userInfo?.data?._id);
+      formData.append('gstId', gst?._id || gst?._doc?._id);
+      formData.append('reviewText', reviewTextDesc);
+      formData.append('rating', value);
+      // formData.append('image', profileImg[0]);
+      // imgFile.map((image) => {
+      //   formData.append('image', imgFile[0])
+      //   console.log(image)
+      // })
 
-    const writeReviewInput = {
-      userId: getUserToken?.userInfo?.data?._id,
-      gstId: gst?._id || gst?._doc?._id,
-      reviewText: reviewTextDesc,
-      rating: value,
-    };
+      const writeReviewInput = {
+        userId: getUserToken?.userInfo?.data?._id,
+        gstId: gst?._id || gst?._doc?._id,
+        reviewText: reviewTextDesc,
+        rating: value,
+      };
 
-    dispatch(writeReview(writeReviewInput)).then((res) => {
-      if (res?.payload?.status === true) {
-        handleClose();
-        isLoading(true);
-        dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
-          setReviewData(res?.payload?.reviews);
-          document.getElementById("btn-cancel").click();
-          fetchReview(gst?._id || gst?._doc?._id, true);
-          isLoading(false);
-        });
-      }
-    });
+      dispatch(writeReview(writeReviewInput)).then((res) => {
+        if (res?.payload?.status === true) {
+          handleClose();
+          isLoading(true);
+          dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
+            setReviewData(res?.payload?.reviews);
+            document.getElementById("btn-cancel").click();
+            fetchReview(gst?._id || gst?._doc?._id, true);
+            isLoading(false);
+          });
+        }
+      });
+    }else if(!reviewTextDesc){
+      toast.error('please write something!')
+    }
   };
 
   return (
