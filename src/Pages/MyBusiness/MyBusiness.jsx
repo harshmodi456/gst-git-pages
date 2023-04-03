@@ -49,7 +49,11 @@ const MyBusiness = () => {
     }),
     onSubmit: values => {
       isLoading(true);
-      dispatch(gstVerify(values?.verificationValue)).then((res) => {
+      const params = {
+        userId: getUserInfo?.userInfo?.data?._id,
+        verificationValue: values?.verificationValue
+      }
+      dispatch(gstVerify(params)).then((res) => {
         if (res?.payload?.status === true) {
           setGstSearchData(res?.payload?.data);
         } else {
@@ -153,7 +157,7 @@ const MyBusiness = () => {
                   <h4>Result</h4>
                   <hr />  
                 </div>
-                <div className="px-lg-4 py-5 row px-4 m-0">
+                <div className="px-lg-4 py-5 row px-4 m-0 mb-5">
                   {
                     gstSearchData?.map((gst, index) => (
                       <GstCard key={index} gst={gst} isMyBusiness={true} />

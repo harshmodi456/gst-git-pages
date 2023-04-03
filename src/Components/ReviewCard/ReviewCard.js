@@ -39,78 +39,29 @@ export default function ReviewCard(props) {
     const getUserInfo = JSON.parse(takeUserInfo)?.userInfo?.data;
     const userId = getUserInfo?._id;
     const [imgFile, setImgFile] = useState([]);
-    const [imageUrl, setImageUrl] = useState();
+    const [imageUrl, setImageUrl] = useState([]);
     const [profileImg, setProfileImg] = useState([]);
     const [deleteBar, setDeleteBar] = useState(false);
-
-    const images = [
-        {
-            id: 0,
-            img: Image
-        },
-        {
-            id: 1,
-            img: Image
-        },
-        {
-            id: 2,
-            img: Image
-        },
-        {
-            id: 3,
-            img: Image
-        },
-        {
-            id: 4,
-            img: Image
-        },
-        {
-            id: 5,
-            img: Image
-        },
-        {
-            id: 6,
-            img: Image
-        },
-        {
-            id: 7,
-            img: Image
-        },
-        {
-            id: 8,
-            img: Image
-        },
-        {
-            id: 9,
-            img: Image
-        },
-        ,
-        {
-            id: 6,
-            img: Image
-        },
-        {
-            id: 7,
-            img: Image
-        },
-        {
-            id: 8,
-            img: Image
-        },
-        {
-            id: 9,
-            img: Image
-        },
-    ]
 
     const fileChangeHandler = (event) => {
         const file = event.target.files;
         if (file != null) {
             for (let i = 0; i < event.target.files?.length; i++) {
                 setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
-                setImgFile(file[i]);
+                setImgFile((current) => [...current, file[i]]);
             }
         }
+    }
+
+    const setImgOnUpdate = () => {
+        let imgArray = [];
+        let counter = 0;
+        review?.reviewImg?.map((image) => {
+            imgArray.push(image?.imgUrl)
+            if (++counter == review?.reviewImg?.length) {
+                setProfileImg(imgArray)
+            }
+        })
     }
 
     const removeImage = (url) => {
@@ -127,20 +78,37 @@ export default function ReviewCard(props) {
         document.getElementById("reviewImgUrl").click()
     }
 
-    const updateHandler = () => {
+    const updateHandler = (e) => {
+        e.preventDefault();
         setIsLoading(true);
-        const params = {
-            _id: review?._id,
-            reviewText: reviewText,
-            rating: rating
-        };
+        let formData = new FormData();
+        formData.append('id', review?._id);
+        formData.append('reviewText', reviewText);
+        formData.append('rating', rating);
+        let oldImg = [];
+        let count = 0;
+        profileImg?.filter((img)=>{
+            if (img.slice(0, 4) == 'http') {
+                oldImg.push({imgUrl : img});
+            }
+            if (++count == profileImg?.length) {
+                formData.append('oldImg', JSON.stringify(oldImg));
+            }
+        })
 
-        dispatch(updateReview(params)).then((res) => {
+        for (const key of Object.keys(imgFile)) {
+            localStorage.setItem('multiImg', true);
+            formData.append('image', imgFile[key]);
+        }
+
+        dispatch(updateReview(formData)).then((res) => {
             if (res?.payload?.status) {
                 document.getElementById(`btn-cancel-${review?._id}`).click();
                 props.updateData(review?.gstId?._id, true);
                 setIsLoading(false);
             }
+            localStorage.setItem('multiImg', false);
+            setIsLoading(false);
         });
     }
 
@@ -169,7 +137,7 @@ export default function ReviewCard(props) {
                         <div className='d-flex align-items-center justify-content-end'>
                             {
                                 review?.userId?._id === userId ? (
-                                    <IconButton className='mr-2' size="small" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>
+                                    <IconButton onClick={setImgOnUpdate} className='mr-2' size="small" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>
                                         <EditIcon fontSize="small" />
                                     </IconButton>
                                 ) : (
@@ -191,7 +159,7 @@ export default function ReviewCard(props) {
                     {
                         review?.reviewImg?.slice(0, 4)?.map((data, index) => {
                             return (
-                                <div className='m-1' key={index}>
+                                <div className='m-1' key={index} data-toggle="modal" data-target="#exampleModalCenter">
                                     <img className='review-img' src={data?.imgUrl} alt='review-img' />
                                 </div>
                             )

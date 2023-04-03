@@ -22,6 +22,12 @@
         -webkit-line-clamp: 1;
         -webkit-box-orient: vertical;
     }
+
+    .verified-mark {
+        .MuiSvgIcon-root {
+            color: green;
+        }
+    }
 }
 
 .gst-card-container:hover {

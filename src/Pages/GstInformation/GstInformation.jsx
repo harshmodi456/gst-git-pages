@@ -165,15 +165,9 @@ const GstInformation = () => {
     formData.append('rating', value);
 
     for (const key of Object.keys(imgFile)) {
+      localStorage.setItem('multiImg', true);
       formData.append('image', imgFile[key]);
     }
-
-    const writeReviewInput = {
-      userId: getUserToken?.userInfo?.data?._id,
-      gstId: gst?._id || gst?._doc?._id,
-      reviewText: reviewTextDesc,
-      rating: value,
-    };
 
     dispatch(writeReview(formData)).then((res) => {
       if (res?.payload?.status === true) {
@@ -186,6 +180,7 @@ const GstInformation = () => {
           isLoading(false);
         });
       }
+      localStorage.setItem('multiImg', false);
     });
   };
 
@@ -352,7 +347,7 @@ const GstInformation = () => {
                 </div>
                 <div className="btn-container text-right w-100">
                   <button id="btn-cancel" onClick={resetData} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
-                  <button className="btn-submit" type="submit">Post</button>
+                  <button className="btn-submit" type="submit" disabled={reviewTextDesc?.length < 1 ? true : false}>Post</button>
                 </div>
               </form>
             </div>

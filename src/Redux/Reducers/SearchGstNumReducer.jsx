@@ -10,7 +10,7 @@ export const gstVerify = createAsyncThunk(
     try {
       return await (
         // await instance.post(`${api}gst/verify`, data)
-        await instance.get(`${api}gst/verify/${data}`)
+        await instance.get(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null }`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -132,15 +132,10 @@ export const writeReview = createAsyncThunk(
 export const updateReview = createAsyncThunk(
   "Gst/updateReview",
   async (data, thunkApi) => {
-    const updateData = {
-      address: data?.address,
-      reviewText: data?.reviewText,
-      rating: data?.rating,
-    };
     try {
       return await
         (
-          await instance.put(`${api}review/${data._id}`, updateData)
+          await instance.post(`${api}review/update`, data)
         ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);

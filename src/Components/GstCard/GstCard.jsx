@@ -8,6 +8,7 @@ import {
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
 
 export default function GstCard(props) {
 
@@ -105,8 +106,16 @@ export default function GstCard(props) {
                     <div className='col-lg-2 col-3'>
                         Name:
                     </div>
-                    <div className='col-lg-10 col-9 company-name mr-0 pl-lg-4 break-line-1'>
+                    <div className='col-lg-9 col-8 company-name mr-0 pl-lg-4 break-line-1'>
                         {gst?.lgnm || gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}
+                    </div>
+                    <div className='col-1'>
+                    {
+                        (gst?.isMyBusiness) && 
+                        <div className='verified-mark'>
+                        <WorkspacePremiumIcon/>
+                        </div>
+                    }
                     </div>
                 </div>
                 <div className='row my-2 font-weight-bold'>

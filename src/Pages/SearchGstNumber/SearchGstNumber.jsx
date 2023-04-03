@@ -30,7 +30,11 @@ const SearchGstNumber = () => {
     }),
     onSubmit: values => {
       isLoading(true);
-      dispatch(gstVerify(values?.verificationValue)).then((res) => {
+      const params = {
+        userId: getUserInfo?.userInfo?.data?._id,
+        verificationValue: values?.verificationValue
+      }
+      dispatch(gstVerify(params)).then((res) => {
         if (res?.payload?.status === true) {
           setGstSearchData(res?.payload?.data);
         } else {
@@ -95,7 +99,7 @@ const SearchGstNumber = () => {
         </Backdrop>
         {
           gstSearchData?.length > 0 ? (
-            <div className="mt-5">
+            <div className="my-5">
               {
                 gstSearchData?.length > 0 ? (
                   <div className="row px-lg-4 m-0">
