@@ -140,7 +140,7 @@ const GstInformation = () => {
     if (file != null) {
       for (let i = 0; i < event.target.files?.length; i++) {
         setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
-        setImgFile(file[i]);
+        setImgFile((current) => [...current, file[i]]);
       }
     }
   }
@@ -149,15 +149,33 @@ const GstInformation = () => {
     document.getElementById("reviewImgUrl").click()
   }
 
-  const handlePost = () => {
+  const resetData = () => {
+    setReviewTextDesc('');
+    setValue(0);
+    setImageUrl([]);
     setProfileImg([]);
+  }
+
+  const handlePost = async (e) => {
+    e.preventDefault();
+    let formData = new FormData();
+    formData.append('userId', getUserToken?.userInfo?.data?._id);
+    formData.append('gstId', gst?._id || gst?._doc?._id);
+    formData.append('reviewText', reviewTextDesc);
+    formData.append('rating', value);
+
+    for (const key of Object.keys(imgFile)) {
+      formData.append('image', imgFile[key]);
+    }
+
     const writeReviewInput = {
       userId: getUserToken?.userInfo?.data?._id,
       gstId: gst?._id || gst?._doc?._id,
       reviewText: reviewTextDesc,
-      rating: value
+      rating: value,
     };
-    dispatch(writeReview(writeReviewInput)).then((res) => {
+
+    dispatch(writeReview(formData)).then((res) => {
       if (res?.payload?.status === true) {
         handleClose();
         isLoading(true);
@@ -228,7 +246,7 @@ const GstInformation = () => {
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">Principal Place of Business</h5>
-            <h5>{gstAddress.slice(0,9) == 'undefined' ? ' ' : gstAddress}</h5>
+            <h5>{gstAddress.slice(0, 9) == 'undefined' ? ' ' : gstAddress}</h5>
           </div>
         </div>
 
@@ -267,74 +285,76 @@ const GstInformation = () => {
         </div>
 
         {/* <!-- Modal --> */}
-        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={true} tabindex="-1" id="write-review-modal">
+        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={true} tabIndex="-1" id="write-review-modal">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
               <div className="write-review-title">
                 <h2>{gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}</h2>
                 <p className="text-muted">Posting Publicity</p>
               </div>
-              <div className="rate-view">
-                <Rating
-                  className="mt-1 mb-4"
-                  name="simple-controlled"
-                  value={value}
-                  onChange={(event, newValue) => {
-                    setValue(newValue);
+              <form onSubmit={handlePost}>
+                <div className="rate-view">
+                  <Rating
+                    className="mt-1 mb-4"
+                    name="simple-controlled"
+                    value={value}
+                    onChange={(event, newValue) => {
+                      setValue(newValue);
+                    }}
+                    size="large"
+                  />
+                </div>
+                <textarea
+                  className="review-textarea w-100"
+                  as='textarea'
+                  autoComplete="off"
+                  rows={6}
+                  placeholder="Write Review..."
+                  value={reviewTextDesc}
+                  onChange={(event) => {
+                    setReviewTextDesc(event.target.value);
                   }}
-                  size="large"
                 />
-              </div>
-              <textarea
-                className="review-textarea"
-                as='textarea'
-                autoComplete="off"
-                rows={6}
-                placeholder="Write Review..."
-                value={reviewTextDesc}
-                onChange={(event) => {
-                  setReviewTextDesc(event.target.value);
-                }}
-              />
-              <div className="img-container d-flex flex-wrap">
-                <input
-                  multiple
-                  id="reviewImgUrl"
-                  name='reviewImgUrl'
-                  accept="image/*"
-                  hidden
-                  type="file"
-                  onChange={(event) => fileChangeHandler(event)}
-                />
-                <Box className='d-flex flex-wrap'>
-                  {
-                    profileImg?.map((image, index) => {
-                      return (
-                        <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
-                          <img src={image} height={'150px'} width={'150px'} />
-                          {
-                            deleteBar && imageUrl === image && (
-                              <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
-                                <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
-                              </Box>
-                            )
-                          }
-                        </Box>
-                      )
-                    })
-                  }
-                </Box>
+                <div className="img-container d-flex flex-wrap">
+                  <input
+                    multiple
+                    id="reviewImgUrl"
+                    name='reviewImgUrl'
+                    accept="image/*"
+                    hidden
+                    type="file"
+                    onChange={(event) => fileChangeHandler(event)}
+                  />
+                  <Box className='d-flex flex-wrap'>
+                    {
+                      profileImg?.map((image, index) => {
+                        return (
+                          <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
+                            <img src={image} height={'150px'} width={'150px'} />
+                            {
+                              deleteBar && imageUrl === image && (
+                                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
+                                  <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
+                                </Box>
+                              )
+                            }
+                          </Box>
+                        )
+                      })
+                    }
+                  </Box>
 
-              </div>
-              <div className="">
-                <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
-                  Add Image
-                </Button>
-              </div>
-              <div className="btn-container text-right w-100">
-                <button id="btn-cancel" onClick={() => setProfileImg([])} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
-                <button className="btn-submit" onClick={handlePost}>Post</button>
-              </div>
+                </div>
+                <div className="mt-2 mb-3">
+                  <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>
+                    Add Image
+                  </Button>
+                </div>
+                <div className="btn-container text-right w-100">
+                  <button id="btn-cancel" onClick={resetData} className="btn-cancel mr-3" data-toggle="modal" data-target="#write-review-modal">Cancel</button>
+                  <button className="btn-submit" type="submit">Post</button>
+                </div>
+              </form>
             </div>
           </div>
         </div>

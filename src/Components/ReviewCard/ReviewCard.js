@@ -134,6 +134,7 @@ export default function ReviewCard(props) {
             reviewText: reviewText,
             rating: rating
         };
+
         dispatch(updateReview(params)).then((res) => {
             if (res?.payload?.status) {
                 document.getElementById(`btn-cancel-${review?._id}`).click();
@@ -144,7 +145,7 @@ export default function ReviewCard(props) {
     }
 
     return (
-        <div className='col-lg-6 col-md-12 px-md-3 my-3 px-0'>
+        <div className='col-lg-6 col-md-12 px-md-3 my-3 px-3'>
             <div className='review-card-container p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
                     <div className='d-flex justify-content-start align-items-center'>
@@ -180,7 +181,7 @@ export default function ReviewCard(props) {
                     </div>
                 </div>
                 <div className='body px-2 py-3'>
-                    <p className='m-0 review-text' data-toggle="modal" data-target="#review-text-modal">
+                    <p className='m-0 review-text' data-toggle="modal" data-target={`#review-text-modal-${review?._id}`}>
                         {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                         been the industry's standard dummy text ever since the 1500s, when an unknown printer took  and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownz */}
                         {review?.reviewText}
@@ -188,18 +189,18 @@ export default function ReviewCard(props) {
                 </div>
                 <div className='review-img-container pt-2 px-2 w-100'>
                     {
-                        images.slice(0, 4)?.map((data, index) => {
+                        review?.reviewImg?.slice(0, 4)?.map((data, index) => {
                             return (
-                                <div className='m-1'>
-                                    <img key={index} className='review-img' src={data?.img} alt='review-img' />
+                                <div className='m-1' key={index}>
+                                    <img className='review-img' src={data?.imgUrl} alt='review-img' />
                                 </div>
                             )
                         })
                     }
                     {
-                        images?.length > 4 && (
-                            <div class="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-                                <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>5</span>
+                        review?.reviewImg?.length > 4 && (
+                            <div className="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                                <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>{review?.reviewImg?.length - 4}</span>
                             </div>
                         )
                     }
@@ -207,13 +208,13 @@ export default function ReviewCard(props) {
             </div>
 
             {/* <!-- Modal --> */}
-            <div class="modal fade bd-example-modal-lg" size="lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered  modal-lg" role="document">
-                    <div class="modal-content modal-lg">
-                        <div class="modal-header p-10">
-                            <h5 class="modal-title" id="exampleModalLongTitle">All Images</h5>
+            <div className="modal fade bd-example-modal-lg" size="lg" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered  modal-lg" role="document">
+                    <div className="modal-content modal-lg">
+                        <div className="modal-header p-10">
+                            <h5 className="modal-title" id="exampleModalLongTitle">All Images</h5>
                         </div>
-                        <div class="modal-body p-10">
+                        <div className="modal-body p-10">
                             <>
                                 <Swiper
                                     slidesPerView={3}
@@ -229,10 +230,10 @@ export default function ReviewCard(props) {
                                     className="mySwiper"
                                 >
                                     {
-                                        images?.map((data, index) => {
+                                        review?.reviewImg?.map((data, index) => {
                                             return (
                                                 <SwiperSlide key={index} className='m-1 swiper-block'>
-                                                    <img src={data?.img} style={{ height: "200px", width: "200px" }} />
+                                                    <img src={data?.imgUrl} style={{ height: "200px", width: "200px", marginBottom: 60 }} />
                                                 </SwiperSlide>
                                             )
                                         })
@@ -240,20 +241,18 @@ export default function ReviewCard(props) {
                                 </Swiper>
                             </>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <div className="modal-footer">
+                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
             </div>
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" data-keyboard={true} tabindex="-1" id="review-text-modal">
+            <div className="modal fade" data-keyboard={true} tabIndex="-1" id={`review-text-modal-${review?._id}`}>
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content p-5">
                         <p className='m-0 review-text'>
-                            {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                            been the industry's standard dummy text ever since the 1500s, when an unknown printer took  and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownz */}
                             {review?.reviewText}
                         </p>
                     </div>
@@ -261,7 +260,7 @@ export default function ReviewCard(props) {
             </div>
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" data-keyboard={true} tabindex="-1" id={`update-review-modal-${review?._id}`}>
+            <div className="modal fade" data-keyboard={true} tabIndex="-1" id={`update-review-modal-${review?._id}`}>
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content p-5">
                         <div className="write-review-title">

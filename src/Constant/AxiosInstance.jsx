@@ -5,9 +5,11 @@ export const api = "https://wa-gst-api.onrender.com/api/v1/";
 const instance = axios.create({
   baseURL: "https://wa-gst-api.onrender.com/api/v1/",
   headers: {
-    "Content-Type": "application/json"
+    // 'Content-Type': 'application/json',
+    // 'Content-Type': ['application/json', 'multipart/form-data'],
   }
 });
+
 
 instance.interceptors.request.use(
   (config) => {

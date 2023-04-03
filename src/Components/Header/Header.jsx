@@ -192,8 +192,9 @@ const Header = (props) => {
                 aria-label="open drawer"
                 edge="start"
                 sx={{ mr: 2, display: { sm: "none" } }}
+                onClick={handleDrawerToggle}
               >
-                <MenuIcon onClick={handleDrawerToggle} />
+                <MenuIcon  />
                 <div className="d-flex h-100 justify-content-center">
                   <div className="logo-backgroung-sm" ></div>
                   <div className="logo-container" >

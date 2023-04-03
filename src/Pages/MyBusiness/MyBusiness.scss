@@ -39,6 +39,13 @@
       background-color: #BFB7C0;
     }
   }
+
+    //  Mobile devices
+    @media (min-width: 300px) and (max-width: 480px) {
+      .search-gst-modal {
+        width: 100%;
+      }
+    }
 }
 
 .my-business-div {

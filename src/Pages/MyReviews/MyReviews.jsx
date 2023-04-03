@@ -55,7 +55,7 @@ const MyReviews = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className="title-container d-flex justify-content-start align-items-center">
+      <div className="title-container">
         <h2 className="font-weight-bold pl-lg-5 pl-3">
           My Review
         </h2>
