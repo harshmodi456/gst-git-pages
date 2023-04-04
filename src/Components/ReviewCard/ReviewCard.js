@@ -149,10 +149,10 @@ export default function ReviewCard(props) {
                     </div>
                 </div>
                 <div className='body px-2 py-3'>
-                    <p className='m-0 review-text min-height-wrap' data-toggle="modal" data-target={review?.reviewText?.length > 203 && `#review-text-modal-${review?._id}`}>
+                    <p className='m-0 review-text min-height-wrap' data-toggle="modal" data-target={review?.reviewText?.length > 257 && `#review-text-modal-${review?._id}`}>
                         {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
                         been the industry's standard dummy text ever since the 1500s, when an unknown printer took  and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownz */}
-                        {review?.reviewText?.slice(0, 203)}{review?.reviewText?.length > 203 && "..."}
+                        {review?.reviewText?.slice(0, 257)}{review?.reviewText?.length > 257 && "..."}
                     </p>
                 </div>
                 <div className='review-img-container pt-2 px-2 w-100'>
