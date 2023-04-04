@@ -15,6 +15,8 @@ import {
   updateUser
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import userImg from '../../Assets/Images/user.png';
+import Backdrop from "@mui/material/Backdrop";
+import CircularProgress from "@mui/material/CircularProgress";
 
 const UserProfile = () => {
 
@@ -24,10 +26,15 @@ const UserProfile = () => {
   const [profileImg, setProfileImg] = useState(userImg);
   const [imgFile, setImgFile] = useState(null);
   const userName = user?.fName + ' ' + user?.lName;
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!user) {
       navigate('/')
+    } else {
+      if (user?.profileImg) {
+        setProfileImg(user?.profileImg);
+      }
     }
   }, [user])
 
@@ -69,15 +76,19 @@ const UserProfile = () => {
   })
 
   const submitHandler = async (userCredentials) => {
+    setIsLoading(true);
     const formData = new FormData();
     formData.append("fName", userCredentials?.fName);
     formData.append("lName", userCredentials?.lName);
-    formData.append("image", imgFile);
-    // const params = {
-    //   userId: user?._id,
-    //   fName: userCredentials?.fName,
-    //   lName: userCredentials?.lName
-    // }
+    if (profileImg.slice(0,4) == 'http') {
+      formData.append("oldImg", profileImg);
+    } else {
+      formData.append("oldImg", null);
+    }
+    if (imgFile) {
+      localStorage.setItem('multiImg', true);
+      formData.append("image", imgFile);
+    }
 
     dispatch(updateUser(formData)).then((res) => {
       if (res?.payload?.status) {
@@ -90,7 +101,11 @@ const UserProfile = () => {
           }
         }
         localStorage.setItem('userInfo', JSON.stringify(user));
+        localStorage.setItem('multiImg', false);
+        setIsLoading(false);
       }
+      localStorage.setItem('multiImg', false);
+      setIsLoading(false);
     });
   }
 
@@ -144,7 +159,7 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="col-12 text-right my-5">
-            <button type="submit">Update</button>
+            <button type="submit" className="btn-update-profile">Update</button>
           </div>
         </form>
       </div>
@@ -181,6 +196,12 @@ const UserProfile = () => {
           <UpdateUserForm />
         </div>
       </Grid>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={isLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </div>
   );
 };

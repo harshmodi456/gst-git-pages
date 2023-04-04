@@ -68,7 +68,7 @@ const Header = (props) => {
         // "Business",
         "My Reviews",
         "My Business",
-        // "User Profile",
+        "User Profile",
         "Log Out"
       ]
       : [
@@ -90,6 +90,7 @@ const Header = (props) => {
     } else if (getVal === "Log Out") {
       localStorage.clear();
       navigate("/");
+      window.location.reload();
     } else if (getVal === "Log In") {
       navigate("/login");
     } else if (getVal === "My Reviews") {

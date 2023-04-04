@@ -52,6 +52,12 @@ export default function ReviewCard(props) {
             }
         }
     }
+    
+    useEffect(()=>{
+        return(()=>{
+            setImgFile([]);
+        })
+    }, [])
 
     const setImgOnUpdate = () => {
         let imgArray = [];
@@ -106,9 +112,11 @@ export default function ReviewCard(props) {
                 document.getElementById(`btn-cancel-${review?._id}`).click();
                 props.updateData(review?.gstId?._id, true);
                 setIsLoading(false);
+                setImgFile([]);
             }
             localStorage.setItem('multiImg', false);
             setIsLoading(false);
+            setImgFile([]);
         });
     }
 
@@ -117,7 +125,7 @@ export default function ReviewCard(props) {
             <div className='review-card-container h-100 p-3'>
                 <div className='header d-flex px-2 justify-content-between w-100'>
                     <div className='d-flex justify-content-start align-items-center'>
-                        <Avatar className='mr-2' size='52' round name={`${review?.userId?.fName} ${review?.userId?.lName}`} />
+                        <Avatar className='mr-2' size='52' round name={`${review?.userId?.fName} ${review?.userId?.lName}`} src={review?.userId?.profileImg} />
                         <div>
                             <p className='user-name m-0 break-line-1'>{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
                             <p className='company-name m-0'>{review?.gstId?.gstData?.lgnm}</p>
