@@ -44,7 +44,11 @@ const GstInformation = () => {
 
   const fetchGst = () => {
     isLoading(true);
-    dispatch(getRecordGstById(gstIn)).then((res) => {
+    const params = {
+      gstIn: gstIn,
+      userId: getUserToken?.userInfo?.data?._id
+    }
+    dispatch(getRecordGstById(params)).then((res) => {
       if (res?.payload?.data) {
         setGst(res?.payload?.data);
         fetchReview(res?.payload?.data?._id || res?.payload?.data?._doc?._id);
@@ -155,6 +159,7 @@ const GstInformation = () => {
     setValue(0);
     setImageUrl([]);
     setProfileImg([]);
+    setImgFile([]);
   }
 
   const handlePost = async (e) => {
@@ -260,7 +265,12 @@ const GstInformation = () => {
             <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
           </div>
           <div className="text-right">
-            <button className="btn-write-review" data-toggle="modal" data-target="#write-review-modal">
+            <button
+              className="btn-write-review"
+              data-toggle="modal"
+              data-target="#write-review-modal"
+              disabled={gst?.isMyBusiness ? true : false}
+            >
               <FaEdit /> Write Review
             </button>
           </div>
@@ -281,7 +291,7 @@ const GstInformation = () => {
         </div>
 
         {/* <!-- Modal --> */}
-        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={true} tabIndex="-1" id="write-review-modal">
+        <div className="modal fade" style={{ zIndex: '1200' }} data-keyboard={false} tabIndex="-1" id="write-review-modal">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
               <div className="write-review-title">

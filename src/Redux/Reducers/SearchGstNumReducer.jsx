@@ -104,7 +104,7 @@ export const getRecordGstById = createAsyncThunk(
       return await // await doFetch(`${api}/auth/login`,'POST',data)
         // await axios.get(`${api}gst/getGst/${data}`)
         (
-          await instance.get(`${api}gst/${data}`)
+          await instance.get(`${api}gst/${data?.gstIn}?userId=${data.userId}`)
         ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -173,6 +173,22 @@ export const getReviewByUser = createAsyncThunk(
           await instance.get( // ---- testing
             `${api}review/user/${userId}?size=30`
           )
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+// for add helpuful
+export const addHelpfulCount = createAsyncThunk(
+  "Gst/addHelpful",
+  async (data, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.post(
+            `${api}review/helpful/${data?.reviewId}`, data)
         ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);

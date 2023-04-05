@@ -22,15 +22,15 @@
 
   .modal-content {
     .css-jue3ft-MuiRating-root {
-      color: #4CBE24 !important;
+      color: #4cbe24 !important;
     }
 
     .write-review-title h2 {
-      color: #00448B;
+      color: #00448b;
       font-weight: 600;
     }
     .review-textarea {
-      background-color: #F3ECEC;
+      background-color: #f3ecec;
       border: none;
       border-radius: 15px;
       resize: none;
@@ -53,15 +53,15 @@
       }
 
       button:focus {
-        outline: none;  
+        outline: none;
       }
 
       .btn-cancel {
-        background: #BFB7C0;
+        background: #bfb7c0;
       }
 
       .btn-submit {
-        background: #DA45FF;
+        background: #da45ff;
       }
     }
   }
@@ -75,16 +75,16 @@
       border: none;
     }
     .lbl-review {
-      color: #4CBE24;
+      color: #4cbe24;
       font-weight: 600;
     }
     .MuiRating-sizeMedium {
-      color: #4CBE24;
+      color: #4cbe24;
       opacity: 1;
     }
     .btn-write-review {
       border: none;
-      background-color: #DA45FF;
+      background-color: #da45ff;
       color: white;
       padding: 15px 20px;
       font-weight: 600;
@@ -95,6 +95,10 @@
 
     .btn-write-review:focus {
       outline: none;
+    }
+
+    .btn-write-review:disabled {
+      cursor: not-allowed;
     }
   }
 }
@@ -311,7 +315,6 @@
   }
 
   .img-container {
-   
     .MuiButton-outlined:hover {
       outline: none !important;
     }
@@ -438,5 +441,4 @@
 .img-container {
   max-height: 250px;
   overflow: auto;
-  
 }

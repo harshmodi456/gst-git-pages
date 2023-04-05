@@ -6,6 +6,7 @@ import { FaThumbsUp } from "react-icons/fa";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
     updateReview,
+    addHelpfulCount
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -31,6 +32,7 @@ import { Keyboard, Pagination, Navigation } from "swiper";
 export default function ReviewCard(props) {
 
     const { review } = props;
+    let [helpfulCount, setHelpfulCount] = useState(review?.helpful?.length || 0);
     const dispatch = useAppDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [reviewText, setReviewText] = useState(review?.reviewText);
@@ -120,6 +122,35 @@ export default function ReviewCard(props) {
         });
     }
 
+    const resetData = () => {
+        setImageUrl([]);
+        setProfileImg([]);
+        setImgFile([]);
+        setReviewText('');
+        setRating('');
+    }
+
+    const handleHelpful = () => {
+        const params = {
+            reviewId: review?._id,
+            userId: userId
+        }
+
+        dispatch(addHelpfulCount(params)).then((res) => {
+            if (res?.payload?.status) {
+                setHelpfulCount(helpfulCount + 1);
+                setIsLoading(false);
+            }
+            setIsLoading(false);
+        });
+    }
+
+    const currentDate = new Date();
+    const reviewDate = new Date(review?.createdAt);
+    const diffTime = Math.abs(reviewDate - currentDate);
+    const reviewTime = Math.round(diffTime / 60000);
+    const reviewTimeAgo = reviewTime <= 1 ? 'now' : <TimeAgo date={review?.createdAt} />
+
     return (
         <div className='col-lg-6 col-md-12 px-md-3 my-3 px-3'>
             <div className='review-card-container h-100 p-3'>
@@ -142,7 +173,6 @@ export default function ReviewCard(props) {
                                 value={Math.round(review?.rating).toFixed(1)}
                                 disabled={true}
                             />
-                            <p className="m-0 ml-2 text-muted">({9 || 0})</p>
                         </div>
                         <div className='d-flex align-items-center justify-content-end'>
                             {
@@ -154,7 +184,7 @@ export default function ReviewCard(props) {
                                     <></>
                                 )
                             }
-                            <p className='m-0 text-muted'>Helpful? <FaThumbsUp className='ml-1 thumsup-icon' /></p>
+                            <p className='m-0 text-muted'>Helpful? <FaThumbsUp onClick={handleHelpful} className='ml-1 thumsup-icon' /><span className='ml-2'>({helpfulCount})</span></p>
                         </div>
                     </div>
                 </div>
@@ -169,7 +199,7 @@ export default function ReviewCard(props) {
                     {
                         review?.reviewImg?.slice(0, 4)?.map((data, index) => {
                             return (
-                                <div className='m-1' key={index} data-toggle="modal" data-target="#exampleModalCenter">
+                                <div className='m-1' key={index} data-toggle="modal" data-target={`#review-img-modal-${review?._id}`}>
                                     <img className='review-img' src={data?.imgUrl} alt='review-img' />
                                 </div>
                             )
@@ -177,7 +207,7 @@ export default function ReviewCard(props) {
                     }
                     {
                         review?.reviewImg?.length > 4 && (
-                            <div className="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+                            <div className="more-box-view m-1 btn btn-primary" data-toggle="modal" data-target={`#review-img-modal-${review?._id}`}>
                                 <AddIcon sx={{ color: '#928585' }} /> <span className='more-text'>{review?.reviewImg?.length - 4}</span>
                             </div>
                         )
@@ -185,8 +215,8 @@ export default function ReviewCard(props) {
                 </div>
             </div>
 
-            {/* <!-- Modal --> */}
-            <div className="modal fade bd-example-modal-lg" size="lg" id="exampleModalCenter" tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            {/* <!-- Images Modal --> */}
+            <div className="modal fade bd-example-modal-lg" size="lg" id={`review-img-modal-${review?._id}`} tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered  modal-lg" role="document">
                     <div className="modal-content modal-lg">
                         <div className="modal-header p-10">
@@ -227,7 +257,7 @@ export default function ReviewCard(props) {
             </div>
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" data-keyboard={true} tabIndex="-1" id={`review-text-modal-${review?._id}`}>
+            <div className="modal fade" data-keyboard={false} tabIndex="-1" id={`review-text-modal-${review?._id}`}>
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content p-5">
                         <p className='m-0 review-text'>
@@ -238,7 +268,7 @@ export default function ReviewCard(props) {
             </div>
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" data-keyboard={true} tabIndex="-1" id={`update-review-modal-${review?._id}`}>
+            <div className="modal fade" tabIndex="-1" id={`update-review-modal-${review?._id}`}>
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content p-5">
                         <div className="write-review-title">
@@ -280,6 +310,7 @@ export default function ReviewCard(props) {
                             <Box className='d-flex flex-wrap'>
                                 {
                                     profileImg?.map((image, index) => {
+                                        console.log(image, 'image')
                                         return (
                                             <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
                                                 <img src={image} height={'150px'} width={'150px'} />
@@ -303,7 +334,7 @@ export default function ReviewCard(props) {
                             </Button>
                         </div>
                         <div className="btn-container text-right w-100 mt-4">
-                            <button id={`btn-cancel-${review?._id}`} className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
+                            <button id={`btn-cancel-${review?._id}`} onClick={resetData} className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
                             <button className="btn-submit" onClick={updateHandler}>Post</button>
                         </div>
                     </div>
