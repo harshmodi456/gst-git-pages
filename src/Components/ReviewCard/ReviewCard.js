@@ -7,12 +7,12 @@ import { useAppDispatch } from "../../Redux/Store/Store";
 import {
     updateReview,
 } from "../../Redux/Reducers/SearchGstNumReducer";
-import Image from '../../Assets/Images/img1.png';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from '@mui/material/IconButton';
 import EditIcon from '@mui/icons-material/Edit';
 import TimeAgo from 'react-timeago';
+import ReactTimeAgo from 'react-time-ago';
 import AddIcon from '@mui/icons-material/Add';
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -21,7 +21,7 @@ import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-
+import moment from 'moment/moment';
 import "./styles.css";
 
 // import required modules
@@ -52,9 +52,9 @@ export default function ReviewCard(props) {
             }
         }
     }
-    
-    useEffect(()=>{
-        return(()=>{
+
+    useEffect(() => {
+        return (() => {
             setImgFile([]);
         })
     }, [])
@@ -93,9 +93,9 @@ export default function ReviewCard(props) {
         formData.append('rating', rating);
         let oldImg = [];
         let count = 0;
-        profileImg?.filter((img)=>{
+        profileImg?.filter((img) => {
             if (img.slice(0, 4) == 'http') {
-                oldImg.push({imgUrl : img});
+                oldImg.push({ imgUrl: img });
             }
             if (++count == profileImg?.length) {
                 formData.append('oldImg', JSON.stringify(oldImg));
@@ -129,7 +129,9 @@ export default function ReviewCard(props) {
                         <div>
                             <p className='user-name m-0 break-line-1'>{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
                             <p className='company-name m-0'>{review?.gstId?.gstData?.lgnm}</p>
-                            <p className='time-lable text-muted m-0'><TimeAgo date={review?.createdAt} /></p>
+                            <p className='time-lable text-muted m-0'><ReactTimeAgo timeStyle="round-minute" date={review?.createdAt} locale="en-US"/></p>
+
+                            {/* <p className='time-lable text-muted m-0'><TimeAgo locale="en-US" date={review?.createdAt} /></p> */}
                         </div>
                     </div>
                     <div>
@@ -193,7 +195,7 @@ export default function ReviewCard(props) {
                         <div className="modal-body p-10">
                             <>
                                 <Swiper
-                                    slidesPerView={3}
+                                    slidesPerView={1}
                                     spaceBetween={30}
                                     keyboard={{
                                         enabled: true,
@@ -209,7 +211,7 @@ export default function ReviewCard(props) {
                                         review?.reviewImg?.map((data, index) => {
                                             return (
                                                 <SwiperSlide key={index} className='m-1 swiper-block'>
-                                                    <img src={data?.imgUrl} style={{ height: "200px", width: "200px", marginBottom: 60 }} />
+                                                    <img src={data?.imgUrl} style={{ height: 550, width: 650, marginBottom: 60 }} />
                                                 </SwiperSlide>
                                             )
                                         })
