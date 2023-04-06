@@ -46,6 +46,8 @@ export default function ReviewCard(props) {
     const [deleteBar, setDeleteBar] = useState(false);
 
     const fileChangeHandler = (event) => {
+        const randome = Math.floor((Math.random() * 100) + 1);
+
         const file = event.target.files;
         if (file != null) {
             for (let i = 0; i < event.target.files?.length; i++) {
@@ -83,7 +85,7 @@ export default function ReviewCard(props) {
     }
 
     const upload = () => {
-        document.getElementById("reviewImgUrl").click()
+        document.getElementById("reviewImgUrl"+review?._id).click()
     }
 
     const updateHandler = (e) => {
@@ -300,8 +302,8 @@ export default function ReviewCard(props) {
                         <div className="img-container d-flex flex-wrap">
                             <input
                                 multiple
-                                id="reviewImgUrl"
-                                name='reviewImgUrl'
+                                id={"reviewImgUrl"+review?._id}
+                                name={"reviewImgUrl"+review?._id}
                                 accept="image/*"
                                 hidden
                                 type="file"
