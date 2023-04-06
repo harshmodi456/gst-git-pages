@@ -82,6 +82,11 @@ const Signup = () => {
         if (res?.payload?.status === true) {
           handleClickOpen(res?.payload);
           setFormValues(res?.payload);
+          const createLocalObject = {
+            success: true,
+            userInfo: res?.payload
+          };
+          localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
         }
         isLoading(false);
       });
@@ -99,7 +104,7 @@ const Signup = () => {
     };
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
-        navigate('/login')
+        navigate('/user-profile')
       } else {
         setTimeout(() => {
           setIsLoadingOtpContainer(false);

@@ -270,7 +270,7 @@ export default function ReviewCard(props) {
             </div>
 
             {/* <!-- Modal --> */}
-            <div className="modal fade" tabIndex="-1" id={`update-review-modal-${review?._id}`}>
+            <div className="modal fade" data-keyboard={false} tabIndex="-1" id={`update-review-modal-${review?._id}`}>
                 <div className="modal-dialog modal-dialog-centered modal-lg">
                     <div className="modal-content p-5">
                         <div className="write-review-title">

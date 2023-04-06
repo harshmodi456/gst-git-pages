@@ -91,17 +91,16 @@ const UserProfile = () => {
     }
 
     dispatch(updateUser(formData)).then((res) => {
-      if (res?.payload?.status) {
+      if (res?.payload?.status == true) {
         setUser(res?.payload?.data);
 
-        const user = {
-          userInfo: {
-            data: res?.payload?.data,
-            token: JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.token
-          }
-        }
-        localStorage.setItem('userInfo', JSON.stringify(user));
+        const createLocalObject = {
+          success: true,
+          userInfo: res?.payload
+        };
+        localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
         localStorage.setItem('multiImg', false);
+        navigate('/');
         setIsLoading(false);
       }
       localStorage.setItem('multiImg', false);
@@ -167,12 +166,12 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="my-user-profile-div">
-      <Grid className="container-div" columns={{ xs: 0, sm: 8, md: 12 }}>
+    <div className="my-user-profile-div pt-5">
+      <Grid columns={{ xs: 0, sm: 8, md: 12 }}>
         <div className="main-div container-fluid px-5">
-          <h1 className="px-5">Hello {user?.fName || ''},</h1>
+          <h1 className="px-5">Hello {user?.fName || 'User'},</h1>
           <hr />
-          <div className="px-5 py-3">
+          <div className="px-5">
             <div>
               <Avatar size={150} round src={profileImg} />
             </div>

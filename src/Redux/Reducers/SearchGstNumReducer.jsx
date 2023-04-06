@@ -197,14 +197,14 @@ export const addHelpfulCount = createAsyncThunk(
 );
 
 // for get write review by id
-const user = JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.data;
 export const updateUser = createAsyncThunk(
   "Get/updateUser",
   async (data, thunkApi) => {
+    const user = JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.data;
     try {
       return await
         (
-          await instance.post(`${api}users/update/${user._id}`, data)
+          await instance.post(`${api}users/update/${user?._id}`, data)
         ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -278,16 +278,6 @@ const SearchGstNumber = createSlice({
     builder.addCase(gstVerify.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
       state.loading = false;
-      toast.error(action?.payload?.response?.data?.msg, {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
     });
 
     // for post gst record
