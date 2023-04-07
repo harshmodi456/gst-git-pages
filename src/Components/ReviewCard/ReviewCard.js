@@ -20,6 +20,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { Swiper, SwiperSlide } from "swiper/react";
 import CameraAltIcon from '@mui/icons-material/CameraAlt';
 import "swiper/css";
+import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import moment from 'moment/moment';
@@ -44,6 +45,7 @@ export default function ReviewCard(props) {
     const [imageUrl, setImageUrl] = useState([]);
     const [profileImg, setProfileImg] = useState([]);
     const [deleteBar, setDeleteBar] = useState(false);
+    const [disableHelpful, setDisableHelpful] = useState(false);
 
     const fileChangeHandler = (event) => {
         const file = event.target.files;
@@ -55,6 +57,20 @@ export default function ReviewCard(props) {
             }
         }
     }
+
+    const handleDisableHelpful = () => {
+        if (review) {
+            review?.helpful?.map((userId) => {
+                if (userId == userId) {
+                    setDisableHelpful(true);
+                }
+            })
+        }
+    }
+
+    useEffect(() => {
+        handleDisableHelpful();
+    }, [review])
 
     useEffect(() => {
         return (() => {
@@ -155,6 +171,7 @@ export default function ReviewCard(props) {
 
         dispatch(addHelpfulCount(params)).then((res) => {
             if (res?.payload?.status) {
+                setDisableHelpful(true);
                 setHelpfulCount(helpfulCount + 1);
                 setIsLoading(false);
             }
@@ -201,7 +218,13 @@ export default function ReviewCard(props) {
                                     <></>
                                 )
                             }
-                            <p className='m-0 text-muted'>Helpful? <FaThumbsUp onClick={handleHelpful} className='ml-1 thumsup-icon' /><span className='ml-2'>({helpfulCount})</span></p>
+                            <p className='m-0 text-muted'>Helpful?
+
+                                <IconButton disabled={disableHelpful} onClick={handleHelpful} className='ml-1' size="small">
+                                    <ThumbUpIcon className='thumsup-icon' fontSize="inherit" />
+                                </IconButton>
+                                <span className='ml-1'>({helpfulCount})</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -356,7 +379,7 @@ export default function ReviewCard(props) {
                             </Button>
                         </div>
                         <div className="btn-container text-right w-100 mt-4">
-                            <button id={`btn-cancel-${review?._id}`} onClick={() => resetData}  className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
+                            <button id={`btn-cancel-${review?._id}`} onClick={() => resetData} className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
                             <button className="btn-submit" onClick={updateHandler}>Post</button>
                         </div>
                     </div>

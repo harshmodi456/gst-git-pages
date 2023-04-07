@@ -5,6 +5,14 @@
     border-radius: 20px;
     width: 100% !important;
     
+    button:focus {
+        outline: none;
+    }
+
+    button:disabled {
+        cursor: not-allowed !important;
+    }
+
     .header {
         .user-name {
             color: #00448b;
@@ -56,7 +64,7 @@
 
 .review-card-container:hover {
     outline: 2px solid rgb(0, 0, 104);
-    cursor: pointer;
+    // cursor: pointer;
 }
 
 
