@@ -19,6 +19,8 @@ import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import { Box } from "@mui/system";
 import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from "react-toastify";
+import { RWebShare } from "react-web-share";
+import { FaShareAlt } from "react-icons/fa";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -41,6 +43,7 @@ const GstInformation = () => {
   const [gstCenter, setGstCenter] = useState('');
   const [gstState, setGstState] = useState('');
   const [gstRange, setGstRange] = useState('');
+
 
   const fetchGst = () => {
     isLoading(true);
@@ -200,7 +203,23 @@ const GstInformation = () => {
       </Backdrop>
 
       <div className="gst-information m-lg-5 px-lg-5 px-4 py-2">
-        <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstData?.gstin || gst?._doc?.gstin}</h3>
+        <div className="d-flex border-bottom align-items-center">
+          <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstData?.gstin || gst?._doc?.gstin}</h3>
+          <div className="ml-4">
+            <RWebShare
+              data={{
+                text: "Share",
+                url: window?.location,
+                title: "Share",
+              }}
+            >
+              <button className="btn-share">
+                <FaShareAlt />
+                <span className="ml-3">Share</span>
+              </button>
+            </RWebShare>
+          </div>
+        </div>
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
           <div className="col-md-4 col-12">
             <h5 className="font-weight-bold break-line-1">Legal Name of Business</h5>

@@ -1,8 +1,10 @@
 .gst-information {
+  .border-bottom {
+    border-bottom: 1px solid rgb(114, 114, 114) !important;
+  }
   .title {
     color: #122c72;
     padding: 10px 0px;
-    border-bottom: 1px solid gray;
   }
   .value {
     text-transform: uppercase;
@@ -18,6 +20,23 @@
     display: -webkit-box;
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
+  }
+
+  .btn-share {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #da45ff;
+    color: white;
+    padding: 5px 20px;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .btn-share:focus {
+    outline: none;
   }
 
   .modal-content {

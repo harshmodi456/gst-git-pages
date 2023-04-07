@@ -2,6 +2,7 @@
 // import PublicRoute from "../Routers/PublicRoute.jsx";
 import Signup from "../Pages/Signup/Signup.jsx";
 import Login from "../Pages/Login/Login.jsx";
+import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword.js";
 // import Dashboard from "../Pages/Dashboard/Dashboard.jsx";
 import SearchGstNumber from "../Pages/SearchGstNumber/SearchGstNumber.jsx";
 import SearchBusinessResult from "../Pages/SearchBusinessResult/SearchBusinessResult.jsx";
@@ -23,6 +24,13 @@ export const routeData = [
     // route: PublicRoute,
     isAuthenticated: false,
     element: Login
+  },
+  {
+    path: "/forgot-password",
+    // path: "/",
+    // route: PublicRoute,
+    isAuthenticated: false,
+    element: ForgotPassword
   },
   {
     path: "/",

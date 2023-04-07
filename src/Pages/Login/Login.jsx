@@ -113,14 +113,21 @@ const Login = () => {
                         Sign In
                       </button>
                     </div>
-                    <div className="mt-2 account-signup">
-                      <span style={{ color: "#27489f" }}>
-                        You don't have an account?
-                      </span>{" "}
-                      &nbsp;{" "}
-                      <Link to="/signup" className="have-account">
-                        Sign up
-                      </Link>
+                    <div className="d-flex justify-content-between">
+                      <div className="mt-2 account-signup">
+                        <span style={{ color: "#27489f" }}>
+                          You don't have an account?
+                        </span>{" "}
+                        &nbsp;{" "}
+                        <Link to="/signup" className="have-account">
+                          Sign up
+                        </Link>
+                      </div>
+                      <div className="mt-2 account-signup">
+                        <Link to="/forgot-password" className="have-account">
+                          Forgot password?
+                        </Link>
+                      </div>
                     </div>
                   </Form>
                 )}
