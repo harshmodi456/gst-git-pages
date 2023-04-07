@@ -211,7 +211,7 @@ const Signup = () => {
                     </label>
                     <div className="w-100 mt-4 mb-3">
                       <button className="w-100 btn-signin">
-                        Sign In
+                        Sign Up
                       </button>
                     </div>
                   </Form>
