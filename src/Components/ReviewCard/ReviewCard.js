@@ -219,9 +219,8 @@ export default function ReviewCard(props) {
                                 )
                             }
                             <p className='m-0 text-muted'>Helpful?
-
                                 <IconButton disabled={disableHelpful} onClick={handleHelpful} className='ml-1' size="small">
-                                    <ThumbUpIcon className='thumsup-icon' fontSize="inherit" />
+                                    <ThumbUpIcon className={`${disableHelpful ? '' : 'thumsup-icon'}`} fontSize="inherit" />
                                 </IconButton>
                                 <span className='ml-1'>({helpfulCount})</span>
                             </p>

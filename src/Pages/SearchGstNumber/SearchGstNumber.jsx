@@ -12,12 +12,15 @@ import homeBackgroung from '../../Assets/Images/home-bg.svg';
 import GstCard from "../../Components/GstCard/GstCard";
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [loading, isLoading] = useState(false);
   const [gstSearchData, setGstSearchData] = useState([]);
+  const [isSearched, setIsSearched] = useState(false);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
 
@@ -28,7 +31,7 @@ const SearchGstNumber = () => {
     validationSchema: Yup.object({
       verificationValue: Yup.string().required('GST number or name is required')
     }),
-    onSubmit: values => {
+    onSubmit: (values, {resetForm}) => {
       isLoading(true);
       const params = {
         userId: getUserInfo?.userInfo?.data?._id,
@@ -37,8 +40,12 @@ const SearchGstNumber = () => {
       dispatch(gstVerify(params)).then((res) => {
         if (res?.payload?.status === true) {
           setGstSearchData(res?.payload?.data);
+          setIsSearched(true);
+          resetForm();
         } else {
           setGstSearchData([]);
+          setIsSearched(true);
+          resetForm();
         }
         isLoading(false);
       });
@@ -98,8 +105,14 @@ const SearchGstNumber = () => {
           <CircularProgress color="inherit" />
         </Backdrop>
         {
-          gstSearchData?.length > 0 ? (
+          isSearched ? (
             <div className="my-5">
+              <div className="px-5 d-flex align-items-center">
+                <IconButton onClick={() => setIsSearched(false)} className='ml-1'>
+                  <ArrowBackIcon />
+                </IconButton>
+                <h5 className="m-0 text-muted ml-2">Back</h5>
+              </div>
               {
                 gstSearchData?.length > 0 ? (
                   <div className="row px-lg-4 m-0">
