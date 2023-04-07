@@ -17,6 +17,7 @@ import {
 import userImg from '../../Assets/Images/user.png';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
+import { toast } from "react-toastify";
 
 const UserProfile = () => {
 
@@ -100,8 +101,13 @@ const UserProfile = () => {
         };
         localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
         localStorage.setItem('multiImg', false);
-        navigate('/');
+        toast.success('Profile updated successfully!')
         setIsLoading(false);
+
+        if (localStorage.getItem('isNewUser') == 'true') {
+          localStorage.clear();
+          navigate('/');
+        }
       }
       localStorage.setItem('multiImg', false);
       setIsLoading(false);
@@ -173,7 +179,7 @@ const UserProfile = () => {
           <hr />
           <div className="px-5">
             <div>
-              <Avatar size={150} round src={profileImg} />
+              <Avatar size={150} round src={profileImg} name={user?.fName} />
             </div>
             <input
               id="profileImgUrl"

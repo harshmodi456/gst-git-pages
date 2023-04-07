@@ -104,6 +104,7 @@ const Signup = () => {
     };
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
+        localStorage.setItem('isNewUser', true);
         navigate('/user-profile')
       } else {
         setTimeout(() => {

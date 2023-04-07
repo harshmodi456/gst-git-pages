@@ -124,9 +124,9 @@ const Login = () => {
                         </Link>
                       </div>
                       <div className="mt-2 account-signup">
-                        <Link to="/forgot-password" className="have-account">
+                        {/* <Link to="/forgot-password" className="have-account">
                           Forgot password?
-                        </Link>
+                        </Link> */}
                       </div>
                     </div>
                   </Form>

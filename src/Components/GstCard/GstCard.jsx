@@ -9,6 +9,7 @@ import {
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import WorkspacePremiumIcon from '@mui/icons-material/WorkspacePremium';
+import { toast } from "react-toastify";
 
 export default function GstCard(props) {
 
@@ -58,22 +59,12 @@ export default function GstCard(props) {
 
     const onPostHandle = () => {
         setIsLoading(true);
-        let reqeObj;
         if (isMyBusiness) {
-            reqeObj = {
+            let reqeObj = {
                 userId: getUserInfo?.userInfo?.data?._id,
                 gstin: gst?.gstin || gst?._doc?.gstin,
                 gstData: gst?.gstData || gst?._doc?.gstData || gst
             };
-        } else {
-            reqeObj = {
-                gstin: gst?.gstin || gst?._doc?.gstin,
-                gstData: gst?.gstData || gst?._doc?.gstData || gst
-            };
-        }
-        if (gst?._doc) {
-            navigate(`/gst-information/${gst?._doc?.gstin}`)
-        } else {
             dispatch(postGstRecord(reqeObj)).then((res) => {
                 if (res?.payload?.status === true) {
                     if (getUserInfo !== undefined && getUserInfo !== null) {
@@ -81,12 +72,40 @@ export default function GstCard(props) {
                             state: { gst }
                         });
                     } else {
-                        navigate("/login");
                         localStorage.setItem("search-selectedGst", JSON.stringify(gst));
+                        navigate("/login");
                     }
+                } else {
+                    setIsLoading(false);
+                    toast.error(res?.payload?.message)
                 }
                 setIsLoading(false);
             });
+        } else {
+            let reqeObj = {
+                gstin: gst?.gstin || gst?._doc?.gstin,
+                gstData: gst?.gstData || gst?._doc?.gstData || gst
+            };
+
+            if (gst?._doc) {
+                navigate(`/gst-information/${gst?._doc?.gstin}`)
+            } else {
+                dispatch(postGstRecord(reqeObj)).then((res) => {
+                    if (res?.payload?.status === true) {
+                        if (getUserInfo !== undefined && getUserInfo !== null) {
+                            navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
+                                state: { gst }
+                            });
+                        } else {
+                            navigate("/login");
+                            localStorage.setItem("search-selectedGst", JSON.stringify(gst));
+                        }
+                    } else {
+                        toast.danger(res?.payload?.message)
+                    }
+                    setIsLoading(false);
+                });
+            }
         }
     };
 
@@ -110,12 +129,12 @@ export default function GstCard(props) {
                         {gst?.lgnm || gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}
                     </div>
                     <div className='col-1'>
-                    {
-                        (gst?.isMyBusiness) && 
-                        <div className='verified-mark'>
-                        <WorkspacePremiumIcon/>
-                        </div>
-                    }
+                        {
+                            (gst?.isMyBusiness) &&
+                            <div className='verified-mark'>
+                                <WorkspacePremiumIcon />
+                            </div>
+                        }
                     </div>
                 </div>
                 <div className='row my-2 font-weight-bold'>

@@ -251,16 +251,16 @@ const SearchGstNumber = createSlice({
         //   theme: "light",
         // });
       } else {
-        toast.success("Gst number or name is not valid!", {
-          position: "top-right",
-          autoClose: 2000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "light",
-        });
+        // toast.success("Gst number or name is not valid!", {
+        //   position: "top-right",
+        //   autoClose: 2000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
       }
       // if (!isValid) {
       //   toast.success("Gst Number is valid!", {
