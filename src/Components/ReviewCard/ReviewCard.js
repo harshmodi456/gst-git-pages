@@ -67,7 +67,8 @@ export default function ReviewCard(props) {
         let imgArray = [];
         let counter = 0;
         review?.reviewImg?.map((image) => {
-            imgArray.push(image?.imgUrl)
+            const randome = Math.floor((Math.random() * 100) + 1);
+            imgArray.push({id: randome, img: image?.imgUrl})
             if (++counter == review?.reviewImg?.length) {
                 setProfileImg(imgArray)
             }
@@ -329,7 +330,6 @@ export default function ReviewCard(props) {
                             <Box className='d-flex flex-wrap'>
                                 {
                                     profileImg?.map((data, index) => {
-                                        console.log(data, 'image')
                                         return (
                                             <Box onMouseOut={() => bottomMenu(false, data)} onMouseOver={() => bottomMenu(true, data)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
                                                 {data?.img ? (<img src={data?.img} height={'150px'} width={'150px'} />) : (<img src={data} height={'150px'} width={'150px'} />)}
@@ -357,7 +357,7 @@ export default function ReviewCard(props) {
                             </Button>
                         </div>
                         <div className="btn-container text-right w-100 mt-4">
-                            <button id={`btn-cancel-${review?._id}`} onClick={resetData} className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
+                            <button id={`btn-cancel-${review?._id}`} onClick={() => resetData}  className="btn-cancel mr-3" data-toggle="modal" data-target={`#update-review-modal-${review?._id}`}>Cancel</button>
                             <button className="btn-submit" onClick={updateHandler}>Post</button>
                         </div>
                     </div>

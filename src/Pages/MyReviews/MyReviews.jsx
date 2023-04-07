@@ -73,12 +73,12 @@ const MyReviews = () => {
       </div>
       <div className="row p-md-5">
         {
-          alignment === 'receive' ? (
+          alignment === 'receive' && (
             <>
               {
                 receiveReviewData?.length > 0 ? (
                   receiveReviewData?.map((review, index) => (
-                    <ReviewCard key={index} review={review} updateData={fetchMyReviews} />
+                    <ReviewCard key={index} review={review} updateData={fetchMyBusinessReviews} />
                   ))
                 ) : (
                   <div className="text-muted text-center w-100">
@@ -87,7 +87,11 @@ const MyReviews = () => {
                 )
               }
             </>
-          ) : (
+          )
+        }
+
+        {
+          alignment === "send" && (
             <>
               {
                 reviewData?.length > 0 ? (
