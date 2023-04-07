@@ -46,12 +46,12 @@ export default function ReviewCard(props) {
     const [deleteBar, setDeleteBar] = useState(false);
 
     const fileChangeHandler = (event) => {
-        const randome = Math.floor((Math.random() * 100) + 1);
 
         const file = event.target.files;
         if (file != null) {
             for (let i = 0; i < event.target.files?.length; i++) {
-                setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
+                const randome = Math.floor((Math.random() * 100) + 1);
+                setProfileImg((current) => [...current, { id: randome, img: URL.createObjectURL(file[i]) }]);
                 setImgFile((current) => [...current, file[i]]);
             }
         }
@@ -74,9 +74,14 @@ export default function ReviewCard(props) {
         })
     }
 
-    const removeImage = (url) => {
-        const deleteImage = profileImg?.filter((data) => data !== url);
-        setProfileImg(deleteImage);
+    const removeImage = (remove_data) => {
+        if (remove_data.id) {
+            const deleteImage = profileImg?.filter((data) => data?.id !== remove_data.id);
+            setProfileImg(deleteImage);
+        } else if (!remove_data.id) {
+            const deleteImage = profileImg?.filter((data) => data !== remove_data);
+            setProfileImg(deleteImage);
+        }
     }
 
     const bottomMenu = (toggle, url) => {
@@ -85,7 +90,7 @@ export default function ReviewCard(props) {
     }
 
     const upload = () => {
-        document.getElementById("reviewImgUrl"+review?._id).click()
+        document.getElementById("reviewImgUrl" + review?._id).click()
     }
 
     const updateHandler = (e) => {
@@ -97,12 +102,22 @@ export default function ReviewCard(props) {
         formData.append('rating', rating);
         let oldImg = [];
         let count = 0;
-        profileImg?.filter((img) => {
-            if (img.slice(0, 4) == 'http') {
-                oldImg.push({ imgUrl: img });
-            }
-            if (++count == profileImg?.length) {
-                formData.append('oldImg', JSON.stringify(oldImg));
+
+        profileImg?.filter((data) => {
+            if (data?.img) {
+                if (data?.img.slice(0, 4) == 'http') {
+                    oldImg.push({ imgUrl: data?.img });
+                }
+                if (++count == profileImg?.length) {
+                    formData.append('oldImg', JSON.stringify(oldImg));
+                }
+            } else if (data) {
+                if (data.slice(0, 4) == 'http') {
+                    oldImg.push({ imgUrl: data });
+                }
+                if (++count == profileImg?.length) {
+                    formData.append('oldImg', JSON.stringify(oldImg));
+                }
             }
         })
 
@@ -128,8 +143,8 @@ export default function ReviewCard(props) {
         setImageUrl([]);
         setProfileImg([]);
         setImgFile([]);
-        setReviewText('');
-        setRating('');
+        // setReviewText('');
+        // setRating();
     }
 
     const handleHelpful = () => {
@@ -162,7 +177,7 @@ export default function ReviewCard(props) {
                         <div>
                             <p className='user-name m-0 break-line-1'>{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
                             <p className='company-name m-0'>{review?.gstId?.gstData?.lgnm}</p>
-                            <p className='time-lable text-muted m-0'><ReactTimeAgo timeStyle="round-minute" date={review?.createdAt} locale="en-US"/></p>
+                            <p className='time-lable text-muted m-0'><ReactTimeAgo timeStyle="round-minute" date={review?.createdAt} locale="en-US" /></p>
 
                             {/* <p className='time-lable text-muted m-0'><TimeAgo locale="en-US" date={review?.createdAt} /></p> */}
                         </div>
@@ -228,7 +243,7 @@ export default function ReviewCard(props) {
                             <>
                                 <Swiper
                                     slidesPerView={1}
-                                    spaceBetween={30}
+                                    spaceBetween={0}
                                     keyboard={{
                                         enabled: true,
                                     }}
@@ -243,7 +258,9 @@ export default function ReviewCard(props) {
                                         review?.reviewImg?.map((data, index) => {
                                             return (
                                                 <SwiperSlide key={index} className='m-1 swiper-block'>
-                                                    <img src={data?.imgUrl} style={{ height: 550, width: 650, marginBottom: 60 }} />
+                                                    <div className='outer-image-wrap'>
+                                                        <img src={data?.imgUrl} />
+                                                    </div>
                                                 </SwiperSlide>
                                             )
                                         })
@@ -252,7 +269,7 @@ export default function ReviewCard(props) {
                             </>
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="reset" className="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -302,8 +319,8 @@ export default function ReviewCard(props) {
                         <div className="img-container d-flex flex-wrap">
                             <input
                                 multiple
-                                id={"reviewImgUrl"+review?._id}
-                                name={"reviewImgUrl"+review?._id}
+                                id={"reviewImgUrl" + review?._id}
+                                name={"reviewImgUrl" + review?._id}
                                 accept="image/*"
                                 hidden
                                 type="file"
@@ -311,15 +328,19 @@ export default function ReviewCard(props) {
                             />
                             <Box className='d-flex flex-wrap'>
                                 {
-                                    profileImg?.map((image, index) => {
-                                        console.log(image, 'image')
+                                    profileImg?.map((data, index) => {
+                                        console.log(data, 'image')
                                         return (
-                                            <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
-                                                <img src={image} height={'150px'} width={'150px'} />
+                                            <Box onMouseOut={() => bottomMenu(false, data)} onMouseOver={() => bottomMenu(true, data)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
+                                                {data?.img ? (<img src={data?.img} height={'150px'} width={'150px'} />) : (<img src={data} height={'150px'} width={'150px'} />)}
                                                 {
-                                                    deleteBar && imageUrl === image && (
+                                                    imageUrl?.id ? deleteBar && imageUrl?.id === data?.id && (
                                                         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
-                                                            <DeleteIcon onClick={() => removeImage(image)} sx={{ color: '#E1E1E1' }} />
+                                                            <DeleteIcon onClick={() => removeImage(data)} sx={{ color: '#E1E1E1' }} />
+                                                        </Box>
+                                                    ) : deleteBar && imageUrl === data && (
+                                                        <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
+                                                            <DeleteIcon onClick={() => removeImage(data)} sx={{ color: '#E1E1E1' }} />
                                                         </Box>
                                                     )
                                                 }

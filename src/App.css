@@ -3,3 +3,7 @@
     color: #4cbe24 !important;
     opacity: 1 !important;
 }
+
+.modal{
+    z-index: 1101;
+}
