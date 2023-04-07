@@ -46,11 +46,10 @@ export default function ReviewCard(props) {
     const [deleteBar, setDeleteBar] = useState(false);
 
     const fileChangeHandler = (event) => {
-
         const file = event.target.files;
         if (file != null) {
             for (let i = 0; i < event.target.files?.length; i++) {
-                const randome = Math.floor((Math.random() * 100) + 1);
+                const randome = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
                 setProfileImg((current) => [...current, { id: randome, img: URL.createObjectURL(file[i]) }]);
                 setImgFile((current) => [...current, file[i]]);
             }
@@ -67,7 +66,7 @@ export default function ReviewCard(props) {
         let imgArray = [];
         let counter = 0;
         review?.reviewImg?.map((image) => {
-            const randome = Math.floor((Math.random() * 100) + 1);
+            const randome = ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>(c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16));
             imgArray.push({id: randome, img: image?.imgUrl})
             if (++counter == review?.reviewImg?.length) {
                 setProfileImg(imgArray)
