@@ -88,7 +88,12 @@ export default function GstCard(props) {
             };
 
             if (gst?._doc) {
-                navigate(`/gst-information/${gst?._doc?.gstin}`)
+                if (getUserInfo === undefined || getUserInfo === null) {
+                    setIsLoading(false);
+                    navigate("/login");
+                } else {
+                    navigate(`/gst-information/${gst?._doc?.gstin}`);
+                }
             } else {
                 dispatch(postGstRecord(reqeObj)).then((res) => {
                     if (res?.payload?.status === true) {
