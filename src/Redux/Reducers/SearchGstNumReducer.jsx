@@ -212,6 +212,51 @@ export const updateUser = createAsyncThunk(
   }
 );
 
+// for send otp for password recovery
+export const sendOtpForPassword = createAsyncThunk(
+  "Get/sendOtpForPassword",
+  async (mobileNo, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.post(`${api}users/sendOtpForPassword/${mobileNo}`)
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+// for password recovery
+export const recoverPassword = createAsyncThunk(
+  "Get/recoverPassword",
+  async (data, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.post(`${api}users/recoverPassword`, data)
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+// for update password
+export const updatePassword = createAsyncThunk(
+  "Get/updatePassword",
+  async (data, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.post(`${api}users/updatePassword`, data)
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   gstInfo: {},
