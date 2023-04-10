@@ -118,7 +118,7 @@ const SearchGstNumber = () => {
                   <div className="row px-lg-4 m-0">
                     {
                       gstSearchData?.map((gst, index) => (
-                        <GstCard key={index} gst={gst} />
+                        <GstCard key={index} gst={gst} fullAddress={true} />
                       ))
                     }
                   </div>

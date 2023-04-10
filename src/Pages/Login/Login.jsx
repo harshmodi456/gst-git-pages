@@ -67,12 +67,12 @@ const Login = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className="login-container">
+      <div className="login-container mt-5">
         <div className="row m-0 p-0 w-100">
-          <div className="col-lg-6 login-img d-flex justify-content-center">
+          <div className="col-lg-6 d-flex align-items-center justify-content-center">
             <img className="pb-5" src={loginBackgroung} alt="background" />
           </div>
-          <div className="col-lg-6 d-flex align-items-center justify-content-center">
+          <div className="col-lg-6 d-flex align-items-center justify-content-center mb-5 pb-5">
             <div className="login-form-container">
               <h3 className="m-0 pt-5 pb-4 font-weight-bold">Login</h3>
               <Formik
@@ -113,12 +113,11 @@ const Login = () => {
                         Sign In
                       </button>
                     </div>
-                    <div className="d-flex justify-content-between">
+                    <div className="signup-link-container">
                       <div className="mt-2 account-signup">
                         <span style={{ color: "#27489f" }}>
                           You don't have an account?
                         </span>{" "}
-                        &nbsp;{" "}
                         <Link to="/signup" className="have-account">
                           Sign up
                         </Link>

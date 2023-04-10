@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: calc(100vh - 165px);
+  // min-height: calc(100vh - 165px);
 
   .login-form-container {
     background-color: #e6fdff;
@@ -40,8 +40,64 @@
     .btn-signin:focus {
       outline: none;
     }
+
+    .signup-link-container {
+      display: flex;
+      justify-content: space-between;
+    }
   }
 }
+
+
+  //  Mobile devices
+  @media (min-width: 300px) and (max-width: 480px) {
+    .login-container {
+        img {
+          display: none;
+        }
+
+      .form-group {
+        background-color: white;
+
+        .form-control-textFiled {
+          width: 300px !important;
+        }
+
+        input {
+          background-color: white;
+          width: 235px !important;
+        }
+      }
+      .signup-link-container {
+        display: block !important;
+      }
+    }
+  }
+
+  // iPads, Tablets
+  @media (min-width: 481px) and (max-width: 768px) {
+    .login-img {
+      img {
+        width: 600px;
+        margin-bottom: 50px;
+      }
+    }
+    .grid-first {
+      display: none !important;
+      img {
+        margin-left: 0px;
+      }
+    }
+  }
+
+  // Small screens, laptops
+  @media (max-width: 1024px) {
+    .login-img {
+      width: 600px;
+      margin-bottom: 50px;
+    }
+  }
+
 
 .form-signin {
   // height: 100vh;
@@ -160,55 +216,5 @@
     background-color: #183a99;
     border-color: #007bff;
     margin-left: 50%;
-  }
-
-  //  Mobile devices
-  @media (min-width: 300px) and (max-width: 480px) {
-    .login-container {
-      .login-img {
-        img {
-          width: 300px !important;
-          height: 300px !important;
-          margin-bottom: 50px;
-        }
-      }
-
-      .form-group {
-        background-color: white;
-
-        .form-control-textFiled {
-          width: 235px !important;
-        }
-
-        input {
-          background-color: white;
-          width: 170px !important;
-        }
-      }
-    }
-  }
-
-  // iPads, Tablets
-  @media (min-width: 481px) and (max-width: 768px) {
-    .login-img {
-      img {
-        width: 600px;
-        margin-bottom: 50px;
-      }
-    }
-    .grid-first {
-      display: none !important;
-      img {
-        margin-left: 0px;
-      }
-    }
-  }
-
-  // Small screens, laptops
-  @media (max-width: 1024px) {
-    .login-img {
-      width: 600px;
-      margin-bottom: 50px;
-    }
   }
 }

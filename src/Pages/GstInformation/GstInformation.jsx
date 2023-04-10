@@ -43,7 +43,7 @@ const GstInformation = () => {
   const [gstCenter, setGstCenter] = useState('');
   const [gstState, setGstState] = useState('');
   const [gstRange, setGstRange] = useState('');
-
+  const [gstStatus, setGstStatus] = useState('');
 
   const fetchGst = () => {
     isLoading(true);
@@ -61,6 +61,10 @@ const GstInformation = () => {
 
   const gstAddressHandler = () => {
     if (gst) {
+
+      let status = gst?.gstData?.sts || gst?._doc?.gstData?.sts;
+      setGstStatus(status);
+
       let gstObj = gst;
       if (gst?._doc) {
         gstObj = gst?._doc?.gstData;
@@ -274,12 +278,13 @@ const GstInformation = () => {
           <p className="title m-0 pb-0">Feedback</p>
           <div className="d-flex justify-content-center align-items-center">
             <p className="m-0 pr-3 lbl-review">REVIEW</p>
-            <p className="m-0 mr-2">{Math.round(gst?.avgRating || 0).toFixed(1)}</p>
+            <p className="m-0 mr-2">{(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}</p>
             <Rating
               className="mt-1"
               name="simple-controlled"
-              value={Math.round(gst?.avgRating).toFixed(1)}
-              disabled={true}
+              value={(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}
+              readOnly={true}
+              precision={0.5}
             />
             <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
           </div>
@@ -288,7 +293,7 @@ const GstInformation = () => {
               className="btn-write-review"
               data-toggle="modal"
               data-target="#write-review-modal"
-              disabled={gst?.isMyBusiness ? true : false}
+              disabled={gst?.isMyBusiness ? true : false || gstStatus != 'Active'}
             >
               <FaEdit /> Write Review
             </button>

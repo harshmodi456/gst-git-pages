@@ -68,7 +68,7 @@ const Signup = () => {
         .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
       confirmPassword: Yup.string()
         .min(8, "Password must be at least 8 characters")
-        .oneOf([Yup.ref("userPassword"), null], "Passwords must match")
+        .oneOf([Yup.ref("userPassword"), null], "Password must be same")
         .required("Confirm Password is required")
     }),
     onSubmit: (values) => {

@@ -60,8 +60,8 @@ export default function ReviewCard(props) {
 
     const handleDisableHelpful = () => {
         if (review) {
-            review?.helpful?.map((userId) => {
-                if (userId == userId) {
+            review?.helpful?.map((user) => {
+                if (userId == user) {
                     setDisableHelpful(true);
                 }
             })
@@ -206,6 +206,7 @@ export default function ReviewCard(props) {
                                 name="simple-controlled"
                                 value={Math.round(review?.rating).toFixed(1)}
                                 disabled={true}
+                                precision={0.5}
                             />
                         </div>
                         <div className='d-flex align-items-center justify-content-end'>
