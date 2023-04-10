@@ -18,6 +18,7 @@ import userImg from '../../Assets/Images/user.png';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-toastify";
+import UpdatePassword from './UpdatePassword.js'
 
 const UserProfile = () => {
 
@@ -81,7 +82,7 @@ const UserProfile = () => {
     const formData = new FormData();
     formData.append("fName", userCredentials?.fName);
     formData.append("lName", userCredentials?.lName);
-    if (profileImg.slice(0,4) == 'http') {
+    if (profileImg.slice(0, 4) == 'http') {
       formData.append("oldImg", profileImg);
     } else {
       formData.append("oldImg", null);
@@ -125,6 +126,8 @@ const UserProfile = () => {
 
     return (
       <div>
+        <h4 className='m-0 px-5'>Personal Information</h4>
+        <hr className="mx-5" />
         <form className="px-5" onSubmit={formik.handleSubmit} autoComplete="off">
           <div className="row my-5">
             <div className="col-6">
@@ -164,6 +167,10 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="col-12 text-right my-5">
+            {
+              localStorage.getItem('isNewUser') != 'true' &&
+              <button className="btn-cancel mr-4" onClick={() => navigate('/')}>Cancel</button>
+            }
             <button type="submit" className="btn-update-profile">Update</button>
           </div>
         </form>
@@ -197,6 +204,12 @@ const UserProfile = () => {
                 <DeleteOutlineIcon />
               </IconButton>
             </div>
+          </div>
+          <div className="px-5">
+            {
+              localStorage.getItem('isNewUser') != 'true' &&
+              <UpdatePassword />
+            }
           </div>
           <UpdateUserForm />
         </div>
