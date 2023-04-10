@@ -15,7 +15,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Grid
+  Grid,
+  TextField
 } from "@mui/material";
 import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
@@ -28,8 +29,9 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import OtpViewComponents from "../../Components/OtpViewComponents/OtpViewComponents";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import signupBackgroung from '../../Assets/Images/login.svg';
+import signupBackgroung from "../../Assets/Images/login.svg";
 import { toast } from "react-toastify";
+import { useFormik } from "formik";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
@@ -49,51 +51,55 @@ const Signup = () => {
     dispatch(sendOtpUser(takeRecord?.data?._id));
   };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const validationSchema = Yup.object({
-    mobileNo: Yup.string()
-      .min(10, "Mobile number must be a 10 digits")
-      .max(10, "Mobile number must be a 10 digits")
-      .required("Mobile number Number is Required."),
-    userPassword: Yup.string()
-      .required("Password is required")
-      .min(8, 'Password must be at least 8 characters')
-      .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
-    confirmPassword: Yup.string()
-      .min(8, 'Password must be at least 8 characters')
-      .oneOf([Yup.ref("userPassword"), null], "Passwords must match")
-      .required("Confirm Password is required")
+  const formik = useFormik({
+    initialValues: {
+      mobileNo: "",
+      userPassword: "",
+      confirmPassword: ""
+    },
+    validationSchema: Yup.object({
+      mobileNo: Yup.string()
+        .min(10, "Mobile number must be a 10 digits")
+        .max(10, "Mobile number must be a 10 digits")
+        .required("Mobile number Number is Required."),
+      userPassword: Yup.string()
+        .required("Password is required")
+        .min(8, "Password must be at least 8 characters")
+        .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+      confirmPassword: Yup.string()
+        .min(8, "Password must be at least 8 characters")
+        .oneOf([Yup.ref("userPassword"), null], "Passwords must match")
+        .required("Confirm Password is required")
+    }),
+    onSubmit: (values) => {
+      if (checkBox) {
+        isLoading(true);
+        dispatch(
+          signUpUser({
+            mobileNo: values?.mobileNo?.toString(),
+            password: values?.userPassword,
+            passwordConfirm: values?.confirmPassword
+          })
+        ).then((res) => {
+          if (res?.payload?.status === true) {
+            handleClickOpen(res?.payload);
+            setFormValues(res?.payload);
+            const createLocalObject = {
+              success: true,
+              userInfo: res?.payload
+            };
+            localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
+          }
+          isLoading(false);
+        });
+      } else if (!checkBox) {
+        toast.warning("Please check privacy policy!");
+      }
+    }
   });
 
-  const signupHandler = (takeValue) => {
-
-    if (checkBox) {
-      isLoading(true);
-      dispatch(
-        signUpUser({
-          mobileNo: takeValue?.mobileNo?.toString(),
-          password: takeValue?.userPassword,
-          passwordConfirm: takeValue?.confirmPassword
-        })
-      ).then((res) => {
-        if (res?.payload?.status === true) {
-          handleClickOpen(res?.payload);
-          setFormValues(res?.payload);
-          const createLocalObject = {
-            success: true,
-            userInfo: res?.payload
-          };
-          localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
-        }
-        isLoading(false);
-      });
-    } else if (!checkBox) {
-      toast.warning('Please check privacy policy!')
-    }
-
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const otpSubmitHandler = () => {
@@ -104,285 +110,201 @@ const Signup = () => {
     };
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
-        localStorage.setItem('isNewUser', true);
-        navigate('/user-profile')
+        localStorage.setItem("isNewUser", true);
+        navigate("/user-profile");
       } else {
         setTimeout(() => {
           setIsLoadingOtpContainer(false);
-        }, [500])
+        }, [500]);
       }
     });
   };
 
   return (
     <>
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={loading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-      <div className="login-container">
-        <div className="row m-0 p-0 w-100">
-          <div className="col-lg-6 login-img d-flex justify-content-center">
-            <img className="pb-5" src={signupBackgroung} alt="background" />
-          </div>
-          <div className="col-lg-6 d-flex align-items-center justify-content-center">
-            <div className="login-form-container">
-              <h3 className="m-0 pt-5 pb-4 font-weight-bold">Signup</h3>
-              <Formik
-                initialValues={{
-                  mobileNo: "",
-                  password: ""
-                }}
-                validationSchema={validationSchema}
-                onSubmit={(values) => signupHandler(values)}
-              >
-                {(props) => (
-                  <Form>
-                    <div className="form-group">
-                      <Field
-                      autoComplete='off'
-                        name="mobileNo"
-                        type="number"
-                        component={CustomTextField}
-                        id="mobileNo"
-                        label="Mobile Number"
-                        variant="outlined"
-                        className="form-control-textFiled"
-                      />
+      <form onSubmit={formik.handleSubmit}>
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
+        <div className="login-container">
+          <div className="row m-0 p-0 w-100">
+            <div className="col-lg-6 login-img d-flex justify-content-center">
+              <img className="pb-5" src={signupBackgroung} alt="background" />
+            </div>
+            <div className="col-lg-6 d-flex align-items-center justify-content-center">
+              <div className="login-form-container">
+                <h3 className="m-0 pt-5 pb-4 font-weight-bold">Signup</h3>
+                <div className="form-group">
+                  <TextField
+                    autoComplete="off"
+                    name="mobileNo"
+                    type="number"
+                    value={formik.values.mobileNo}
+                    onChange={formik.handleChange}
+                    id="mobileNo"
+                    label="Mobile Number"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                  />
+                  {
+                    <div
+                      className="invalid-feedback"
+                      style={{ display: "flex" }}
+                    >
+                      {formik.touched.mobileNo && formik.errors.mobileNo && (
+                        <div className="error">{formik.errors.mobileNo}</div>
+                      )}
                     </div>
-                    <div className="form-group">
-                      <Field
-                        name="userPassword"
-                        type={showPassword ? "text" : "password"}
-                        component={CustomTextField}
-                        id="password"
-                        label="Password"
-                        variant="outlined"
-                        className='form-control-textFiled'
-                      />
-                      {
-                        showPassword ? (
-                          <FaEyeSlash
-                            size={25}
-                            className="password-icon"
-                            onClick={() => setShowPassword(!showPassword)}
-                          />
-                        ) : (
-                          <FaEye
-                            size={25}
-                            onClick={() => setShowPassword(!showPassword)}
-                            className="password-icon"
-                          />
-                        )
-                      }
+                  }
+                </div>
+                <div className="form-group">
+                  <TextField
+                    name="userPassword"
+                    value={formik.values.userPassword}
+                    onChange={formik.handleChange}
+                    type={showPassword ? "text" : "password"}
+                    id="userPassword"
+                    label="Password"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                  />
+                  {showPassword ? (
+                    <FaEyeSlash
+                      size={25}
+                      className="password-icon"
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  ) : (
+                    <FaEye
+                      size={25}
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="password-icon"
+                    />
+                  )}
+                  {
+                    <div
+                      className="invalid-feedback"
+                      style={{ display: "flex" }}
+                    >
+                      {formik.touched.userPassword &&
+                        formik.errors.userPassword && (
+                          <div className="error">
+                            {formik.errors.userPassword}
+                          </div>
+                        )}
                     </div>
-                    <div className="form-group">
-                      <Field
-                        name="confirmPassword"
-                        type={showConPassword ? "text" : "password"}
-                        component={CustomTextField}
-                        id="password"
-                        label="Confirm Password"
-                        variant="outlined"
-                        className='form-control-textFiled'
-                      />
-                      {
-                        showConPassword ? (
-                          <FaEyeSlash
-                            size={25}
-                            className="password-icon"
-                            onClick={() => setShowConPassword(!showConPassword)}
-                          />
-                        ) : (
-                          <FaEye
-                            size={25}
-                            onClick={() => setShowConPassword(!showConPassword)}
-                            className="password-icon"
-                          />
-                        )
-                      }
+                  }
+                </div>
+                <div className="form-group">
+                  <TextField
+                    name="confirmPassword"
+                    value={formik.values.confirmPassword}
+                    onChange={formik.handleChange}
+                    type={showConPassword ? "text" : "password"}
+                    id="confirmPassword"
+                    label="Confirm Password"
+                    variant="outlined"
+                    className="form-control-textFiled"
+                  />
+                  {showConPassword ? (
+                    <FaEyeSlash
+                      size={25}
+                      className="password-icon"
+                      onClick={() => setShowConPassword(!showConPassword)}
+                    />
+                  ) : (
+                    <FaEye
+                      size={25}
+                      onClick={() => setShowConPassword(!showConPassword)}
+                      className="password-icon"
+                    />
+                  )}
+                   {
+                    <div
+                      className="invalid-feedback"
+                      style={{ display: "flex" }}
+                    >
+                      {formik.touched.confirmPassword &&
+                        formik.errors.confirmPassword && (
+                          <div className="error">
+                            {formik.errors.confirmPassword}
+                          </div>
+                        )}
                     </div>
-                    <label className="tandc-checkbox d-flex align-items-center justify-content-center">
-                      <input value={checkBox} onChange={() => setCheckBox(!checkBox)} type="checkbox" className="mr-3" />
-                      <p className="m-0">
-                        By clicking, I accept the<a href="/"> terms of the service</a> and <a href="/">privacy policy</a>
-                      </p>
-                    </label>
-                    <div className="w-100 mt-4 mb-3">
-                      <button className="w-100 btn-signin">
-                        Sign Up
-                      </button>
-                    </div>
-                  </Form>
-                )}
-              </Formik>
+                  }
+                </div>
+                <label className="tandc-checkbox d-flex align-items-center justify-content-center">
+                  <input
+                    value={checkBox}
+                    onChange={() => setCheckBox(!checkBox)}
+                    type="checkbox"
+                    className="mr-3"
+                  />
+                  <p className="m-0">
+                    By clicking, I accept the
+                    <a href="/"> terms of the service</a> and{" "}
+                    <a href="/">privacy policy</a>
+                  </p>
+                </label>
+                <div className="w-100 mt-4 mb-3">
+                  <button type="submit" className="w-100 btn-signin">
+                    Sign Up
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={loading}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      </div>
-      {/* <div className="form-signup">
-        <Backdrop
-          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-          open={loading}
-        >
-          <CircularProgress color="inherit" />
-        </Backdrop>
-        <div className="form-card">
-          <Grid
-            container
-            spacing={{ xs: 0, md: 3 }}
-            columns={{ xs: 0, sm: 8, md: 12 }}
+          <Backdrop
+            sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+            open={loading}
           >
-            <Grid item xs={4} className="grid-first">
-              <img src={loginImg} alt="sign up" />
-            </Grid>
-            <Grid item xs={4} md={5}>
-              <Card sx={{ width: 450 }}>
-                <CardHeader title="Sign Up" className="card-header text-center" />
-                <CardContent className="mt-2">
-                  <Formik
-                    initialValues={{
-                      mobileNo: "",
-                      userPassword: "",
-                      confirmPassword: ""
-                    }}
-                    validationSchema={validationSchema}
-                    onSubmit={async (values) => {
-                      signupHandler(values);
-                    }}
-                  >
-                    <Form>
-                      <div className="form-group">
-                        <Field
-                          name="mobileNo"
-                          type="number"
-                          component={CustomTextField}
-                          id="mobileNo"
-                          label="Mobile Number"
-                          variant="outlined"
-                          className="form-control-textFiled"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          name="userPassword"
-                          type={showPassword ? "text" : "password"}
-                          component={CustomTextField}
-                          id="password"
-                          label="Password"
-                          variant="outlined"
-                        />
-                        {
-                          showPassword ? (
-                            <FaEyeSlash
-                              size={25}
-                              className="password-icon"
-                              onClick={() => setShowPassword(!showPassword)}
-                            />
-                          ) : (
-                            <FaEye
-                              size={25}
-                              onClick={() => setShowPassword(!showPassword)}
-                              className="password-icon"
-                            />
-                          )
-                        }
-                      </div>
-                      <div className="form-group">
-                        <Field
-                          name="confirmPassword"
-                          type={showConPassword ? "text" : "password"}
-                          component={CustomTextField}
-                          id="password"
-                          label="Confirm Password"
-                          variant="outlined"
-                        />
-                        {
-                          showConPassword ? (
-                            <FaEyeSlash
-                              size={25}
-                              className="password-icon"
-                              onClick={() => setShowConPassword(!showConPassword)}
-                            />
-                          ) : (
-                            <FaEye
-                              size={25}
-                              onClick={() => setShowConPassword(!showConPassword)}
-                              className="password-icon"
-                            />
-                          )
-                        }
-                      </div>
-                      <label className="tandc-checkbox d-flex align-items-center justify-content-center">
-                        <input type="checkbox" className="mr-3" />
-                        <p className="m-0">
-                          By clicking, I accept the<a href="/"> terms of the service</a> and <a href="/">privacy policy</a>
-                        </p>
-                      </label>
-                      <div className="w-50">
-                        <button className="w-100 btn btn-lg btn-primary">
-                          Sign Up
-                        </button>
-                      </div>
-
-                      <div className="mt-3 account-signup">
-                        <span style={{ color: "#27489f" }}>
-                          Already have an account?
-                        </span>{" "}
-                        &nbsp;{" "}
-                        <Link to="/login" className="have-account">
-                          Login
-                        </Link>
-                      </div>
-                    </Form>
-                  </Formik>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
+            <CircularProgress color="inherit" />
+          </Backdrop>
         </div>
-      </div> */}
-      <Dialog
-        open={open}
-        onClose={(event, reason) => {
-          if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
-            // Set 'open' to false, however you would do that with your particular code.
-            handleClose();
-          }
-        }}
-        PaperProps={{
-          sx: {
-            width: "100%"
-          }
-        }}
-      >
-        <DialogTitle id="alert-dialog-title">
-          <div className="text-center mt-2 mb-4">{"Otp verification"}</div>
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            <Backdrop
-              open={isLoadingOtpContainer}
-              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
-            <OtpViewComponents handleChange={(evt) => setOtp(evt)} otp={otp} />
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={() => otpSubmitHandler()}>Submit</Button>
-        </DialogActions>
-      </Dialog>
+
+        <Dialog
+          open={open}
+          onClose={(event, reason) => {
+            if (reason !== "backdropClick" && reason !== "escapeKeyDown") {
+              // Set 'open' to false, however you would do that with your particular code.
+              handleClose();
+            }
+          }}
+          PaperProps={{
+            sx: {
+              width: "100%"
+            }
+          }}
+        >
+          <DialogTitle id="alert-dialog-title">
+            <div className="text-center mt-2 mb-4">{"Otp verification"}</div>
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <Backdrop
+                open={isLoadingOtpContainer}
+                sx={{
+                  color: "#fff",
+                  zIndex: (theme) => theme.zIndex.drawer + 1
+                }}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
+              <OtpViewComponents
+                handleChange={(evt) => setOtp(evt)}
+                otp={otp}
+              />
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose}>Cancel</Button>
+            <Button onClick={() => otpSubmitHandler()}>Submit</Button>
+          </DialogActions>
+        </Dialog>
+      </form>
     </>
   );
 };
