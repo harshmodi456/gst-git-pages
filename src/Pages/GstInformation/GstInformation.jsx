@@ -329,17 +329,31 @@ const GstInformation = () => {
                   scrollableTarget="scrollableDiv"
                 >
                   <>
-                    <div className="row review-container mt-3" id="scrollableDiv"
-                      style={{
-                        height: 500,
-                        width: '100%',
-                        overflow: 'auto',
-                        display: 'flex',
-                      }}>
-                      {getReviewData?.map((review, index) => (
-                        <ReviewCard key={index} review={review} updateData={fetchReview} />
-                      ))}
-                    </div>
+                    {
+                      getReviewData?.length > 2 ? (
+                        <div className="row review-container mt-3" id="scrollableDiv"
+                          style={{
+                            height: 500,
+                            width: '100%',
+                            overflow: 'auto',
+                            display: 'flex',
+                          }}>
+                          {getReviewData?.map((review, index) => (
+                            <ReviewCard key={index} review={review} updateData={fetchReview} />
+                          ))}
+                        </div>
+                      ) : (
+                        <div className="row review-container mt-3" id="scrollableDiv"
+                          style={{
+                            width: '100%'
+                          }}>
+                          {getReviewData?.map((review, index) => (
+                            <ReviewCard key={index} review={review} updateData={fetchReview} />
+                          ))}
+                        </div>
+                      )
+                    }
+
                   </>
                 </InfiniteScroll>
               ) : (
