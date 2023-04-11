@@ -195,8 +195,6 @@ export default function ReviewCard(props) {
                             <p className='user-name m-0 break-line-1'>{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
                             <p className='company-name m-0'>{review?.gstId?.gstData?.lgnm}</p>
                             <p className='time-lable text-muted m-0'><ReactTimeAgo timeStyle="round-minute" date={review?.createdAt} locale="en-US" /></p>
-
-                            {/* <p className='time-lable text-muted m-0'><TimeAgo locale="en-US" date={review?.createdAt} /></p> */}
                         </div>
                     </div>
                     <div>
@@ -228,10 +226,8 @@ export default function ReviewCard(props) {
                     </div>
                 </div>
                 <div className='body px-2 py-3'>
-                    <p className='m-0 review-text min-height-wrap' data-toggle="modal" data-target={review?.reviewText?.length > 257 && `#review-text-modal-${review?._id}`}>
-                        {/* Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer took  and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknownz */}
-                        {review?.reviewText?.slice(0, 257)}{review?.reviewText?.length > 257 && "..."}
+                    <p className='m-0 review-text min-height-wrap' data-toggle="modal" data-target={review?.reviewText?.length > 285 && `#review-text-modal-${review?._id}`}>
+                        {review?.reviewText?.slice(0, 285)}{review?.reviewText?.length > 285 && "..."}
                     </p>
                 </div>
                 <div className='review-img-container pt-2 px-2 w-100'>
