@@ -61,6 +61,8 @@ const UserProfile = () => {
     fName: user?.fName,
     lName: user?.lName,
     mobileNo: user?.mobileNo,
+    email: user?.email,
+    businessName: user?.businessName,
   };
 
   const UserSchema = Yup.object().shape({
@@ -74,7 +76,14 @@ const UserProfile = () => {
       .typeError("Invalid contact number")
       .trim()
       .matches(/^[1-9]{1}[0-9]{9}$/, 'Invalid phone number')
-      .required(' '),
+      .required('Required'),
+    email: Yup.string()
+      .email('Invalid email address')
+      .trim()
+      .required('Required'),
+    businessName: Yup.string()
+      .trim()
+      .required('Required'),
   })
 
   const submitHandler = async (userCredentials) => {
@@ -82,6 +91,8 @@ const UserProfile = () => {
     const formData = new FormData();
     formData.append("fName", userCredentials?.fName);
     formData.append("lName", userCredentials?.lName);
+    formData.append("email", userCredentials?.email);
+    formData.append("businessName", userCredentials?.businessName);
     if (profileImg.slice(0, 4) == 'http') {
       formData.append("oldImg", profileImg);
     } else {
@@ -109,6 +120,8 @@ const UserProfile = () => {
           localStorage.clear();
           navigate('/');
         }
+      } else {
+        toast.error(res?.payload?.response?.data?.message)
       }
       localStorage.setItem('multiImg', false);
       setIsLoading(false);
@@ -157,6 +170,30 @@ const UserProfile = () => {
             <div className="col-6">
               <TextField
                 className='w-100'
+                name='email'
+                label="Email"
+                value={formik.values.email}
+                error={formik.touched.email && Boolean(formik.errors.email)}
+                helperText={formik.touched.email && formik.errors.email}
+                onChange={formik.handleChange}
+              />
+            </div>
+            <div className="col-6">
+              <TextField
+                className='w-100'
+                name='businessName'
+                label="Business Name"
+                value={formik.values.businessName}
+                error={formik.touched.businessName && Boolean(formik.errors.businessName)}
+                helperText={formik.touched.businessName && formik.errors.businessName}
+                onChange={formik.handleChange}
+              />
+            </div>
+          </div>
+          <div className="row my-5">
+            <div className="col-6">
+              <TextField
+                className='w-100'
                 name='mobileNo'
                 label="Mobile Number"
                 value={formik.values.mobileNo}
@@ -166,7 +203,7 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="col-12 text-right my-5">
+          <div className="col-12 text-right my-5 py-5">
             {
               localStorage.getItem('isNewUser') != 'true' &&
               <button className="btn-cancel mr-4" onClick={() => navigate('/')}>Cancel</button>
@@ -205,12 +242,12 @@ const UserProfile = () => {
               </IconButton>
             </div>
           </div>
-          <div className="px-5">
+          {/* <div className="px-5">
             {
               localStorage.getItem('isNewUser') != 'true' &&
               <UpdatePassword />
             }
-          </div>
+          </div> */}
           <UpdateUserForm />
         </div>
       </Grid>

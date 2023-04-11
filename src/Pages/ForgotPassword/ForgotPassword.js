@@ -219,13 +219,11 @@ export default function ForgotPassword() {
     return (
         <div className='forget-password-container'>
             <div className="row m-0 p-0 w-100">
-                <div className="col-lg-6 login-img d-flex justify-content-center align-items-center pt-5">
+                <div className="col-lg-6 d-flex justify-content-center align-items-center py-5">
                     <img className="pb-5" src={passwordBackgroung} alt="background" />
                 </div>
                 <div className="col-lg-6 d-flex align-items-center justify-content-center">
                     {isOtpSent ? (
-
-
                         <div className="col-lg-6 d-flex align-items-center justify-content-center">
                             <div className="sent-otp-form-container">
                                 <h3 className="m-0 pb-4 font-weight-bold">Reset password</h3>

@@ -165,19 +165,20 @@ export default function GstCard(props) {
         </div>
         <div className="row my-2 font-weight-bold">
           <div className="col-lg-2 col-3">Address:</div>
-          <div className="col-lg-10 col-9 company-addr mr-0 pl-lg-4 break-line-1">
+          <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}>
             {address.slice(0, 9) == "undefined" ? " " : address}
             {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
           </div>
         </div>
         <div className="d-flex justify-content-end">
           <p className="m-0 mr-2">
-            {Math.round(gst?.avgRating || 0).toFixed(1)}
+            {(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}
           </p>
           <Rating
             name="simple-controlled"
-            value={Math.round(gst?.avgRating).toFixed(1)}
-            disabled={true}
+            value={(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}
+            readOnly={true}
+            precision={0.5}
           />
           <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
         </div>
