@@ -4,6 +4,47 @@
   z-index: 10 !important;
 }
 
+@keyframes fadeIn {
+  0% {
+      opacity: 0;
+  }
+
+  100% {
+      opacity: 1;
+  }
+}
+
+.dropdown {
+  display: none;
+  border-radius: 10px;
+  position: absolute;
+  right: 1%;
+  width: 200px;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  padding: 10px 0px;
+  text-align: left;
+}
+
+.show-dropdown:hover .dropdown {
+  display: block;
+  animation: fadeIn 0.6s;
+}
+
+.dropdown ul,
+.dropdown li {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-weight: 600;
+  color: rgb(99, 98, 98);
+}
+
+.dropdown li:active {
+  background-color: rgb(239, 240, 255);
+  color: black;
+}
+
 .MuiAppBar-root {
   background-color: transparent !important;
   box-shadow: none !important;
@@ -69,7 +110,6 @@
     .logo-container {
       padding: 10px 0px 0px 50px;
     }
-
   }
 
   // iPads, Tablets

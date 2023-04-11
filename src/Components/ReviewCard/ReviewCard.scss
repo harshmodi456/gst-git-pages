@@ -39,16 +39,6 @@
         }
     }
 
-    .body {
-        .review-text {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-    }
-
     .review-img-container {
         display: flex;
         justify-content: flex-start !important;
@@ -85,6 +75,12 @@
     background-color: #e1dbdb;
 }
 
+.btn-view {
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .more-text{
     font-weight: bold;
     color: #928585;
@@ -96,4 +92,12 @@
 
 .review-text.min-height-wrap{
     min-height: 50px;
+}
+
+.break-line-1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
 }

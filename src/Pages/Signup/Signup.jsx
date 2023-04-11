@@ -45,6 +45,7 @@ const Signup = () => {
   const [open, setOpen] = React.useState(false);
   const [otp, setOtp] = React.useState("");
   const [checkBox, setCheckBox] = React.useState(false);
+  const [mobileNoError, setMobileNoError] = React.useState('');
 
   const handleClickOpen = (takeRecord) => {
     setOpen(true);
@@ -61,15 +62,15 @@ const Signup = () => {
       mobileNo: Yup.string()
         .min(10, "Mobile number must be a 10 digits")
         .max(10, "Mobile number must be a 10 digits")
-        .required("Mobile number Number is Required."),
+        .required("Mobile number is required."),
       userPassword: Yup.string()
         .required("Password is required")
         .min(8, "Password must be at least 8 characters")
-        .matches(/[a-zA-Z]/, "Password can only contain Latin letters."),
+        .matches(/[a-zA-Z]/, "Password can only contain latin letters."),
       confirmPassword: Yup.string()
         .min(8, "Password must be at least 8 characters")
         .oneOf([Yup.ref("userPassword"), null], "Password must be same")
-        .required("Confirm Password is required")
+        .required("Confirm password is required")
     }),
     onSubmit: (values) => {
       if (checkBox) {
@@ -89,6 +90,12 @@ const Signup = () => {
               userInfo: res?.payload
             };
             localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
+          } else {
+            setMobileNoError(res?.payload?.response?.data?.message);
+            isLoading(false);
+            setTimeout(()=>{
+              setMobileNoError('');
+            }, 4000)
           }
           isLoading(false);
         });
@@ -154,9 +161,7 @@ const Signup = () => {
                       className="invalid-feedback"
                       style={{ display: "flex" }}
                     >
-                      {formik.touched.mobileNo && formik.errors.mobileNo && (
-                        <div className="error">{formik.errors.mobileNo}</div>
-                      )}
+                      <div className="error">{formik.errors.mobileNo || mobileNoError}</div>
                     </div>
                   }
                 </div>
@@ -222,7 +227,7 @@ const Signup = () => {
                       className="password-icon"
                     />
                   )}
-                   {
+                  {
                     <div
                       className="invalid-feedback"
                       style={{ display: "flex" }}

@@ -78,7 +78,7 @@ const MyReviews = () => {
               {
                 receiveReviewData?.length > 0 ? (
                   receiveReviewData?.map((review, index) => (
-                    <ReviewCard key={index} review={review} updateData={fetchMyBusinessReviews} />
+                    <ReviewCard key={index} review={review} updateData={fetchMyBusinessReviews} receiveReview={true} />
                   ))
                 ) : (
                   <div className="text-muted text-center w-100">
@@ -96,7 +96,7 @@ const MyReviews = () => {
               {
                 reviewData?.length > 0 ? (
                   reviewData?.map((review, index) => (
-                    <ReviewCard key={index} review={review} updateData={fetchMyReviews} />
+                    <ReviewCard key={index} review={review} updateData={fetchMyReviews} mySentReview={true} />
                   ))
                 ) : (
                   <div className="text-muted text-center w-100">

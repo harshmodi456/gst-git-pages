@@ -29,54 +29,39 @@ export default function GstCard(props) {
         gstObj = gst?.gstData;
       }
       if (gst?.adadr?.length > 0) {
-        let addressStr = `${
-          gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
-        }${gstObj?.adadr[0]?.addr?.bno && ", "}
-                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${
-          gstObj?.adadr[0]?.addr?.bnm && ", "
-        }
-                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${
-          gstObj?.adadr[0]?.addr?.loc && ", "
-        }
-                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${
-          gstObj?.adadr[0]?.addr?.st && ", "
-        }
-                ${
-                  gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
-                }${gstObj?.adadr[0]?.addr?.city && ", "}
-                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${
-          gstObj?.adadr[0]?.addr?.dst && ", "
-        }
-                ${
-                  gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
-                }${gstObj?.adadr[0]?.addr?.stcd && ", "}
-                ${
-                  gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
-                }.`;
+        let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
+          }${gstObj?.adadr[0]?.addr?.bno && ", "}
+                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${gstObj?.adadr[0]?.addr?.bnm && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${gstObj?.adadr[0]?.addr?.loc && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${gstObj?.adadr[0]?.addr?.st && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
+          }${gstObj?.adadr[0]?.addr?.city && ", "}
+                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
+          }${gstObj?.adadr[0]?.addr?.stcd && ", "}
+                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
+          }.`;
 
         setAddress(addressStr);
       } else {
-        let addressStr = `${
-          gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
-        }${gstObj?.pradr?.addr?.flno && ", "}
-                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${
-          gstObj?.pradr?.addr?.bno && ", "
-        }
-                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${
-          gstObj?.pradr?.addr?.bnm && ", "
-        }
-                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${
-          gstObj?.pradr?.addr?.st && ", "
-        }
-                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${
-          gstObj?.pradr?.addr?.city && ", "
-        }
-                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${
-          gstObj?.pradr?.addr?.dst && ", "
-        }
-                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${
-          gstObj?.pradr?.addr?.stcd && ", "
-        }
+        let addressStr = `${gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
+          }${gstObj?.pradr?.addr?.flno && ", "}
+                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${gstObj?.pradr?.addr?.bno && ", "
+          }
+                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${gstObj?.pradr?.addr?.bnm && ", "
+          }
+                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${gstObj?.pradr?.addr?.st && ", "
+          }
+                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ", "
+          }
+                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ", "
+          }
+                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ", "
+          }
                 ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}.`;
 
         setAddress(addressStr);
@@ -115,12 +100,12 @@ export default function GstCard(props) {
       };
 
       if (gst?._doc) {
-        if (getUserInfo === undefined || getUserInfo === null) {
-          setIsLoading(false);
-          navigate("/login");
-        } else {
-          navigate(`/gst-information/${gst?._doc?.gstin}`);
-        }
+        // if (getUserInfo === undefined || getUserInfo === null) {
+        //   setIsLoading(false);
+        //   navigate("/login");
+        // } else {
+        navigate(`/gst-information/${gst?._doc?.gstin}`);
+        // }
       } else {
         dispatch(postGstRecord(reqeObj)).then((res) => {
           if (res?.payload?.status === true) {
@@ -128,10 +113,11 @@ export default function GstCard(props) {
               navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
                 state: { gst }
               });
-            } else {
-              navigate("/login");
-              localStorage.setItem("search-selectedGst", JSON.stringify(gst));
             }
+            // else {
+            //   navigate("/login");
+            //   localStorage.setItem("search-selectedGst", JSON.stringify(gst));
+            // }
           } else {
             toast.danger(res?.payload?.message);
           }
@@ -172,11 +158,12 @@ export default function GstCard(props) {
         </div>
         <div className="d-flex justify-content-end">
           <p className="m-0 mr-2">
-            {(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}
+            {(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}
           </p>
           <Rating
+            className="mt-1"
             name="simple-controlled"
-            value={(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}
+            value={(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}
             readOnly={true}
             precision={0.5}
           />

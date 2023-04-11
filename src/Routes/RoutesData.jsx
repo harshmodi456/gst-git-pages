@@ -10,6 +10,7 @@ import GstInformation from "../Pages/GstInformation/GstInformation.jsx";
 import MyReviews from "../Pages/MyReviews/MyReviews.jsx";
 import MyBusiness from "../Pages/MyBusiness/MyBusiness.jsx";
 import UserProfile from "../Pages/UserProfile/UserProfile.jsx";
+import ChangePassword from "../Pages/ChangePassword/ChangePassword.js";
 
 export const routeData = [
   {
@@ -50,7 +51,7 @@ export const routeData = [
     // path: "/gst-information",
     path: "/gst-information/:gstNumber",
     // route: AuthorizedRoute,
-    isAuthenticated: true,
+    isAuthenticated: false,
     element: GstInformation
   },
   {
@@ -67,6 +68,11 @@ export const routeData = [
     path: "/user-profile",
     isAuthenticated: true,
     element: UserProfile
+  },
+  {
+    path: "/change-password",
+    isAuthenticated: true,
+    element: ChangePassword
   }
 ];
 

@@ -22,9 +22,11 @@ import { toast } from "react-toastify";
 import { RWebShare } from "react-web-share";
 import { FaShareAlt } from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
+import Swal from 'sweetalert2';
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
@@ -39,12 +41,15 @@ const GstInformation = () => {
   const [imgFile, setImgFile] = useState([]);
   const [profileImg, setProfileImg] = useState([]);
   const [deleteBar, setDeleteBar] = useState(false);
+  const [disableShare, setDisableShare] = useState(true);
   const [imageUrl, setImageUrl] = useState();
   const [gstAddress, setGstAddress] = useState('');
   const [gstCenter, setGstCenter] = useState('');
   const [gstState, setGstState] = useState('');
   const [gstRange, setGstRange] = useState('');
   const [gstStatus, setGstStatus] = useState('');
+  const takeUserInfo = localStorage.getItem("userInfo");
+  const getUserInfo = JSON.parse(takeUserInfo);
 
   const fetchGst = () => {
     isLoading(true);
@@ -102,6 +107,38 @@ const GstInformation = () => {
         setGstAddress(addressStr);
         setGstCenter(center);
         setGstState(state);
+      }
+    }
+  }
+
+  useEffect(()=>{
+    if (getUserInfo === undefined || getUserInfo === null) {
+      setDisableShare(true)
+    } else {
+      setDisableShare(false)
+    }
+  }, [getUserInfo])
+
+  const validateLogin = (isReview) => {
+    if (getUserInfo === undefined || getUserInfo === null) {
+      Swal.fire(
+        {
+          icon: 'error',
+          title: 'Login Required!',
+          text: 'Please login first to access more.',
+        },
+        setTimeout(() => {
+          Swal.close();
+          navigate("/login");
+        }, 1500)
+      ).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      })
+    } else {
+      if (isReview == true) {
+        document.getElementById("btn-cancel").click();
       }
     }
   }
@@ -173,6 +210,10 @@ const GstInformation = () => {
 
   const handlePost = async (e) => {
     e.preventDefault();
+
+    // Check user is login or not
+    validateLogin();
+
     let formData = new FormData();
     formData.append('userId', getUserToken?.userInfo?.data?._id);
     formData.append('gstId', gst?._id || gst?._doc?._id);
@@ -228,7 +269,7 @@ const GstInformation = () => {
       <div className="gst-information m-lg-5 px-lg-5 px-4 py-2">
         <div className="d-flex border-bottom align-items-center">
           <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstData?.gstin || gst?._doc?.gstin}</h3>
-          <div className="ml-4">
+          <div className="ml-4" onClick={validateLogin}>
             <RWebShare
               data={{
                 text: "Share",
@@ -236,7 +277,7 @@ const GstInformation = () => {
                 title: "Share",
               }}
             >
-              <button className="btn-share">
+              <button className="btn-share" disabled={disableShare}>
                 <FaShareAlt />
                 <span className="ml-3">Share</span>
               </button>
@@ -264,7 +305,7 @@ const GstInformation = () => {
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">GSTIN / UIN Status</h5>
-            <h5 className="break-line-1">{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
+            <h5 className={`break-line-1 font-weight-bold ${gst?.gstData?.sts || gst?._doc?.gstData?.sts == 'Active' ? 'text-green' : 'text-danger'}`}>{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3s">
             <h5 className="font-weight-bold break-line-1">Taxpayer Type</h5>
@@ -296,22 +337,21 @@ const GstInformation = () => {
         <div className="feedback-container p-lg-5">
           <p className="title m-0 pb-0">Feedback</p>
           <div className="d-flex justify-content-center align-items-center">
-            <p className="m-0 pr-3 lbl-review">REVIEW</p>
-            <p className="m-0 mr-2">{(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}</p>
+            <p className="m-0 pr-3 lbl-review mt-1">REVIEW</p>
+            <p className="m-0 mr-2 mt-1">{(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}</p>
             <Rating
-              className="mt-1"
               name="simple-controlled"
               value={(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}
               readOnly={true}
               precision={0.5}
             />
-            <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
+            <p className="m-0 ml-2 mt-1 text-muted">({gst?.totalReview || 0})</p>
           </div>
           <div className="text-right">
             <button
               className="btn-write-review"
               data-toggle="modal"
-              data-target="#write-review-modal"
+              onClick={() => validateLogin(true)}
               disabled={gst?.isMyBusiness ? true : false || gstStatus != 'Active'}
             >
               <FaEdit /> Write Review

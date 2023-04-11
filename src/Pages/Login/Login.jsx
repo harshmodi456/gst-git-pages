@@ -28,7 +28,7 @@ const Login = () => {
     mobileNo: Yup.string().matches(new RegExp('^[0-9]+$'), 'Invalid mobile number')
       .min(10, "Mobile number must be a 10 digits")
       .max(10, "Mobile number must be a 10 digits")
-      .required("Mobile number Number is Required."),
+      .required("Mobile number is required."),
     password: Yup.string().required("Password required")
   });
 
@@ -96,7 +96,7 @@ const Login = () => {
                         className="form-control-textFiled"
                       />
                     </div>
-                    <div className="form-group w-100">
+                    <div className="form-group w-100 mb-1">
                       <Field
                         name="password"
                         type={showPassword ? "text" : "password"}
@@ -107,6 +107,11 @@ const Login = () => {
                         showPassword={showPassword}
                         handleClickShowPassword={handleClickShowPassword}
                       />
+                    </div>
+                    <div className="m-0 p-0 text-right">
+                      <Link to="/forgot-password" className="have-account">
+                        Forgot password?
+                      </Link>
                     </div>
                     <div className="w-100 mt-4 mb-3">
                       <button className="w-100 btn-signin">
@@ -120,11 +125,6 @@ const Login = () => {
                         </span>{" "}
                         <Link to="/signup" className="have-account">
                           Sign up
-                        </Link>
-                      </div>
-                      <div className="mt-2 account-signup">
-                        <Link to="/forgot-password" className="have-account">
-                          Forgot password?
                         </Link>
                       </div>
                     </div>

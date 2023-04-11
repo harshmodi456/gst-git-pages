@@ -8,7 +8,7 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { sendOtpForPassword, recoverPassword } from "../../Redux/Reducers/SearchGstNumReducer";
 import { toast } from "react-toastify";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -26,7 +26,7 @@ export default function ForgotPassword() {
         mobileNo: Yup.string().matches(new RegExp('^[0-9]+$'), 'Invalid mobile number')
             .min(10, "Mobile number must be a 10 digits")
             .max(10, "Mobile number must be a 10 digits")
-            .required("Mobile number Number is Required.")
+            .required("Mobile number is required.")
     });
 
     const passwordValidationSchema = Yup.object().shape({
@@ -37,12 +37,12 @@ export default function ForgotPassword() {
             .required('OTP is required'),
         userPwd: Yup.string()
             .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, ' ')
-            .min(8, 'Password is too short.')
+            .min(8, 'Password must be at least 8 characters')
             .trim()
             .required('Required'),
         userConfirmPwd: Yup.string()
             .oneOf([Yup.ref('userPwd'), null], 'Passwords must be same')
-            .min(8, 'Password is too short.')
+            .min(8, 'Password must be at least 8 characters')
             .trim()
             .required('Required')
     });
@@ -101,7 +101,7 @@ export default function ForgotPassword() {
                     >
                         {(props) => (
                             <Form autoComplete="off">
-                                <div className="form-group">
+                                <div className="form-group mb-1">
                                     <Field
                                         name="mobileNo"
                                         type="text"
@@ -111,6 +111,11 @@ export default function ForgotPassword() {
                                         variant="outlined"
                                         className="form-control-textFiled"
                                     />
+                                </div>
+                                <div className='w-100 text-right'>
+                                <Link to="/login" className="have-account">
+                                    Login from here
+                                </Link>
                                 </div>
                                 <div className="w-100 mt-4 mb-3">
                                     <button className="w-100 btn-signin">

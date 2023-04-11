@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import AppsOutlinedIcon from "@mui/icons-material/AppsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
+import PersonIcon from '@mui/icons-material/Person';
 import BusinessIcon from "@mui/icons-material/Business";
 import useHeaderFooter from "./Hooks/useHeader.jsx";
 import { useNavigate } from "react-router-dom";
@@ -28,6 +29,7 @@ import Person2Icon from "@mui/icons-material/Person2";
 import logo from "../../Assets/Logos/logo.svg";
 import "./Header.scss";
 import SearchIcon from '@mui/icons-material/Search';
+import LockOpenIcon from '@mui/icons-material/LockOpen';
 
 // const drawerWidth = 240;
 
@@ -59,6 +61,12 @@ const Header = (props) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
+  const userName = getUserInfo?.userInfo?.data?.fName;
+
+  const logoutHandler = () => {
+    localStorage.clear();
+    navigate("/");
+  }
 
   const navItems =
     getUserInfo !== undefined && getUserInfo !== null
@@ -68,8 +76,9 @@ const Header = (props) => {
         // "Business",
         "My Reviews",
         "My Business",
-        "User Profile",
-        "Log Out"
+        // "User Profile",
+        // "Log Out"
+        userName
       ]
       : [
         "Home",
@@ -117,7 +126,6 @@ const Header = (props) => {
                   appState === item.state
                     ? colorConfigs.sidebar.activeBg
                     : "unset",
-                paddingY: "12px",
                 paddingX: "24px"
               }}
               onClick={() => handleRoute(item)}
@@ -133,11 +141,6 @@ const Header = (props) => {
                     <AppsOutlinedIcon />
                     <ListItemText primary={item} className="ml-3" />
                   </>
-                ) : item === "Business" ? (
-                  <>
-                    <BusinessIcon />
-                    <ListItemText primary={item} className="ml-3" />
-                  </>
                 ) : item === "My Reviews" ? (
                   <>
                     <ReviewsIcon />
@@ -148,21 +151,43 @@ const Header = (props) => {
                     <BusinessCenterIcon />
                     <ListItemText primary={item} className="ml-3" />
                   </>
-                ) : item === "User Profile" ? (
-                  <>
-                    <Person2Icon />
-                    <ListItemText primary={item} className="ml-3" />
-                  </>
-                ) : (
-                  <>
-                    <LogoutIcon className="ml-1" />
-                    <ListItemText primary={item} className="ml-3" />
-                  </>
-                )}
+                ) : (null)
+                }
               </ListItemIcon>
             </ListItemButton>
           </ListItem>
         ))}
+        <ListItem disablePadding className="m-0 p-0">
+          <ListItemButton
+            sx={{
+              "&: hover": {
+                backgroundColor: colorConfigs.sidebar.hoverBg
+              },
+              backgroundColor: "unset",
+              paddingX: "24px"
+            }}
+          >
+            <ListItemIcon
+              sx={{
+                color: colorConfigs.sidebar.color
+              }}
+              className="d-block m-0 p-0"
+            >
+              <div className="d-flex pb-2" onClick={() => navigate('/user-profile')}>
+                <Person2Icon />
+                <ListItemText primary={'My Profile'} className="ml-3" />
+              </div>
+              <div className="d-flex pb-2" onClick={() => navigate('/change-password')}>
+                <LockOpenIcon />
+                <ListItemText primary={'Change Password'} className="ml-3" />
+              </div>
+              <div className="d-flex" onClick={logoutHandler}>
+                <LogoutIcon />
+                <ListItemText primary={'Logout'} className="ml-3" />
+              </div>
+            </ListItemIcon>
+          </ListItemButton>
+        </ListItem>
       </List>
       {/* <List>
         {navItems.map((item) => (
@@ -195,7 +220,7 @@ const Header = (props) => {
                 sx={{ mr: 2, display: { sm: "none" } }}
                 onClick={handleDrawerToggle}
               >
-                <MenuIcon  />
+                <MenuIcon />
                 <div className="d-flex h-100 justify-content-center">
                   <div className="logo-backgroung-sm" ></div>
                   <div className="logo-container" >
@@ -216,7 +241,7 @@ const Header = (props) => {
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {navItems.map((item) => (
                   <button
-                    className="btn-navigation"
+                    className={`btn-navigation ${userName == item ? 'show-dropdown' : ''}`}
                     key={item}
                     sx={{ color: "#fff" }}
                     onClick={(event) => {
@@ -224,6 +249,19 @@ const Header = (props) => {
                     }}
                   >
                     {item}
+                    <div className="dropdown">
+                      <ul className="dropdown-content">
+                        <li className="dropdown-item px-3 py-1" onClick={() => navigate('/user-profile')}>
+                          My Profile
+                        </li>
+                        <li className="dropdown-item px-3 py-1" onClick={() => navigate('/change-password')}>
+                          Change Password
+                        </li>
+                        <li className="dropdown-item px-3 py-1" onClick={logoutHandler}>
+                          Logout
+                        </li>
+                      </ul>
+                    </div>
                   </button>
                 ))}
               </Box>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { Grid } from "@mui/material";
 import "./UserProfile.scss";
 import { useNavigate } from "react-router-dom";
@@ -18,27 +18,29 @@ import userImg from '../../Assets/Images/user.png';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import { toast } from "react-toastify";
-import UpdatePassword from './UpdatePassword.js'
 
 const UserProfile = () => {
 
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
-  const [user, setUser] = useState(JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.data);
-  const [profileImg, setProfileImg] = useState(userImg);
+  const [user, setUser] = useState();
+  const [profileImg, setProfileImg] = useState(null);
   const [imgFile, setImgFile] = useState(null);
-  const userName = user?.fName + ' ' + user?.lName;
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     if (!user) {
-      navigate('/')
+      // navigate('/')
     } else {
       if (user?.profileImg) {
         setProfileImg(user?.profileImg);
       }
     }
   }, [user])
+
+  useEffect(() => {
+    setUser(JSON.parse(localStorage.getItem('userInfo'))?.userInfo?.data);
+  }, [])
 
   const fileChangeHandler = (event) => {
     const file = event.target.files[0];
@@ -73,9 +75,9 @@ const UserProfile = () => {
       .trim()
       .required('Required'),
     mobileNo: Yup.string()
-      .typeError("Invalid contact number")
+      .typeError("Invalid mobile number")
       .trim()
-      .matches(/^[1-9]{1}[0-9]{9}$/, 'Invalid phone number')
+      .matches(/^[1-9]{1}[0-9]{9}$/, 'Invalid mobile number')
       .required('Required'),
     email: Yup.string()
       .email('Invalid email address')
@@ -140,10 +142,10 @@ const UserProfile = () => {
     return (
       <div>
         <h4 className='m-0 px-5'>Personal Information</h4>
-        <hr className="mx-5" />
-        <form className="px-5" onSubmit={formik.handleSubmit} autoComplete="off">
+        <hr className="mx-lg-5" />
+        <form className="px-lg-5" onSubmit={formik.handleSubmit} autoComplete="off">
           <div className="row my-5">
-            <div className="col-6">
+            <div className="col-lg-6 mb-lg-0 mb-3">
               <TextField
                 className='w-100'
                 name='fName'
@@ -154,7 +156,7 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
             </div>
-            <div className="col-6">
+            <div className="col-lg-6">
               <TextField
                 className='w-100'
                 name='lName'
@@ -166,8 +168,8 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="row my-5">
-            <div className="col-6">
+          <div className="row my-lg-5">
+            <div className="col-lg-6 mb-lg-0 mb-3">
               <TextField
                 className='w-100'
                 name='email'
@@ -178,7 +180,7 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
             </div>
-            <div className="col-6">
+            <div className="col-lg-6">
               <TextField
                 className='w-100'
                 name='businessName'
@@ -191,7 +193,7 @@ const UserProfile = () => {
             </div>
           </div>
           <div className="row my-5">
-            <div className="col-6">
+            <div className="col-lg-6">
               <TextField
                 className='w-100'
                 name='mobileNo'
@@ -206,7 +208,7 @@ const UserProfile = () => {
           <div className="col-12 text-right my-5 py-5">
             {
               localStorage.getItem('isNewUser') != 'true' &&
-              <button className="btn-cancel mr-4" onClick={() => navigate('/')}>Cancel</button>
+              <button className="btn-cancel mr-lg-4 mb-lg-0 mb-3" onClick={() => navigate('/')}>Cancel</button>
             }
             <button type="submit" className="btn-update-profile">Update</button>
           </div>
@@ -219,9 +221,9 @@ const UserProfile = () => {
     <div className="my-user-profile-div pt-5">
       <Grid columns={{ xs: 0, sm: 8, md: 12 }}>
         <div className="main-div container-fluid px-5">
-          <h1 className="px-5">Hello {user?.fName || 'User'},</h1>
+          <h1 className="px-lg-5">Hello {user?.fName || 'User'},</h1>
           <hr />
-          <div className="px-5">
+          <div className="px-lg-5">
             <div>
               <Avatar size={150} round src={profileImg} name={user?.fName} />
             </div>
@@ -242,12 +244,6 @@ const UserProfile = () => {
               </IconButton>
             </div>
           </div>
-          {/* <div className="px-5">
-            {
-              localStorage.getItem('isNewUser') != 'true' &&
-              <UpdatePassword />
-            }
-          </div> */}
           <UpdateUserForm />
         </div>
       </Grid>
