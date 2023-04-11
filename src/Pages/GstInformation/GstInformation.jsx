@@ -21,6 +21,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import { toast } from "react-toastify";
 import { RWebShare } from "react-web-share";
 import { FaShareAlt } from "react-icons/fa";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -131,6 +132,7 @@ const GstInformation = () => {
       if (gst) {
         const request = {
           gstId: gstId,
+          size: 5
         };
         dispatch(getWriteReview(request)).then((res) => {
           setReviewData(res?.payload?.reviews);
@@ -183,10 +185,13 @@ const GstInformation = () => {
     }
 
     dispatch(writeReview(formData)).then((res) => {
+      const id_a = gst._id;
+      const id_b = gst?._doc?._id
+      const size = 5;
       if (res?.payload?.status === true) {
         handleClose();
         isLoading(true);
-        dispatch(getWriteReview(gst._id || gst?._doc?._id)).then((res) => {
+        dispatch(getWriteReview({ id_a, size } || { id_b, size })).then((res) => {
           setReviewData(res?.payload?.reviews);
           document.getElementById("btn-cancel").click();
           fetchReview(gst?._id || gst?._doc?._id, true);
@@ -196,6 +201,20 @@ const GstInformation = () => {
       localStorage.setItem('multiImg', false);
     });
   };
+
+  const fetchMoreReviews = (length) => {
+    const size = length + 5;
+    if (gst) {
+      const request = {
+        gstId: gst?._id || gst?._doc?._id,
+        size: size
+      };
+      dispatch(getWriteReview(request)).then((res) => {
+        setReviewData(res?.payload?.reviews);
+        isLoading(false);
+      });
+    }
+  }
 
   return (
     <div className="gst-information-container">
@@ -278,11 +297,11 @@ const GstInformation = () => {
           <p className="title m-0 pb-0">Feedback</p>
           <div className="d-flex justify-content-center align-items-center">
             <p className="m-0 pr-3 lbl-review">REVIEW</p>
-            <p className="m-0 mr-2">{(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}</p>
+            <p className="m-0 mr-2">{(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}</p>
             <Rating
               className="mt-1"
               name="simple-controlled"
-              value={(Math.round((gst?.avgRating / 0.5) || 0)*0.5).toFixed(1)}
+              value={(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}
               readOnly={true}
               precision={0.5}
             />
@@ -298,13 +317,31 @@ const GstInformation = () => {
               <FaEdit /> Write Review
             </button>
           </div>
-
-          <div className="row review-container p-md-5">
+          <div>
             {
+
               getReviewData?.length > 0 ? (
-                getReviewData?.map((review, index) => (
-                  <ReviewCard key={index} review={review} updateData={fetchReview} />
-                ))
+                <InfiniteScroll
+                  dataLength={getReviewData?.length}
+                  next={() => fetchMoreReviews(getReviewData?.length)}
+                  hasMore={true}
+                  // loader={<h4>Loading...</h4>}
+                  scrollableTarget="scrollableDiv"
+                >
+                  <>
+                    <div className="row review-container mt-3" id="scrollableDiv"
+                      style={{
+                        height: 500,
+                        width: '100%',
+                        overflow: 'auto',
+                        display: 'flex',
+                      }}>
+                      {getReviewData?.map((review, index) => (
+                        <ReviewCard key={index} review={review} updateData={fetchReview} />
+                      ))}
+                    </div>
+                  </>
+                </InfiniteScroll>
               ) : (
                 <div className="text-muted text-center w-100">
                   <h3>No reviews</h3>

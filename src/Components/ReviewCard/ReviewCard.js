@@ -145,7 +145,7 @@ export default function ReviewCard(props) {
         dispatch(updateReview(formData)).then((res) => {
             if (res?.payload?.status) {
                 document.getElementById(`btn-cancel-${review?._id}`).click();
-                props.updateData(review?.gstId?._id, true);
+                // props.updateData(review?.gstId?._id, true);
                 setIsLoading(false);
                 setImgFile([]);
             }
