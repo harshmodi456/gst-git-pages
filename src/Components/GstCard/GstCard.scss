@@ -4,7 +4,9 @@
     box-shadow: 0px -1px 7px 1px rgba(29, 21, 80, 0.12);
     border-radius: 20px;
     font-size: 20px;
-
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     .company-name {
         text-transform: uppercase;
         color: #00448b;

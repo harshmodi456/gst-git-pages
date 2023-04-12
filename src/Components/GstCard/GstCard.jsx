@@ -29,39 +29,54 @@ export default function GstCard(props) {
         gstObj = gst?.gstData;
       }
       if (gst?.adadr?.length > 0) {
-        let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
-          }${gstObj?.adadr[0]?.addr?.bno && ", "}
-                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${gstObj?.adadr[0]?.addr?.bnm && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${gstObj?.adadr[0]?.addr?.loc && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${gstObj?.adadr[0]?.addr?.st && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
-          }${gstObj?.adadr[0]?.addr?.city && ", "}
-                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
-          }${gstObj?.adadr[0]?.addr?.stcd && ", "}
-                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
-          }.`;
+        let addressStr = `${
+          gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
+        }${gstObj?.adadr[0]?.addr?.bno && ", "}
+                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${
+          gstObj?.adadr[0]?.addr?.bnm && ", "
+        }
+                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${
+          gstObj?.adadr[0]?.addr?.loc && ", "
+        }
+                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${
+          gstObj?.adadr[0]?.addr?.st && ", "
+        }
+                ${
+                  gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
+                }${gstObj?.adadr[0]?.addr?.city && ", "}
+                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${
+          gstObj?.adadr[0]?.addr?.dst && ", "
+        }
+                ${
+                  gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
+                }${gstObj?.adadr[0]?.addr?.stcd && ", "}
+                ${
+                  gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
+                }.`;
 
         setAddress(addressStr);
       } else {
-        let addressStr = `${gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
-          }${gstObj?.pradr?.addr?.flno && ", "}
-                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${gstObj?.pradr?.addr?.bno && ", "
-          }
-                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${gstObj?.pradr?.addr?.bnm && ", "
-          }
-                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${gstObj?.pradr?.addr?.st && ", "
-          }
-                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ", "
-          }
-                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ", "
-          }
-                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ", "
-          }
+        let addressStr = `${
+          gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
+        }${gstObj?.pradr?.addr?.flno && ", "}
+                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${
+          gstObj?.pradr?.addr?.bno && ", "
+        }
+                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${
+          gstObj?.pradr?.addr?.bnm && ", "
+        }
+                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${
+          gstObj?.pradr?.addr?.st && ", "
+        }
+                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${
+          gstObj?.pradr?.addr?.city && ", "
+        }
+                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${
+          gstObj?.pradr?.addr?.dst && ", "
+        }
+                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${
+          gstObj?.pradr?.addr?.stcd && ", "
+        }
                 ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}.`;
 
         setAddress(addressStr);
@@ -135,39 +150,47 @@ export default function GstCard(props) {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <div className="gst-card-container pt-3 pb-2 px-4" onClick={onPostHandle}>
-        <div className="row my-1 font-weight-bold">
-          <div className="col-lg-2 col-3">Name:</div>
-          <div className="col-lg-9 col-8 company-name mr-0 pl-lg-4 break-line-1">
-            {gst?.lgnm || gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}
+      <div
+        className="gst-card-container pt-3 pb-2 px-4 h-100"
+        onClick={onPostHandle}
+      >
+        <div className="top-section-wrap">
+          <div className="row my-1 font-weight-bold">
+            <div className="col-lg-2 col-3">Name:</div>
+            <div className="col-lg-9 col-8 company-name mr-0 pl-lg-4 break-line-1">
+              {gst?.lgnm || gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}
+            </div>
+            <div className="col-1">
+              {gst?.isMyBusiness && (
+                <div className="verified-mark">
+                  <WorkspacePremiumIcon />
+                </div>
+              )}
+            </div>
           </div>
-          <div className="col-1">
-            {gst?.isMyBusiness && (
-              <div className="verified-mark">
-                <WorkspacePremiumIcon />
-              </div>
-            )}
+          <div className="row my-2 font-weight-bold">
+            <div className="col-lg-2 col-3">Address:</div>
+            {/* <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}> */}
+            <div className="col-lg-10 col-9 company-addr mr-0 pl-lg-4">
+              {address}
+              {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
+            </div>
           </div>
         </div>
-        <div className="row my-2 font-weight-bold">
-          <div className="col-lg-2 col-3">Address:</div>
-          <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}>
-            {address.slice(0, 9) == "undefined" ? " " : address}
-            {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
+        <div className="bottom-section-wrap">
+          <div className="d-flex justify-content-end">
+            <p className="m-0 mr-2">
+              {(Math.round(gst?.avgRating / 0.5 || 0) * 0.5).toFixed(1)}
+            </p>
+            <Rating
+              className="mt-1"
+              name="simple-controlled"
+              value={(Math.round(gst?.avgRating / 0.5 || 0) * 0.5).toFixed(1)}
+              readOnly={true}
+              precision={0.5}
+            />
+            <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
           </div>
-        </div>
-        <div className="d-flex justify-content-end">
-          <p className="m-0 mr-2">
-            {(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}
-          </p>
-          <Rating
-            className="mt-1"
-            name="simple-controlled"
-            value={(Math.round((gst?.avgRating / 0.5) || 0) * 0.5).toFixed(1)}
-            readOnly={true}
-            precision={0.5}
-          />
-          <p className="m-0 ml-2 text-muted">({gst?.totalReview || 0})</p>
         </div>
       </div>
     </div>
