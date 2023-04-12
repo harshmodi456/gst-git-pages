@@ -33,6 +33,7 @@ import { Keyboard, Pagination, Navigation } from "swiper";
 import { useNavigate } from "react-router-dom";
 
 export default function ReviewCard(props) {
+
   const { review } = props;
   const navigate = useNavigate();
   let [helpfulCount, setHelpfulCount] = useState(review?.helpful?.length || 0);
@@ -98,13 +99,16 @@ export default function ReviewCard(props) {
 
   const handleDisableHelpful = () => {
     if (review) {
+      if (review?.userId?._id == userId) {
+        setDisableHelpful(true);
+      }
       review?.helpful?.map((user) => {
         if (userId == user) {
           setDisableHelpful(true);
         }
-      });
+      })
     }
-  };
+  }
 
   useEffect(() => {
     handleDisableHelpful();
@@ -241,7 +245,6 @@ export default function ReviewCard(props) {
               size="52"
               round
               name={(review?.gstId?.gstData?.tradeNam).slice(0, 1)}
-              src={review?.userId?.profileImg}
             />
             <div>
               <p className="user-name m-0 break-line-1">
@@ -305,8 +308,7 @@ export default function ReviewCard(props) {
       return (
         <div className="header w-100">
           <div className="d-flex ml-2">
-            <p className="mr-2 text-dark">Received On: </p>
-            <p className="text-muted">{review?.gstId?.gstData?.tradeNam}</p>
+            <p className="text-success break-line-1">{review?.gstId?.gstData?.tradeNam}</p>
           </div>
           <div className="d-flex px-2 justify-content-between w-100">
             <div className="d-flex justify-content-start align-items-center">
@@ -450,15 +452,18 @@ export default function ReviewCard(props) {
 
   const onChangeRichText = (value) => {
     setReviewText(value);
-};
+  };
 
   return (
-    <div className="col-lg-6 col-md-12 px-md-3 my-3 px-3">
-      <div className="review-card-container h-100 p-3">
-        <div>{CardHeader()}</div>
-        <div className="body px-2 py-3">
-          <p className="m-0 min-height-wrap" dangerouslySetInnerHTML={{__html: review?.reviewText}}>
-            {/* {showFullReview
+    <>
+      {
+        (props.receiveReview == true && review?.userId?._id == userId) ? (null) : (
+          <div className="col-lg-6 col-md-12 px-md-3 my-3 px-3">
+            <div className="review-card-container h-100 p-3">
+              <div>{CardHeader()}</div>
+              <div className="body px-2 py-3">
+                <p className="m-0 min-height-wrap" dangerouslySetInnerHTML={{ __html: review?.reviewText }}>
+                  {/* {showFullReview
               ? review?.reviewText
               : review?.reviewText?.slice(0, 270)}
             {review?.reviewText?.length > 270 && (
@@ -480,129 +485,129 @@ export default function ReviewCard(props) {
                 )}
               </>
             )} */}
-          </p>
-        </div>
-        <div className="review-img-container pt-2 px-2 w-100">
-          {review?.reviewImg?.slice(0, 4)?.map((data, index) => {
-            return (
-              <div
-                className="m-1"
-                key={index}
-                data-toggle="modal"
-                data-target={`#review-img-modal-${review?._id}`}
-              >
-                <img
-                  className="review-img"
-                  src={data?.imgUrl}
-                  alt="review-img"
-                />
+                </p>
               </div>
-            );
-          })}
-          {review?.reviewImg?.length > 4 && (
+              <div className="review-img-container pt-2 px-2 w-100">
+                {review?.reviewImg?.slice(0, 4)?.map((data, index) => {
+                  return (
+                    <div
+                      className="m-1"
+                      key={index}
+                      data-toggle="modal"
+                      data-target={`#review-img-modal-${review?._id}`}
+                    >
+                      <img
+                        className="review-img"
+                        src={data?.imgUrl}
+                        alt="review-img"
+                      />
+                    </div>
+                  );
+                })}
+                {review?.reviewImg?.length > 4 && (
+                  <div
+                    className="more-box-view m-1 btn btn-primary"
+                    data-toggle="modal"
+                    data-target={`#review-img-modal-${review?._id}`}
+                  >
+                    <AddIcon sx={{ color: "#928585" }} />{" "}
+                    <span className="more-text">{review?.reviewImg?.length - 4}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* <!-- Images Modal --> */}
             <div
-              className="more-box-view m-1 btn btn-primary"
-              data-toggle="modal"
-              data-target={`#review-img-modal-${review?._id}`}
+              className="modal fade bd-example-modal-lg"
+              size="lg"
+              id={`review-img-modal-${review?._id}`}
+              tabIndex="-1"
+              role="dialog"
+              aria-labelledby="exampleModalCenterTitle"
+              aria-hidden="true"
             >
-              <AddIcon sx={{ color: "#928585" }} />{" "}
-              <span className="more-text">{review?.reviewImg?.length - 4}</span>
-            </div>
-          )}
-        </div>
-      </div>
-
-      {/* <!-- Images Modal --> */}
-      <div
-        className="modal fade bd-example-modal-lg"
-        size="lg"
-        id={`review-img-modal-${review?._id}`}
-        tabIndex="-1"
-        role="dialog"
-        aria-labelledby="exampleModalCenterTitle"
-        aria-hidden="true"
-      >
-        <div
-          className="modal-dialog modal-dialog-centered  modal-lg"
-          role="document"
-        >
-          <div className="modal-content modal-lg">
-            <div className="modal-header p-10">
-              <h5 className="modal-title" id="exampleModalLongTitle">
-                {review?.gstId?.gstData?.tradeNam}
-              </h5>
-            </div>
-            <div className="modal-body p-10">
-              <>
-                <Swiper
-                  slidesPerView={1}
-                  spaceBetween={0}
-                  keyboard={{
-                    enabled: true
-                  }}
-                  pagination={{
-                    clickable: true
-                  }}
-                  navigation={true}
-                  modules={[Keyboard, Pagination, Navigation]}
-                  className="mySwiper"
-                >
-                  {review?.reviewImg?.map((data, index) => {
-                    return (
-                      <SwiperSlide key={index} className="m-1 swiper-block">
-                        <div className="outer-image-wrap">
-                          <img src={data?.imgUrl} />
-                        </div>
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </>
-            </div>
-            <div className="modal-footer">
-              <button
-                type="reset"
-                className="btn btn-secondary"
-                data-dismiss="modal"
+              <div
+                className="modal-dialog modal-dialog-centered  modal-lg"
+                role="document"
               >
-                Close
-              </button>
+                <div className="modal-content modal-lg">
+                  <div className="modal-header p-10">
+                    <h5 className="modal-title" id="exampleModalLongTitle">
+                      {review?.gstId?.gstData?.tradeNam}
+                    </h5>
+                  </div>
+                  <div className="modal-body p-10">
+                    <>
+                      <Swiper
+                        slidesPerView={1}
+                        spaceBetween={0}
+                        keyboard={{
+                          enabled: true
+                        }}
+                        pagination={{
+                          clickable: true
+                        }}
+                        navigation={true}
+                        modules={[Keyboard, Pagination, Navigation]}
+                        className="mySwiper"
+                      >
+                        {review?.reviewImg?.map((data, index) => {
+                          return (
+                            <SwiperSlide key={index} className="m-1 swiper-block">
+                              <div className="outer-image-wrap">
+                                <img src={data?.imgUrl} />
+                              </div>
+                            </SwiperSlide>
+                          );
+                        })}
+                      </Swiper>
+                    </>
+                  </div>
+                  <div className="modal-footer">
+                    <button
+                      type="reset"
+                      className="btn btn-secondary"
+                      data-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
-      </div>
 
-      {/* <!-- Modal --> */}
-      <div
-        className="modal fade"
-        data-keyboard={false}
-        tabIndex="-1"
-        id={`update-review-modal-${review?._id}`}
-      >
-        <div className="modal-dialog modal-dialog-centered modal-lg">
-          <div className="modal-content p-5">
-            <div className="write-review-title">
-              <h2>{review?.gstId?.gstData?.lgnm}</h2>
-              <p className="text-muted">Posting Publicity</p>
-            </div>
-            <div className="rate-view">
-              <Rating
-                className="mt-1 mb-4"
-                name="simple-controlled"
-                value={rating}
-                onChange={(event, newValue) => {
-                  setRating(newValue);
-                }}
-                size="large"
-              />
-            </div>
-            <RichTextEditor
-              id="review"
-              name="review"
-              value={reviewText}
-              onChange={onChangeRichText}
-            />
-            {/* <textarea
+            {/* <!-- Modal --> */}
+            <div
+              className="modal fade"
+              data-keyboard={false}
+              tabIndex="-1"
+              id={`update-review-modal-${review?._id}`}
+            >
+              <div className="modal-dialog modal-dialog-centered modal-lg">
+                <div className="modal-content p-5">
+                  <div className="write-review-title">
+                    <h2>{review?.gstId?.gstData?.lgnm}</h2>
+                    <p className="text-muted">Posting Publicity</p>
+                  </div>
+                  <div className="rate-view">
+                    <Rating
+                      className="mt-1 mb-4"
+                      name="simple-controlled"
+                      value={rating}
+                      onChange={(event, newValue) => {
+                        setRating(newValue);
+                      }}
+                      size="large"
+                    />
+                  </div>
+                  <RichTextEditor
+                    id="review"
+                    name="review"
+                    value={reviewText}
+                    onChange={onChangeRichText}
+                  />
+                  {/* <textarea
                             className="review-textarea"
                             as='textarea'
                             autoComplete="off"
@@ -613,110 +618,113 @@ export default function ReviewCard(props) {
                                 setReviewText(event.target.value);
                             }}
                         /> */}
-            <div className="img-container d-flex flex-wrap">
-              <input
-                multiple
-                id={"reviewImgUrl" + review?._id}
-                name={"reviewImgUrl" + review?._id}
-                accept="image/*"
-                hidden
-                type="file"
-                onChange={(event) => fileChangeHandler(event)}
-              />
-              <Box className="d-flex flex-wrap">
-                {profileImg?.map((data, index) => {
-                  return (
-                    <Box
-                      onMouseOut={() => bottomMenu(false, data)}
-                      onMouseOver={() => bottomMenu(true, data)}
-                      key={index}
-                      sx={{ alignItems: "center", m: 1, position: "relative" }}
-                    >
-                      {data?.img ? (
-                        <img src={data?.img} height={"150px"} width={"150px"} />
-                      ) : (
-                        <img src={data} height={"150px"} width={"150px"} />
-                      )}
-                      {imageUrl?.id
-                        ? deleteBar &&
-                          imageUrl?.id === data?.id && (
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "flex-end",
-                                position: "absolute",
-                                bottom: 0,
-                                backgroundColor: "#5A5A5A",
-                                width: "100%",
-                                opacity: 0.7
-                              }}
-                            >
-                              <DeleteIcon
-                                onClick={() => removeImage(data)}
-                                sx={{ color: "#E1E1E1" }}
-                              />
-                            </Box>
-                          )
-                        : deleteBar &&
-                          imageUrl === data && (
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                justifyContent: "flex-end",
-                                position: "absolute",
-                                bottom: 0,
-                                backgroundColor: "#5A5A5A",
-                                width: "100%",
-                                opacity: 0.7
-                              }}
-                            >
-                              <DeleteIcon
-                                onClick={() => removeImage(data)}
-                                sx={{ color: "#E1E1E1" }}
-                              />
-                            </Box>
-                          )}
+                  <div className="img-container d-flex flex-wrap">
+                    <input
+                      multiple
+                      id={"reviewImgUrl" + review?._id}
+                      name={"reviewImgUrl" + review?._id}
+                      accept="image/*"
+                      hidden
+                      type="file"
+                      onChange={(event) => fileChangeHandler(event)}
+                    />
+                    <Box className="d-flex flex-wrap">
+                      {profileImg?.map((data, index) => {
+                        return (
+                          <Box
+                            onMouseOut={() => bottomMenu(false, data)}
+                            onMouseOver={() => bottomMenu(true, data)}
+                            key={index}
+                            sx={{ alignItems: "center", m: 1, position: "relative" }}
+                          >
+                            {data?.img ? (
+                              <img src={data?.img} height={"150px"} width={"150px"} />
+                            ) : (
+                              <img src={data} height={"150px"} width={"150px"} />
+                            )}
+                            {imageUrl?.id
+                              ? deleteBar &&
+                              imageUrl?.id === data?.id && (
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-end",
+                                    position: "absolute",
+                                    bottom: 0,
+                                    backgroundColor: "#5A5A5A",
+                                    width: "100%",
+                                    opacity: 0.7
+                                  }}
+                                >
+                                  <DeleteIcon
+                                    onClick={() => removeImage(data)}
+                                    sx={{ color: "#E1E1E1" }}
+                                  />
+                                </Box>
+                              )
+                              : deleteBar &&
+                              imageUrl === data && (
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-end",
+                                    position: "absolute",
+                                    bottom: 0,
+                                    backgroundColor: "#5A5A5A",
+                                    width: "100%",
+                                    opacity: 0.7
+                                  }}
+                                >
+                                  <DeleteIcon
+                                    onClick={() => removeImage(data)}
+                                    sx={{ color: "#E1E1E1" }}
+                                  />
+                                </Box>
+                              )}
+                          </Box>
+                        );
+                      })}
                     </Box>
-                  );
-                })}
-              </Box>
+                  </div>
+                  <div className="">
+                    <Button
+                      onClick={upload}
+                      className="mt-3"
+                      variant="outlined"
+                      startIcon={<CameraAltIcon />}
+                    >
+                      Add Image
+                    </Button>
+                  </div>
+                  <div className="btn-container text-right w-100 mt-4">
+                    <button
+                      id={`btn-cancel-${review?._id}`}
+                      onClick={() => resetData}
+                      className="btn-cancel mr-3"
+                      data-toggle="modal"
+                      data-target={`#update-review-modal-${review?._id}`}
+                    >
+                      Cancel
+                    </button>
+                    <button className="btn-submit" onClick={updateHandler}>
+                      Post
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="">
-              <Button
-                onClick={upload}
-                className="mt-3"
-                variant="outlined"
-                startIcon={<CameraAltIcon />}
-              >
-                Add Image
-              </Button>
-            </div>
-            <div className="btn-container text-right w-100 mt-4">
-              <button
-                id={`btn-cancel-${review?._id}`}
-                onClick={() => resetData}
-                className="btn-cancel mr-3"
-                data-toggle="modal"
-                data-target={`#update-review-modal-${review?._id}`}
-              >
-                Cancel
-              </button>
-              <button className="btn-submit" onClick={updateHandler}>
-                Post
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
 
-      <Backdrop
-        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-        open={isLoading}
-      >
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    </div>
+            <Backdrop
+              sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={isLoading}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          </div>
+        )
+      }
+    </>
   );
 }

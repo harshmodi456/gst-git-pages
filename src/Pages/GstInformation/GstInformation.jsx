@@ -111,7 +111,7 @@ const GstInformation = () => {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     if (getUserInfo === undefined || getUserInfo === null) {
       setDisableShare(true)
     } else {
@@ -348,14 +348,20 @@ const GstInformation = () => {
             <p className="m-0 ml-2 mt-1 text-muted">({gst?.totalReview || 0})</p>
           </div>
           <div className="text-right">
-            <button
-              className="btn-write-review"
-              data-toggle="modal"
-              onClick={() => validateLogin(true)}
-              disabled={gst?.isMyBusiness ? true : false || gstStatus != 'Active'}
-            >
-              <FaEdit /> Write Review
-            </button>
+            {
+              (gst?.isMyBusiness ? true : false || gstStatus != 'Active') ? (
+                null
+              ) : (
+                <button
+                  className="btn-write-review"
+                  data-toggle="modal"
+                  onClick={() => validateLogin(true)}
+                  disabled={gst?.isMyBusiness ? true : false || gstStatus != 'Active'}
+                >
+                  <FaEdit /> Write Review
+                </button>
+              )
+            }
           </div>
           <div>
             {
@@ -397,7 +403,7 @@ const GstInformation = () => {
                   </>
                 </InfiniteScroll>
               ) : (
-                <div className="text-muted text-center w-100">
+                <div className="text-muted text-center w-100 pt-5">
                   <h3>No reviews</h3>
                 </div>
               )

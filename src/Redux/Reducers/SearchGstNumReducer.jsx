@@ -260,6 +260,36 @@ export const updatePassword = createAsyncThunk(
   }
 );
 
+// for add history
+export const addHistory = createAsyncThunk(
+  "Get/addHistory",
+  async (data, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.post(`${api}history/${data?.userId}`, data)
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
+// for fetch history
+export const fetchHistory = createAsyncThunk(
+  "Get/fetchHistory",
+  async (id, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.get(`${api}history/${id}`,)
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   gstInfo: {},

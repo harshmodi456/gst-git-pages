@@ -30,6 +30,7 @@ import logo from "../../Assets/Logos/logo.svg";
 import "./Header.scss";
 import SearchIcon from '@mui/icons-material/Search';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { FaUserAlt } from "react-icons/fa";
 
 // const drawerWidth = 240;
 
@@ -261,14 +262,16 @@ const Header = (props) => {
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
                 {navItems?.map((item) => (
                   <button
-                    className={`btn-navigation ${userName == item ? 'show-dropdown' : ''}`}
+                    className={`btn-navigation  ${userName == item ? 'show-dropdown' : 'px-0'}`}
                     key={item}
                     sx={{ color: "#fff" }}
                     onClick={(event) => {
                       handleRoute(item);
                     }}
                   >
-                    {item}
+                    {item == userName ? (
+                        <p className="m-0 d-flex"><FaUserAlt className="header-user-icon mr-2"/><span>{item}</span></p>
+                    ) : (item)}
                     <div className="dropdown">
                       <ul className="dropdown-content">
                         <li className="dropdown-item px-3 py-1" onClick={() => navigate('/user-profile')}>

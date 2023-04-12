@@ -29,54 +29,39 @@ export default function GstCard(props) {
         gstObj = gst?.gstData;
       }
       if (gst?.adadr?.length > 0) {
-        let addressStr = `${
-          gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
-        }${gstObj?.adadr[0]?.addr?.bno && ", "}
-                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${
-          gstObj?.adadr[0]?.addr?.bnm && ", "
-        }
-                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${
-          gstObj?.adadr[0]?.addr?.loc && ", "
-        }
-                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${
-          gstObj?.adadr[0]?.addr?.st && ", "
-        }
-                ${
-                  gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
-                }${gstObj?.adadr[0]?.addr?.city && ", "}
-                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${
-          gstObj?.adadr[0]?.addr?.dst && ", "
-        }
-                ${
-                  gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
-                }${gstObj?.adadr[0]?.addr?.stcd && ", "}
-                ${
-                  gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
-                }.`;
+        let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
+          }${gstObj?.adadr[0]?.addr?.bno && ", "}
+                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${gstObj?.adadr[0]?.addr?.bnm && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${gstObj?.adadr[0]?.addr?.loc && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${gstObj?.adadr[0]?.addr?.st && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
+          }${gstObj?.adadr[0]?.addr?.city && ", "}
+                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ", "
+          }
+                ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
+          }${gstObj?.adadr[0]?.addr?.stcd && ", "}
+                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
+          }.`;
 
         setAddress(addressStr);
       } else {
-        let addressStr = `${
-          gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
-        }${gstObj?.pradr?.addr?.flno && ", "}
-                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${
-          gstObj?.pradr?.addr?.bno && ", "
-        }
-                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${
-          gstObj?.pradr?.addr?.bnm && ", "
-        }
-                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${
-          gstObj?.pradr?.addr?.st && ", "
-        }
-                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${
-          gstObj?.pradr?.addr?.city && ", "
-        }
-                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${
-          gstObj?.pradr?.addr?.dst && ", "
-        }
-                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${
-          gstObj?.pradr?.addr?.stcd && ", "
-        }
+        let addressStr = `${gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
+          }${gstObj?.pradr?.addr?.flno && ", "}
+                ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${gstObj?.pradr?.addr?.bno && ", "
+          }
+                ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${gstObj?.pradr?.addr?.bnm && ", "
+          }
+                ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${gstObj?.pradr?.addr?.st && ", "
+          }
+                ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ", "
+          }
+                ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ", "
+          }
+                ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ", "
+          }
                 ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}.`;
 
         setAddress(addressStr);
@@ -172,7 +157,7 @@ export default function GstCard(props) {
             <div className="col-lg-2 col-3">Address:</div>
             {/* <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}> */}
             <div className="col-lg-10 col-9 company-addr mr-0 pl-lg-4">
-              {address}
+              {address.slice(0, 9) == 'undefined' ? ' ' : address}
               {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
             </div>
           </div>

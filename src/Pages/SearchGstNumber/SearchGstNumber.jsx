@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./SearchGstNumber.scss";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   gstVerify,
-  postGstRecord
+  postGstRecord,
+  addHistory,
+  fetchHistory
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
@@ -20,9 +22,86 @@ const SearchGstNumber = () => {
   const navigate = useNavigate();
   const [loading, isLoading] = useState(false);
   const [gstSearchData, setGstSearchData] = useState([]);
+  const [history, setHistory] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
+  const searchInput = React.useRef(null);
+  const [focused, setFocused] = React.useState(false);
+
+  const onFocus = () => setFocused(true)
+  const onBlur = () => {
+    setTimeout(() => {
+      setFocused(false)
+    }, 500)
+  }
+
+  const fetchHistoryHandler = () => {
+    dispatch(fetchHistory(getUserInfo?.userInfo?.data?._id)).then((res) => {
+      if (res?.payload?.status === true) {
+        setHistory(res?.payload?.data?.history);
+      }
+    });
+  }
+
+  if (document.activeElement === searchInput.current) {
+    alert('0');
+    // setOpenHistory(true);
+  }
+
+  const addHistoryHandler = (searchValue) => {
+
+    const params = {
+      userId: getUserInfo?.userInfo?.data?._id,
+      history: searchValue
+    }
+
+    dispatch(addHistory(params)).then((res) => {
+      if (res?.payload?.status === true) {
+      }
+    });
+  }
+
+  useEffect(() => {
+    fetchHistoryHandler();
+  }, [])
+
+  const historyClickHandler = (item) => {
+    onBlur();
+    submitHandler({ verificationValue: item }, false, {})
+  }
+
+  const submitHandler = (values, isFormSubmit, { resetForm }) => {
+    setFocused(false);
+    isLoading(true);
+    if (isFormSubmit) {
+      addHistoryHandler(values?.verificationValue)
+    }
+
+    const params = {
+      userId: getUserInfo?.userInfo?.data?._id,
+      verificationValue: values?.verificationValue
+    }
+    dispatch(gstVerify(params)).then((res) => {
+      if (res?.payload?.status == true) {
+        setGstSearchData(res?.payload?.data);
+        setIsSearched(true);
+        if (isFormSubmit) {
+          resetForm();
+        }
+        isLoading(false);
+      } else {
+        setGstSearchData([]);
+        setIsSearched(true);
+        if (isFormSubmit) {
+          resetForm();
+        }
+        isLoading(false);
+      }
+      isLoading(false);
+    });
+    fetchHistoryHandler();
+  }
 
   const formik = useFormik({
     initialValues: {
@@ -31,25 +110,9 @@ const SearchGstNumber = () => {
     validationSchema: Yup.object({
       verificationValue: Yup.string().required('GST number or name is required')
     }),
-    onSubmit: (values, {resetForm}) => {
-      isLoading(true);
-      const params = {
-        userId: getUserInfo?.userInfo?.data?._id,
-        verificationValue: values?.verificationValue
-      }
-      dispatch(gstVerify(params)).then((res) => {
-        if (res?.payload?.status === true) {
-          setGstSearchData(res?.payload?.data);
-          setIsSearched(true);
-          resetForm();
-        } else {
-          setGstSearchData([]);
-          setIsSearched(true);
-          resetForm();
-        }
-        isLoading(false);
-      });
-    },
+    onSubmit: (values, { resetForm }) => {
+      submitHandler(values, true, { resetForm })
+    }
   });
 
 
@@ -93,6 +156,7 @@ const SearchGstNumber = () => {
         isLoading(false);
       });
     }
+    isLoading(false);
   };
 
   return (
@@ -145,6 +209,9 @@ const SearchGstNumber = () => {
                       placeholder="Enter GST No. / Name"
                       onChange={formik.handleChange}
                       value={formik.values.verificationValue}
+                      onFocus={onFocus}
+                      onBlur={onBlur}
+                    // ref={searchInput}
                     // onKeyPress={(e) => {
                     //   if (e.key === "Enter") {
                     //     searchGstHandler(formik.values.verificationValue);
@@ -158,6 +225,32 @@ const SearchGstNumber = () => {
                         </span>
                       </div>
                     )}
+                    {
+                      focused ? (
+                        <div className="history-container py-2">
+                          {
+                            history?.length > 0 ? (
+                              <>
+                                {
+                                  history?.map((item, index) => (
+                                    <div
+                                      className="py-2 px-4 history-item"
+                                      onClick={() => historyClickHandler(item)}
+                                    >
+                                      {item}
+                                    </div>
+                                  ))
+                                }
+                              </>
+                            ) : (
+                              <div className="w-100 text-center text-muted py-3">
+                                No history
+                              </div>
+                            )
+                          }
+                        </div>
+                      ) : (null)
+                    }
                     < div >
                     </div>
                     <div className="py-4">
