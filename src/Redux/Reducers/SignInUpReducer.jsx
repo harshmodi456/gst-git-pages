@@ -10,9 +10,9 @@ export const signInUser = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
-      (
-        await axios.post(`${api}users/login`, data)
-      ).data;
+        (
+          await axios.post(`${api}users/login`, data)
+        ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -104,6 +104,16 @@ const signUpUserSlice = createSlice({
     builder.addCase(signInUser.rejected, (state, action) => {
       state.error = JSON.parse(JSON.stringify(action.payload));
       state.loading = false;
+      toast.error(action?.payload?.response?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
     });
 
     // for sign up
@@ -126,20 +136,20 @@ const signUpUserSlice = createSlice({
       // });
       // <Navigate to="/signIn" />;
     });
-    // builder.addCase(signUpUser.rejected, (state, action) => {
-    //   state.error = action?.payload?.response?.data;
-    //   state.loading = false;
-    //   toast.error(action?.payload?.response?.data?.message, {
-    //     position: "top-right",
-    //     autoClose: 2000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light"
-    //   });
-    // });
+    builder.addCase(signUpUser.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
+      state.loading = false;
+      // toast.error(action?.payload?.response?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light"
+      // });
+    });
 
     // for send Otp
     builder.addCase(sendOtpUser.pending, (state, action) => {
@@ -160,20 +170,20 @@ const signUpUserSlice = createSlice({
         theme: "light"
       });
     });
-    // builder.addCase(sendOtpUser.rejected, (state, action) => {
-    //   state.error = action?.payload?.response?.data;
-    //   state.loading = false;
-    //   toast.error(action?.payload?.response?.data?.message, {
-    //     position: "top-right",
-    //     autoClose: 2000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light"
-    //   });
-    // });
+    builder.addCase(sendOtpUser.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
+      state.loading = false;
+      // toast.error(action?.payload?.response?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light"
+      // });
+    });
 
     // for verify Otp
     builder.addCase(userVerifyWithOtp.pending, (state, action) => {
@@ -194,20 +204,20 @@ const signUpUserSlice = createSlice({
         theme: "light"
       });
     });
-    // builder.addCase(userVerifyWithOtp.rejected, (state, action) => {
-    //   state.error = action?.payload?.response?.data;
-    //   state.loading = false;
-    //   toast.error(action?.payload?.response?.data?.message, {
-    //     position: "top-right",
-    //     autoClose: 2000,
-    //     hideProgressBar: false,
-    //     closeOnClick: true,
-    //     pauseOnHover: true,
-    //     draggable: true,
-    //     progress: undefined,
-    //     theme: "light"
-    //   });
-    // });
+    builder.addCase(userVerifyWithOtp.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
+      state.loading = false;
+      // toast.error(action?.payload?.response?.data?.message, {
+      //   position: "top-right",
+      //   autoClose: 2000,
+      //   hideProgressBar: false,
+      //   closeOnClick: true,
+      //   pauseOnHover: true,
+      //   draggable: true,
+      //   progress: undefined,
+      //   theme: "light"
+      // });
+    });
   }
 });
 

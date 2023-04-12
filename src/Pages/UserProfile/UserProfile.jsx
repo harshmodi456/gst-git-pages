@@ -24,7 +24,7 @@ const UserProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate()
   const [user, setUser] = useState();
-  const [profileImg, setProfileImg] = useState(null);
+  const [profileImg, setProfileImg] = useState(userImg);
   const [imgFile, setImgFile] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 

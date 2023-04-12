@@ -68,10 +68,10 @@ const Header = (props) => {
     navigate("/");
   }
 
-  const navItems =
-    getUserInfo !== undefined && getUserInfo !== null
-      /* ------ Business is currently disabled ------ */
-      ? [
+  let navItems = [];
+  if (localStorage.getItem('isNewUser') != 'true') {
+    if (getUserInfo !== undefined && getUserInfo !== null) {
+      navItems = [
         "Home",
         // "Business",
         "My Reviews",
@@ -80,11 +80,31 @@ const Header = (props) => {
         // "Log Out"
         userName
       ]
-      : [
+    } else {
+      navItems = [
         "Home",
         // "Business",
         "Log In"
-      ];
+      ]
+    }
+  }
+  // const navItems =
+  //   getUserInfo !== undefined && getUserInfo !== null
+  //     /* ------ Business is currently disabled ------ */
+  //     ? [
+  //       "Home",
+  //       // "Business",
+  //       "My Reviews",
+  //       "My Business",
+  //       // "User Profile",
+  //       // "Log Out"
+  //       userName
+  //     ]
+  //     : [
+  //       "Home",
+  //       // "Business",
+  //       "Log In"
+  //     ];
 
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
@@ -115,17 +135,17 @@ const Header = (props) => {
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
-        {navItems.map((item) => (
+        {navItems?.map((item) => (
           <ListItem key={item} disablePadding>
             <ListItemButton
               sx={{
                 "&: hover": {
                   backgroundColor: colorConfigs.sidebar.hoverBg
                 },
-                backgroundColor:
-                  appState === item.state
-                    ? colorConfigs.sidebar.activeBg
-                    : "unset",
+                // backgroundColor:
+                //   appState === item.state
+                //     ? colorConfigs.sidebar.activeBg
+                //     : "unset",
                 paddingX: "24px"
               }}
               onClick={() => handleRoute(item)}
@@ -239,7 +259,7 @@ const Header = (props) => {
                 </div>
               </Typography>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
-                {navItems.map((item) => (
+                {navItems?.map((item) => (
                   <button
                     className={`btn-navigation ${userName == item ? 'show-dropdown' : ''}`}
                     key={item}
