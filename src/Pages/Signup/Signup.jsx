@@ -120,7 +120,7 @@ const Signup = () => {
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
         localStorage.setItem("userInfo", JSON.stringify(createLocalObjectValue));
-        localStorage.setItem("isNewUser", false);
+        localStorage.setItem("isNewUser", true);
         navigate("/user-profile");
       } else {
         setTimeout(() => {
@@ -146,7 +146,7 @@ const Signup = () => {
             </div>
             <div className="col-lg-6 d-flex align-items-center justify-content-center">
               <div className="login-form-container">
-                <h3 className="m-0 pt-5 pb-4 font-weight-bold">Signup</h3>
+                <h3 className="m-0 pt-5 pb-4 font-weight-bold">Sign Up</h3>
                 <div className="form-group">
                   <TextField
                     autoComplete="off"

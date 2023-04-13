@@ -290,6 +290,21 @@ export const fetchHistory = createAsyncThunk(
   }
 );
 
+// for fetch history
+export const removeHistory = createAsyncThunk(
+  "Get/removeHistory",
+  async (data, thunkApi) => {
+    try {
+      return await
+        (
+          await instance.post(`${api}history/remove/${data?.userId}`,data)
+        ).data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 const initialState = {
   loading: false,
   gstInfo: {},

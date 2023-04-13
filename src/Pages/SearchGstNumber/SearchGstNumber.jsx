@@ -5,7 +5,8 @@ import {
   gstVerify,
   postGstRecord,
   addHistory,
-  fetchHistory
+  fetchHistory,
+  removeHistory
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
@@ -16,6 +17,8 @@ import { useFormik } from 'formik';
 import * as Yup from "yup";
 import IconButton from '@mui/material/IconButton';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import HistoryIcon from '@mui/icons-material/History';
+import CloseIcon from '@mui/icons-material/Close';
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
@@ -28,6 +31,7 @@ const SearchGstNumber = () => {
   const getUserInfo = JSON.parse(takeUserInfo);
   const searchInput = React.useRef(null);
   const [focused, setFocused] = React.useState(false);
+  const [userId, setUserId] = useState(getUserInfo?.userInfo?.data?._id);
 
   const onFocus = () => setFocused(true)
   const onBlur = () => {
@@ -39,7 +43,7 @@ const SearchGstNumber = () => {
   const fetchHistoryHandler = () => {
     dispatch(fetchHistory(getUserInfo?.userInfo?.data?._id)).then((res) => {
       if (res?.payload?.status === true) {
-        setHistory(res?.payload?.data?.history);
+        setHistory(res?.payload?.data);
       }
     });
   }
@@ -50,13 +54,13 @@ const SearchGstNumber = () => {
   }
 
   const addHistoryHandler = (searchValue) => {
-
     const params = {
       userId: getUserInfo?.userInfo?.data?._id,
       history: searchValue
     }
 
     dispatch(addHistory(params)).then((res) => {
+      console.log(res?.payload)
       if (res?.payload?.status === true) {
       }
     });
@@ -159,6 +163,31 @@ const SearchGstNumber = () => {
     isLoading(false);
   };
 
+  const backButtonHandler = () => {
+    setIsSearched(false);
+    fetchHistoryHandler();
+  }
+
+  const removeHistoryHandler = (historyItem) => {
+    const params = {
+      userId: getUserInfo?.userInfo?.data?._id,
+      history: historyItem
+    }
+
+    dispatch(removeHistory(params)).then((res) => {
+      console.log(res?.payload)
+      if (res?.payload?.status === true) {
+        let updatedHistory = history?.filter((item) => {
+          if (historyItem != item) {
+            return item;
+          }
+        })
+
+        setHistory(updatedHistory);
+      }
+    });
+  }
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
@@ -172,7 +201,7 @@ const SearchGstNumber = () => {
           isSearched ? (
             <div className="my-5">
               <div className="px-5 d-flex align-items-center">
-                <IconButton onClick={() => setIsSearched(false)} className='ml-1'>
+                <IconButton onClick={backButtonHandler} className='ml-1'>
                   <ArrowBackIcon />
                 </IconButton>
                 <h5 className="m-0 text-muted ml-2">Back</h5>
@@ -226,7 +255,7 @@ const SearchGstNumber = () => {
                       </div>
                     )}
                     {
-                      focused ? (
+                      (focused && (getUserInfo != undefined || getUserInfo != null)) ? (
                         <div className="history-container py-2">
                           {
                             history?.length > 0 ? (
@@ -234,10 +263,17 @@ const SearchGstNumber = () => {
                                 {
                                   history?.map((item, index) => (
                                     <div
-                                      className="py-2 px-4 history-item"
-                                      onClick={() => historyClickHandler(item)}
+                                      className="px-4 history-item d-flex align-items-center justify-content-between"
                                     >
-                                      {item}
+                                      <div className="d-flex align-items-center py-3 w-100" onClick={() => historyClickHandler(item)}>
+                                        <HistoryIcon className="mr-2" />
+                                        {item}
+                                      </div>
+                                      <div className="btn-remove-history">
+                                        <IconButton onClick={() => removeHistoryHandler(item)} >
+                                          <CloseIcon />
+                                        </IconButton>
+                                      </div>
                                     </div>
                                   ))
                                 }

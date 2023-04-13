@@ -70,22 +70,22 @@ const UserProfile = () => {
   const UserSchema = Yup.object().shape({
     fName: Yup.string()
       .trim()
-      .required('Required'),
+      .required('First name is required'),
     lName: Yup.string()
       .trim()
-      .required('Required'),
+      .required('Last name is required'),
     mobileNo: Yup.string()
       .typeError("Invalid mobile number")
       .trim()
       .matches(/^[1-9]{1}[0-9]{9}$/, 'Invalid mobile number')
-      .required('Required'),
+      .required('Mobile number required'),
     email: Yup.string()
       .email('Invalid email address')
       .trim()
-      .required('Required'),
+      .required('Email address is required'),
     businessName: Yup.string()
       .trim()
-      .required('Required'),
+      .required('Business name is required'),
   })
 
   const submitHandler = async (userCredentials) => {
@@ -145,7 +145,7 @@ const UserProfile = () => {
         <hr className="mx-lg-5" />
         <form className="px-lg-5" onSubmit={formik.handleSubmit} autoComplete="off">
           <div className="row my-5">
-            <div className="col-lg-6 mb-lg-0 mb-3">
+            <div className="col-lg-4 mb-lg-0 mb-3">
               <TextField
                 className='w-100'
                 name='fName'
@@ -156,7 +156,7 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
             </div>
-            <div className="col-lg-6">
+            <div className="col-lg-4">
               <TextField
                 className='w-100'
                 name='lName'
@@ -167,9 +167,7 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
             </div>
-          </div>
-          <div className="row my-lg-5">
-            <div className="col-lg-6 mb-lg-0 mb-3">
+            <div className="col-lg-4 mb-lg-0 mb-3">
               <TextField
                 className='w-100'
                 name='email'
@@ -180,7 +178,9 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
             </div>
-            <div className="col-lg-6">
+          </div>
+          <div className="row my-lg-5">
+            <div className="col-lg-4">
               <TextField
                 className='w-100'
                 name='businessName'
@@ -191,9 +191,7 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
             </div>
-          </div>
-          <div className="row my-5">
-            <div className="col-lg-6">
+            <div className="col-lg-4">
               <TextField
                 className='w-100'
                 name='mobileNo'
@@ -205,7 +203,7 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="col-12 text-right my-5 py-5">
+          <div className="col-12 text-right my-4 py-5">
             {
               localStorage.getItem('isNewUser') != 'true' &&
               <button className="btn-cancel mr-lg-4 mb-lg-0 mb-3" onClick={() => navigate('/')}>Cancel</button>
@@ -218,14 +216,14 @@ const UserProfile = () => {
   }
 
   return (
-    <div className="my-user-profile-div pt-5">
+    <div className="my-user-profile-div pt-4">
       <Grid columns={{ xs: 0, sm: 8, md: 12 }}>
         <div className="main-div container-fluid px-5">
           <h1 className="px-lg-5">Hello {user?.fName || 'User'},</h1>
           <hr />
           <div className="px-lg-5">
             <div>
-              <Avatar size={150} round src={profileImg} name={user?.fName} />
+              <Avatar size={130} round src={profileImg} name={user?.fName} />
             </div>
             <input
               id="profileImgUrl"

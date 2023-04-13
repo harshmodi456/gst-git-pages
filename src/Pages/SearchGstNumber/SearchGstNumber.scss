@@ -236,6 +236,10 @@
       .history-item:hover {
         background-color: rgb(243, 243, 243);
       }
+
+      .btn-remove-history {
+        z-index: 10;
+      }
     }
 
     .search-bar {

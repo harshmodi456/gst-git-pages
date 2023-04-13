@@ -63,11 +63,7 @@ export default function ReviewCard(props) {
           icon: "error",
           title: "Login Required!",
           text: "Please login first to access more."
-        },
-        setTimeout(() => {
-          Swal.close();
-          navigate("/login");
-        }, 1500)
+        }
       ).then((result) => {
         if (result.isConfirmed) {
           navigate("/login");
@@ -203,6 +199,14 @@ export default function ReviewCard(props) {
     });
   };
 
+  const constitutionHandler = (constitution) => {
+    if (constitution == 'Proprietorship') {
+      return 'SP'
+    } else if (constitution == 'Private Limited Company') {
+      return 'Pvt Ltd'
+    }
+  }
+
   const resetData = () => {
     setImageUrl([]);
     setProfileImg([]);
@@ -229,11 +233,11 @@ export default function ReviewCard(props) {
   };
 
   const currentDate = new Date();
-  const reviewDate = new Date(review?.createdAt);
+  const reviewDate = new Date(review?.updatedAt);
   const diffTime = Math.abs(reviewDate - currentDate);
   const reviewTime = Math.round(diffTime / 60000);
   const reviewTimeAgo =
-    reviewTime <= 1 ? "now" : <TimeAgo date={review?.createdAt} />;
+    reviewTime <= 1 ? "now" : <TimeAgo date={review?.updatedAt} />;
 
   const CardHeader = () => {
     if (props.mySentReview == true) {
@@ -253,7 +257,7 @@ export default function ReviewCard(props) {
               <p className="time-lable text-muted m-0">
                 <ReactTimeAgo
                   timeStyle="round-minute"
-                  date={review?.createdAt}
+                  date={review?.updatedAt}
                   locale="en-US"
                 />
               </p>
@@ -327,7 +331,7 @@ export default function ReviewCard(props) {
                 <p className="time-lable text-muted m-0">
                   <ReactTimeAgo
                     timeStyle="round-minute"
-                    date={review?.createdAt}
+                    date={review?.updatedAt}
                     locale="en-US"
                   />
                 </p>
@@ -396,7 +400,7 @@ export default function ReviewCard(props) {
               <p className="time-lable text-muted m-0">
                 <ReactTimeAgo
                   timeStyle="round-minute"
-                  date={review?.createdAt}
+                  date={review?.updatedAt}
                   locale="en-US"
                 />
               </p>

@@ -207,16 +207,16 @@ const signUpUserSlice = createSlice({
     builder.addCase(userVerifyWithOtp.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
       state.loading = false;
-      // toast.error(action?.payload?.response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light"
-      // });
+      toast.error(action?.payload?.response?.data?.message, {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light"
+      });
     });
   }
 });

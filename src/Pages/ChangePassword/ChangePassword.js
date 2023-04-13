@@ -25,12 +25,11 @@ export default function ChangePassword() {
 
     const PasswordSchema = Yup.object().shape({
         oldPassword: Yup.string()
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, ' ')
             .min(8, 'Password is too short.')
             .trim()
             .required('Required'),
         userPwd: Yup.string()
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, ' ')
+            .matches(/[a-zA-Z]/, "Password can only contain latin letters.")
             .min(8, 'Password is too short.')
             .trim()
             .required('Required'),
@@ -74,7 +73,7 @@ export default function ChangePassword() {
         return (
             <div className='p-5 mt-5'>
                 <h4 className='m-0 p-0'>Change password</h4>
-                <hr/>
+                <hr />
                 <form onSubmit={formik.handleSubmit} autoComplete="off">
                     <div className="row my-5 mt-4">
                         <div className="col-lg-4 form-group">

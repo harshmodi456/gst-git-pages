@@ -26,7 +26,7 @@ export default function ForgotPassword() {
         mobileNo: Yup.string().matches(new RegExp('^[0-9]+$'), 'Invalid mobile number')
             .min(10, "Mobile number must be a 10 digits")
             .max(10, "Mobile number must be a 10 digits")
-            .required("Mobile number is required.")
+            .required("Mobile number is required")
     });
 
     const passwordValidationSchema = Yup.object().shape({
@@ -39,12 +39,12 @@ export default function ForgotPassword() {
             .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, ' ')
             .min(8, 'Password must be at least 8 characters')
             .trim()
-            .required('Required'),
+            .required('Password is required'),
         userConfirmPwd: Yup.string()
             .oneOf([Yup.ref('userPwd'), null], 'Passwords must be same')
             .min(8, 'Password must be at least 8 characters')
             .trim()
-            .required('Required')
+            .required('Confirm password is required')
     });
 
     const sendOtpHandler = (values) => {

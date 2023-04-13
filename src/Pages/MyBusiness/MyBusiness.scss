@@ -14,6 +14,11 @@
     background-color: #1D1299;
   }
 
+  .my-business-search-container {
+    max-height: 400px;
+    overflow-y: scroll;
+  }
+
   .search-gst-modal {
     padding: 10px 20px;
     border: 1px solid blue;

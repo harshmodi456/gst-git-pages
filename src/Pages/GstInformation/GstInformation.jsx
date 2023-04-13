@@ -127,11 +127,7 @@ const GstInformation = () => {
           icon: 'error',
           title: 'Login Required!',
           text: 'Please login first to access more.',
-        },
-        setTimeout(() => {
-          Swal.close();
-          navigate("/login");
-        }, 1500)
+        }
       ).then((result) => {
         if (result.isConfirmed) {
           navigate("/login");
@@ -314,7 +310,7 @@ const GstInformation = () => {
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">GSTIN / UIN Status</h5>
-            <h5 className={`break-line-1 font-weight-bold ${gst?.gstData?.sts || gst?._doc?.gstData?.sts == 'Active' ? 'text-green' : 'text-danger'}`}>{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
+            <h5 className={`break-line-1 font-weight-bold ${gst?.gstData?.sts || gst?._doc?.gstData?.sts == 'Cancelled' ? 'text-danger' : 'text-green'}`}>{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3s">
             <h5 className="font-weight-bold break-line-1">Taxpayer Type</h5>
@@ -365,7 +361,7 @@ const GstInformation = () => {
                   className="btn-write-review"
                   data-toggle="modal"
                   onClick={() => validateLogin(true)}
-                  disabled={gst?.isMyBusiness ? true : false || gstStatus != 'Active'}
+                  disabled={gst?.isMyBusiness ? true : false || gstStatus == 'Cancelled'}
                 >
                   <FaEdit /> Write Review
                 </button>

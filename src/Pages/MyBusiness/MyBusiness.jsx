@@ -36,7 +36,7 @@ const MyBusiness = () => {
   }
 
   React.useEffect(() => {
-    
+
     myBusinessHandler();
   }, []);
 
@@ -60,7 +60,8 @@ const MyBusiness = () => {
           setGstSearchData([]);
         }
         isLoading(false);
-        document.getElementById("btn-cancel").click();
+        // closing modal
+        // document.getElementById("btn-cancel").click();
       });
     },
   });
@@ -148,60 +149,58 @@ const MyBusiness = () => {
             )
           }
         </div>
-        <div >
-          {
-            gstSearchData?.length > 0 &&
-            (
-              <>
-                <div className="px-5">
-                  <h4>Result</h4>
-                  <hr />  
-                </div>
-                <div className="px-lg-4 py-5 row px-4 m-0 mb-5">
-                  {
-                    gstSearchData?.map((gst, index) => (
-                      <GstCard key={index} gst={gst} isMyBusiness={true} />
-                    ))
-                  }
-                </div>
-              </>
-            )
-          }
-        </div>
         {/* <!-- Modal --> */}
-        <div className="modal fade" data-keyboard={true} tabIndex="-1" id="staticBackdrop">
+        <div className="modal fade" data-keyboard={false} tabIndex="-1" id="staticBackdrop">
           <div className="modal-dialog modal-dialog-centered modal-lg">
             <div className="modal-content p-5">
-              <h5>Enter GST Number / Business Name</h5>
-              <input
-                placeholder="Enter GST No. / Name"
-                className="mt-3 search-gst-modal"
-                id="verificationValue"
-                name="verificationValue"
-                value={formik.values.verificationValue}
-                onChange={formik.handleChange}
-              // onKeyPress={(e) => {
-              //   if (e.key === "Enter") {
-              //     searchGstHandler(verificationValue);
-              //   }
-              // }}
-              />
-              {formik.errors.verificationValue && (
-                <div className="mt-1">
-                  <span style={{ color: 'red' }}>
-                    {formik.errors.verificationValue}
-                  </span>
+              <div>
+                <h5>Enter GST Number / Business Name</h5>
+                <input
+                  placeholder="Enter GST No. / Name"
+                  className="mt-3 search-gst-modal"
+                  id="verificationValue"
+                  name="verificationValue"
+                  value={formik.values.verificationValue}
+                  onChange={formik.handleChange}
+                // onKeyPress={(e) => {
+                //   if (e.key === "Enter") {
+                //     searchGstHandler(verificationValue);
+                //   }
+                // }}
+                />
+                {formik.errors.verificationValue && (
+                  <div className="mt-1">
+                    <span style={{ color: 'red' }}>
+                      {formik.errors.verificationValue}
+                    </span>
+                  </div>
+                )}
+                <div className="modal-btn-container mt-4">
+                  <button id="btn-cancel" type="reset" onClick={() => setGstSearchData([])} className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
+                  <button
+                    className="btn-add"
+                    type="submit"
+                  // disabled={verificationValue ? false : true}
+                  >
+                    Add
+                  </button>
                 </div>
-              )}
-              <div className="modal-btn-container mt-4">
-                <button id="btn-cancel" type="reset" className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
-                <button
-                  className="btn-add"
-                  type="submit"
-                // disabled={verificationValue ? false : true}
-                >
-                  Add
-                </button>
+              </div>
+              <div className="my-business-search-container">
+                {
+                  gstSearchData?.length > 0 &&
+                  (
+                    <>
+                      <div className="px-lg-4 pt-4 row px-4 m-0 mb-5" data-toggle="modal" data-target="#staticBackdrop">
+                        {
+                          gstSearchData?.map((gst, index) => (
+                            <GstCard key={index} gst={gst} isMyBusiness={true} myBusinessSearch={true} />
+                          ))
+                        }
+                      </div>
+                    </>
+                  )
+                }
               </div>
             </div>
           </div>

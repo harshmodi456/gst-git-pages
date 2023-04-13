@@ -110,10 +110,10 @@ export default function GstCard(props) {
         dispatch(postGstRecord(reqeObj)).then((res) => {
           if (res?.payload?.status === true) {
             if (getUserInfo !== undefined && getUserInfo !== null) {
-              navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
-                state: { gst }
-              });
             }
+            navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
+              state: { gst }
+            });
             // else {
             //   navigate("/login");
             //   localStorage.setItem("search-selectedGst", JSON.stringify(gst));
@@ -128,7 +128,7 @@ export default function GstCard(props) {
   };
 
   return (
-    <div className="col-lg-4 col-md-6 px-md-3 my-3 px-0">
+    <div className={`col-lg-4 col-md-6 px-md-3 my-3 px-0 ${props.myBusinessSearch ? 'col-lg-12' : ''}`}>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={isLoading}
