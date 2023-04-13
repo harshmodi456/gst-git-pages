@@ -391,7 +391,7 @@ export default function ReviewCard(props) {
               src={review?.userId?.profileImg}
             />
             <div>
-              <p className="user-name m-0 break-line-1">{`${review?.userId?.fName} ${review?.userId?.lName}`}</p>
+              <p className="user-name m-0 break-line-1">{`${review?.userId?.fName && review?.userId?.lName ?  review?.userId?.fName + " " + review?.userId?.lName: "Anonymous" } `}</p>
               <p className="company-name m-0">{review?.userId?.businessName}</p>
               <p className="time-lable text-muted m-0">
                 <ReactTimeAgo
