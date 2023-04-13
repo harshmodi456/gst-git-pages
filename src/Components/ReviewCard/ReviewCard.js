@@ -454,6 +454,10 @@ export default function ReviewCard(props) {
     setReviewText(value);
   };
 
+  const toolbarConfig = {
+    display: [],
+  };
+
   return (
     <>
       {
@@ -463,28 +467,6 @@ export default function ReviewCard(props) {
               <div>{CardHeader()}</div>
               <div className="body px-2 py-3">
                 <p className="m-0 min-height-wrap" dangerouslySetInnerHTML={{ __html: review?.reviewText }}>
-                  {/* {showFullReview
-              ? review?.reviewText
-              : review?.reviewText?.slice(0, 270)}
-            {review?.reviewText?.length > 270 && (
-              <>
-                {showFullReview ? (
-                  <button
-                    className="btn-view ml-3"
-                    onClick={() => setShowFullReview(!showFullReview)}
-                  >
-                    hide
-                  </button>
-                ) : (
-                  <button
-                    className="btn-view ml-3"
-                    onClick={() => setShowFullReview(!showFullReview)}
-                  >
-                    View more
-                  </button>
-                )}
-              </>
-            )} */}
                 </p>
               </div>
               <div className="review-img-container pt-2 px-2 w-100">
@@ -602,22 +584,14 @@ export default function ReviewCard(props) {
                     />
                   </div>
                   <RichTextEditor
+                    className="text-editor"
+                    toolbarStyle={{ borderBottom: "0px" }}
                     id="review"
                     name="review"
+                    toolbarConfig={toolbarConfig}
                     value={reviewText}
                     onChange={onChangeRichText}
                   />
-                  {/* <textarea
-                            className="review-textarea"
-                            as='textarea'
-                            autoComplete="off"
-                            rows={6}
-                            placeholder="Write Review..."
-                            value={reviewText}
-                            onChange={(event) => {
-                                setReviewText(event.target.value);
-                            }}
-                        /> */}
                   <div className="img-container d-flex flex-wrap">
                     <input
                       multiple
