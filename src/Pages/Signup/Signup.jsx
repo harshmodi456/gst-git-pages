@@ -46,6 +46,7 @@ const Signup = () => {
   const [otp, setOtp] = React.useState("");
   const [checkBox, setCheckBox] = React.useState(false);
   const [mobileNoError, setMobileNoError] = React.useState('');
+  const [createLocalObjectValue, setCreateLocalObjectValue] = React.useState();
 
   const handleClickOpen = (takeRecord) => {
     setOpen(true);
@@ -89,6 +90,7 @@ const Signup = () => {
               success: true,
               userInfo: res?.payload
             };
+            setCreateLocalObjectValue(createLocalObject);
             localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
           } else {
             setMobileNoError(res?.payload?.response?.data?.message);
@@ -117,7 +119,8 @@ const Signup = () => {
     };
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
-        localStorage.setItem("isNewUser", true);
+        localStorage.setItem("userInfo", JSON.stringify(createLocalObjectValue));
+        localStorage.setItem("isNewUser", false);
         navigate("/user-profile");
       } else {
         setTimeout(() => {
