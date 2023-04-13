@@ -23,6 +23,7 @@ import { RWebShare } from "react-web-share";
 import { FaShareAlt } from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Swal from 'sweetalert2';
+import RichTextEditor from "react-rte";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ const GstInformation = () => {
   const location = useLocation();
   const [value, setValue] = React.useState(0);
   const [open, setOpen] = React.useState(false);
-  const [reviewTextDesc, setReviewTextDesc] = React.useState("");
+  const [reviewTextDesc, setReviewTextDesc] = React.useState(RichTextEditor.createValueFromString("","html"));
   const [getReviewData, setReviewData] = React.useState([]);
   const [loading, isLoading] = React.useState(false);
   const [isEditable, setIsEditable] = React.useState(false);
@@ -183,7 +184,7 @@ const GstInformation = () => {
     setOpen(false);
     setIsEditable(false);
     setValue("");
-    setReviewTextDesc("");
+    setReviewTextDesc(RichTextEditor.createValueFromString("","html"));
   };
 
   const fileChangeHandler = (event) => {
@@ -201,7 +202,7 @@ const GstInformation = () => {
   }
 
   const resetData = () => {
-    setReviewTextDesc('');
+    setReviewTextDesc(RichTextEditor.createValueFromString("","html"));
     setValue(0);
     setImageUrl([]);
     setProfileImg([]);
@@ -217,7 +218,7 @@ const GstInformation = () => {
     let formData = new FormData();
     formData.append('userId', getUserToken?.userInfo?.data?._id);
     formData.append('gstId', gst?._id || gst?._doc?._id);
-    formData.append('reviewText', reviewTextDesc);
+    formData.append('reviewText', reviewTextDesc.toString('html'));
     formData.append('rating', value);
 
     for (const key of Object.keys(imgFile)) {
@@ -256,6 +257,14 @@ const GstInformation = () => {
       });
     }
   }
+
+  const onChangeRichText = (value) => {
+    setReviewTextDesc(value);
+  };
+
+  const toolbarConfig = {
+    display: [],
+  };
 
   return (
     <div className="gst-information-container">
@@ -431,7 +440,18 @@ const GstInformation = () => {
                     size="large"
                   />
                 </div>
-                <textarea
+                <RichTextEditor
+                    editorStyle={{ height: '150px' }}
+                    className="text-editor"
+                    placeholder="Write Review..."
+                    toolbarStyle={{ borderBottom: "0px", padding: "0px" }}
+                    id="review"
+                    name="review"
+                    toolbarConfig={toolbarConfig}
+                    value={reviewTextDesc}
+                    onChange={onChangeRichText}
+                  />
+                {/* <textarea
                   className="review-textarea w-100"
                   as='textarea'
                   autoComplete="off"
@@ -441,7 +461,7 @@ const GstInformation = () => {
                   onChange={(event) => {
                     setReviewTextDesc(event.target.value);
                   }}
-                />
+                /> */}
                 <div className="img-container d-flex flex-wrap">
                   <input
                     multiple
