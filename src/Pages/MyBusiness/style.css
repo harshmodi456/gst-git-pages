@@ -1,0 +1,33 @@
+.my-business-container {
+    font-family: 'Outfit';
+}
+    button:focus {
+      outline: none;
+    }
+.my-business-search-container {
+    max-height: 300px;
+    overflow-y: scroll;
+  }
+  .modal-btn-container Button {
+      border: none;
+      padding: 10px 30px;
+      border-radius: 10px;
+      cursor: pointer;
+      color: white;
+      font-size: 20px;
+      font-weight: 600;
+    }
+    .btn-add{
+      background-color: #DA45FF;
+    }
+    .btn-cancel {
+      background-color: #BFB7C0;
+    }
+    .search-gst-modal {
+        padding: 10px 20px;
+        border: 1px solid blue;
+        border-radius: 15px;
+        /* width: 400px; */
+        text-transform: uppercase;
+      }
+    

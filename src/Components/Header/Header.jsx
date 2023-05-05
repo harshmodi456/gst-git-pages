@@ -70,8 +70,8 @@ const Header = (props) => {
   }
 
   let navItems = [];
-  if (localStorage.getItem('isNewUser') != 'true') {
-    if (getUserInfo !== undefined && getUserInfo !== null) {
+  if (JSON.parse(localStorage.getItem('userInfo')) !== null) {
+    if (getUserInfo?.userInfo?.data?.email !== undefined && getUserInfo !== null) {
       navItems = [
         "Home",
         // "Business",
@@ -81,13 +81,14 @@ const Header = (props) => {
         // "Log Out"
         userName
       ]
-    } else {
-      navItems = [
-        "Home",
-        // "Business",
-        "Log In"
-      ]
     }
+  }
+  else if(JSON.parse(localStorage.getItem('userInfo')) === null){
+    navItems = [
+      "Home",
+      // "Business",
+      "Log In"
+    ]
   }
   // const navItems =
   //   getUserInfo !== undefined && getUserInfo !== null

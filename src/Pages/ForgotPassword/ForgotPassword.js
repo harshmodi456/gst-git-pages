@@ -8,17 +8,18 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { sendOtpForPassword, recoverPassword } from "../../Redux/Reducers/SearchGstNumReducer";
 import { toast } from "react-toastify";
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, json } from 'react-router-dom';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 
 export default function ForgotPassword() {
-
+    
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = React.useState(false);
     const [showConPassword, setShowConPassword] = React.useState(false);
     const [isOtpSent, setIsOtpSent] = React.useState(false);
+    const [mobileno, setMobileNo] = useState('');
     const [isLoading, setIsLoading] = React.useState(false);
     const [user, setUser] = React.useState({});
 
@@ -26,7 +27,7 @@ export default function ForgotPassword() {
         mobileNo: Yup.string().matches(new RegExp('^[0-9]+$'), 'Invalid mobile number')
             .min(10, "Mobile number must be a 10 digits")
             .max(10, "Mobile number must be a 10 digits")
-            .required("Mobile number is required")
+            .required("Mobile number is required.")
     });
 
     const passwordValidationSchema = Yup.object().shape({
@@ -35,20 +36,35 @@ export default function ForgotPassword() {
             .max(6)
             .trim()
             .required('OTP is required'),
-        userPwd: Yup.string()
-            .matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/, ' ')
-            .min(8, 'Password must be at least 8 characters')
-            .trim()
-            .required('Password is required'),
+            userPwd: Yup.string()
+            .required("Password is required")
+            .matches(
+             /^(?=.*[A-Z])/,
+             "  Must Contain One Uppercase Character"
+           )
+           .matches(
+             /^(?=.*[a-z])/,
+             " Must Contain One Lowercase Character"
+           )
+           .matches(
+             /^(?=.*[!@#\$%\^&\*])/,
+             "  Must Contain  One Special Case Character"
+           )
+           .matches(
+             /^(?=.*[0-9])/,
+             "  Must Contain One Number Character"
+           )
+           .min(8, "Must Contain 8 Characters"),
         userConfirmPwd: Yup.string()
             .oneOf([Yup.ref('userPwd'), null], 'Passwords must be same')
             .min(8, 'Password must be at least 8 characters')
             .trim()
-            .required('Confirm password is required')
+            .required('Required')
     });
 
     const sendOtpHandler = (values) => {
         setIsLoading(true);
+        setMobileNo(values.mobileNo)
         dispatch(
             sendOtpForPassword(values?.mobileNo)
         ).then((res) => {
@@ -94,7 +110,7 @@ export default function ForgotPassword() {
                     <p className='text-muted mb-4 mt-0'>Please, enter the mobile number associated with your account.</p>
                     <Formik
                         initialValues={{
-                            mobileNo: "",
+                            mobileNo: "" || mobileno,
                         }}
                         validationSchema={validationSchema}
                         onSubmit={(values) => sendOtpHandler(values)}

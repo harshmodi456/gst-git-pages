@@ -1,14 +1,15 @@
 import React from "react";
 import "./Login.scss";
-import Card from "@mui/material/Card";
-import CardHeader from "@mui/material/CardHeader";
-import CardContent from "@mui/material/CardContent";
+// import Card from "@mui/material/Card";
+// import CardHeader from "@mui/material/CardHeader";
+// import CardContent from "@mui/material/CardContent";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import { Link, useNavigate } from "react-router-dom";
-import Grid from "@mui/material/Grid";
-import loginImg from "../../Assets/Images/img2.png";
+// import Grid from "@mui/material/Grid";
+// import loginImg from "../../Assets/Images/img2.png";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { signInUser } from "../../Redux/Reducers/SignInUpReducer";
 import Backdrop from "@mui/material/Backdrop";
@@ -21,7 +22,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const [showPassword, setShowPassword] = React.useState(false);
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
+ 
   const [loading, isLoading] = React.useState(false);
 
   const validationSchema = Yup.object().shape({
@@ -33,13 +34,15 @@ const Login = () => {
   });
 
   const signInHandler = (takeValue) => {
+    debugger;
     isLoading(true);
+    setShowPassword(false)
     dispatch(
       signInUser({
         mobileNo: takeValue.mobileNo,
         password: takeValue.password
       })
-    ).then((res) => {
+      ).then((res) => {
       if (res?.payload?.status === true) {
         let getGstResult = JSON.parse(
           localStorage.getItem("search-selectedGst")
@@ -103,10 +106,20 @@ const Login = () => {
                         component={CustomTextField}
                         label="Password"
                         variant="outlined"
-                        setShowPassword={setShowPassword}
-                        showPassword={showPassword}
-                        handleClickShowPassword={handleClickShowPassword}
                       />
+                      {showPassword ? (
+                    <FaEyeSlash
+                      size={25}
+                      className="password-icon"
+                      onClick={() => setShowPassword(!showPassword)}
+                    />
+                  ) : (
+                    <FaEye
+                      size={25}
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="password-icon"
+                    />
+                  )}
                     </div>
                     <div className="m-0 p-0 text-right">
                       <Link to="/forgot-password" className="have-account">

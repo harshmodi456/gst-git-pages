@@ -461,7 +461,11 @@
     }
   }
 }
+
 .img-container {
   max-height: 250px;
   overflow: auto;
+}
+::-webkit-scrollbar {
+  height: 8px !important;
 }

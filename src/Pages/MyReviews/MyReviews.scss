@@ -71,16 +71,47 @@
 
 
     //  Mobile devices
-    @media (min-width: 300px) and (max-width: 480px) {
+    @media (min-width: 300px) and (max-width: 400px) {
+      .title-container{
+        display: block;
+      }
+      .MuiButtonBase-root {
+       margin: -2px;
+      }
+      .title-container {
+        .MuiButtonBase-root {
+          padding: 5px 20px 5px 20px !important;
+          margin: 0;
+          // padding-left: 2px !important;
+        }
+      }
+    }
+    //mobile screen 
+    @media (min-width: 401px) and (max-width: 480px) {
       .title-container {
         display: block;
       }
       .MuiButtonBase-root {
-        margin: 10px 0px;
+        margin: -2px;
       }
     }
+    //tablet screen
+    @media (min-width: 480px) and (max-width: 615px) {
+      .title-container {
+        display: block;
+      }
+      .MuiButtonBase-root {
+        margin: -2px;
+      }
+    }
+    //for tablet, laptop and medium screen
+    @media (min-width: 1100px) and (max-width: 1640px) {
+      .MuiButtonBase-root {
+        margin: -2px;
+      }
+      
+    }
 }
-
 .my-reviews-div {
   .container-div {
     height: calc(100vh - 100px);
@@ -93,3 +124,5 @@
     }
   }
 }
+
+

@@ -1,29 +1,25 @@
 import React, { useState } from "react";
 import "./Signup.scss";
 import "./Signup.css";
-import { Link, useNavigate } from "react-router-dom";
-import { Formik, Field, Form } from "formik";
+import {useNavigate } from "react-router-dom";
+// import { Formik, Field, Form } from "formik";
 import * as Yup from "yup";
-import CustomTextField from "../../Components/CustomTextField/CustomTextField";
+// import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import {
   Button,
-  Card,
-  CardContent,
-  CardHeader,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
-  Grid,
-  TextField
+  TextField,
+  Typography
 } from "@mui/material";
-import loginImg from "../../Assets/Images/img2.png";
+// import loginImg from "../../Assets/Images/img2.png";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   sendOtpUser,
   signUpUser,
-  userVerifyWithOtp
+  userVerifyWithOtp,
 } from "../../Redux/Reducers/SignInUpReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -45,7 +41,7 @@ const Signup = () => {
   const [open, setOpen] = React.useState(false);
   const [otp, setOtp] = React.useState("");
   const [checkBox, setCheckBox] = React.useState(false);
-  const [mobileNoError, setMobileNoError] = React.useState('');
+  const [mobileNoError, setMobileNoError] = React.useState("");
   const [createLocalObjectValue, setCreateLocalObjectValue] = React.useState();
 
   const handleClickOpen = (takeRecord) => {
@@ -57,7 +53,7 @@ const Signup = () => {
     initialValues: {
       mobileNo: "",
       userPassword: "",
-      confirmPassword: ""
+      confirmPassword: "",
     },
     validationSchema: Yup.object({
       mobileNo: Yup.string()
@@ -65,13 +61,23 @@ const Signup = () => {
         .max(10, "Mobile number must be a 10 digits")
         .required("Mobile number is required."),
       userPassword: Yup.string()
-        .required("Password is required")
+      .matches(/^(?=.*[A-Z])/, "  Must contain one uppercase character")
+      .matches(/^(?=.*[a-z])/, " Must contain one lowercase character")
+      .matches(
+        /^(?=.*[!@#$%^&*])/,
+        "  Must contain one special case character"
+        )
+        .matches(/^(?=.*[0-9])/, "  Must contain one number character")
         .min(8, "Password must be at least 8 characters")
-        .matches(/[a-zA-Z]/, "Password can only contain latin letters."),
-      confirmPassword: Yup.string()
+        .required("Password is required"),
+        confirmPassword: Yup.string()
         .min(8, "Password must be at least 8 characters")
-        .oneOf([Yup.ref("userPassword"), null], "Password must be same")
-        .required("Confirm password is required")
+        .min(8, "Password must be at least 8 characters")
+        .test("passwordMatch", "Passwords must be the same", function(value) {
+          const {  userPassword } = this.parent;
+          return  userPassword === value;
+        })
+        .required("Confirm password is required"),
     }),
     onSubmit: (values) => {
       if (checkBox) {
@@ -80,7 +86,7 @@ const Signup = () => {
           signUpUser({
             mobileNo: values?.mobileNo?.toString(),
             password: values?.userPassword,
-            passwordConfirm: values?.confirmPassword
+            passwordConfirm: values?.confirmPassword,
           })
         ).then((res) => {
           if (res?.payload?.status === true) {
@@ -88,23 +94,23 @@ const Signup = () => {
             setFormValues(res?.payload);
             const createLocalObject = {
               success: true,
-              userInfo: res?.payload
+              userInfo: res?.payload,
             };
             setCreateLocalObjectValue(createLocalObject);
             localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
           } else {
             setMobileNoError(res?.payload?.response?.data?.message);
             isLoading(false);
-            setTimeout(()=>{
-              setMobileNoError('');
-            }, 4000)
+            setTimeout(() => {
+              setMobileNoError("");
+            }, 4000);
           }
           isLoading(false);
         });
       } else if (!checkBox) {
         toast.warning("Please check privacy policy!");
       }
-    }
+    },
   });
 
   const handleClose = () => {
@@ -115,11 +121,14 @@ const Signup = () => {
     setIsLoadingOtpContainer(true);
     const request = {
       userId: formValues?.data?._id,
-      otp: otp
+      otp: otp,
     };
     dispatch(userVerifyWithOtp(request)).then((res) => {
       if (res?.payload?.status === true) {
-        localStorage.setItem("userInfo", JSON.stringify(createLocalObjectValue));
+        localStorage.setItem(
+          "userInfo",
+          JSON.stringify(createLocalObjectValue)
+        );
         localStorage.setItem("isNewUser", true);
         navigate("/user-profile");
       } else {
@@ -164,7 +173,9 @@ const Signup = () => {
                       className="invalid-feedback"
                       style={{ display: "flex" }}
                     >
-                      <div className="error">{formik.errors.mobileNo || mobileNoError}</div>
+                      <div className="error">
+                        {formik.errors.mobileNo || mobileNoError}
+                      </div>
                     </div>
                   }
                 </div>
@@ -251,11 +262,11 @@ const Signup = () => {
                     type="checkbox"
                     className="mr-3"
                   />
-                  <p className="m-0">
+                  <span className="m-0">
                     By clicking, I accept the
                     <a href="/"> terms of the service</a> and{" "}
                     <a href="/">privacy policy</a>
-                  </p>
+                  </span>
                 </label>
                 <div className="w-100 mt-4 mb-3">
                   <button type="submit" className="w-100 btn-signin">
@@ -283,29 +294,26 @@ const Signup = () => {
           }}
           PaperProps={{
             sx: {
-              width: "100%"
-            }
+              width: "100%",
+            },
           }}
         >
           <DialogTitle id="alert-dialog-title">
-            <div className="text-center mt-2 mb-4">{"Otp verification"}</div>
+            <Typography variant="h6" align="center" gutterBottom>
+              Otp verification
+            </Typography>
           </DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              <Backdrop
-                open={isLoadingOtpContainer}
-                sx={{
-                  color: "#fff",
-                  zIndex: (theme) => theme.zIndex.drawer + 1
-                }}
-              >
-                <CircularProgress color="inherit" />
-              </Backdrop>
-              <OtpViewComponents
-                handleChange={(evt) => setOtp(evt)}
-                otp={otp}
-              />
-            </DialogContentText>
+            <Backdrop
+              open={isLoadingOtpContainer}
+              sx={{
+                color: "#fff",
+                zIndex: (theme) => theme.zIndex.drawer + 1,
+              }}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+            <OtpViewComponents handleChange={(evt) => setOtp(evt)} otp={otp} />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleClose}>Cancel</Button>

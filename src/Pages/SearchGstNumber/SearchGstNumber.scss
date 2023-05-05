@@ -1,3 +1,7 @@
+.title {
+  color: #122c72;
+  font-weight: 600;
+}
 .form-searchGst {
   color: #4e5e6a;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
@@ -222,10 +226,11 @@
       position: absolute;
       top: 60%;
       width: 430px;
+      box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
       border-radius: 5px;
       background-color: white;
       overflow-y:  scroll;
-      max-height: 300px;
+      max-height: 200px;
 
       .history-item {
         font-size: 18px;

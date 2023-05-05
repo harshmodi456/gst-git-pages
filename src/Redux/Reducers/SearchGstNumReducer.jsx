@@ -147,9 +147,7 @@ export const updateReview = createAsyncThunk(
 export const getWriteReview = createAsyncThunk(
   "Gst/getWriteReview",
   async (data, thunkApi) => {
-    {
       console.log('--------- data ---------', data);
-    }
     try {
       return await // await doFetch(`${api}/auth/login`,'POST',data)
         // await axios.get(`${api}gst/getGst/${data}`)
@@ -170,6 +168,7 @@ export const getReviewByUser = createAsyncThunk(
   "Gst/getReviewByUser",
   async (userId, thunkApi) => {
     try {
+      
       return await // await doFetch(`${api}/auth/login`,'POST',data)
         // await axios.get(`${api}gst/getGst/${data}`)
         (

@@ -1,14 +1,12 @@
 import React from "react";
 import {
   FormControl,
-  IconButton,
-  InputAdornment,
   InputLabel,
   OutlinedInput,
   TextField
 } from "@mui/material";
-import Visibility from "@mui/icons-material/Visibility";
-import VisibilityOff from "@mui/icons-material/VisibilityOff";
+// import Visibility from "@mui/icons-material/Visibility";
+// import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import "../../Pages/Login/Login.scss";
 // const CustomTextField = ({ field, form: { touched, errors }, ...props }) => {
 const CustomTextField = ({
@@ -22,18 +20,6 @@ const CustomTextField = ({
         <FormControl variant="outlined">
           <InputLabel htmlFor="password">Password</InputLabel>
           <OutlinedInput
-            endAdornment={
-              <InputAdornment position="end">
-                <IconButton
-                  aria-label="toggle password visibility"
-                  onClick={props.handleClickShowPassword}
-                  onMouseDown={props.handleMouseDownPassword}
-                  edge="end"
-                >
-                  {props.showPassword ? <VisibilityOff /> : <Visibility />}
-                </IconButton>
-              </InputAdornment>
-            }
             {...field}
             {...props}
           />

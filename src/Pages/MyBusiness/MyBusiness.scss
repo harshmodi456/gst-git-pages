@@ -14,11 +14,6 @@
     background-color: #1D1299;
   }
 
-  .my-business-search-container {
-    max-height: 400px;
-    overflow-y: scroll;
-  }
-
   .search-gst-modal {
     padding: 10px 20px;
     border: 1px solid blue;
@@ -27,24 +22,24 @@
     text-transform: uppercase;
   }
 
-  .modal-btn-container {
-    .btn-cancel,
-    .btn-add {
-      border: none;
-      padding: 10px 30px;
-      border-radius: 10px;
-      cursor: pointer;
-      color: white;
-      font-size: 20px;
-      font-weight: 600;
-    }
-    .btn-add{
-      background-color: #DA45FF;
-    }
-    .btn-cancel {
-      background-color: #BFB7C0;
-    }
-  }
+  // .modal-btn-container {
+  //   .btn-cancel,
+  //   .btn-add {
+  //     border: none;
+  //     padding: 10px 30px;
+  //     border-radius: 10px;
+  //     cursor: pointer;
+  //     color: white;
+  //     font-size: 20px;
+  //     font-weight: 600;
+  //   }
+  //   .btn-add{
+  //     background-color: #DA45FF;
+  //   }
+  //   .btn-cancel {
+  //     background-color: #BFB7C0;
+  //   }
+  // }
 
     //  Mobile devices
     @media (min-width: 300px) and (max-width: 480px) {

@@ -4,7 +4,6 @@
     box-shadow: 0px -1px 7px 1px rgba(29, 21, 80, 0.12);
     border-radius: 20px;
     width: 100% !important;
-    
     button:focus {
         outline: none;
     }
@@ -12,7 +11,7 @@
     button:disabled {
         cursor: not-allowed !important;
     }
-
+    
     .header {
         .user-name {
             color: #00448b;
@@ -42,8 +41,9 @@
 
     .review-img-container {
         display: flex;
+        bottom: 0;
         justify-content: flex-start !important;
-
+        
         .review-img {
             height: 50px;
             width: 50px;
@@ -52,12 +52,14 @@
         }
     }
 }
-
+.text-editor{
+    height: 220px;
+    overflow-y: auto;
+}
 .review-card-container:hover {
     outline: 2px solid rgb(0, 0, 104);
     cursor: pointer;
 }
-
 
 .more-box-view {
     display: flex;
@@ -102,3 +104,13 @@
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
 }
+@media (min-width: 1100px) and (max-width: 1640px) {
+    .review-card-container .header .user-name {
+        color: #00448b;
+        font-size: 17px;
+        font-weight:600;
+        max-width: 410px;
+    }
+}
+
+  

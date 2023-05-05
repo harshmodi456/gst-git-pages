@@ -99,6 +99,7 @@ export default function GstCard(props) {
         gstData: gst?.gstData || gst?._doc?.gstData || gst
       };
 
+   
       if (gst?._doc) {
         // if (getUserInfo === undefined || getUserInfo === null) {
         //   setIsLoading(false);
@@ -110,14 +111,17 @@ export default function GstCard(props) {
         dispatch(postGstRecord(reqeObj)).then((res) => {
           if (res?.payload?.status === true) {
             if (getUserInfo !== undefined && getUserInfo !== null) {
+              navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
+                state: { gst }
+              });
             }
-            navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
-              state: { gst }
-            });
-            // else {
-            //   navigate("/login");
-            //   localStorage.setItem("search-selectedGst", JSON.stringify(gst));
-            // }
+            else {
+              toast.error('Please log in to access more Info!');
+              setTimeout(() => {
+                navigate("/login");
+              }, 5000);
+              localStorage.setItem("search-selectedGst", JSON.stringify(gst));
+            }
           } else {
             toast.danger(res?.payload?.message);
           }
@@ -157,7 +161,7 @@ export default function GstCard(props) {
             <div className="col-lg-2 col-3">Address:</div>
             {/* <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}> */}
             <div className="col-lg-10 col-9 company-addr mr-0 pl-lg-4">
-              {address.slice(0, 9) == 'undefined' ? ' ' : address}
+              {address.slice(0, 9) === 'undefined' ? ' ' : address}
               {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
             </div>
           </div>

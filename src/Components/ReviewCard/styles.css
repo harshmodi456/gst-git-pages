@@ -27,7 +27,6 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
 }
 
 .swiper-pagination-bullet {
@@ -36,10 +35,6 @@ body {
 }
 
 .outer-image-wrap {
-  height: 550px;
+  height: 520px;
  
-}
-
-.outer-image-wrap img {
-  
 }

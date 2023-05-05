@@ -22,6 +22,8 @@ import { toast } from "react-toastify";
 import { RWebShare } from "react-web-share";
 import { FaShareAlt } from "react-icons/fa";
 import InfiniteScroll from "react-infinite-scroll-component";
+import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import Swal from 'sweetalert2';
 import RichTextEditor from "react-rte";
 
@@ -127,7 +129,11 @@ const GstInformation = () => {
           icon: 'error',
           title: 'Login Required!',
           text: 'Please login first to access more.',
-        }
+        },
+        setTimeout(() => {
+          Swal.close();
+          navigate("/login");
+        }, 1500)
       ).then((result) => {
         if (result.isConfirmed) {
           navigate("/login");
@@ -156,6 +162,10 @@ const GstInformation = () => {
   const removeImage = (url) => {
     const deleteImage = profileImg?.filter((data) => data !== url);
     setProfileImg(deleteImage);
+    const index = profileImg?.indexOf(url);
+    const newImgFile = [...imgFile];
+    newImgFile.splice(index, 1);
+    setImgFile(newImgFile);
   }
 
   const fetchReview = (gstId, isGst) => {
@@ -199,6 +209,7 @@ const GstInformation = () => {
 
   const resetData = () => {
     setReviewTextDesc(RichTextEditor.createValueFromString("","html"));
+    document.getElementById("reviewImgUrl").value = '';
     setValue(0);
     setImageUrl([]);
     setProfileImg([]);
@@ -206,11 +217,9 @@ const GstInformation = () => {
   }
 
   const handlePost = async (e) => {
+    debugger
     e.preventDefault();
-
-    // Check user is login or not
     validateLogin();
-
     let formData = new FormData();
     formData.append('userId', getUserToken?.userInfo?.data?._id);
     formData.append('gstId', gst?._id || gst?._doc?._id);
@@ -272,6 +281,12 @@ const GstInformation = () => {
       </Backdrop>
 
       <div className="gst-information m-lg-5 px-lg-5 px-4 py-2">
+      {/* <div className="px-5 d-flex align-items-center">
+                <IconButton onClick={() => gstIn()} className='ml-1'>
+                  <ArrowBackIcon />
+                </IconButton>
+                <h5 className="m-0 text-muted ml-2">Back</h5>
+              </div> */}
         <div className="d-flex border-bottom align-items-center">
           <h3 className="title m-0">Search Result based on GSTIN/UIN : {gst?.gstData?.gstin || gst?._doc?.gstin}</h3>
           <div className="ml-4" onClick={validateLogin}>
@@ -310,7 +325,7 @@ const GstInformation = () => {
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">GSTIN / UIN Status</h5>
-            <h5 className={`break-line-1 font-weight-bold ${gst?.gstData?.sts || gst?._doc?.gstData?.sts == 'Cancelled' ? 'text-danger' : 'text-green'}`}>{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
+            <h5 className={`break-line-1 font-weight-bold ${gst?.gstData?.sts || gst?._doc?.gstData?.sts === 'Active' ? 'text-green' : 'text-danger'}`}>{gst?.gstData?.sts || gst?._doc?.gstData?.sts}</h5>
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3s">
             <h5 className="font-weight-bold break-line-1">Taxpayer Type</h5>
@@ -335,7 +350,7 @@ const GstInformation = () => {
           </div>
           <div className="col-md-4 col-12 pt-md-0 pt-3">
             <h5 className="font-weight-bold break-line-1">Principal Place of Business</h5>
-            <h5>{gstAddress.slice(0, 9) == 'undefined' ? ' ' : gstAddress}</h5>
+            <h5>{gstAddress.slice(0, 9) === 'undefined' ? ' ' : gstAddress}</h5>
           </div>
         </div>
 
@@ -353,21 +368,23 @@ const GstInformation = () => {
             <p className="m-0 ml-2 mt-1 text-muted">({gst?.totalReview || 0})</p>
           </div>
           <div className="text-right">
-            {
-              (gst?.isMyBusiness ? true : false || gstStatus != 'Active') ? (
-                null
-              ) : (
-                <button
-                  className="btn-write-review"
-                  data-toggle="modal"
-                  onClick={() => validateLogin(true)}
-                  disabled={gst?.isMyBusiness ? true : false || gstStatus == 'Cancelled'}
-                >
-                  <FaEdit /> Write Review
-                </button>
-              )
-            }
-          </div>
+  {getReviewData !== undefined && getReviewData.some((d) => d.userId._id === getUserInfo?.userInfo?.data._id)
+    ? null
+    : (
+      <button
+        className="btn-write-review"
+        data-toggle="modal"
+        onClick={() => validateLogin(true)}
+        disabled={gst?.isMyBusiness ? false : true || gstStatus !== "Active"}
+      >
+        <FaEdit /> Write Review
+      </button>
+    )
+  }
+</div>
+
+          <div>
+    </div>
           <div>
             {
 
@@ -437,7 +454,6 @@ const GstInformation = () => {
                   />
                 </div>
                 <RichTextEditor
-                    editorStyle={{ height: '150px' }}
                     className="text-editor"
                     placeholder="Write Review..."
                     toolbarStyle={{ borderBottom: "0px", padding: "0px" }}
@@ -447,33 +463,22 @@ const GstInformation = () => {
                     value={reviewTextDesc}
                     onChange={onChangeRichText}
                   />
-                {/* <textarea
-                  className="review-textarea w-100"
-                  as='textarea'
-                  autoComplete="off"
-                  rows={6}
-                  placeholder="Write Review..."
-                  value={reviewTextDesc}
-                  onChange={(event) => {
-                    setReviewTextDesc(event.target.value);
-                  }}
-                /> */}
-                <div className="img-container d-flex flex-wrap">
+                <div className="img-container d-flex">
                   <input
-                    multiple
-                    id="reviewImgUrl"
-                    name='reviewImgUrl'
-                    accept="image/*"
-                    hidden
-                    type="file"
-                    onChange={(event) => fileChangeHandler(event)}
-                  />
-                  <Box className='d-flex flex-wrap'>
+                      multiple
+                      id="reviewImgUrl"
+                      name='reviewImgUrl'
+                      accept="image/*"
+                      hidden
+                      type="file"
+                      onChange={(event) => fileChangeHandler(event)}
+                    />
+                  <Box className='d-flex'>
                     {
                       profileImg?.map((image, index) => {
                         return (
                           <Box onMouseOut={() => bottomMenu(false, image)} onMouseOver={() => bottomMenu(true, image)} key={index} sx={{ alignItems: 'center', m: 1, position: 'relative' }} >
-                            <img src={image} height={'150px'} width={'150px'} />
+                            <img src={image} height={'150px'} width={'150px'} alt="" accept="image/png, image/gif, image/jpeg"/>
                             {
                               deleteBar && imageUrl === image && (
                                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'flex-end', position: 'absolute', bottom: 0, backgroundColor: '#5A5A5A', width: '100%', opacity: 0.7 }}>
@@ -486,7 +491,6 @@ const GstInformation = () => {
                       })
                     }
                   </Box>
-
                 </div>
                 <div className="mt-2 mb-3">
                   <Button onClick={upload} className="mt-3" variant="outlined" startIcon={<CameraAltIcon />}>

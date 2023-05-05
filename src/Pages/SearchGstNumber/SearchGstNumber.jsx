@@ -27,6 +27,8 @@ const SearchGstNumber = () => {
   const [gstSearchData, setGstSearchData] = useState([]);
   const [history, setHistory] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
+  const [searchValue, setSearchValue] = useState([]);
+  const [clickHistory, setClickHistory] = useState([]);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
   const searchInput = React.useRef(null);
@@ -54,21 +56,24 @@ const SearchGstNumber = () => {
   }
 
   const addHistoryHandler = (searchValue) => {
+    setSearchValue(searchValue)
     const params = {
       userId: getUserInfo?.userInfo?.data?._id,
-      history: searchValue
-    }
-
+      history: searchValue,
+    };
+    if(getUserInfo?.userInfo?.data?._id){
     dispatch(addHistory(params)).then((res) => {
-      console.log(res?.payload)
       if (res?.payload?.status === true) {
       }
     });
   }
+  };
 
   useEffect(() => {
-    fetchHistoryHandler();
-  }, [])
+    if (getUserInfo?.userInfo?.data?._id) {
+      fetchHistoryHandler();
+    }
+  }, []);
 
   const historyClickHandler = (item) => {
     onBlur();
@@ -86,8 +91,9 @@ const SearchGstNumber = () => {
       userId: getUserInfo?.userInfo?.data?._id,
       verificationValue: values?.verificationValue
     }
+    setSearchValue(params?.verificationValue)
     dispatch(gstVerify(params)).then((res) => {
-      if (res?.payload?.status == true) {
+      if (res?.payload?.status === true) {
         setGstSearchData(res?.payload?.data);
         setIsSearched(true);
         if (isFormSubmit) {
@@ -104,7 +110,7 @@ const SearchGstNumber = () => {
       }
       isLoading(false);
     });
-    fetchHistoryHandler();
+    // fetchHistoryHandler();
   }
 
   const formik = useFormik({
@@ -113,6 +119,7 @@ const SearchGstNumber = () => {
     },
     validationSchema: Yup.object({
       verificationValue: Yup.string().required('GST number or name is required')
+      .trim()
     }),
     onSubmit: (values, { resetForm }) => {
       submitHandler(values, true, { resetForm })
@@ -165,7 +172,9 @@ const SearchGstNumber = () => {
 
   const backButtonHandler = () => {
     setIsSearched(false);
+    if(getUserInfo?.userInfo?.data?._id){
     fetchHistoryHandler();
+    }
   }
 
   const removeHistoryHandler = (historyItem) => {
@@ -173,7 +182,7 @@ const SearchGstNumber = () => {
       userId: getUserInfo?.userInfo?.data?._id,
       history: historyItem
     }
-
+    
     dispatch(removeHistory(params)).then((res) => {
       console.log(res?.payload)
       if (res?.payload?.status === true) {
@@ -204,7 +213,8 @@ const SearchGstNumber = () => {
                 <IconButton onClick={backButtonHandler} className='ml-1'>
                   <ArrowBackIcon />
                 </IconButton>
-                <h5 className="m-0 text-muted ml-2">Back</h5>
+                <h5 className="m-0 text-muted ml-2 mr-4">Back</h5>
+              <h4 className="m-0 title">{`Search Result based on GSTIN/UIN:- ${searchValue.toUpperCase()}`}</h4>
               </div>
               {
                 gstSearchData?.length > 0 ? (
@@ -255,7 +265,7 @@ const SearchGstNumber = () => {
                       </div>
                     )}
                     {
-                      (focused && (getUserInfo != undefined || getUserInfo != null)) ? (
+                      (focused && (getUserInfo !== undefined || getUserInfo != null)) ? (
                         <div className="history-container py-2">
                           {
                             history?.length > 0 ? (
@@ -263,7 +273,7 @@ const SearchGstNumber = () => {
                                 {
                                   history?.map((item, index) => (
                                     <div
-                                      className="px-4 history-item d-flex align-items-center justify-content-between"
+                                      className="px-4 history-item d-flex align-items-center justify-content-between" key={index}
                                     >
                                       <div className="d-flex align-items-center py-3 w-100" onClick={() => historyClickHandler(item)}>
                                         <HistoryIcon className="mr-2" />

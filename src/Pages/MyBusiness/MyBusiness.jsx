@@ -1,6 +1,9 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import "./MyBusiness.scss";
+import "./style.css"
+import { useState } from "react";
+import { Modal} from "react-bootstrap";
 import { useNavigate } from 'react-router-dom';
 import { getGstByUserId, gstVerify, postGstRecord } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useAppDispatch } from "../../Redux/Store/Store";
@@ -17,6 +20,7 @@ import * as Yup from "yup";
 const MyBusiness = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const [showModal, setShowModal] = useState(false);
   const [loading, isLoading] = React.useState(false);
   const [gstSearchData, setGstSearchData] = React.useState([]);
   const [myBusinessData, setMyBusinessData] = React.useState([]);
@@ -36,7 +40,6 @@ const MyBusiness = () => {
   }
 
   React.useEffect(() => {
-
     myBusinessHandler();
   }, []);
 
@@ -60,11 +63,17 @@ const MyBusiness = () => {
           setGstSearchData([]);
         }
         isLoading(false);
-        // closing modal
-        // document.getElementById("btn-cancel").click();
       });
     },
   });
+
+
+  const handleCancel = () => {
+    setShowModal(false);
+    setGstSearchData([]);
+    formik.values.verificationValue = "";
+    // formik.errors.verificationValue = "";
+  };
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -123,89 +132,93 @@ const MyBusiness = () => {
   };
 
   return (
-    <form onSubmit={formik.handleSubmit} onReset={formik.handleReset}>
-      <div className="my-business-container py-5 px-lg-5 px-md-3">
+    <form>
+        <div className="my-business-container py-5 px-lg-5 px-md-3">
         <h2 className="font-weight-bold pl-lg-5 pl-3">
           My Business
-          <IconButton type="reset" className="ml-3 add-business-btn" data-toggle="modal" data-target="#staticBackdrop">
+          <IconButton
+            type="reset"
+            className="ml-3 add-business-btn"
+            onClick={() => setShowModal(true)}
+          >
             <AddIcon />
           </IconButton>
         </h2>
 
         <div className="px-lg-4 py-5 row px-4 m-0">
-          {
-            myBusinessData?.length > 0 ? (
-              <>
-                {
-                  myBusinessData?.map((gst, index) => (
-                    <GstCard key={index} gst={gst} />
-                  ))
-                }
-              </>
-            ) : (
-              <div className="w-100 text-center">
-                <h4 className="text-muted">No data</h4>
-              </div>
-            )
-          }
-        </div>
-        {/* <!-- Modal --> */}
-        <div className="modal fade" data-keyboard={false} tabIndex="-1" id="staticBackdrop">
-          <div className="modal-dialog modal-dialog-centered modal-lg">
-            <div className="modal-content p-5">
-              <div>
-                <h5>Enter GST Number / Business Name</h5>
-                <input
-                  placeholder="Enter GST No. / Name"
-                  className="mt-3 search-gst-modal"
-                  id="verificationValue"
-                  name="verificationValue"
-                  value={formik.values.verificationValue}
-                  onChange={formik.handleChange}
-                // onKeyPress={(e) => {
-                //   if (e.key === "Enter") {
-                //     searchGstHandler(verificationValue);
-                //   }
-                // }}
-                />
-                {formik.errors.verificationValue && (
-                  <div className="mt-1">
-                    <span style={{ color: 'red' }}>
-                      {formik.errors.verificationValue}
-                    </span>
-                  </div>
-                )}
-                <div className="modal-btn-container mt-4">
-                  <button id="btn-cancel" type="reset" onClick={() => setGstSearchData([])} className="btn-cancel mr-3" data-toggle="modal" data-target="#staticBackdrop">Cancel</button>
-                  <button
-                    className="btn-add"
-                    type="submit"
-                  // disabled={verificationValue ? false : true}
-                  >
-                    Add
-                  </button>
-                </div>
-              </div>
-              <div className="my-business-search-container">
-                {
-                  gstSearchData?.length > 0 &&
-                  (
-                    <>
-                      <div className="px-lg-4 pt-4 row px-4 m-0 mb-5" data-toggle="modal" data-target="#staticBackdrop">
-                        {
-                          gstSearchData?.map((gst, index) => (
-                            <GstCard key={index} gst={gst} isMyBusiness={true} myBusinessSearch={true} />
-                          ))
-                        }
-                      </div>
-                    </>
-                  )
-                }
-              </div>
+          {myBusinessData?.length > 0 ? (
+            <>
+              {myBusinessData?.map((gst, index) => (
+                <GstCard key={index} gst={gst} />
+              ))}
+            </>
+          ) : (
+            <div className="w-100 text-center">
+              <h4 className="text-muted">No data</h4>
             </div>
-          </div>
+          )}
         </div>
-      </div >
+
+        <Modal
+          show={showModal}
+          onHide={() => setShowModal(false)}
+          size="lg"
+          backdrop="static"
+          aria-labelledby="example-modal-sizes-title-lg"
+          keyboard={false}
+          centered
+        >
+          <Modal.Body className="mx-4">
+          <h5 className="mt-3">Enter GST Number / Business Name</h5>
+            <input
+              type="text"
+              placeholder="Enter GST No. / Name"
+              className="mt-3 w-50 search-gst-modal"
+              id="verificationValue"
+              name="verificationValue"
+              value={formik.values.verificationValue}
+              onChange={formik.handleChange}
+            />
+            {formik.errors.verificationValue && (
+              <div className="mt-1">
+                <span style={{ color: "red" }}>
+                  {formik.errors.verificationValue}
+                </span>
+              </div>
+            )}
+          </Modal.Body>
+          <Modal.Footer className="modal-btn-container mr-auto mx-4 border-0">
+            <button
+              className="btn-cancel"
+              onClick={handleCancel}
+            >
+              Cancel
+            </button>
+            <button
+              className="btn-add"
+              type="button"
+              onClick={formik.handleSubmit}
+            >
+              Add
+            </button>
+
+          </Modal.Footer>
+          <div className="my-business-search-container">
+            {gstSearchData?.length > 0 && (
+              <div className="px-lg-4 pt-4 mx-4 row px-4 m-0 mb-5">
+                {gstSearchData.map((gst, index) => (
+                  <GstCard
+                    key={index}
+                    gst={gst}
+                    isMyBusiness={true}
+                    myBusinessSearch={true}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </Modal>
+      </div>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
