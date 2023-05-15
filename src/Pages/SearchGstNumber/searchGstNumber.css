@@ -1,0 +1,9 @@
+@media (max-width: 480px) {
+    .filterGstCard{
+      display: flex;
+      justify-content: center
+    }
+    .filterSearch-bar{
+        margin-bottom: 4px;
+    }
+  }

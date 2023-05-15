@@ -84,8 +84,7 @@ export default function ReviewCard(props) {
   const fileChangeHandler = (event) => {
     const file = event.target.files;
     console.log('file', file);
-    // debugger
-    if (file != null) {
+       if (file != null) {
       for (let i = 0; i < event.target.files?.length; i++) {
         const randome = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(
           /[018]/g,

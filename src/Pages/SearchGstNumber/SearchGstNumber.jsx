@@ -1,24 +1,29 @@
 import React, { useEffect, useState } from "react";
 import "./SearchGstNumber.scss";
+import "./searchGstNumber.css";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   gstVerify,
   postGstRecord,
   addHistory,
   fetchHistory,
-  removeHistory
+  removeHistory,
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useNavigate } from "react-router-dom";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
-import homeBackgroung from '../../Assets/Images/home-bg.svg';
+import homeBackgroung from "../../Assets/Images/home-bg.svg";
 import GstCard from "../../Components/GstCard/GstCard";
-import { useFormik } from 'formik';
+import { useFormik } from "formik";
 import * as Yup from "yup";
-import IconButton from '@mui/material/IconButton';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import HistoryIcon from '@mui/icons-material/History';
-import CloseIcon from '@mui/icons-material/Close';
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import HistoryIcon from "@mui/icons-material/History";
+import CloseIcon from "@mui/icons-material/Close";
+import Button from "@mui/material/Button";
+import Chip from "@mui/material/Chip";
+import { TextField, Autocomplete, MenuItem } from "@mui/material";
+import CheckIcon from "@mui/icons-material/Check";
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
@@ -28,19 +33,20 @@ const SearchGstNumber = () => {
   const [history, setHistory] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
   const [searchValue, setSearchValue] = useState([]);
-  const [clickHistory, setClickHistory] = useState([]);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
   const searchInput = React.useRef(null);
   const [focused, setFocused] = React.useState(false);
-  const [userId, setUserId] = useState(getUserInfo?.userInfo?.data?._id);
+  const [selectedStates, setSelectedStates] = useState([]);
+  const [selectedDistrict, setSelectedDistrict] = useState([]);
+  const [selectedDst, setSelectedDst] = useState("");
 
-  const onFocus = () => setFocused(true)
+  const onFocus = () => setFocused(true);
   const onBlur = () => {
     setTimeout(() => {
-      setFocused(false)
-    }, 500)
-  }
+      setFocused(false);
+    }, 500);
+  };
 
   const fetchHistoryHandler = () => {
     dispatch(fetchHistory(getUserInfo?.userInfo?.data?._id)).then((res) => {
@@ -48,25 +54,25 @@ const SearchGstNumber = () => {
         setHistory(res?.payload?.data);
       }
     });
-  }
+  };
 
   if (document.activeElement === searchInput.current) {
-    alert('0');
+    alert("0");
     // setOpenHistory(true);
   }
 
   const addHistoryHandler = (searchValue) => {
-    setSearchValue(searchValue)
+    setSearchValue(searchValue);
     const params = {
       userId: getUserInfo?.userInfo?.data?._id,
       history: searchValue,
     };
-    if(getUserInfo?.userInfo?.data?._id){
-    dispatch(addHistory(params)).then((res) => {
-      if (res?.payload?.status === true) {
-      }
-    });
-  }
+    if (getUserInfo?.userInfo?.data?._id) {
+      dispatch(addHistory(params)).then((res) => {
+        if (res?.payload?.status === true) {
+        }
+      });
+    }
   };
 
   useEffect(() => {
@@ -77,22 +83,49 @@ const SearchGstNumber = () => {
 
   const historyClickHandler = (item) => {
     onBlur();
-    submitHandler({ verificationValue: item }, false, {})
+    submitHandler({ verificationValue: item }, false, {});
+  };
+
+  const handleStateChange = (event, values) => {
+    setSelectedStates(values);
+    const matchedData = gstSearchData.filter((data) =>
+      values.includes(data.pradr?.addr?.stcd)
+    );
+    if (matchedData) {
+      const dstValues = [
+        ...new Set(matchedData.map((data) => data.pradr?.addr?.dst || "")),
+      ];
+      setSelectedDst(dstValues);
+    }
+  };
+
+  const handleDistrictChange = (event, value) => {
+    setSelectedDistrict(value);
+  };
+  // for district dropdown
+  let data;
+  if (selectedStates.length === 0) {
+    data = [...new Set(gstSearchData.map((e) => e.pradr?.addr?.dst))];
+  } else {
+    data = selectedDst;
   }
 
   const submitHandler = (values, isFormSubmit, { resetForm }) => {
+    
     setFocused(false);
     isLoading(true);
     if (isFormSubmit) {
-      addHistoryHandler(values?.verificationValue)
+      addHistoryHandler(values?.verificationValue);
     }
-
     const params = {
       userId: getUserInfo?.userInfo?.data?._id,
-      verificationValue: values?.verificationValue
-    }
-    setSearchValue(params?.verificationValue)
+      verificationValue: values?.verificationValue || searchValue,
+      stcd: selectedStates.length === 0 ? [] : selectedStates,
+      dst: selectedDistrict.length === 0 ? [] : selectedDistrict,
+    };
+    setSearchValue(params?.verificationValue);
     dispatch(gstVerify(params)).then((res) => {
+      
       if (res?.payload?.status === true) {
         setGstSearchData(res?.payload?.data);
         setIsSearched(true);
@@ -110,22 +143,20 @@ const SearchGstNumber = () => {
       }
       isLoading(false);
     });
-    // fetchHistoryHandler();
-  }
-
+  };
   const formik = useFormik({
     initialValues: {
-      verificationValue: '',
+      verificationValue: "",
     },
     validationSchema: Yup.object({
-      verificationValue: Yup.string().required('GST number or name is required')
-      .trim()
+      verificationValue: Yup.string()
+        .required("GST number or name is required")
+        .trim(),
     }),
     onSubmit: (values, { resetForm }) => {
-      submitHandler(values, true, { resetForm })
-    }
+      submitHandler(values, true, { resetForm });
+    },
   });
-
 
   const onPostHandle = (getRow) => {
     isLoading(true);
@@ -146,19 +177,22 @@ const SearchGstNumber = () => {
         sts: getRow.sts,
         tradeNam: getRow.tradeNam,
         ctj: getRow.ctj,
-        einvoiceStatus: getRow.einvoiceStatus
-      }
+        einvoiceStatus: getRow.einvoiceStatus,
+      },
     };
 
     if (getRow?._doc) {
-      navigate(`/gst-information/${getRow?._doc?.gstin}`)
+      navigate(`/gst-information/${getRow?._doc?.gstin}`);
     } else {
       dispatch(postGstRecord(reqeObj)).then((res) => {
         if (res?.payload?.status === true) {
           if (getUserInfo !== undefined && getUserInfo !== null) {
-            navigate(`/gst-information/${getRow?.gstin || getRow?._doc?.gstin}`, {
-              state: { getRow }
-            });
+            navigate(
+              `/gst-information/${getRow?.gstin || getRow?._doc?.gstin}`,
+              {
+                state: { getRow },
+              }
+            );
           } else {
             navigate("/login");
             localStorage.setItem("search-selectedGst", JSON.stringify(getRow));
@@ -169,33 +203,35 @@ const SearchGstNumber = () => {
     }
     isLoading(false);
   };
-
   const backButtonHandler = () => {
     setIsSearched(false);
-    if(getUserInfo?.userInfo?.data?._id){
-    fetchHistoryHandler();
+    if (getUserInfo?.userInfo?.data?._id) {
+      fetchHistoryHandler();
+      setSelectedStates([]);
+      setSelectedDistrict([]);
+      formik.errors.verificationValue = "";
     }
-  }
+  };
 
   const removeHistoryHandler = (historyItem) => {
     const params = {
       userId: getUserInfo?.userInfo?.data?._id,
-      history: historyItem
-    }
-    
+      history: historyItem,
+    };
+
     dispatch(removeHistory(params)).then((res) => {
-      console.log(res?.payload)
+      console.log(res?.payload);
       if (res?.payload?.status === true) {
         let updatedHistory = history?.filter((item) => {
-          if (historyItem != item) {
+          if (historyItem !== item) {
             return item;
           }
-        })
+        });
 
         setHistory(updatedHistory);
       }
     });
-  }
+  };
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -206,118 +242,241 @@ const SearchGstNumber = () => {
         >
           <CircularProgress color="inherit" />
         </Backdrop>
-        {
-          isSearched ? (
-            <div className="my-5">
-              <div className="px-5 d-flex align-items-center">
-                <IconButton onClick={backButtonHandler} className='ml-1'>
+        {isSearched ? (
+          <div className="my-5">
+            <div className="searchContainer px-5">
+              <div className="d-flex align-items-center">
+                <IconButton onClick={backButtonHandler} className="ml-1">
                   <ArrowBackIcon />
                 </IconButton>
                 <h5 className="m-0 text-muted ml-2 mr-4">Back</h5>
-              <h4 className="m-0 title">{`Search Result based on GSTIN/UIN:- ${searchValue.toUpperCase()}`}</h4>
+                <h4 className="m-0 title">{`Search Result based on GSTIN/UIN:- ${searchValue.toUpperCase()}`}</h4>
               </div>
-              {
-                gstSearchData?.length > 0 ? (
-                  <div className="row px-lg-4 m-0">
-                    {
-                      gstSearchData?.map((gst, index) => (
-                        <GstCard key={index} gst={gst} fullAddress={true} />
-                      ))
-                    }
-                  </div>
-                ) : (
-                  <div className="p-5 text-center w-100">
-                    <h4 className="text-muted pt-5">
-                      No data
-                    </h4>
-                  </div>
-                )
-              }
+              <div className="filterGstCard form-inline">
+                <Autocomplete
+                  sx={{ m: 1, width: "260px" }}
+                  multiple
+                  options={[
+                    ...new Set(gstSearchData.map((e) => e.pradr?.addr?.stcd)),
+                  ]}
+                  getOptionLabel={(option) =>
+                    typeof option === "string" || option instanceof String
+                      ? option
+                      : ""
+                  }
+                  disableCloseOnSelect
+                  value={selectedStates}
+                  onChange={handleStateChange}
+                  renderTags={(value, getTagProps) => {
+                    if (value.length === 0) return null;
+
+                    return (
+                      <>
+                        <Chip
+                          variant="outlined"
+                          label={value[0]}
+                          {...getTagProps({ index: 0 })}
+                          sx={{ width: "120px", overflow: "hidden" }}
+                        />
+                        {value.length > 1 && (
+                          <button
+                            type="button"
+                            class="btn btn-info btn-sm"
+                            variant="outlined"
+                            sx={{ width: 2, padding: 1, margin: 2 }}
+                          >
+                            +{value.length - 1}
+                          </button>
+                        )}
+                      </>
+                    );
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Select State"
+                      placeholder={selectedStates !== "" ? "" : "Select State"}
+                    />
+                  )}
+                  renderOption={(props, option, { selected }) => (
+                    <MenuItem
+                      {...props}
+                      key={option}
+                      value={option}
+                      sx={{ justifyContent: "space-between" }}
+                    >
+                      {option}
+                      {selected ? <CheckIcon color="info" /> : null}
+                    </MenuItem>
+                  )}
+                />
+
+                <Autocomplete
+                  sx={{ m: 1, width: "260px" }}
+                  multiple
+                  options={data}
+                  getOptionLabel={(option) =>
+                    typeof option === "string" || option instanceof String
+                      ? option
+                      : ""
+                  }
+                  disableCloseOnSelect
+                  value={selectedDistrict}
+                  onChange={handleDistrictChange}
+                  renderTags={(value, getTagProps) => {
+                    if (value.length === 0) return null;
+
+                    return (
+                      <>
+                        <Chip
+                          variant="outlined"
+                          label={value[0]}
+                          {...getTagProps({ index: 0 })}
+                          sx={{ width: "120px", overflow: "hidden" }}
+                        />
+                        {value.length > 1 && (
+                          <button
+                            type="button"
+                            class="btn btn-info btn-sm"
+                            variant="outlined"
+                            sx={{ width: 2, padding: 1, margin: 2 }}
+                          >
+                            +{value.length - 1}
+                          </button>
+                        )}
+                      </>
+                    );
+                  }}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      variant="outlined"
+                      label="Select District"
+                      placeholder={
+                        selectedDistrict !== "" ? "" : "Select District"
+                      }
+                    />
+                  )}
+                  renderOption={(props, option, { selected }) => (
+                    <MenuItem
+                      {...props}
+                      key={option}
+                      value={option}
+                      sx={{ justifyContent: "space-between" }}
+                    >
+                      {option}
+                      {selected ? <CheckIcon color="info" /> : null}
+                    </MenuItem>
+                  )}
+                />
+                <button
+                  type="button"
+                  className="btn-submit"
+                  onClick={() => {
+                    submitHandler(formik.values, false, {
+                      resetForm: formik.resetForm,
+                    });
+                  }}
+                >
+                  Submit
+                </button>
+              </div>
             </div>
-          ) : (
-            <div className="home-container">
-              <div className="row m-0 p-0 w-100">
-                <div className="col-lg-6 d-flex align-items-center justify-content-center">
-                  <div className="search-container">
-                    <h3 className="m-0 pt-5 pb-2 font-weight-bold">Search GST Taxpayer</h3>
-                    <input
-                      autoComplete="off"
-                      className="my-4 search-bar w-100"
-                      id="verificationValue"
-                      name="verificationValue"
-                      placeholder="Enter GST No. / Name"
-                      onChange={formik.handleChange}
-                      value={formik.values.verificationValue}
-                      onFocus={onFocus}
-                      onBlur={onBlur}
+            {gstSearchData?.length > 0 ? (
+              <div className="row px-lg-4 m-0">
+                {gstSearchData?.map((gst, index) => (
+                  <GstCard key={index} gst={gst} fullAddress={true} />
+                ))}
+              </div>
+            ) : (
+              <div className="p-5 text-center w-100">
+                <h4 className="text-muted pt-5">No data</h4>
+              </div>
+            )}
+          </div>
+        ) : (
+          <div className="home-container">
+            <div className="row m-0 p-0 w-100">
+              <div className="col-lg-6 d-flex align-items-center justify-content-center">
+                <div className="search-container">
+                  <h3 className="m-0 pt-5 pb-2 font-weight-bold">
+                    Search GST Taxpayer
+                  </h3>
+                  <input
+                    autoComplete="off"
+                    className="my-4 search-bar w-100"
+                    id="verificationValue"
+                    name="verificationValue"
+                    placeholder="Enter GST No. / Name"
+                    onChange={formik.handleChange}
+                    value={formik.values.verificationValue}
+                    onFocus={onFocus}
+                    onBlur={onBlur}
                     // ref={searchInput}
                     // onKeyPress={(e) => {
                     //   if (e.key === "Enter") {
                     //     searchGstHandler(formik.values.verificationValue);
                     //   }
                     // }}
-                    />
-                    {formik.errors.verificationValue && (
-                      <div>
-                        <span style={{ color: 'red' }}>
-                          {formik.errors.verificationValue}
-                        </span>
-                      </div>
-                    )}
-                    {
-                      (focused && (getUserInfo !== undefined || getUserInfo != null)) ? (
-                        <div className="history-container py-2">
-                          {
-                            history?.length > 0 ? (
-                              <>
-                                {
-                                  history?.map((item, index) => (
-                                    <div
-                                      className="px-4 history-item d-flex align-items-center justify-content-between" key={index}
-                                    >
-                                      <div className="d-flex align-items-center py-3 w-100" onClick={() => historyClickHandler(item)}>
-                                        <HistoryIcon className="mr-2" />
-                                        {item}
-                                      </div>
-                                      <div className="btn-remove-history">
-                                        <IconButton onClick={() => removeHistoryHandler(item)} >
-                                          <CloseIcon />
-                                        </IconButton>
-                                      </div>
-                                    </div>
-                                  ))
-                                }
-                              </>
-                            ) : (
-                              <div className="w-100 text-center text-muted py-3">
-                                No history
+                  />
+                  {formik.errors.verificationValue && (
+                    <div>
+                      <span style={{ color: "red" }}>
+                        {formik.errors.verificationValue}
+                      </span>
+                    </div>
+                  )}
+                  {focused &&
+                  (getUserInfo !== undefined || getUserInfo != null) ? (
+                    <div className="history-container py-2">
+                      {history?.length > 0 ? (
+                        <>
+                          {history?.map((item, index) => (
+                            <div
+                              className="px-4 history-item d-flex align-items-center justify-content-between"
+                              key={index}
+                            >
+                              <div
+                                className="d-flex align-items-center py-3 w-100"
+                                onClick={() => historyClickHandler(item)}
+                              >
+                                <HistoryIcon className="mr-2" />
+                                {item}
                               </div>
-                            )
-                          }
+                              <div className="btn-remove-history">
+                                <IconButton
+                                  onClick={() => removeHistoryHandler(item)}
+                                >
+                                  <CloseIcon />
+                                </IconButton>
+                              </div>
+                            </div>
+                          ))}
+                        </>
+                      ) : (
+                        <div className="w-100 text-center text-muted py-3">
+                          No history
                         </div>
-                      ) : (null)
-                    }
-                    < div >
+                      )}
                     </div>
-                    <div className="py-4">
-                      <button
-                        type="submit"
-                        className="btn-search w-100"
-                      >
-                        Search
-                      </button>
-                    </div>
+                  ) : null}
+                  <div></div>
+                  <div className="py-4">
+                    <button type="submit" className="btn-search w-100">
+                      Search
+                    </button>
                   </div>
                 </div>
-                <div className="col-lg-6 d-flex justify-content-center">
-                  <img className="pb-5" src={homeBackgroung} alt="background" />
-                </div>
+              </div>
+              <div className="col-lg-6 d-flex justify-content-center">
+                <img className="pb-5" src={homeBackgroung} alt="background" />
               </div>
             </div>
-          )
-        }
+          </div>
+        )}
       </div>
-    </form >
+    </form>
   );
 };
 

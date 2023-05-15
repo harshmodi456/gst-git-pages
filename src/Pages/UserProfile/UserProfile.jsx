@@ -84,7 +84,6 @@ const UserProfile = () => {
   });
 
   const submitHandler = async (userCredentials) => {
-    debugger;
     setIsLoading(true);
 
     const formData = new FormData();

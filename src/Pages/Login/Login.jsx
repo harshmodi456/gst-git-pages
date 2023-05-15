@@ -34,7 +34,6 @@ const Login = () => {
   });
 
   const signInHandler = (takeValue) => {
-    debugger;
     isLoading(true);
     setShowPassword(false)
     dispatch(

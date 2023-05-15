@@ -180,7 +180,7 @@ const MyBusiness = () => {
               onChange={formik.handleChange}
             />
             {formik.errors.verificationValue && (
-              <div className="mt-1">
+              <div className="mt-1 ml-3">
                 <span style={{ color: "red" }}>
                   {formik.errors.verificationValue}
                 </span>

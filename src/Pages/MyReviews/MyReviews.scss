@@ -45,8 +45,49 @@
         background: #da45ff;
       }
     }
-  }
+  } 
 
+  .search-bar {
+    padding: 5px 10px;
+    font-size: 18px;
+    width: calc(32ch + 2px);
+    border: 2px solid rgb(168, 168, 168);
+    border-radius: 15px;
+    margin-right: 4px;
+    height: 6vh;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  
+  .filterDropdown{
+    padding: 5px 10px;
+    font-size: 18px;
+    border: 2px solid rgb(168, 168, 168);
+    border-radius: 15px;
+    margin-right: 4px;
+    height: 6vh;
+    text-transform: uppercase; 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
+  .filterDropdown {
+    color:#8e8e8e;
+   }
+   .filterDropdown option{
+    color: black;
+   }
+  .btn-search {
+    padding: 5px;
+    font-size: 20px;
+    width: 100px;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    color: white;
+    margin-right:30px;
+    background-color: #da45ff;
+    font-weight: 600;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  }
   .title-container {
     display: flex;
     justify-content: start;
@@ -68,8 +109,6 @@
       outline: none !important;
     }
   }
-
-
     //  Mobile devices
     @media (min-width: 300px) and (max-width: 400px) {
       .title-container{
@@ -85,6 +124,28 @@
           // padding-left: 2px !important;
         }
       }
+      .filter-Conatiner{
+        .search-bar{
+          margin: auto;
+          margin-bottom: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .filterDropdown{
+          margin: auto;
+          display: flex;
+          margin-bottom: 4px;
+          justify-content: center;
+          align-items: center;
+        }
+        .btn-search{
+          margin: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        } 
+      }
     }
     //mobile screen 
     @media (min-width: 401px) and (max-width: 480px) {
@@ -93,6 +154,28 @@
       }
       .MuiButtonBase-root {
         margin: -2px;
+      }
+      .filter-Conatiner{
+        .search-bar{
+          margin: auto;
+          margin-bottom: 4px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+        .filterDropdown{
+          margin: auto;
+          display: flex;
+          margin-bottom: 4px;
+          justify-content: center;
+          align-items: center;
+        }
+        .btn-search{
+          margin: auto;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
       }
     }
     //tablet screen

@@ -18,6 +18,8 @@ export default function GstCard(props) {
   const getUserInfo = JSON.parse(takeUserInfo);
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState("");
+  const [shortaddress, setShortAddress] = useState([])
+  let arr = [];
 
   useEffect(() => {
     if (gst) {
@@ -69,6 +71,11 @@ export default function GstCard(props) {
     }
   }, [gst]);
 
+  const takeData = () =>{
+    arr.push(gst.pradr?.addr?.stcd);
+    setShortAddress(arr)
+  }
+  
   const onPostHandle = () => {
     setIsLoading(true);
     if (isMyBusiness) {
@@ -99,7 +106,6 @@ export default function GstCard(props) {
         gstData: gst?.gstData || gst?._doc?.gstData || gst
       };
 
-   
       if (gst?._doc) {
         // if (getUserInfo === undefined || getUserInfo === null) {
         //   setIsLoading(false);
@@ -158,7 +164,7 @@ export default function GstCard(props) {
             </div>
           </div>
           <div className="row my-2 font-weight-bold">
-            <div className="col-lg-2 col-3">Address:</div>
+            <div className="col-lg-2 col-md-2 col-sm-2 col-3">Address:</div>
             {/* <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}> */}
             <div className="col-lg-10 col-9 company-addr mr-0 pl-lg-4">
               {address.slice(0, 9) === 'undefined' ? ' ' : address}

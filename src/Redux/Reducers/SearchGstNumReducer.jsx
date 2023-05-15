@@ -7,10 +7,15 @@ import instance from "../../Constant/AxiosInstance";
 export const gstVerify = createAsyncThunk(
   "user/gstVerify",
   async (data, thunkApi) => {
+    
+    let filterdata = {
+      state: data.stcd || [],
+      city: data.dst || [],
+    }
     try {
       return await (
         // await instance.post(`${api}gst/verify`, data)
-        await instance.get(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null }`)
+        await instance.post(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null }`, filterdata)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -36,12 +41,16 @@ export const getGstByUserId = createAsyncThunk(
 // for review for my business by user id
 export const getReviewForMyBusiness = createAsyncThunk(
   "user/getReviewForMyBusiness",
-  async (userId, thunkApi) => {
+  async ({ userId, params }, thunkApi) => {
+    let data = {
+      companyName:params?.companyName || '',
+      orderByRating:params?.orderByRating || ''
+    };
     try {
-      return await (
-        // await instance.post(`${api}gst/verify`, data)
-        await instance.get(`${api}review/businessReview/${userId}`)
-      ).data;
+      // if(params?.companyName === '' || params?.orderByRating === '' || params === undefined){
+        const response = await instance.post(`${api}review/businessReview/${userId}`, data);
+        return response.data;
+      //}
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -166,16 +175,16 @@ export const getWriteReview = createAsyncThunk(
 // for get write review by id
 export const getReviewByUser = createAsyncThunk(
   "Gst/getReviewByUser",
-  async (userId, thunkApi) => {
+  async ({ userId, params }, thunkApi) => {
+    let data = {
+      companyName:params?.companyName || '',
+      orderByRating:params?.orderByRating || ''
+    };
     try {
-      
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
-        (
-          await instance.get( // ---- testing
-            `${api}review/user/${userId}?size=30`
-          )
-        ).data;
+      // if(params?.companyName === '' || params?.orderByRating === '' || params === undefined){
+        const response = await instance.post(`${api}review/user/${userId}?size=30`, data);
+        return response.data;
+      //}
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
@@ -534,6 +543,59 @@ const SearchGstNumber = createSlice({
     });
     builder.addCase(getWriteReview.rejected, (state, action) => {
       state.error = JSON.parse(JSON.stringify(action.payload));
+      state.loading = false;
+    });
+
+    // for getReviewByUser 
+    builder.addCase(getReviewByUser.pending, (state, action) => {
+      state.loading = true;
+      state.error = {};
+    });
+    builder.addCase(getReviewByUser.fulfilled, (state, action) => {
+      state.loading = false;
+
+      // let isValid =
+      //   typeof action?.payload.data === "object" &&
+      //   action?.payload.data !== null;
+
+      if (action?.payload?.status === true) {
+        // toast.success("Gst number or name is valid!", {
+        //   position: "top-right",
+        //   autoClose: 2000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
+      } else {
+        // toast.success("Gst number or name is not valid!", {
+        //   position: "top-right",
+        //   autoClose: 2000,
+        //   hideProgressBar: false,
+        //   closeOnClick: true,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: undefined,
+        //   theme: "light",
+        // });
+      }
+      // if (!isValid) {
+      //   toast.success("Gst Number is valid!", {
+      //     position: "top-right",
+      //     autoClose: 2000,
+      //     hideProgressBar: false,
+      //     closeOnClick: true,
+      //     pauseOnHover: true,
+      //     draggable: true,
+      //     progress: undefined,
+      //     theme: "light"
+      //   });
+      // }
+    });
+    builder.addCase(getReviewByUser.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
       state.loading = false;
     });
   },
