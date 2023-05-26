@@ -1,4 +1,4 @@
-.gst-card-container {   
+.gst-card-container {
     background: #ffffff;
     border: 1px solid rgba(35, 47, 108, 0.51);
     box-shadow: 0px -1px 7px 1px rgba(29, 21, 80, 0.12);
@@ -7,19 +7,21 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+
     .company-name {
         text-transform: uppercase;
         color: #00448b;
     }
-    
+
     .company-addr {
         color: #00448b;
         text-transform: capitalize;
     }
-    
+
     .company-full-addr {
         height: 180px;
     }
+
     .break-line-1 {
         overflow: hidden;
         text-overflow: ellipsis;
@@ -34,10 +36,47 @@
         }
     }
 }
-.address{
+
+.address {
     margin-right: 17px;
 }
+
 .gst-card-container:hover {
     outline: 2px solid rgb(7, 7, 10);
     cursor: pointer;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
+    position: absolute;
+    width: 200px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+    z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+}
+
+.setsvg{
+    position: absolute;
+    top: 0;
+    right: 5%;
+}
+
+.ab-tag-wrap {
+    position: relative;
+    transition: all 0.3s ease-in-out;
+}
+
+.badge-light {
+    background-color: #e1fbff !important;
 }

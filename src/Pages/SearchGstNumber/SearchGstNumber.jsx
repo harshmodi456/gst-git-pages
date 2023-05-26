@@ -20,7 +20,6 @@ import IconButton from "@mui/material/IconButton";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import HistoryIcon from "@mui/icons-material/History";
 import CloseIcon from "@mui/icons-material/Close";
-import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import { TextField, Autocomplete, MenuItem } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
@@ -33,6 +32,10 @@ const SearchGstNumber = () => {
   const [history, setHistory] = useState([]);
   const [isSearched, setIsSearched] = useState(false);
   const [searchValue, setSearchValue] = useState([]);
+  const [copysearchValue, setCopySearchValue] = useState([]);
+  const [copyStatevalue, setCopyStatevalue] = useState([]);
+  const [distTf, setDistTf] = useState(false);
+  const [stateTf, setStateTf] = useState(false);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
   const searchInput = React.useRef(null);
@@ -40,6 +43,7 @@ const SearchGstNumber = () => {
   const [selectedStates, setSelectedStates] = useState([]);
   const [selectedDistrict, setSelectedDistrict] = useState([]);
   const [selectedDst, setSelectedDst] = useState("");
+  const [key, setKey] = useState(0);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => {
@@ -56,11 +60,7 @@ const SearchGstNumber = () => {
     });
   };
 
-  if (document.activeElement === searchInput.current) {
-    alert("0");
-    // setOpenHistory(true);
-  }
-
+  
   const addHistoryHandler = (searchValue) => {
     setSearchValue(searchValue);
     const params = {
@@ -79,6 +79,7 @@ const SearchGstNumber = () => {
     if (getUserInfo?.userInfo?.data?._id) {
       fetchHistoryHandler();
     }
+    setCopySearchValue(gstSearchData);
   }, []);
 
   const historyClickHandler = (item) => {
@@ -86,64 +87,107 @@ const SearchGstNumber = () => {
     submitHandler({ verificationValue: item }, false, {});
   };
 
+  useEffect(() => {
+    setCopySearchValue(gstSearchData);
+  }, [gstSearchData])
+
   const handleStateChange = (event, values) => {
-    setSelectedStates(values);
-    const matchedData = gstSearchData.filter((data) =>
-      values.includes(data.pradr?.addr?.stcd)
-    );
-    if (matchedData) {
-      const dstValues = [
-        ...new Set(matchedData.map((data) => data.pradr?.addr?.dst || "")),
-      ];
-      setSelectedDst(dstValues);
+    if (values.length === 0) {
+      setStateTf(false)
+      let tf = false
+      if (distTf === true && stateTf === false) {
+        setCopySearchValue(copyStatevalue)
+      } if (distTf === false && tf === false) {
+        setCopySearchValue(gstSearchData)
+      }
+      setSelectedStates(values);
+    } else {
+      setStateTf(true)
+      setSelectedStates(values);
+      const matchedData = gstSearchData.filter((data) =>
+        values.includes(data.pradr?.addr?.stcd)
+      );
+      if (matchedData.length !== 0) {
+        setCopySearchValue(matchedData)
+        setCopyStatevalue(matchedData)
+      }
+      if (matchedData) {
+        let dstValues = [
+          ...new Set(matchedData.map((data) => data.pradr?.addr?.dst || "")),
+        ];
+        dstValues = dstValues.filter(x => x !== undefined);
+        setSelectedDst(dstValues);
+      }
     }
+    setKey(key + 1);
   };
 
   const handleDistrictChange = (event, value) => {
     setSelectedDistrict(value);
+    const matchedData = gstSearchData.filter((data) =>
+      value.includes(data.pradr?.addr?.dst)
+    );
+    if (value.length === 0) {
+      setDistTf(false)
+      let tf = false
+      if (tf === false && stateTf === false) {
+        setCopySearchValue(gstSearchData)
+      }
+      if (tf === false && stateTf === true) {
+        setCopySearchValue(copyStatevalue)
+      }
+      setSelectedDistrict(value);
+    } else {
+      setDistTf(true)
+      setCopySearchValue(matchedData)
+    }
+    setKey(key + 1);
   };
+
   // for district dropdown
   let data;
+  let stateData;
+  stateData = [...new Set(gstSearchData.map((e) => e.pradr?.addr?.stcd))]
+  stateData = stateData.filter(x => x !== undefined);
   if (selectedStates.length === 0) {
     data = [...new Set(gstSearchData.map((e) => e.pradr?.addr?.dst))];
+    data = data.filter(x => x !== undefined);
   } else {
     data = selectedDst;
   }
 
   const submitHandler = (values, isFormSubmit, { resetForm }) => {
-    
-    setFocused(false);
-    isLoading(true);
-    if (isFormSubmit) {
-      addHistoryHandler(values?.verificationValue);
-    }
-    const params = {
-      userId: getUserInfo?.userInfo?.data?._id,
-      verificationValue: values?.verificationValue || searchValue,
-      stcd: selectedStates.length === 0 ? [] : selectedStates,
-      dst: selectedDistrict.length === 0 ? [] : selectedDistrict,
-    };
-    setSearchValue(params?.verificationValue);
-    dispatch(gstVerify(params)).then((res) => {
-      
-      if (res?.payload?.status === true) {
-        setGstSearchData(res?.payload?.data);
-        setIsSearched(true);
-        if (isFormSubmit) {
-          resetForm();
-        }
-        isLoading(false);
-      } else {
-        setGstSearchData([]);
-        setIsSearched(true);
-        if (isFormSubmit) {
-          resetForm();
-        }
-        isLoading(false);
+    if (values.verificationValue !== "") {
+      setFocused(false);
+      isLoading(true);
+      if (isFormSubmit) {
+        addHistoryHandler(values?.verificationValue);
       }
-      isLoading(false);
-    });
-  };
+      const params = {
+        userId: getUserInfo?.userInfo?.data?._id,
+        verificationValue: values?.verificationValue || searchValue,
+      };
+      setSearchValue(params?.verificationValue);
+      dispatch(gstVerify(params)).then((res) => {
+        if (res?.payload?.status === true) {
+          setGstSearchData(res?.payload?.data);
+          setIsSearched(true);
+          if (isFormSubmit) {
+            resetForm();
+          }
+          isLoading(false);
+        } else {
+          setGstSearchData([]);
+          setIsSearched(true);
+          if (isFormSubmit) {
+            resetForm();
+          }
+          isLoading(false);
+        }
+        isLoading(false);
+      });
+    };
+  }
   const formik = useFormik({
     initialValues: {
       verificationValue: "",
@@ -157,6 +201,7 @@ const SearchGstNumber = () => {
       submitHandler(values, true, { resetForm });
     },
   });
+
 
   const onPostHandle = (getRow) => {
     isLoading(true);
@@ -203,13 +248,15 @@ const SearchGstNumber = () => {
     }
     isLoading(false);
   };
+
   const backButtonHandler = () => {
     setIsSearched(false);
+    setSearchValue([]);
     if (getUserInfo?.userInfo?.data?._id) {
       fetchHistoryHandler();
       setSelectedStates([]);
       setSelectedDistrict([]);
-      formik.errors.verificationValue = "";
+      formik.values.verificationValue = "";
     }
   };
 
@@ -220,7 +267,6 @@ const SearchGstNumber = () => {
     };
 
     dispatch(removeHistory(params)).then((res) => {
-      console.log(res?.payload);
       if (res?.payload?.status === true) {
         let updatedHistory = history?.filter((item) => {
           if (historyItem !== item) {
@@ -244,7 +290,7 @@ const SearchGstNumber = () => {
         </Backdrop>
         {isSearched ? (
           <div className="my-5">
-            <div className="searchContainer px-5">
+            <div className="searchContainer px-md-5">
               <div className="d-flex align-items-center">
                 <IconButton onClick={backButtonHandler} className="ml-1">
                   <ArrowBackIcon />
@@ -252,140 +298,133 @@ const SearchGstNumber = () => {
                 <h5 className="m-0 text-muted ml-2 mr-4">Back</h5>
                 <h4 className="m-0 title">{`Search Result based on GSTIN/UIN:- ${searchValue.toUpperCase()}`}</h4>
               </div>
-              <div className="filterGstCard form-inline">
-                <Autocomplete
-                  sx={{ m: 1, width: "260px" }}
-                  multiple
-                  options={[
-                    ...new Set(gstSearchData.map((e) => e.pradr?.addr?.stcd)),
-                  ]}
-                  getOptionLabel={(option) =>
-                    typeof option === "string" || option instanceof String
-                      ? option
-                      : ""
-                  }
-                  disableCloseOnSelect
-                  value={selectedStates}
-                  onChange={handleStateChange}
-                  renderTags={(value, getTagProps) => {
-                    if (value.length === 0) return null;
+              <div className="filterGstCard form-inline m-0 p-0 justify-content-end">
+                <div className="col-5 p-0 col-md-2">
+                  <Autocomplete
+                    sx={{ m: 1 }}
+                    multiple
+                    options={stateData}
+                    getOptionLabel={(option) =>
+                      typeof option === "string" || option instanceof String
+                        ? option
+                        : ""
+                    }
+                    disableCloseOnSelect
+                    value={selectedStates}
+                    onChange={handleStateChange}
+                    renderTags={(value, getTagProps) => {
+                      if (value.length === 0) return null;
 
-                    return (
-                      <>
-                        <Chip
-                          variant="outlined"
-                          label={value[0]}
-                          {...getTagProps({ index: 0 })}
-                          sx={{ width: "120px", overflow: "hidden" }}
-                        />
-                        {value.length > 1 && (
-                          <button
-                            type="button"
-                            class="btn btn-info btn-sm"
+                      return (
+                        <>
+                          <Chip
                             variant="outlined"
-                            sx={{ width: 2, padding: 1, margin: 2 }}
-                          >
-                            +{value.length - 1}
-                          </button>
-                        )}
-                      </>
-                    );
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Select State"
-                      placeholder={selectedStates !== "" ? "" : "Select State"}
-                    />
-                  )}
-                  renderOption={(props, option, { selected }) => (
-                    <MenuItem
-                      {...props}
-                      key={option}
-                      value={option}
-                      sx={{ justifyContent: "space-between" }}
-                    >
-                      {option}
-                      {selected ? <CheckIcon color="info" /> : null}
-                    </MenuItem>
-                  )}
-                />
+                            label={value[0]}
+                            {...getTagProps({ index: 0 })}
+                            sx={{ width: "120px", overflow: "hidden" }}
+                          />
+                          {value.length > 1 && (
+                            <button
+                              type="button"
+                              className="btn btn-info btn-sm"
+                              variant="outlined"
+                              sx={{ width: 2, padding: 1, margin: 2 }}
+                            >
+                              +{value.length - 1}
+                            </button>
+                          )}
+                        </>
+                      );
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        variant="outlined"
+                        label="Select State"
+                        placeholder={selectedStates !== "" ? "" : "Select State"}
+                      />
+                    )}
+                    renderOption={(props, option, { selected }) => (
+                      <MenuItem
+                        {...props}
+                        key={option}
+                        value={option}
+                        sx={{ justifyContent: "space-between" }}
+                      >
+                        {option}
+                        {selected ? <CheckIcon color="info" /> : null}
+                      </MenuItem>
+                    )}
+                  />
+                </div>
+                <div className="col-5 p-0 col-md-2">
+                  <Autocomplete
+                    sx={{ m: 1 }}
+                    multiple
+                    key={key}
+                    options={data}
+                    getOptionLabel={(option) =>
+                      typeof option === "string" || option instanceof String
+                        ? option
+                        : ""
+                    }
+                    disableCloseOnSelect
+                    value={selectedDistrict}
+                    onChange={handleDistrictChange}
+                    renderTags={(value, getTagProps) => {
+                      if (value.length === 0) return null;
 
-                <Autocomplete
-                  sx={{ m: 1, width: "260px" }}
-                  multiple
-                  options={data}
-                  getOptionLabel={(option) =>
-                    typeof option === "string" || option instanceof String
-                      ? option
-                      : ""
-                  }
-                  disableCloseOnSelect
-                  value={selectedDistrict}
-                  onChange={handleDistrictChange}
-                  renderTags={(value, getTagProps) => {
-                    if (value.length === 0) return null;
-
-                    return (
-                      <>
-                        <Chip
-                          variant="outlined"
-                          label={value[0]}
-                          {...getTagProps({ index: 0 })}
-                          sx={{ width: "120px", overflow: "hidden" }}
-                        />
-                        {value.length > 1 && (
-                          <button
-                            type="button"
-                            class="btn btn-info btn-sm"
+                      return (
+                        <>
+                          <Chip
                             variant="outlined"
-                            sx={{ width: 2, padding: 1, margin: 2 }}
-                          >
-                            +{value.length - 1}
-                          </button>
-                        )}
-                      </>
-                    );
-                  }}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      variant="outlined"
-                      label="Select District"
-                      placeholder={
-                        selectedDistrict !== "" ? "" : "Select District"
-                      }
-                    />
-                  )}
-                  renderOption={(props, option, { selected }) => (
-                    <MenuItem
-                      {...props}
-                      key={option}
-                      value={option}
-                      sx={{ justifyContent: "space-between" }}
-                    >
-                      {option}
-                      {selected ? <CheckIcon color="info" /> : null}
-                    </MenuItem>
-                  )}
-                />
-                <button
-                  type="button"
-                  className="btn-submit"
-                  onClick={() => {
-                    submitHandler(formik.values, false, {
-                      resetForm: formik.resetForm,
-                    });
-                  }}
-                >
-                  Submit
-                </button>
+                            label={value[0]}
+                            {...getTagProps({ index: 0 })}
+                            sx={{ width: "120px", overflow: "hidden" }}
+                          />
+                          {value.length > 1 && (
+                            <button
+                              type="button"
+                              className="btn btn-info btn-sm"
+                              variant="outlined"
+                              sx={{ width: 2, padding: 1, margin: 2 }}
+                            >
+                              +{value.length - 1}
+                            </button>
+                          )}
+                        </>
+                      );
+                    }}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        size="small"
+                        variant="outlined"
+                        label="Select District"
+                        placeholder={
+                          selectedDistrict !== "" ? "" : "Select District"
+                        }
+                      />
+                    )}
+                    renderOption={(props, option, { selected }) => (
+                      <MenuItem
+                        {...props}
+                        key={option}
+                        value={option}
+                        sx={{ justifyContent: "space-between" }}
+                      >
+                        {option}
+                        {selected ? <CheckIcon color="info" /> : null}
+                      </MenuItem>
+                    )}
+                  />
+                </div>
               </div>
             </div>
             {gstSearchData?.length > 0 ? (
               <div className="row px-lg-4 m-0">
-                {gstSearchData?.map((gst, index) => (
+                {copysearchValue?.map((gst, index) => (
                   <GstCard key={index} gst={gst} fullAddress={true} />
                 ))}
               </div>
@@ -413,12 +452,6 @@ const SearchGstNumber = () => {
                     value={formik.values.verificationValue}
                     onFocus={onFocus}
                     onBlur={onBlur}
-                    // ref={searchInput}
-                    // onKeyPress={(e) => {
-                    //   if (e.key === "Enter") {
-                    //     searchGstHandler(formik.values.verificationValue);
-                    //   }
-                    // }}
                   />
                   {formik.errors.verificationValue && (
                     <div>
@@ -428,7 +461,7 @@ const SearchGstNumber = () => {
                     </div>
                   )}
                   {focused &&
-                  (getUserInfo !== undefined || getUserInfo != null) ? (
+                    (getUserInfo !== undefined || getUserInfo != null) ? (
                     <div className="history-container py-2">
                       {history?.length > 0 ? (
                         <>
@@ -463,7 +496,11 @@ const SearchGstNumber = () => {
                   ) : null}
                   <div></div>
                   <div className="py-4">
-                    <button type="submit" className="btn-search w-100">
+                    <button type="submit" className="btn-search w-100 " onClick={() => {
+                      submitHandler(formik.values, false, {
+                        resetForm: formik.resetForm,
+                      });
+                    }}>
                       Search
                     </button>
                   </div>

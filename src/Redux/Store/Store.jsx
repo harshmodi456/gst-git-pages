@@ -6,8 +6,9 @@ const Store = configureStore({
   reducer: {
     signUpUser: SignUpReducer,
     SearchGstNumber: SearchGstNumberReducer,
-    // chatsReducer: ChatsReducer
-  }
+  }, middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    serializableCheck:false,
+  })
 });
 
 export const useAppDispatch = () => useDispatch();

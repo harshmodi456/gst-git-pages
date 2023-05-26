@@ -73,6 +73,13 @@
     cursor: pointer;
 }
 
+.swal2-container.swal2-top, .swal2-container.swal2-center, .swal2-container.swal2-bottom{
+    z-index: 10000000!important;
+}
+.swal2-container.swal2-center>.swal2-popup{
+    z-index: 10000000!important;
+}
+
 .more-box-view:hover,
 .more-box-view:active {
     background-color: #e1dbdb;

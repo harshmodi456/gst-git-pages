@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import { routeData } from "../../Routes/RoutesData";
 import PrivateRoute from "../../Routers/AuthorizedRoute";
 import NotFound from "../../Pages/NotFound/NotFound";
+import AuthLogin from "../../Routers/Authlogin";
 export default function Main() {
   const isVisibleHeader = useHeaderFooter();
 
@@ -13,7 +14,6 @@ export default function Main() {
       <Routes>
         {routeData?.map((route, index) => {
           return (
-            // <Route key={index} element={<route.route />} >
             <Route
               key={index}
               path={route.path}
@@ -23,11 +23,10 @@ export default function Main() {
                     <route.element />
                   </PrivateRoute>
                 ) : (
-                  <route.element />
+                  route?.login === true ? <AuthLogin><route.element/></AuthLogin>:<route.element />
                 )
               }
             />
-            // </Route>
           );
         })}
         <Route path="*" element={<NotFound />} />

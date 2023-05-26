@@ -10,6 +10,7 @@
       color: #00448b;
       font-weight: 600;
     }
+
     .review-textarea {
       background-color: #f3ecec;
       border: none;
@@ -17,6 +18,7 @@
       resize: none;
       padding: 20px;
     }
+
     .review-textarea:focus {
       outline: none;
     }
@@ -45,49 +47,79 @@
         background: #da45ff;
       }
     }
-  } 
+  }
 
   .search-bar {
-    padding: 5px 10px;
     font-size: 18px;
-    width: calc(32ch + 2px);
-    border: 2px solid rgb(168, 168, 168);
-    border-radius: 15px;
-    margin-right: 4px;
-    height: 6vh;
     text-transform: uppercase;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  }
-  
-  .filterDropdown{
-    padding: 5px 10px;
-    font-size: 18px;
-    border: 2px solid rgb(168, 168, 168);
+    width: calc(32ch);
+    border: 2px solid rgb(211, 211, 211);
     border-radius: 15px;
     margin-right: 4px;
-    height: 6vh;
-    text-transform: uppercase; 
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    height: 50px;
+    outline: none;
   }
+  .search-bar:focus {
+    outline: 2px solid rgb(95, 95, 95);
+  }
+
+  .css-9ddj71-MuiInputBase-root-MuiOutlinedInput-root {
+    height: auto;
+    border-radius: 5px;
+  }
+
+  .css-nz481w-MuiInputBase-input-MuiInput-input {
+    padding-left: 10px!important;
+    color: rgb(97, 82, 82) !important;
+    font-size: 18px;
+    font-family: 'outfit';
+    letter-spacing: normal;
+    text-transform: uppercase;
+  }
+
+  fieldset {
+    border: none !important;
+    outline: none !important;
+  }
+
+  .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 2px;
+  }
+
   .filterDropdown {
-    color:#8e8e8e;
-   }
-   .filterDropdown option{
-    color: black;
-   }
-  .btn-search {
-    padding: 5px;
-    font-size: 20px;
-    width: 100px;
-    border: none;
+    width: calc(28ch);
+    margin-left: 3px;
+    text-align: left;
+    text-transform: uppercase;
+    padding: 5px 10px;
+    font-size: 18px;
+    border: 2px solid rgb(211, 211, 211);
     border-radius: 15px;
+    margin-right: 4px;
+    height: 50px;
+  }
+
+  .filterDropdown:focus {
+    outline: 2px solid rgb(95, 95, 95);
+  }
+
+  .css-jedpe8-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    color: gray !important;
+    font-family: 'outfit';
+  }
+
+  .btn-search {
+    padding: 10px;
+    font-size: 18px;
+    vertical-align: baseline;
+    border: none;
+    border-radius: 14px;
     cursor: pointer;
     color: white;
-    margin-right:30px;
+    margin-left: 3px;
     background-color: #da45ff;
-    font-weight: 600;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   }
+
   .title-container {
     display: flex;
     justify-content: start;
@@ -109,92 +141,106 @@
       outline: none !important;
     }
   }
-    //  Mobile devices
-    @media (min-width: 300px) and (max-width: 400px) {
-      .title-container{
-        display: block;
-      }
+
+  //  Mobile devices
+  @media (min-width: 300px) and (max-width: 400px) {
+    .title-container {
+      display: block;
+    }
+
+    .MuiButtonBase-root {
+      margin: -2px;
+    }
+
+    .title-container {
       .MuiButtonBase-root {
-       margin: -2px;
-      }
-      .title-container {
-        .MuiButtonBase-root {
-          padding: 5px 20px 5px 20px !important;
-          margin: 0;
-          // padding-left: 2px !important;
-        }
-      }
-      .filter-Conatiner{
-        .search-bar{
-          margin: auto;
-          margin-bottom: 4px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .filterDropdown{
-          margin: auto;
-          display: flex;
-          margin-bottom: 4px;
-          justify-content: center;
-          align-items: center;
-        }
-        .btn-search{
-          margin: auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        } 
+        padding: 5px 20px 5px 20px !important;
+        margin: 0;
       }
     }
-    //mobile screen 
-    @media (min-width: 401px) and (max-width: 480px) {
-      .title-container {
-        display: block;
+
+    .filter-Conatiner {
+      .search-bar {
+        margin: auto;
+        margin-bottom: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-      .MuiButtonBase-root {
-        margin: -2px;
+
+      .filterDropdown {
+        margin: auto;
+        display: flex;
+        margin-bottom: 4px;
+        justify-content: center;
+        align-items: center;
       }
-      .filter-Conatiner{
-        .search-bar{
-          margin: auto;
-          margin-bottom: 4px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
-        .filterDropdown{
-          margin: auto;
-          display: flex;
-          margin-bottom: 4px;
-          justify-content: center;
-          align-items: center;
-        }
-        .btn-search{
-          margin: auto;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        }
+
+      .btn-search {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
-    //tablet screen
-    @media (min-width: 480px) and (max-width: 615px) {
-      .title-container {
-        display: block;
+  }
+
+  //mobile screen 
+  @media (min-width: 401px) and (max-width: 480px) {
+    .title-container {
+      display: block;
+    }
+
+    .MuiButtonBase-root {
+      margin: -2px;
+    }
+
+    .filter-Conatiner {
+      .search-bar {
+        margin: auto;
+        margin-bottom: 4px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
-      .MuiButtonBase-root {
-        margin: -2px;
+
+      .filterDropdown {
+        margin: auto;
+        display: flex;
+        margin-bottom: 4px;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .btn-search {
+        margin: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
-    //for tablet, laptop and medium screen
-    @media (min-width: 1100px) and (max-width: 1640px) {
-      .MuiButtonBase-root {
-        margin: -2px;
-      }
-      
+  }
+
+  //tablet screen
+  @media (min-width: 480px) and (max-width: 615px) {
+    .title-container {
+      display: block;
     }
+
+    .MuiButtonBase-root {
+      margin: -2px;
+    }
+  }
+
+  //for tablet, laptop and medium screen
+  @media (min-width: 1100px) and (max-width: 1640px) {
+    .MuiButtonBase-root {
+      margin: -2px;
+    }
+
+  }
 }
+
 .my-reviews-div {
   .container-div {
     height: calc(100vh - 100px);
@@ -207,5 +253,3 @@
     }
   }
 }
-
-

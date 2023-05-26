@@ -32,7 +32,6 @@ import SearchIcon from '@mui/icons-material/Search';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FaUserAlt } from "react-icons/fa";
 
-// const drawerWidth = 240;
 
 const colorConfigs = {
   sidebar: {
@@ -49,7 +48,6 @@ const colorConfigs = {
 };
 const sizeConfigs = {
   sidebar: {
-    // width: "300px"
     width: "240px"
   }
 };
@@ -74,11 +72,8 @@ const Header = (props) => {
     if (getUserInfo?.userInfo?.data?.email !== undefined && getUserInfo !== null) {
       navItems = [
         "Home",
-        // "Business",
         "My Reviews",
         "My Business",
-        // "User Profile",
-        // "Log Out"
         userName
       ]
     }
@@ -86,35 +81,15 @@ const Header = (props) => {
   else if(JSON.parse(localStorage.getItem('userInfo')) === null){
     navItems = [
       "Home",
-      // "Business",
       "Log In"
     ]
   }
-  // const navItems =
-  //   getUserInfo !== undefined && getUserInfo !== null
-  //     /* ------ Business is currently disabled ------ */
-  //     ? [
-  //       "Home",
-  //       // "Business",
-  //       "My Reviews",
-  //       "My Business",
-  //       // "User Profile",
-  //       // "Log Out"
-  //       userName
-  //     ]
-  //     : [
-  //       "Home",
-  //       // "Business",
-  //       "Log In"
-  //     ];
-
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
 
   const handleRoute = (getVal) => {
     if (getVal === "Home") {
-      // navigate("/search-gst-number");
       navigate("/");
     } else if (getVal === "Business") {
       navigate("/business-result");
@@ -132,8 +107,6 @@ const Header = (props) => {
       navigate("/user-profile");
     }
   };
-
-  let appState = false;
   const drawer = (
     <Box onClick={handleDrawerToggle} sx={{ textAlign: "center" }}>
       <List>
@@ -144,10 +117,6 @@ const Header = (props) => {
                 "&: hover": {
                   backgroundColor: colorConfigs.sidebar.hoverBg
                 },
-                // backgroundColor:
-                //   appState === item.state
-                //     ? colorConfigs.sidebar.activeBg
-                //     : "unset",
                 paddingX: "24px"
               }}
               onClick={() => handleRoute(item)}
@@ -211,18 +180,6 @@ const Header = (props) => {
           </ListItemButton>
         </ListItem>
       </List>
-      {/* <List>
-        {navItems.map((item) => (
-          <ListItem key={item} disablePadding>
-            <ListItemButton
-              sx={{ textAlign: "center" }}
-              onClick={() => handleRoute(item)}
-            >
-              <ListItemText primary={item} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List> */}
     </Box>
   );
 
@@ -298,7 +255,7 @@ const Header = (props) => {
               open={mobileOpen}
               onClose={handleDrawerToggle}
               ModalProps={{
-                keepMounted: true // Better open performance on mobile.
+                keepMounted: true
               }}
               sx={{
                 width: sizeConfigs.sidebar.width,

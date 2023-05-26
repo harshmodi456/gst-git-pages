@@ -23,6 +23,7 @@
     "react-bootstrap": "^2.7.4",
     "react-cookie": "^4.1.1",
     "react-cookies": "^0.1.1",
+    "react-debounce-input": "^3.3.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-image-slider": "^0.1.0",
@@ -40,6 +41,7 @@
     "react-web-share": "^2.0.2",
     "sweetalert2": "^11.7.3",
     "swiper": "^9.1.1",
+    "tesseract.js": "^4.0.6",
     "web-vitals": "^2.1.4",
     "yup": "^1.0.2"
   },

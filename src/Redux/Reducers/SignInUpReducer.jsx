@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
-import { Navigate } from "react-router-dom";
 import { api } from "../../Constant/AxiosInstance";
 
 // for sign in action and state declaration
@@ -124,31 +123,11 @@ const signUpUserSlice = createSlice({
     builder.addCase(signUpUser.fulfilled, (state, action) => {
       state.loading = false;
       state.success = true;
-      // toast.success("Sign up successfully!", {
-      //   position: "top-right",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light"
-      // });
-      // <Navigate to="/signIn" />;
     });
     builder.addCase(signUpUser.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
       state.loading = false;
-      // toast.error(action?.payload?.response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light"
-      // });
+
     });
 
     // for send Otp
@@ -173,16 +152,6 @@ const signUpUserSlice = createSlice({
     builder.addCase(sendOtpUser.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
       state.loading = false;
-      // toast.error(action?.payload?.response?.data?.message, {
-      //   position: "top-right",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light"
-      // });
     });
 
     // for verify Otp

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./GstCard.scss";
-import { Rating } from "@mui/material";
+import { Rating, Tooltip } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { postGstRecord } from "../../Redux/Reducers/SearchGstNumReducer";
@@ -19,7 +19,16 @@ export default function GstCard(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [address, setAddress] = useState("");
   const [shortaddress, setShortAddress] = useState([])
+  const [hovering, setHovering] = useState(false);
   let arr = [];
+
+  const handleMouseEnter = () => {
+    setHovering(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHovering(false);
+  };
 
   useEffect(() => {
     if (gst) {
@@ -71,11 +80,11 @@ export default function GstCard(props) {
     }
   }, [gst]);
 
-  const takeData = () =>{
+  const takeData = () => {
     arr.push(gst.pradr?.addr?.stcd);
     setShortAddress(arr)
   }
-  
+
   const onPostHandle = () => {
     setIsLoading(true);
     if (isMyBusiness) {
@@ -105,29 +114,15 @@ export default function GstCard(props) {
         gstin: gst?.gstin || gst?._doc?.gstin,
         gstData: gst?.gstData || gst?._doc?.gstData || gst
       };
-
       if (gst?._doc) {
-        // if (getUserInfo === undefined || getUserInfo === null) {
-        //   setIsLoading(false);
-        //   navigate("/login");
-        // } else {
         navigate(`/gst-information/${gst?._doc?.gstin}`);
-        // }
       } else {
         dispatch(postGstRecord(reqeObj)).then((res) => {
           if (res?.payload?.status === true) {
-            if (getUserInfo !== undefined && getUserInfo !== null) {
-              navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
-                state: { gst }
-              });
-            }
-            else {
-              toast.error('Please log in to access more Info!');
-              setTimeout(() => {
-                navigate("/login");
-              }, 5000);
-              localStorage.setItem("search-selectedGst", JSON.stringify(gst));
-            }
+            navigate(`/gst-information/${gst?.gstin || gst?._doc?.gstin}`, {
+              state: { gst }
+            });
+            localStorage.setItem("search-selectedGst", JSON.stringify(gst));
           } else {
             toast.danger(res?.payload?.message);
           }
@@ -147,10 +142,31 @@ export default function GstCard(props) {
       </Backdrop>
       <div
         className="gst-card-container pt-3 pb-2 px-4 h-100"
-        onClick={onPostHandle}
+        onClick={onPostHandle} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
       >
+        <div className="setsvg">
+          <div className="ab-tag-wrap">
+            {
+              gst?.ctb === undefined ? null : <span className="badge badge-light">
+                <Tooltip title={<h6 style={{ padding: "0", margin: "0" }}>{gst?.ctb}</h6>} placement="top">
+                  <div className="col-lg-4 col-9 company-addr mr-0 pl-lg-4 ">
+                    {gst?.ctb === "Sole Proprietorship" ? "SP"
+                      : gst?.ctb === "Partnership" ? "Co."
+                        : gst?.ctb === "Private Limited Company" ? "Pvt ltd"
+                          : gst?.ctb === "Public Company" ? "PLC"
+                            : gst?.ctb === "Non-Government Organization" ? "NGO"
+                              : gst?.ctb === "Limited Liability Partnership" ? "LLP"
+                                : gst?.ctb === "Proprietorship" ? "P"
+                                  : gst?.ctb}
+                  </div>
+                </Tooltip>
+              </span>
+            }
+
+          </div>
+        </div>
         <div className="top-section-wrap">
-          <div className="row my-1 font-weight-bold">
+          <div className="row my-1 mt-3 font-weight-bold">
             <div className="col-lg-2 col-3">Name:</div>
             <div className="col-lg-9 col-8 company-name mr-0 pl-lg-4 break-line-1">
               {gst?.lgnm || gst?.gstData?.lgnm || gst?._doc?.gstData?.lgnm}
@@ -164,11 +180,9 @@ export default function GstCard(props) {
             </div>
           </div>
           <div className="row my-2 font-weight-bold">
-            <div className="col-lg-2 col-md-2 col-sm-2 col-3">Address:</div>
-            {/* <div className={`col-lg-10 col-9 company-addr mr-0 pl-lg-4 ${props.fullAddress ? 'company-full-addr' : 'break-line-1'}`}> */}
-            <div className="col-lg-10 col-9 company-addr mr-0 pl-lg-4">
+            <div className="col-lg-3 col-md-2 col-sm-2 col-3">Address:</div>
+            <div className="col-lg-9 col-9 company-addr mr-0 pl-lg-4">
               {address.slice(0, 9) === 'undefined' ? ' ' : address}
-              {/* {gst?._doc?.gstData?.adadr?.addr?.bnm || gst?._doc?.gstData?.pradr?.addr?.bnm || gst?.adadr?.addr?.bnm || gst?.pradr?.addr?.bnm || gst?.gstData?.pradr?.addr?.bnm} */}
             </div>
           </div>
         </div>

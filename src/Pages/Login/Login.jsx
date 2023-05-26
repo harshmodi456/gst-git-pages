@@ -1,14 +1,9 @@
 import React from "react";
 import "./Login.scss";
-// import Card from "@mui/material/Card";
-// import CardHeader from "@mui/material/CardHeader";
-// import CardContent from "@mui/material/CardContent";
 import { Field, Form, Formik } from "formik";
 import * as Yup from "yup";
 import CustomTextField from "../../Components/CustomTextField/CustomTextField";
 import { Link, useNavigate } from "react-router-dom";
-// import Grid from "@mui/material/Grid";
-// import loginImg from "../../Assets/Images/img2.png";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import { signInUser } from "../../Redux/Reducers/SignInUpReducer";

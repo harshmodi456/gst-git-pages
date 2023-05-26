@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import "./ReviewCard.scss";
 import { Rating, Button } from "@mui/material";
 import Avatar from "react-avatar";
-// import { FaThumbsUp } from "react-icons/fa";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   updateReview,
@@ -13,7 +12,6 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
-// import TimeAgo from "react-timeago";
 import ReactTimeAgo from "react-time-ago";
 import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/system";
@@ -24,21 +22,15 @@ import "swiper/css";
 import ThumbUpIcon from "@mui/icons-material/ThumbUp";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
-// import moment from "moment/moment";
 import "./styles.css";
 import Swal from "sweetalert2";
 import RichTextEditor from "react-rte";
 
 // import required modules
 import { Keyboard, Pagination, Navigation } from "swiper";
-import { useNavigate } from "react-router-dom";
-import { ref } from "yup";
-// import { date } from "yup";
 
 export default function ReviewCard(props) {
   const { review } = props;
-  const inputRef = useRef(null);
-  const navigate = useNavigate();
   let [helpfulCount, setHelpfulCount] = useState(review?.helpful?.length || 0);
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
@@ -59,6 +51,7 @@ export default function ReviewCard(props) {
   const [deleteBar, setDeleteBar] = useState(false);
   const [disableHelpful, setDisableHelpful] = useState(false);
   const [seeMoreToggle, setSeeMoreToggle] = useState(false);
+  const [key, setKey] = useState(0);
 
   const validateLogin = () => {
     if (getUserInfo === undefined || getUserInfo === null) {
@@ -67,24 +60,14 @@ export default function ReviewCard(props) {
           icon: "error",
           title: "Login Required!",
           text: "Please login first to access more."
-        },
-        setTimeout(() => {
-          Swal.close();
-          navigate("/login");
-        }, 1500)
-      ).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/login");
-        }
-      });
+        })
     }
   };
 
 
   const fileChangeHandler = (event) => {
     const file = event.target.files;
-    console.log('file', file);
-       if (file != null) {
+    if (file != null) {
       for (let i = 0; i < event.target.files?.length; i++) {
         const randome = ([1e7] + -1e3 + -4e3 + -8e3 + -1e11).replace(
           /[018]/g,
@@ -101,6 +84,7 @@ export default function ReviewCard(props) {
 
         setImgFile((current) => [...current, file[i]]);
       }
+      setKey(key + 1);
     }
   };
 
@@ -148,10 +132,29 @@ export default function ReviewCard(props) {
 
   const removeImage = (remove_data, takeIndx) => {
     if (remove_data.id) {
-      const deleteImage = profileImg?.filter(
-        (data) => data?.id !== remove_data.id
-      );
-      setProfileImg(deleteImage);
+      new Swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this!",
+        icon: "warning",
+        buttons: {
+          cancel: true,
+          confirm: "Confirm"
+        },
+        dangerMode: true,
+        className: "styleTitle",
+        closeOnConfirm: false,
+        closeOnCancel: false,
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Confirm",
+      }).then((result) => {
+        if (result.value) {
+          const deleteImage = profileImg?.filter(
+            (data) => data?.id !== remove_data.id
+          );
+          setProfileImg(deleteImage)
+        }
+      }, () => console.log("Rejected"))
     } else if (!remove_data.id) {
       const deleteImage = profileImg?.filter((data) => data !== remove_data);
       setProfileImg(deleteImage);
@@ -196,13 +199,11 @@ export default function ReviewCard(props) {
       }
     });
     for (const key of profileImg) {
-      console.log('data===', key?.img?.slice(0, 4));
       if (key?.img?.slice(0, 4) === "blob") {
         localStorage.setItem("multiImg", true);
         formData.append("image", key?.blobUrl);
       }
     }
-    console.log('checkFile', profileImg, Object.keys(imgFile), formData);
     dispatch(updateReview(formData)).then((res) => {
       if (res?.payload?.status) {
         document.getElementById(`btn-cancel-${review?._id}`).click();
@@ -660,6 +661,7 @@ export default function ReviewCard(props) {
                 />
                 <div className="img-container d-flex flex-wrap">
                   <input
+                    key={key}
                     multiple
                     id={"reviewImgUrl" + review?._id}
                     name={"reviewImgUrl" + review?._id}
@@ -668,7 +670,7 @@ export default function ReviewCard(props) {
                     type="file"
                     onChange={(event) => fileChangeHandler(event)}
                   />
-                  <Box className="d-flex ">
+                  <Box className="d-flex">
                     {profileImg?.map((data, index) => {
                       return (
                         <Box

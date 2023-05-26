@@ -1,62 +1,71 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import CircularProgress from "@mui/material/CircularProgress";
 import "./MyReviews.scss";
 import {
   getReviewByUser,
   getReviewForMyBusiness,
-  FilterReviewByUser,
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import SendIcon from "@mui/icons-material/Send";
+import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { DebounceInput } from 'react-debounce-input';
 
 const MyReviews = () => {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
-  // const user = localStorage.getItem('userInfo');
   const [searchValue, setSearchValue] = useState([]);
   const [reviewData, setReviewData] = useState([]);
   const [receiveReviewData, setReceiveReviewData] = useState([]);
   const [alignment, setAlignment] = useState("send");
-  // const takeUserInfo = localStorage.getItem("userInfo");
-  // const getUserInfo = JSON.parse(takeUserInfo);
   const [userId, setUserId] = useState("");
+  const [selectMenu, setSelectMenu] = useState('');
+  const [inputField,setinputField] = useState('');
 
+  const userInfo = JSON.parse(localStorage.getItem("userInfo"));
+  let token = userInfo?.userInfo?.token
   useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("userInfo"));
     if (userInfo?.userInfo?.data?._id) {
       setUserId(userInfo.userInfo.data._id);
     }
   }, []);
 
   const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
+    if (newAlignment !== null) {
+      setAlignment(newAlignment);
+    }
   };
+
   const fetchMyReviews = () => {
-    setIsLoading(true);
-    dispatch(getReviewByUser({ userId })).then((res) => {
-      setReviewData(res?.payload?.reviews);
-      setIsLoading(false);
-    });
+    if (alignment === "send") {
+      setIsLoading(true);
+      dispatch(getReviewByUser({ userId })).then((res) => {
+        setReviewData(res?.payload?.reviews);
+        setIsLoading(false);
+      });
+    }
   };
   const fetchMyBusinessReviews = () => {
-    setIsLoading(true);
-    dispatch(getReviewForMyBusiness({ userId })).then((res) => {
-      setReceiveReviewData(res?.payload?.reviews);
-      setIsLoading(false);
-    });
+    if (alignment === "receive") {
+      setIsLoading(true);
+      dispatch(getReviewForMyBusiness({ userId })).then((res) => {
+        setReceiveReviewData(res?.payload?.reviews);
+        setIsLoading(false);
+      });
+    }
   };
   useEffect(() => {
     if (userId) {
+      setSelectMenu('')
+      setinputField('')
       fetchMyReviews();
       fetchMyBusinessReviews();
     }
-  }, [userId]);
+  }, [userId,alignment]);
 
   const submitHandler = (values, isFormSubmit, { resetForm }) => {
     const params = {
@@ -64,18 +73,6 @@ const MyReviews = () => {
       orderByRating: values?.orderByRating === "" ? "" : values?.orderByRating,
     };
     setSearchValue(params?.verificationValue);
-    dispatch(getReviewByUser({ userId, params })).then((res) => {
-      if (isFormSubmit) {
-        setReviewData(res?.payload?.reviews);
-        setIsLoading(false);
-      }
-    });
-    dispatch(getReviewForMyBusiness({ userId, params })).then((res) => {
-      if (isFormSubmit) {
-        setReceiveReviewData(res?.payload?.reviews);
-        setIsLoading(false);
-      }
-    });
   };
   const formik = useFormik({
     initialValues: {
@@ -87,6 +84,33 @@ const MyReviews = () => {
       submitHandler(values, true, { resetForm });
     },
   });
+  
+  const handleChangeDebounce = (e) => {
+    if (e.target.name === "orderByRating") {
+      setSelectMenu(e.target.value)
+    }else{
+      setinputField(e.target.value)
+    }
+    const params = {
+      [e.target.name]: e.target.value,
+    };
+    setSearchValue(params?.verificationValue);
+    if (alignment === "send") {
+      setIsLoading(true);
+      dispatch(getReviewByUser({ userId, params })).then((res) => {
+        setReviewData(res?.payload?.reviews);
+        setIsLoading(false);
+      });
+    } else {
+      setIsLoading(true);
+
+      dispatch(getReviewForMyBusiness({ userId, params, token })).then((res) => {
+        setReceiveReviewData(res?.payload?.reviews);
+        setIsLoading(false);
+      });
+    }
+
+  }
   return (
     <div className="my-review-container py-5 px-lg-5 px-md-3">
       <Backdrop
@@ -103,50 +127,44 @@ const MyReviews = () => {
           exclusive
           onChange={handleChange}
           aria-label="Platform"
-          className="ml-5"
-        >
-          <ToggleButton value="send">
-            Send <SendIcon className="ml-3" />
-          </ToggleButton>
+          className="ml-5">
+          <ToggleButton value="send">Send <SendIcon className="ml-3" /></ToggleButton>
           <ToggleButton value="receive">Receive</ToggleButton>
         </ToggleButtonGroup>
       </div>
-      <div class="mt-4">
-        <div className="filter-Conatiner" style={{ textAlign: "right" }}>
-          <form onSubmit={formik.handleSubmit}>
-            <input
-              autoComplete="off"
-              className="search-bar"
-              id="companyName"
-              name="companyName"
-              placeholder="Enter your company name"
-              onChange={formik.handleChange}
-              value={formik.values.companyName}
-            />
-            <select
+      <div className="mt-4">
+        <div className="filter-Conatiner" style={{ textAlign: "right" }} >
+          <DebounceInput placeholder="ENTER COMPANY NAME" name="companyName" variant="standard" autoComplete="off"
+            size="small" onChange={(e) => handleChangeDebounce(e)} debounceTimeout={1500} value={inputField}
+            className="search-bar p-2" InputProps={{
+              disableUnderline: true,
+            }} />
+          <FormControl sx={{ width: "auto" }} size="small">
+            <Select
               id="orderByRating"
               name="orderByRating"
               className="filterDropdown"
-              value={formik.values.orderByRating}
-              onChange={formik.handleChange}
+              displayEmpty
+              value={selectMenu}
+              onChange={(e) => handleChangeDebounce(e)}
+              InputProps={{
+                disableUnderline: true,
+              }}
             >
-              <option value="" selected>
-                Select the option
-              </option>
-              <option value="Ascending">Ascending</option>
-              <option value="Descending">Descending</option>
-            </select>
-            <button type="submit" className="btn-search">
-              Submit
-            </button>
-            {formik.errors.companyName && (
-              <div>
-                <span style={{ color: "red" }}>
-                  {formik.errors.companyName}
-                </span>
-              </div>
-            )}
-          </form>
+              <MenuItem value="">
+                Select The Options
+              </MenuItem>
+              <MenuItem value="Ascending">Ascending</MenuItem>
+              <MenuItem value="Descending">Descending</MenuItem>
+            </Select>
+          </FormControl>
+          {formik.errors.companyName && (
+            <div>
+              <span style={{ color: "red" }}>
+                {formik.errors.companyName}
+              </span>
+            </div>
+          )}
         </div>
       </div>
       <div className="row p-md-2">

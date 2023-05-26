@@ -1,11 +1,7 @@
-// import AuthorizedRoute from "../Routers/AuthorizedRoute.jsx";
-// import PublicRoute from "../Routers/PublicRoute.jsx";
 import Signup from "../Pages/Signup/Signup.jsx";
 import Login from "../Pages/Login/Login.jsx";
 import ForgotPassword from "../Pages/ForgotPassword/ForgotPassword.js";
-// import Dashboard from "../Pages/Dashboard/Dashboard.jsx";
 import SearchGstNumber from "../Pages/SearchGstNumber/SearchGstNumber.jsx";
-import SearchBusinessResult from "../Pages/SearchBusinessResult/SearchBusinessResult.jsx";
 import GstInformation from "../Pages/GstInformation/GstInformation.jsx";
 import MyReviews from "../Pages/MyReviews/MyReviews.jsx";
 import MyBusiness from "../Pages/MyBusiness/MyBusiness.jsx";
@@ -21,8 +17,8 @@ export const routeData = [
   },
   {
     path: "/login",
-    // path: "/",
-    // route: PublicRoute,
+    // route: publicRouteData,
+    login:true,
     isAuthenticated: false,
     element: Login
   },
@@ -42,11 +38,6 @@ export const routeData = [
     element: SearchGstNumber
   },
   /* ------- Currently disable for now ------- */
-  // {
-  //   path: "/business-result",
-  //   isAuthenticated: false,
-  //   element: SearchBusinessResult
-  // },
   {
     // path: "/gst-information",
     path: "/gst-information/:gstNumber",
@@ -76,19 +67,19 @@ export const routeData = [
   }
 ];
 
-// export const publicRouteData = [
-//   {
-//     path: "/signup",
-//     // route: PublicRoute,
-//     element: Signup
-//   },
-//   {
-//     // path: "/login",
-//     path: "/",
-//     // route: PublicRoute,
-//     element: Login
-//   },
-// ];
+export const publicRouteData = [
+  {
+    path: "/signup",
+    // route: PublicRoute,
+    element: Signup
+  },
+  {
+    // path: "/login",
+    path: "/",
+    // route: PublicRoute,
+    element: Login
+  },
+];
 
 // export const authorizedRouteData = [
 //   {

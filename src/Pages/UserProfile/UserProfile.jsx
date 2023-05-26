@@ -6,7 +6,6 @@ import { TextField } from "@mui/material";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import Avatar from "react-avatar";
-// import Button from "@mui/material/Button";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import IconButton from "@mui/material/IconButton";
 import PhotoCamera from "@mui/icons-material/PhotoCamera";
@@ -26,10 +25,10 @@ const UserProfile = () => {
   const [profileData, setProfileData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [key, setKey] = useState(0);
 
   useEffect(() => {
     if (!user) {
-      // navigate('/')
     } else {
       if (user?.profileImg) {
         setProfileImg(user?.profileImg);
@@ -41,11 +40,12 @@ const UserProfile = () => {
     setUser(JSON.parse(localStorage.getItem("userInfo"))?.userInfo?.data);
   }, []);
 
-  const fileChangeHandler = (event) => {
+  const fileChangeHandler = (event) => {    
     const file = event.target.files[0];
     if (file != null) {
       setProfileImg(URL.createObjectURL(file));
       setImgFile(file);
+      setKey(key + 1);
     }
   };
 
@@ -54,9 +54,12 @@ const UserProfile = () => {
   };
 
   const removeImgHandler = () => {
-    if(imgFile){
+    if (imgFile) {
       setProfileImg(user?.profileImg);
       setImgFile(null);
+    } else {
+      setProfileImg(null)
+      setImgFile(null)
     }
   };
 
@@ -91,8 +94,8 @@ const UserProfile = () => {
     formData.append("lName", userCredentials?.lName);
     formData.append("email", userCredentials?.email);
     formData.append("businessName", userCredentials?.businessName);
-    
-    if (profileImg.slice(0, 4) === "http") {
+
+    if (profileImg?.slice(0, 4) === "http") {
       formData.append("oldImg", profileImg);
     } else {
       formData.append("oldImg", null);
@@ -115,16 +118,15 @@ const UserProfile = () => {
         localStorage.setItem("multiImg", false);
         toast.success("Profile updated successfully!");
         setIsLoading(false);
-        
+
         if (localStorage.getItem("isNewUser") === "true") {
           localStorage.setItem("userInfo", JSON.stringify(createLocalObject));
-          // localStorage.clear();
           navigate("/");
         }
       } else {
-        const errorMessage = res?.payload?.response?.data?.message || "Something Went Wrong!" 
+        const errorMessage = res?.payload?.response?.data?.message || "Something Went Wrong!"
         setErrorMessage(errorMessage);
-      }      
+      }
       localStorage.setItem("multiImg", false);
       setIsLoading(false);
     });
@@ -184,8 +186,8 @@ const UserProfile = () => {
                 onChange={formik.handleChange}
               />
               {!formik.touched.email && !formik.errors.email && (
-              <span style={{ color: "red" }}>{errorMessage}</span>
-            )}
+                <span style={{ color: "red" }}>{errorMessage}</span>
+              )}
             </div>
             <div className="col-lg-6">
               <TextField
@@ -220,16 +222,16 @@ const UserProfile = () => {
           <div className="col-12 text-right my-5 py-5">
             {localStorage.getItem("isNewUser") !== "true" && (
               <button
-                  className="btn-cancel mr-lg-4 mb-lg-0 mb-3"
-                  onClick={() => navigate("/")}
-                  type="button"
-                  onKeyDown={(e) => {
-                      if (e.key === "Enter") {
-                          e.preventDefault();
-                      }
-                  }}
+                className="btn-cancel mr-lg-4 mb-lg-0 mb-3"
+                onClick={() => navigate("/")}
+                type="button"
+                onKeyDown={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
               >
-                  Cancel
+                Cancel
               </button>
             )}
             <button type="submit" className="btn-update-profile">
@@ -252,6 +254,7 @@ const UserProfile = () => {
               <Avatar size={150} round src={profileImg} name={user?.fName} />
             </div>
             <input
+              key={key}
               id="profileImgUrl"
               name="image"
               accept="image/png, image/gif, image/jpeg"

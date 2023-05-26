@@ -7,15 +7,9 @@ import instance from "../../Constant/AxiosInstance";
 export const gstVerify = createAsyncThunk(
   "user/gstVerify",
   async (data, thunkApi) => {
-    
-    let filterdata = {
-      state: data.stcd || [],
-      city: data.dst || [],
-    }
     try {
       return await (
-        // await instance.post(`${api}gst/verify`, data)
-        await instance.post(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null }`, filterdata)
+        await instance.get(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null }`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -29,7 +23,6 @@ export const getGstByUserId = createAsyncThunk(
   async (userId, thunkApi) => {
     try {
       return await (
-        // await instance.post(`${api}gst/verify`, data)
         await instance.get(`${api}gst/user/${userId}`)
       ).data;
     } catch (error) {
@@ -41,14 +34,20 @@ export const getGstByUserId = createAsyncThunk(
 // for review for my business by user id
 export const getReviewForMyBusiness = createAsyncThunk(
   "user/getReviewForMyBusiness",
-  async ({ userId, params }, thunkApi) => {
+  async ({ userId, params,token }, thunkApi) => {
     let data = {
       companyName:params?.companyName || '',
       orderByRating:params?.orderByRating || ''
     };
+    let config = {
+      headers: { 
+        'authorization': `${token}`
+      },
+      data : data
+    }
     try {
       // if(params?.companyName === '' || params?.orderByRating === '' || params === undefined){
-        const response = await instance.post(`${api}review/businessReview/${userId}`, data);
+        const response = await instance.post(`${api}review/businessReview/${userId}`, config);
         return response.data;
       //}
     } catch (error) {
@@ -62,8 +61,7 @@ export const postGstRecord = createAsyncThunk(
   "Gst/postGstRecord",
   async (data, thunkApi) => {
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await
         (
           await instance.post(`${api}gst/recordGst`, data)
         ).data;
@@ -78,8 +76,7 @@ export const SearchByGstNumber = createAsyncThunk(
   "Gst/SearchByGstNumber",
   async (data, thunkApi) => {
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await 
         (
           await instance.get(`${api}gst/searchGst/${data}`)
         ).data;
@@ -94,8 +91,7 @@ export const getAllGstRecord = createAsyncThunk(
   "Gst/getAllGstRecord",
   async (data, thunkApi) => {
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await 
         (
           await instance.get(`${api}gst?size=${data.size}?page=${data.page}`)
         ).data;
@@ -110,8 +106,7 @@ export const getRecordGstById = createAsyncThunk(
   "Gst/getRecordGstById",
   async (data, thunkApi) => {
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await
         (
           await instance.get(`${api}gst/${data?.gstIn}?userId=${data.userId}`)
         ).data;
@@ -126,8 +121,7 @@ export const writeReview = createAsyncThunk(
   "Gst/writeReview",
   async (data, thunkApi) => {
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await
         (
           await instance.post(`${api}review/write`, data)
         ).data;
@@ -156,10 +150,8 @@ export const updateReview = createAsyncThunk(
 export const getWriteReview = createAsyncThunk(
   "Gst/getWriteReview",
   async (data, thunkApi) => {
-      console.log('--------- data ---------', data);
     try {
-      return await // await doFetch(`${api}/auth/login`,'POST',data)
-        // await axios.get(`${api}gst/getGst/${data}`)
+      return await
         (
           await instance.get(
             `${api}review/${data?.gstId}${data?.address ? `?address=${data?.address}` : ""
@@ -181,7 +173,6 @@ export const getReviewByUser = createAsyncThunk(
       orderByRating:params?.orderByRating || ''
     };
     try {
-      // if(params?.companyName === '' || params?.orderByRating === '' || params === undefined){
         const response = await instance.post(`${api}review/user/${userId}?size=30`, data);
         return response.data;
       //}
@@ -336,45 +327,9 @@ const SearchGstNumber = createSlice({
     builder.addCase(gstVerify.fulfilled, (state, action) => {
       state.loading = false;
 
-      // let isValid =
-      //   typeof action?.payload.data === "object" &&
-      //   action?.payload.data !== null;
-
       if (action?.payload?.status === true) {
-        // toast.success("Gst number or name is valid!", {
-        //   position: "top-right",
-        //   autoClose: 2000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
       } else {
-        // toast.success("Gst number or name is not valid!", {
-        //   position: "top-right",
-        //   autoClose: 2000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
       }
-      // if (!isValid) {
-      //   toast.success("Gst Number is valid!", {
-      //     position: "top-right",
-      //     autoClose: 2000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: "light"
-      //   });
-      // }
     });
     builder.addCase(gstVerify.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
@@ -390,16 +345,6 @@ const SearchGstNumber = createSlice({
       state.gstInfo = action.payload;
       state.loading = false;
       state.success = true;
-      // toast.success(action?.payload?.message, {
-      //   position: "top-right",
-      //   autoClose: 2000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      //   theme: "light",
-      // });
     });
     builder.addCase(postGstRecord.rejected, (state, action) => {
       state.error = JSON.parse(JSON.stringify(action.payload));
@@ -554,45 +499,9 @@ const SearchGstNumber = createSlice({
     builder.addCase(getReviewByUser.fulfilled, (state, action) => {
       state.loading = false;
 
-      // let isValid =
-      //   typeof action?.payload.data === "object" &&
-      //   action?.payload.data !== null;
-
       if (action?.payload?.status === true) {
-        // toast.success("Gst number or name is valid!", {
-        //   position: "top-right",
-        //   autoClose: 2000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
       } else {
-        // toast.success("Gst number or name is not valid!", {
-        //   position: "top-right",
-        //   autoClose: 2000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        //   theme: "light",
-        // });
       }
-      // if (!isValid) {
-      //   toast.success("Gst Number is valid!", {
-      //     position: "top-right",
-      //     autoClose: 2000,
-      //     hideProgressBar: false,
-      //     closeOnClick: true,
-      //     pauseOnHover: true,
-      //     draggable: true,
-      //     progress: undefined,
-      //     theme: "light"
-      //   });
-      // }
     });
     builder.addCase(getReviewByUser.rejected, (state, action) => {
       state.error = action?.payload?.response?.data;
