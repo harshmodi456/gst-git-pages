@@ -51,6 +51,7 @@ const GstInformation = () => {
   const [key, setKey] = useState(0);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const fetchGst = () => {
     isLoading(true);
@@ -137,7 +138,7 @@ const GstInformation = () => {
     if (getUserInfo === undefined || getUserInfo === null) {
       toast.error('Please login first to access more')
       setTimeout(() => {
-        
+
         navigate("/login");
       }, 5000);
     } else {
@@ -165,16 +166,8 @@ const GstInformation = () => {
       title: "Are you sure?",
       text: "Once deleted, you will not be able to recover this!",
       icon: "warning",
-      buttons: {
-        cancel: true,
-        confirm: "Confirm"
-      },
-      dangerMode: true,
-      className: "styleTitle",
-      closeOnConfirm: false,
       cancelButtonText: 'Cancel',
       showCancelButton: true,
-      closeOnCancel: false,
       confirmButtonColor: "#DD6B55",
       confirmButtonText: "Confirm",
     }).then((result) => {
@@ -206,13 +199,15 @@ const GstInformation = () => {
       }
     }
   };
-
+  
   const handleClose = () => {
     setOpen(false);
     setIsEditable(false);
-    setValue("");
+    setValue(0);
     setReviewTextDesc(RichTextEditor.createValueFromString("", "html"));
   };
+
+  console.log(profileImg);
 
   const fileChangeHandler = (event) => {
     const file = event.target.files;
@@ -251,31 +246,41 @@ const GstInformation = () => {
       localStorage.setItem('multiImg', true);
       formData.append('image', imgFile[key]);
     }
-    dispatch(writeReview(formData)).then((res) => {
-      const id_a = gst._id;
-      const id_b = gst?._doc?._id;
-      const size = 5;
-      if (res?.payload?.status === true) {
-        handleClose();
-        isLoading(true);
-        dispatch(getWriteReview({ id_a, size } || { id_b, size })).then(
-          (res) => {
-            setReviewData(res?.payload?.reviews);
-            document.getElementById("btn-cancel").click();
-            fetchReview(gst?._id || gst?._doc?._id, true);
-            isLoading(false);
-          }
-        );
-      }
-      localStorage.setItem("multiImg", false);
-    });
+    setIsDisabled(false)
+      if (value !== 0) {
+        dispatch(writeReview(formData)).then((res) => {
+        // const id_a = gst._id;
+        // const id_b = gst?._doc?._id;
+        // const size = 5;
+        const request = {
+          gstId: gst._doc._id,
+          size: 5,
+        };
+        if (res?.payload?.status === true) {
+          handleClose();
+          isLoading(true);
+          setIsDisabled(true)
+          dispatch(getWriteReview(request)).then(
+            (res) => {
+              setReviewData(res?.payload?.reviews);
+              document.getElementById("btn-cancel").click();
+              fetchReview(gst?._id || gst?._doc?._id, true);
+              isLoading(false);
+            }
+          );
+        } else {
+          setIsDisabled(false)
+        }
+        localStorage.setItem("multiImg", false);
+      });
+    }
   };
 
   const fetchMoreReviews = (length) => {
     const size = length + 5;
     if (gst) {
       const request = {
-        gstId: gst?._id || gst?._doc?._id,
+        gstId: gst?._id,
         size: size,
       };
       dispatch(getWriteReview(request)).then((res) => {
@@ -415,7 +420,7 @@ const GstInformation = () => {
             </p>
             <Rating
               name="simple-controlled"
-              value={(Math.round(gst?.avgRating / 0.5 || 0) * 0.5).toFixed(1)}
+              value={(+(Math.round(gst?.avgRating / 0.5 || 0) * 0.5).toFixed(1))}
               readOnly={true}
               precision={0.5}
             />
@@ -532,7 +537,7 @@ const GstInformation = () => {
                 />
                 <div className="img-container d-flex">
                   <input
-                  key={key}
+                    key={key}
                     multiple
                     id="reviewImgUrl"
                     name="reviewImgUrl"
@@ -608,7 +613,7 @@ const GstInformation = () => {
                   <button
                     className="btn-submit"
                     type="submit"
-                    disabled={reviewTextDesc?.length < 1 ? true : false}
+                    disabled={reviewTextDesc?.length < 1 || isDisabled ? true : false}
                   >
                     Post
                   </button>

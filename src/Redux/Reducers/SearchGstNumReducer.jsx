@@ -39,15 +39,8 @@ export const getReviewForMyBusiness = createAsyncThunk(
       companyName:params?.companyName || '',
       orderByRating:params?.orderByRating || ''
     };
-    let config = {
-      headers: { 
-        'authorization': `${token}`
-      },
-      data : data
-    }
     try {
-      // if(params?.companyName === '' || params?.orderByRating === '' || params === undefined){
-        const response = await instance.post(`${api}review/businessReview/${userId}`, config);
+        const response = await instance.post(`${api}review/businessReview/${userId}`, data);
         return response.data;
       //}
     } catch (error) {

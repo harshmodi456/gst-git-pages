@@ -60,7 +60,7 @@ const SearchGstNumber = () => {
     });
   };
 
-  
+
   const addHistoryHandler = (searchValue) => {
     setSearchValue(searchValue);
     const params = {
@@ -296,14 +296,14 @@ const SearchGstNumber = () => {
                   <ArrowBackIcon />
                 </IconButton>
                 <h5 className="m-0 text-muted ml-2 mr-4">Back</h5>
-                <h4 className="m-0 title">{`Search Result based on GSTIN/UIN:- ${searchValue.toUpperCase()}`}</h4>
+                <h4 className="m-0 title">{`Search Result based on GSTIN/UIN:- ${searchValue ?searchValue.toString().toUpperCase():""}`}</h4>
               </div>
               <div className="filterGstCard form-inline m-0 p-0 justify-content-end">
                 <div className="col-5 p-0 col-md-2">
                   <Autocomplete
                     sx={{ m: 1 }}
                     multiple
-                    options={stateData}
+                    options={stateData.sort()}
                     getOptionLabel={(option) =>
                       typeof option === "string" || option instanceof String
                         ? option
@@ -363,7 +363,7 @@ const SearchGstNumber = () => {
                     sx={{ m: 1 }}
                     multiple
                     key={key}
-                    options={data}
+                    options={data.sort()}
                     getOptionLabel={(option) =>
                       typeof option === "string" || option instanceof String
                         ? option

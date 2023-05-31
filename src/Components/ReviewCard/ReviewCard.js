@@ -5,9 +5,9 @@ import Avatar from "react-avatar";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   updateReview,
-  addHelpfulCount
+  addHelpfulCount,
+  getWriteReview
 } from "../../Redux/Reducers/SearchGstNumReducer";
-import { useRef } from 'react';
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import IconButton from "@mui/material/IconButton";
@@ -28,6 +28,7 @@ import RichTextEditor from "react-rte";
 
 // import required modules
 import { Keyboard, Pagination, Navigation } from "swiper";
+import { IMAGE_BASE_URL } from "../../Constant/ApiUrl";
 
 export default function ReviewCard(props) {
   const { review } = props;
@@ -36,10 +37,15 @@ export default function ReviewCard(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [reviewText, setReviewText] = useState(
     RichTextEditor.createValueFromString(
-      review?.reviewText ? review?.reviewText : "",
-      "html"
+      review?.reviewText,"html"
     )
   );
+
+  console.log('=============reviewText=======================');
+  console.log(RichTextEditor.createValueFromString(
+    review?.reviewText,"html"
+  ));
+  console.log('====================================');
 
   const [rating, setRating] = useState(review?.rating);
   const takeUserInfo = localStorage.getItem("userInfo");
@@ -123,7 +129,11 @@ export default function ReviewCard(props) {
             (crypto.getRandomValues(new Uint8Array(1))[0] & (15 >> (c / 4)))
           ).toString(16)
       );
-      imgArray.push({ id: randome, img: image?.imgUrl });
+      // if (image.imgUrl) {
+      //   imgArray.push({ id: randome, img: image?.imgUrl });
+      // }else{
+        imgArray.push({ id: randome, img: image });
+      // }
       if (++counter === review?.reviewImg?.length) {
         setProfileImg(imgArray);
       }
@@ -133,17 +143,9 @@ export default function ReviewCard(props) {
   const removeImage = (remove_data, takeIndx) => {
     if (remove_data.id) {
       new Swal({
-        title: "Are you sure?",
-        text: "Once deleted, you will not be able to recover this!",
-        icon: "warning",
-        buttons: {
-          cancel: true,
-          confirm: "Confirm"
-        },
-        dangerMode: true,
-        className: "styleTitle",
-        closeOnConfirm: false,
-        closeOnCancel: false,
+        title: 'Are you sure?',
+        html: "Once deleted, you will not be able to recover this!",
+        icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Confirm",
@@ -154,13 +156,12 @@ export default function ReviewCard(props) {
           );
           setProfileImg(deleteImage)
         }
-      }, () => console.log("Rejected"))
+      })
     } else if (!remove_data.id) {
       const deleteImage = profileImg?.filter((data) => data !== remove_data);
       setProfileImg(deleteImage);
     }
 
-    console.log('profileImg', profileImg, takeIndx, Object.keys(imgFile));
   };
 
   const bottomMenu = (toggle, url) => {
@@ -172,6 +173,17 @@ export default function ReviewCard(props) {
     document.getElementById("reviewImgUrl" + review?._id).click();
   };
 
+  // useEffect(()=>{
+  //   dispatch(getWriteReview(request)).then(
+  //     (res) => {
+  //       setReviewData(res?.payload?.reviews);
+  //       document.getElementById("btn-cancel").click();
+  //       fetchReview(gst?._id || gst?._doc?._id, true);
+  //       isLoading(false);
+  //     }
+  //   );
+  // },[])
+
   const updateHandler = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -182,21 +194,37 @@ export default function ReviewCard(props) {
     let oldImg = [];
     let count = 0;
     profileImg?.filter((data) => {
+      // if (data) {
       if (data?.img) {
-        if (data?.img.slice(0, 4) === "http") {
-          oldImg.push({ imgUrl: data?.img });
-        }
-        if (++count === profileImg?.length) {
-          formData.append("oldImg", JSON.stringify(oldImg));
-        }
-      } else if (data) {
-        if (data.slice(0, 4) === "http") {
-          oldImg.push({ imgUrl: data });
-        }
+        // if (data?.img.slice(0, 4) === "http") {
+          oldImg.push(data?.img);
+          // oldImg.push({ imgUrl: data?.img });
+        // }
         if (++count === profileImg?.length) {
           formData.append("oldImg", JSON.stringify(oldImg));
         }
       }
+      else if (data) {
+        if (data?.img !== undefined) {
+          if (data.slice(0, 4) === "http") {
+          }
+        } else {
+          // oldImg.push({ imgUrl: data?.img });
+          oldImg.push(data?.img);
+          if (++count === profileImg?.length) {
+            formData.append("oldImg", JSON.stringify(oldImg));
+          }
+        }
+      }
+      // }
+      // else if (data) {
+      //   if (data.slice(0, 4) === "http") {
+      //     oldImg.push({ imgUrl: data });
+      //   }
+      //   if (++count === profileImg?.length) {
+      //     formData.append("oldImg", JSON.stringify(oldImg));
+      //   }
+      // }
     });
     for (const key of profileImg) {
       if (key?.img?.slice(0, 4) === "blob") {
@@ -275,7 +303,7 @@ export default function ReviewCard(props) {
               </p>
               <Rating
                 name="simple-controlled"
-                value={Math.round((review?.rating)).toFixed(1)}
+                value={(+(Math.round((review?.rating)).toFixed(1)))}
                 disabled={true}
                 precision={0.5}
               />
@@ -351,7 +379,7 @@ export default function ReviewCard(props) {
                 </p>
                 <Rating
                   name="simple-controlled"
-                  value={Math.round((review?.rating)).toFixed(1)}
+                  value={(+(Math.round((review?.rating)).toFixed(1)))}
                   disabled={true}
                   precision={0.5}
                 />
@@ -423,7 +451,7 @@ export default function ReviewCard(props) {
               </p>
               <Rating
                 name="simple-controlled"
-                value={Math.round(review?.rating).toFixed(1)}
+                value={+(Math.round(review?.rating).toFixed(1))}
                 disabled={true}
                 precision={0.5}
               />
@@ -535,7 +563,7 @@ export default function ReviewCard(props) {
               )} */}
             </div>
             <div className="review-img-container pt-2 px-2 w-100">
-              {review?.reviewImg?.slice(0, 4)?.map((data, index) => {
+              {review?.reviewImg?.map((image, index) => {
                 return (
                   <div
                     className="m-1"
@@ -545,7 +573,7 @@ export default function ReviewCard(props) {
                   >
                     <img
                       className="review-img"
-                      src={data?.imgUrl}
+                      src={`${IMAGE_BASE_URL + image}`}
                       alt="review-img"
                     />
                   </div>
@@ -605,7 +633,7 @@ export default function ReviewCard(props) {
                         return (
                           <SwiperSlide key={index} className=" swiper-block">
                             <div className="outer-image-wrap">
-                              <img src={data?.imgUrl} alt="" />
+                              <img src={data} alt="" />
                             </div>
                           </SwiperSlide>
                         );
@@ -686,7 +714,7 @@ export default function ReviewCard(props) {
                           {data?.img ? (
                             <img
                               src={data?.img}
-                              height={"150px"}
+                              height={"170px"}
                               width={"150px"}
                               alt="" />
                           ) : (

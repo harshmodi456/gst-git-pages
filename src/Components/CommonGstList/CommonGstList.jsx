@@ -39,7 +39,7 @@ const CommonGstList = (props) => {
                   <span className="review-rating ml-2">
                     <Rating
                       name="simple-controlled"
-                      value={Math.round(row?.avgRating)}
+                      value={+(Math.round(row?.avgRating))}
                     //   disabled={true}
                     />
                   </span>{" "}

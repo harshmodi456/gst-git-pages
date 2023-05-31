@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Backdrop from "@mui/material/Backdrop";
 import { useFormik } from "formik";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -12,7 +12,7 @@ import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import SendIcon from "@mui/icons-material/Send";
-import { FormControl, InputLabel, MenuItem, Select, TextField } from "@mui/material";
+import { FormControl, MenuItem, Select } from "@mui/material";
 import { DebounceInput } from 'react-debounce-input';
 
 const MyReviews = () => {
@@ -24,7 +24,7 @@ const MyReviews = () => {
   const [alignment, setAlignment] = useState("send");
   const [userId, setUserId] = useState("");
   const [selectMenu, setSelectMenu] = useState('');
-  const [inputField,setinputField] = useState('');
+  const [inputField, setinputField] = useState('');
 
   const userInfo = JSON.parse(localStorage.getItem("userInfo"));
   let token = userInfo?.userInfo?.token
@@ -49,6 +49,7 @@ const MyReviews = () => {
       });
     }
   };
+
   const fetchMyBusinessReviews = () => {
     if (alignment === "receive") {
       setIsLoading(true);
@@ -65,7 +66,7 @@ const MyReviews = () => {
       fetchMyReviews();
       fetchMyBusinessReviews();
     }
-  }, [userId,alignment]);
+  }, [userId, alignment]);
 
   const submitHandler = (values, isFormSubmit, { resetForm }) => {
     const params = {
@@ -84,11 +85,11 @@ const MyReviews = () => {
       submitHandler(values, true, { resetForm });
     },
   });
-  
+
   const handleChangeDebounce = (e) => {
     if (e.target.name === "orderByRating") {
       setSelectMenu(e.target.value)
-    }else{
+    } else {
       setinputField(e.target.value)
     }
     const params = {
@@ -103,7 +104,7 @@ const MyReviews = () => {
       });
     } else {
       setIsLoading(true);
-
+      
       dispatch(getReviewForMyBusiness({ userId, params, token })).then((res) => {
         setReceiveReviewData(res?.payload?.reviews);
         setIsLoading(false);
@@ -136,9 +137,7 @@ const MyReviews = () => {
         <div className="filter-Conatiner" style={{ textAlign: "right" }} >
           <DebounceInput placeholder="ENTER COMPANY NAME" name="companyName" variant="standard" autoComplete="off"
             size="small" onChange={(e) => handleChangeDebounce(e)} debounceTimeout={1500} value={inputField}
-            className="search-bar p-2" InputProps={{
-              disableUnderline: true,
-            }} />
+            className="search-bar p-2" />
           <FormControl sx={{ width: "auto" }} size="small">
             <Select
               id="orderByRating"
@@ -147,13 +146,8 @@ const MyReviews = () => {
               displayEmpty
               value={selectMenu}
               onChange={(e) => handleChangeDebounce(e)}
-              InputProps={{
-                disableUnderline: true,
-              }}
             >
-              <MenuItem value="">
-                Select The Options
-              </MenuItem>
+              <MenuItem value="">Select The Options</MenuItem>
               <MenuItem value="Ascending">Ascending</MenuItem>
               <MenuItem value="Descending">Descending</MenuItem>
             </Select>

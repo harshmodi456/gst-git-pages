@@ -5,6 +5,5 @@ export default function AuthLogin({ children }) {
   if (getUserToken?.success) {
     return <Navigate to="/" />;
   }
-
   return children;
 }

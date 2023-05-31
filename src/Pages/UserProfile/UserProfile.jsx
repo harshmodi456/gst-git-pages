@@ -20,6 +20,7 @@ const UserProfile = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const [user, setUser] = useState();
+  const [initialProfileImg, setInitialProfileImg] = useState()
   const [profileImg, setProfileImg] = useState(userImg);
   const [imgFile, setImgFile] = useState(null);
   const [profileData, setProfileData] = useState([]);
@@ -32,6 +33,7 @@ const UserProfile = () => {
     } else {
       if (user?.profileImg) {
         setProfileImg(user?.profileImg);
+        setInitialProfileImg(user?.profileImg)
       }
     }
   }, [user]);
@@ -40,7 +42,7 @@ const UserProfile = () => {
     setUser(JSON.parse(localStorage.getItem("userInfo"))?.userInfo?.data);
   }, []);
 
-  const fileChangeHandler = (event) => {    
+  const fileChangeHandler = (event) => {
     const file = event.target.files[0];
     if (file != null) {
       setProfileImg(URL.createObjectURL(file));
@@ -62,6 +64,11 @@ const UserProfile = () => {
       setImgFile(null)
     }
   };
+
+  // const handleCancelUpdate = () => {
+  //   setProfileImg(initialProfileImg);
+  //   navigate("");
+  // }
 
   const initialValues = {
     fName: profileData.fName || user?.fName,
@@ -85,7 +92,7 @@ const UserProfile = () => {
       .required("Required"),
     businessName: Yup.string().trim().required("Required"),
   });
-
+  
   const submitHandler = async (userCredentials) => {
     setIsLoading(true);
 
@@ -143,14 +150,14 @@ const UserProfile = () => {
 
     return (
       <div>
-        <h4 className="m-0 px-5">Personal Information</h4>
-        <hr className="mx-lg-5" />
+        {/* <h4 className="m-0 mx-lg-5">Personal Information</h4>
+        <hr className="mx-lg-5" /> */}
         <form
           className="px-lg-5"
           onSubmit={formik.handleSubmit}
           autoComplete="off"
         >
-          <div className="row my-5">
+          <div className="row my-4">
             <div className="col-lg-6 mb-lg-0 mb-3">
               <TextField
                 className="w-100"
@@ -174,7 +181,7 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="row my-lg-5">
+          <div className="row my-lg-4">
             <div className="col-lg-6 mb-lg-0 mb-3">
               <TextField
                 className="w-100"
@@ -206,7 +213,7 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="row my-5">
+          <div className="row my-4">
             <div className="col-lg-6">
               <TextField
                 className="w-100"
@@ -219,7 +226,7 @@ const UserProfile = () => {
               />
             </div>
           </div>
-          <div className="col-12 text-right my-5 py-5">
+          <div className="col-12 text-right my-4 py-4">
             {localStorage.getItem("isNewUser") !== "true" && (
               <button
                 className="btn-cancel mr-lg-4 mb-lg-0 mb-3"
@@ -244,44 +251,48 @@ const UserProfile = () => {
   };
 
   return (
-    <div className="my-user-profile-div pt-5">
+    <div className="my-user-profile-div pt-3">
       <Grid columns={{ xs: 0, sm: 8, md: 12 }}>
-        <div className="main-div container-fluid px-5">
-          <h1 className="px-lg-5">Hello {user?.fName || "User"},</h1>
+        <div className="main-div container-fluid px-lg-5">
+          <h2 className="px-lg-4">Hello {user?.fName || "User"},</h2>
           <hr />
-          <div className="px-lg-5">
-            <div>
-              <Avatar size={150} round src={profileImg} name={user?.fName} />
+          <div className="row m-0 p-0">
+            <div className="px-lg-4 col-12 col-md-12 col-lg-2">
+              <div>
+                <Avatar size={130} round src={profileImg} name={user?.fName} />
+              </div>
+              <input
+                key={key}
+                id="profileImgUrl"
+                name="image"
+                accept="image/png, image/gif, image/jpeg"
+                hidden
+                type="file"
+                onChange={(event) => fileChangeHandler(event)}
+              />
+              <div className="mx-4 my-2">
+                <IconButton
+                  color="primary"
+                  onClick={upload}
+                  aria-label="upload picture"
+                  component="label"
+                >
+                  <PhotoCamera />
+                </IconButton>
+                <IconButton
+                  color="primary"
+                  onClick={removeImgHandler}
+                  aria-label="upload picture"
+                  component="label"
+                >
+                  <DeleteOutlineIcon />
+                </IconButton>
+              </div>
             </div>
-            <input
-              key={key}
-              id="profileImgUrl"
-              name="image"
-              accept="image/png, image/gif, image/jpeg"
-              hidden
-              type="file"
-              onChange={(event) => fileChangeHandler(event)}
-            />
-            <div className="mx-4 my-3 px-2">
-              <IconButton
-                color="primary"
-                onClick={upload}
-                aria-label="upload picture"
-                component="label"
-              >
-                <PhotoCamera />
-              </IconButton>
-              <IconButton
-                color="primary"
-                onClick={removeImgHandler}
-                aria-label="upload picture"
-                component="label"
-              >
-                <DeleteOutlineIcon />
-              </IconButton>
+            <div className="col-12 col-md-12 col-lg-10">
+              <UpdateUserForm />
             </div>
           </div>
-          <UpdateUserForm />
         </div>
       </Grid>
       <Backdrop

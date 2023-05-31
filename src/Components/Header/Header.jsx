@@ -78,7 +78,7 @@ const Header = (props) => {
       ]
     }
   }
-  else if(JSON.parse(localStorage.getItem('userInfo')) === null){
+  else if (JSON.parse(localStorage.getItem('userInfo')) === null) {
     navItems = [
       "Home",
       "Log In"
@@ -203,7 +203,7 @@ const Header = (props) => {
                 <div className="d-flex h-100 justify-content-center">
                   <div className="logo-backgroung-sm" ></div>
                   <div className="logo-container" >
-                    <img src={logo} className="logo" alt="logo" />
+                    <img src={logo} className="logo" alt="logo" onClick={() => navigate('/')}/>
                   </div>
                 </div>
               </IconButton>
@@ -214,7 +214,7 @@ const Header = (props) => {
               >
                 <div className="logo-backgroung" ></div>
                 <div className="logo-container" >
-                  <img src={logo} className="logo" alt="logo" />
+                  <img src={logo} className="logo" alt="logo" onClick={() => navigate('/')} style={{cursor:"pointer"}}/>
                 </div>
               </Typography>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>
@@ -227,8 +227,8 @@ const Header = (props) => {
                       handleRoute(item);
                     }}
                   >
-                    {item == userName ? (
-                        <p className="m-0 d-flex"><FaUserAlt className="header-user-icon mr-2"/><span>{item}</span></p>
+                    {item === userName ? (
+                      <p className="m-0 d-flex"><FaUserAlt className="header-user-icon mr-2" /><span>{item}</span></p>
                     ) : (item)}
                     <div className="dropdown">
                       <ul className="dropdown-content">
