@@ -21,7 +21,7 @@ import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import HistoryIcon from "@mui/icons-material/History";
 import CloseIcon from "@mui/icons-material/Close";
 import Chip from "@mui/material/Chip";
-import { TextField, Autocomplete, MenuItem, OutlinedInput, Menu, Button, Dialog, AppBar, Toolbar, Typography, Slide, DialogActions, DialogContent } from "@mui/material";
+import { TextField, Autocomplete, MenuItem, OutlinedInput, Menu, Button, Dialog, AppBar, Toolbar, Typography, Slide, DialogActions, DialogContent, Stack } from "@mui/material";
 import CheckIcon from "@mui/icons-material/Check";
 import { renderToString } from 'react-dom/server';
 import { OCR_DATA } from "./Main_OCR_GST";
@@ -61,6 +61,7 @@ const SearchGstNumber = () => {
   const [apiResponseData, setapiResponseData] = useState([]);
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
+  var gstNumbers = []
 
   const onFocus = () => setFocused(true);
   const onBlur = () => {
@@ -395,12 +396,12 @@ const SearchGstNumber = () => {
     const file = event.target.files[0];
     let url = await readFileAsync(file)
     const textAnnotations = await handleImageUpload(url)
-    if (textAnnotations && textAnnotations.length > 0) {
-      setProfileImg(URL.createObjectURL(file));
-      let dataText = textAnnotations.slice(1)
-      drawBoundingBoxes(dataText)
-      setTextAnnotations(textAnnotations.slice(1));
-    }
+    // if (textAnnotations && textAnnotations.length > 0) {
+    //   setProfileImg(URL.createObjectURL(file));
+    //   let dataText = textAnnotations.slice(1)
+    //   drawBoundingBoxes(dataText)
+    //   setTextAnnotations(textAnnotations.slice(1));
+    // }
     handleClose()
   }
 
@@ -415,6 +416,8 @@ const SearchGstNumber = () => {
     }
     handleClose()
   }
+
+  const [updatedImageData, setupdatedImageData] = useState([])
 
   const handleImageUpload = async (baseUrl) => {
     try {
@@ -435,7 +438,28 @@ const SearchGstNumber = () => {
           },
         ],
       });
-      return response.data.responses[0].textAnnotations;
+      // return response.data.responses[0].textAnnotations;
+      const textAnnotationsResponse = response.data.responses[0].textAnnotations;
+      // const textAnnotationsResponse = apiResponseData.data.responses[0].textAnnotations;
+
+      if (textAnnotationsResponse && textAnnotationsResponse.length > 0) {
+        var responseData = textAnnotationsResponse.slice(1).map(x => x.description).join("")?.toUpperCase();
+        const pattern = /[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}(Z|2)[0-9A-Z]{1}/g;
+        gstNumbers = responseData.match(pattern);
+        console.log("gstNumbers", gstNumbers);
+
+        const updatedStrings = gstNumbers.map((string) => {
+          if (string.length >= 2) {
+            let secondLastChar = string.charAt(string.length - 2);
+            if (secondLastChar === "2") {
+              return string.slice(0, -2) + "Z" + string.slice(-1);
+            }
+          }
+          return string;
+        });
+        setupdatedImageData(updatedImageData);
+        console.log("updatedStrings", updatedStrings);
+      }
     } catch (error) {
       console.error('Error:', error);
     }
@@ -502,15 +526,29 @@ const SearchGstNumber = () => {
     setAnchorEl(null);
   };
 
-
+  // useEffect(() => {
+  //   async function startVideo() {
+  //     try {
+  //       const stream = await navigator.mediaDevices.getUserMedia({
+  //         video: {
+  //           facingMode: "user"
+  //         }
+  //       });
+  //       webcamRef.current.srcObject = stream;
+  //     } catch (err) {
+  //       console.error("Error accessing camera.", err);
+  //     }
+  //   }
+  //   startVideo();
+  // }, [openCameraModal]);
 
   const webcamRef = useRef(null);
 
-  const videoConstraints = {
-    // width: 1280,
-    // height: 720,
-    facingMode: "user"
-  };
+  // const videoConstraints = {
+  // width: 300,
+  // height: 320,
+  //   facingMode: "environment"
+  // };
 
   const capture = React.useCallback(
     () => {
@@ -523,6 +561,10 @@ const SearchGstNumber = () => {
 
   const recapture = () => {
     setOpenCameraImg('')
+  }
+
+  const handleChipClick = (e) => {
+    console.log(e.currentTarget.getAttribute('value'));
   }
 
 
@@ -757,11 +799,11 @@ const SearchGstNumber = () => {
                       <>
                         <Webcam
                           audio={false}
-                          height={"100%"}
                           ref={webcamRef}
                           screenshotFormat="image/jpeg"
-                          width={"100%"}
-                          videoConstraints={videoConstraints}
+                        // width={300}
+                        // height={320}
+                        // videoConstraints={videoConstraints}
                         />
                         <br />
                       </>
@@ -787,6 +829,13 @@ const SearchGstNumber = () => {
                   <h3 className="m-0 pt-5 pb-2 font-weight-bold">
                     Search GST Taxpayer
                   </h3>
+                  {
+                    updatedImageData.length >= 0 && <Stack direction="row" spacing={1}>
+                      <Chip label="Clickable" onClick={handleChipClick} value="myValue" />
+                      <Chip label="Clickable" onClick={handleChipClick} value="myValue112" />
+                    </Stack>
+                  }
+
                   <OutlinedInput
                     autoComplete="off"
                     className="my-4 search-bar w-100"

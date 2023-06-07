@@ -1,6 +1,6 @@
 {
   "name": "gstin",
-  "homepage": "https://wa-gst-ob6l.onrender.com/",
+  "homepage": "https://harshmodi456.github.io/gstin",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,6 +19,7 @@
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "formik": "^2.2.9",
+    "gh-pages": "^5.0.0",
     "javascript-time-ago": "^2.5.9",
     "moment": "^2.29.4",
     "node-sass": "^8.0.0",
@@ -57,7 +58,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
