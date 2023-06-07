@@ -839,6 +839,10 @@ const SearchGstNumber = () => {
                           audio={false}
                           ref={webcamRef}
                           screenshotFormat="image/jpeg"
+                          videoConstraints={{
+                            ...videoConstraints,
+                            facingMode
+                          }}
                         // width={300}
                         // height={320}
                         // videoConstraints={videoConstraints}
