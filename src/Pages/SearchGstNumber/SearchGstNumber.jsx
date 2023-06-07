@@ -14,6 +14,7 @@ import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
 import homeBackgroung from "../../Assets/Images/home-bg.svg";
 import GstCard from "../../Components/GstCard/GstCard";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import IconButton from "@mui/material/IconButton";
@@ -31,6 +32,9 @@ import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import Webcam from "react-webcam";
 import axios from "axios";
 import PartyModeIcon from '@mui/icons-material/PartyMode';
+import { toast } from "react-toastify";
+import CameraswitchIcon from '@mui/icons-material/Cameraswitch';
+
 
 const SearchGstNumber = () => {
   const dispatch = useAppDispatch();
@@ -62,6 +66,9 @@ const SearchGstNumber = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   var gstNumbers = []
+  const FACING_MODE_USER = "user";
+  const FACING_MODE_ENVIRONMENT = "environment";
+  const [facingMode, setFacingMode] = React.useState(FACING_MODE_USER);
 
   const onFocus = () => setFocused(true);
   const onBlur = () => {
@@ -79,6 +86,7 @@ const SearchGstNumber = () => {
     setShow(false)
     setProfileImg('')
     setSelectedText('');
+    // setupdatedImageData('');
   }
 
   const handleopenCameraModal = () => {
@@ -90,6 +98,7 @@ const SearchGstNumber = () => {
     setOpenCameraModal(false)
     setOpenCameraImg('')
     // setImageSvg('')
+    // setupdatedImageData('');
     handleClose()
   }
 
@@ -245,31 +254,35 @@ const SearchGstNumber = () => {
     },
   });
 
-  const submitOCRImageHandler = () => {
-    if (selectedText !== "") {
+  const submitOCRImageHandler = (value) => {
+    if (updatedImageData !== "") {
       setFocused(false);
       handleCloseMOdel()
       isLoading(true);
-      addHistoryHandler(selectedText);
+      addHistoryHandler(value);
       const params = {
         userId: getUserInfo?.userInfo?.data?._id,
-        verificationValue: selectedText,
+        verificationValue: value,
       };
       setSearchValue(params?.verificationValue);
-      dispatch(gstVerify(params)).then((res) => {
-        if (res?.payload?.status === true) {
-          setGstSearchData(res?.payload?.data);
-          setIsSearched(true);
-          isLoading(false);
-        } else {
-          setGstSearchData([]);
-          setIsSearched(true);
-          isLoading(false);
-        }
-        localStorage.setItem("isSearched", true)
-        isLoading(false);
-      });
+      handleSearchApi(params)
     };
+  }
+
+  const handleSearchApi = (params) => {
+    dispatch(gstVerify(params)).then((res) => {
+      if (res?.payload?.status === true) {
+        setGstSearchData(res?.payload?.data);
+        setIsSearched(true);
+        isLoading(false);
+      } else {
+        setGstSearchData([]);
+        setIsSearched(true);
+        isLoading(false);
+      }
+      localStorage.setItem("isSearched", true)
+      isLoading(false);
+    });
   }
 
   const onPostHandle = (getRow) => {
@@ -322,6 +335,7 @@ const SearchGstNumber = () => {
     setIsSearched(false);
     localStorage.setItem("isSearched", false)
     setSearchValue([]);
+    setupdatedImageData([])
     if (getUserInfo?.userInfo?.data?._id) {
       fetchHistoryHandler();
       setSelectedStates([]);
@@ -402,19 +416,22 @@ const SearchGstNumber = () => {
     //   drawBoundingBoxes(dataText)
     //   setTextAnnotations(textAnnotations.slice(1));
     // }
+    handleCloseMOdel()
     handleClose()
   }
 
   const handleOpenCameraUpload = async (opencameraUrl) => {
     const url = opencameraUrl.split(',')[1];
     const textAnnotations = await handleImageUpload(url)
-    if (textAnnotations && textAnnotations.length > 0) {
-      setOpenCameraImg(opencameraUrl);
-      setTextAnnotations(textAnnotations.slice(1));
-      let dataText = textAnnotations.slice(1)
-      drawBoundingBoxes(dataText)
-    }
-    handleClose()
+    // if (textAnnotations && textAnnotations.length > 0) {
+    //   setOpenCameraImg(opencameraUrl);
+    //   setTextAnnotations(textAnnotations.slice(1));
+    //   let dataText = textAnnotations.slice(1)
+    //   drawBoundingBoxes(dataText)
+    // }
+    // console.log(textAnnotations);
+    handleCloseOpenCameraMOdel()
+    // handleClose()
   }
 
   const [updatedImageData, setupdatedImageData] = useState([])
@@ -446,7 +463,7 @@ const SearchGstNumber = () => {
         var responseData = textAnnotationsResponse.slice(1).map(x => x.description).join("")?.toUpperCase();
         const pattern = /[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}(Z|2)[0-9A-Z]{1}/g;
         gstNumbers = responseData.match(pattern);
-        console.log("gstNumbers", gstNumbers);
+        // console.log("gstNumbers", gstNumbers);
 
         const updatedStrings = gstNumbers.map((string) => {
           if (string.length >= 2) {
@@ -457,8 +474,14 @@ const SearchGstNumber = () => {
           }
           return string;
         });
-        setupdatedImageData(updatedImageData);
-        console.log("updatedStrings", updatedStrings);
+        // if (updatedStrings.length <= 0) {
+        // } else {
+        setupdatedImageData(updatedStrings);
+        // }
+        // console.log("updatedStrings", updatedStrings);
+      } else {
+        // alert('Enter Manual Number')
+        toast.error('Not able to Recognize GST Number,Kindly enter manually');
       }
     } catch (error) {
       console.error('Error:', error);
@@ -544,11 +567,20 @@ const SearchGstNumber = () => {
 
   const webcamRef = useRef(null);
 
-  // const videoConstraints = {
-  // width: 300,
-  // height: 320,
-  //   facingMode: "environment"
-  // };
+  const videoConstraints = {
+    // width: 300,
+    // height: 320,
+    facingMode: FACING_MODE_USER
+  };
+
+  const switchCamera = React.useCallback(() => {
+    setFacingMode(
+      prevState =>
+        prevState === FACING_MODE_USER
+          ? FACING_MODE_ENVIRONMENT
+          : FACING_MODE_USER
+    );
+  }, []);
 
   const capture = React.useCallback(
     () => {
@@ -562,11 +594,15 @@ const SearchGstNumber = () => {
   const recapture = () => {
     setOpenCameraImg('')
   }
-
-  const handleChipClick = (e) => {
-    console.log(e.currentTarget.getAttribute('value'));
+  const [selectedChip, setSelectedChip] = React.useState(false);
+  const handleChipClick = (e, index) => {
+    // console.log(e.currentTarget.getAttribute('value'),index);
+    setSelectedChip((s) => !s)
+    let value = e.currentTarget.getAttribute('value')
+    document.getElementById(value).style.background = "#c7c7c7";
+    submitOCRImageHandler(value)
   }
-
+  // console.log(updatedImageData);
 
   return (
     <form onSubmit={formik.handleSubmit}>
@@ -743,12 +779,12 @@ const SearchGstNumber = () => {
                   <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     Uploaded Image
                   </Typography>
-                  <Button autoFocus color="inherit" onClick={submitOCRImageHandler}>
+                  {/* <Button autoFocus color="inherit" onClick={submitOCRImageHandler}>
                     Search
-                  </Button>
+                  </Button> */}
                 </Toolbar>
               </AppBar>
-              <div className="font-weight-bold pl-2">Selected GST No : {selectedText}</div>
+              {/* <div className="font-weight-bold pl-2">Selected GST No : {selectedText}</div> */}
               <div className="container p-0">
                 {profileImg && (
                   <img
@@ -767,6 +803,7 @@ const SearchGstNumber = () => {
             <Dialog
               fullWidth={true}
               maxWidth={false}
+              // fullWidth
               open={openCameraModal}
               onClose={handleCloseOpenCameraMOdel}
             >
@@ -783,12 +820,13 @@ const SearchGstNumber = () => {
                   <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
                     Click Picture
                   </Typography>
+                  <Button onClick={switchCamera} color="inherit"><CameraswitchIcon className="mr-2" />Switch Camera</Button>
                   {
-                    openCameraImg.length < 1 ? <Button onClick={capture} color="inherit"><PhotoCameraIcon className="mr-2" />Capture photo</Button> : <Button onClick={recapture} color="inherit"><PartyModeIcon className="mr-2" />Recapture photo</Button>
+                    openCameraImg.length < 1 ? <Button onClick={capture} color="inherit"><PhotoCameraIcon className="mr-2" />Capture photo</Button> : <></>
                   }
-                  <Button autoFocus color="inherit" onClick={submitOCRImageHandler}>
+                  {/* <Button autoFocus color="inherit" onClick={submitOCRImageHandler}>
                     Search
-                  </Button>
+                  </Button> */}
                 </Toolbar>
               </AppBar>
               <DialogContent dividers={true}>
@@ -809,15 +847,6 @@ const SearchGstNumber = () => {
                       </>
                     )
                   }
-                  {openCameraImg.length > 0 && (
-                    <>
-                      <img
-                        src={openCameraImg}
-                        alt="Uploaded"
-                      />
-                      <div dangerouslySetInnerHTML={{ __html: imageSvg }} />
-                    </>
-                  )}
                 </div>
               </DialogContent>
               <DialogActions>
@@ -829,10 +858,23 @@ const SearchGstNumber = () => {
                   <h3 className="m-0 pt-5 pb-2 font-weight-bold">
                     Search GST Taxpayer
                   </h3>
+                  {/* {
+                    notFoundData &&
+                    <h6>{notFoundData}</h6>
+                  } */}
                   {
                     updatedImageData.length >= 0 && <Stack direction="row" spacing={1}>
-                      <Chip label="Clickable" onClick={handleChipClick} value="myValue" />
-                      <Chip label="Clickable" onClick={handleChipClick} value="myValue112" />
+                      {
+                        updatedImageData?.map((e, index) => {
+                          // console.log("e", e,index);
+                          return (
+                            <>
+                              <Chip key={index + 1} id={e} label={e} onClick={handleChipClick} value={e} />
+                            </>
+                          );
+                        })
+                      }
+                      {/* <Chip label="myValue112" icon={<CheckCircleIcon />} variant="outlined" onClick={handleChipClick} value="myValue112" /> */}
                     </Stack>
                   }
 
