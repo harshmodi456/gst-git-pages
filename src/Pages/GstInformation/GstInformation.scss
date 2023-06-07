@@ -34,6 +34,18 @@
     border-radius: 10px;
     cursor: pointer;
   }
+  .btn-write-review {
+    display: flex;
+    align-items: center;
+    border: none;
+    background-color: #da45ff;
+    color: white;
+    padding: 5px 20px;
+    font-weight: 600;
+    font-size: 20px;
+    border-radius: 10px;
+    cursor: pointer;
+  }
 
   .text-green {
     color: #319e09;
@@ -104,16 +116,6 @@
     .MuiRating-sizeMedium {
       color: #4cbe24;
       opacity: 1;
-    }
-    .btn-write-review {
-      border: none;
-      background-color: #da45ff;
-      color: white;
-      padding: 15px 20px;
-      font-weight: 600;
-      font-size: 20px;
-      border-radius: 20px;
-      cursor: pointer;
     }
 
     .btn-write-review:focus {

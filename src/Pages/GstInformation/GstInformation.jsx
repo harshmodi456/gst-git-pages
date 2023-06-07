@@ -2,7 +2,7 @@ import { Button, Rating } from "@mui/material";
 import { FaEdit } from "react-icons/fa";
 import React, { useEffect, useState } from "react";
 import "./GstInformation.scss";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   getRecordGstById,
@@ -15,12 +15,14 @@ import CameraAltIcon from "@mui/icons-material/CameraAlt";
 import ReviewCard from "../../Components/ReviewCard/ReviewCard";
 import { Box } from "@mui/system";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { ToastContainer, toast } from "react-toastify";
 import { RWebShare } from "react-web-share";
 import { FaShareAlt } from "react-icons/fa";
-import InfiniteScroll from "react-infinite-scroll-component"
+import InfiniteScroll from "react-infinite-scroll-component";
+import IconButton from "@mui/material/IconButton";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import Swal from "sweetalert2";
 import RichTextEditor from "react-rte";
-import { toast } from "react-toastify";
 
 const GstInformation = () => {
   const dispatch = useAppDispatch();
@@ -47,11 +49,10 @@ const GstInformation = () => {
   const [gstCenter, setGstCenter] = useState("");
   const [gstState, setGstState] = useState("");
   const [gstRange, setGstRange] = useState("");
+  const [disableCopy, setDisableCopy] = useState(false);
   const [gstStatus, setGstStatus] = useState("");
-  const [key, setKey] = useState(0);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo);
-  const [isDisabled, setIsDisabled] = useState(true);
 
   const fetchGst = () => {
     isLoading(true);
@@ -65,6 +66,22 @@ const GstInformation = () => {
         fetchReview(res?.payload?.data?._id || res?.payload?.data?._doc?._id);
       }
     });
+  };
+  //for copy url
+  function copyTextToClipboard(text) {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success("URL copied to clipboard");
+      })
+      .catch((error) => {
+        toast.error("Failed to copy URL");
+      });
+  }
+  const handleCopy = () => {
+    const currentUrl = window?.location.href;
+    copyTextToClipboard(currentUrl);
+    setDisableCopy(true);
   };
 
   const gstAddressHandler = () => {
@@ -81,39 +98,54 @@ const GstInformation = () => {
       }
       setGstRange(gstObj?.ctj);
       if (gst?.adadr?.length > 0) {
-        let addressStr = `${gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
-          }${gstObj?.adadr[0]?.addr?.bno && ", "}
-                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${gstObj?.adadr[0]?.addr?.bnm && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${gstObj?.adadr[0]?.addr?.loc && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${gstObj?.adadr[0]?.addr?.st && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
-          }${gstObj?.adadr[0]?.addr?.city && ", "}
-                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${gstObj?.adadr[0]?.addr?.dst && ", "
-          }
-                ${gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
-          }${gstObj?.adadr[0]?.addr?.stcd && ", "}
-                ${gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
-          }.`;
+        let addressStr = `${
+          gstObj?.adadr[0]?.addr?.bno && gstObj?.adadr[0]?.addr?.bno
+        }${gstObj?.adadr[0]?.addr?.bno && ", "}
+                ${gstObj?.adadr[0]?.addr?.bnm && gstObj?.adadr[0]?.addr?.bnm}${
+          gstObj?.adadr[0]?.addr?.bnm && ", "
+        }
+                ${gstObj?.adadr[0]?.addr?.loc && gstObj?.adadr[0]?.addr?.loc}${
+          gstObj?.adadr[0]?.addr?.loc && ", "
+        }
+                ${gstObj?.adadr[0]?.addr?.st && gstObj?.adadr[0]?.addr?.st}${
+          gstObj?.adadr[0]?.addr?.st && ", "
+        }
+                ${
+                  gstObj?.adadr[0]?.addr?.city && gstObj?.adadr[0]?.addr?.city
+                }${gstObj?.adadr[0]?.addr?.city && ", "}
+                ${gstObj?.adadr[0]?.addr?.dst && gstObj?.adadr[0]?.addr?.dst}${
+          gstObj?.adadr[0]?.addr?.dst && ", "
+        }
+                ${
+                  gstObj?.adadr[0]?.addr?.stcd && gstObj?.adadr[0]?.addr?.stcd
+                }${gstObj?.adadr[0]?.addr?.stcd && ", "}
+                ${
+                  gstObj?.adadr[0]?.addr?.pncd && gstObj?.adadr[0]?.addr?.pncd
+                }.`;
 
         setGstAddress(addressStr);
       } else {
-        let addressStr = `${gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
-          }${gstObj?.pradr?.addr?.flno && ", "}
-        ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${gstObj?.pradr?.addr?.bno && ", "
-          }
-        ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${gstObj?.pradr?.addr?.bnm && ", "
-          }
-        ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${gstObj?.pradr?.addr?.st && ", "
-          }
-        ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${gstObj?.pradr?.addr?.city && ", "
-          }
-        ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${gstObj?.pradr?.addr?.dst && ", "
-          }
-        ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${gstObj?.pradr?.addr?.stcd && ", "
-          }
+        let addressStr = `${
+          gstObj?.pradr?.addr?.flno && gstObj?.pradr?.addr?.flno
+        }${gstObj?.pradr?.addr?.flno && ", "}
+        ${gstObj?.pradr?.addr?.bno && gstObj?.pradr?.addr?.bno}${
+          gstObj?.pradr?.addr?.bno && ", "
+        }
+        ${gstObj?.pradr?.addr?.bnm && gstObj?.pradr?.addr?.bnm}${
+          gstObj?.pradr?.addr?.bnm && ", "
+        }
+        ${gstObj?.pradr?.addr?.st && gstObj?.pradr?.addr?.st}${
+          gstObj?.pradr?.addr?.st && ", "
+        }
+        ${gstObj?.pradr?.addr?.city && gstObj?.pradr?.addr?.city}${
+          gstObj?.pradr?.addr?.city && ", "
+        }
+        ${gstObj?.pradr?.addr?.dst && gstObj?.pradr?.addr?.dst}${
+          gstObj?.pradr?.addr?.dst && ", "
+        }
+        ${gstObj?.pradr?.addr?.stcd && gstObj?.pradr?.addr?.stcd}${
+          gstObj?.pradr?.addr?.stcd && ", "
+        }
         ${gstObj?.pradr?.addr?.pncd && gstObj?.pradr?.addr?.pncd}.`;
 
         let center = gstObj?.pradr?.addr?.loc;
@@ -136,13 +168,23 @@ const GstInformation = () => {
 
   const validateLogin = (isReview) => {
     if (getUserInfo === undefined || getUserInfo === null) {
-      toast.error('Please login first to access more')
-      setTimeout(() => {
-
-        navigate("/login");
-      }, 5000);
+      Swal.fire(
+        {
+          icon: "error",
+          title: "Login Required!",
+          text: "Please login first to access more.",
+        },
+        setTimeout(() => {
+          Swal.close();
+          navigate("/login");
+        }, 1500)
+      ).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
     } else {
-      if (isReview === true) {
+      if (isReview == true) {
         document.getElementById("btn-cancel").click();
       }
     }
@@ -162,24 +204,12 @@ const GstInformation = () => {
   };
 
   const removeImage = (url) => {
-    new Swal({
-      title: "Are you sure?",
-      text: "Once deleted, you will not be able to recover this!",
-      icon: "warning",
-      cancelButtonText: 'Cancel',
-      showCancelButton: true,
-      confirmButtonColor: "#DD6B55",
-      confirmButtonText: "Confirm",
-    }).then((result) => {
-      if (result.value) {
-        const deleteImage = profileImg?.filter((data) => data !== url);
-        setProfileImg(deleteImage);
-        const index = profileImg?.indexOf(url);
-        const newImgFile = [...imgFile];
-        newImgFile.splice(index, 1);
-        setImgFile(newImgFile);
-      }
-    }, () => console.log("Rejected"))
+    const deleteImage = profileImg?.filter((data) => data !== url);
+    setProfileImg(deleteImage);
+    const index = profileImg?.indexOf(url);
+    const newImgFile = [...imgFile];
+    newImgFile.splice(index, 1);
+    setImgFile(newImgFile);
   };
 
   const fetchReview = (gstId, isGst) => {
@@ -199,15 +229,13 @@ const GstInformation = () => {
       }
     }
   };
-  
+
   const handleClose = () => {
     setOpen(false);
     setIsEditable(false);
-    setValue(0);
+    setValue("");
     setReviewTextDesc(RichTextEditor.createValueFromString("", "html"));
   };
-
-  console.log(profileImg);
 
   const fileChangeHandler = (event) => {
     const file = event.target.files;
@@ -216,7 +244,6 @@ const GstInformation = () => {
         setProfileImg((current) => [...current, URL.createObjectURL(file[i])]);
         setImgFile((current) => [...current, file[i]]);
       }
-      setKey(key + 1);
     }
   };
 
@@ -242,45 +269,38 @@ const GstInformation = () => {
     formData.append("reviewText", reviewTextDesc.toString("html"));
     formData.append("rating", value);
 
-    for (const key of Object.keys(imgFile)) {
-      localStorage.setItem('multiImg', true);
-      formData.append('image', imgFile[key]);
+    for (const key of profileImg) {
+      if (key?.img?.slice(0, 4) === "blob") {
+        localStorage.setItem("multiImg", true);
+        formData.append("image", key?.blobUrl);
+      }
     }
-    setIsDisabled(false)
-      if (value !== 0) {
-        dispatch(writeReview(formData)).then((res) => {
-        // const id_a = gst._id;
-        // const id_b = gst?._doc?._id;
-        // const size = 5;
-        const request = {
-          gstId: gst._doc._id,
-          size: 5,
-        };
-        if (res?.payload?.status === true) {
-          handleClose();
-          isLoading(true);
-          setIsDisabled(true)
-          dispatch(getWriteReview(request)).then(
-            (res) => {
-              setReviewData(res?.payload?.reviews);
-              document.getElementById("btn-cancel").click();
-              fetchReview(gst?._id || gst?._doc?._id, true);
-              isLoading(false);
-            }
-          );
-        } else {
-          setIsDisabled(false)
-        }
-        localStorage.setItem("multiImg", false);
-      });
-    }
+
+    dispatch(writeReview(formData)).then((res) => {
+      const id_a = gst._id;
+      const id_b = gst?._doc?._id;
+      const size = 5;
+      if (res?.payload?.status === true) {
+        handleClose();
+        isLoading(true);
+        dispatch(getWriteReview({ id_a, size } || { id_b, size })).then(
+          (res) => {
+            setReviewData(res?.payload?.reviews);
+            document.getElementById("btn-cancel").click();
+            fetchReview(gst?._id || gst?._doc?._id, true);
+            isLoading(false);
+          }
+        );
+      }
+      localStorage.setItem("multiImg", false);
+    });
   };
 
   const fetchMoreReviews = (length) => {
     const size = length + 5;
     if (gst) {
       const request = {
-        gstId: gst?._id,
+        gstId: gst?._id || gst?._doc?._id,
         size: size,
       };
       dispatch(getWriteReview(request)).then((res) => {
@@ -310,22 +330,36 @@ const GstInformation = () => {
       <div className="gst-information m-lg-5 px-lg-5 px-4 py-2">
         <div className="d-flex border-bottom align-items-center">
           <h3 className="title m-0">
-            Search Result based on GSTIN/UIN :{" "}
+            Search Result based on GSTIN/UIN:{" "}
             {gst?.gstData?.gstin || gst?._doc?.gstin}
           </h3>
-          <div className="ml-4" onClick={validateLogin}>
-            <RWebShare
-              data={{
-                text: "Share",
-                url: window?.location,
-                title: "Share",
-              }}
-            >
-              <button className="btn-share" disabled={disableShare}>
-                <FaShareAlt />
-                <span className="ml-3">Share</span>
-              </button>
-            </RWebShare>
+          <div className="ml-auto d-flex">
+            <div onClick={validateLogin} className="mr-4">
+              <div onClick={handleCopy}>
+                <button className="btn-share" disabled={disableCopy}>
+                  <FaShareAlt />
+                  <span className="ml-3">Share</span>
+                </button>
+                <ToastContainer />
+              </div>
+            </div>
+            <div>
+              {(getReviewData !== undefined &&
+                getReviewData.some(
+                  (d) => d.userId._id === getUserInfo?.userInfo?.data._id
+                )) ||
+              gst?.isMyBusiness ? (
+                true
+              ) : false || gstStatus === "Cancelled" ? null : (
+                <button
+                  className="btn-write-review"
+                  data-toggle="modal"
+                  onClick={() => validateLogin(true)}
+                >
+                  <FaEdit /> Write Review
+                </button>
+              )}
+            </div>
           </div>
         </div>
         <div className="row pt-2 pb-5 px-lg-3 bg-gray">
@@ -366,10 +400,11 @@ const GstInformation = () => {
               GSTIN / UIN Status
             </h5>
             <h5
-              className={`break-line-1 font-weight-bold ${gst?.gstData?.sts || gst?._doc?.gstData?.sts === "Active"
-                ? "text-green"
-                : "text-danger"
-                }`}
+              className={`break-line-1 font-weight-bold ${
+                gst?.gstData?.sts || gst?._doc?.gstData?.sts === "Active"
+                  ? "text-green"
+                  : "text-danger"
+              }`}
             >
               {gst?.gstData?.sts || gst?._doc?.gstData?.sts}
             </h5>
@@ -420,7 +455,7 @@ const GstInformation = () => {
             </p>
             <Rating
               name="simple-controlled"
-              value={(+(Math.round(gst?.avgRating / 0.5 || 0) * 0.5).toFixed(1))}
+              value={(Math.round(gst?.avgRating / 0.5 || 0) * 0.5).toFixed(1)}
               readOnly={true}
               precision={0.5}
             />
@@ -428,7 +463,7 @@ const GstInformation = () => {
               ({gst?.totalReview || 0})
             </p>
           </div>
-          <div className="text-right">
+          {/* <div className="text-right">
             {(getReviewData !== undefined &&
               getReviewData.some(
                 (d) => d.userId._id === getUserInfo?.userInfo?.data._id
@@ -441,7 +476,7 @@ const GstInformation = () => {
                 <FaEdit /> Write Review
               </button>
             )}
-          </div>
+          </div> */}
 
           <div></div>
           <div>
@@ -450,6 +485,7 @@ const GstInformation = () => {
                 dataLength={getReviewData?.length}
                 next={() => fetchMoreReviews(getReviewData?.length)}
                 hasMore={true}
+                // loader={<h4>Loading...</h4>}
                 scrollableTarget="scrollableDiv"
               >
                 <>
@@ -537,7 +573,6 @@ const GstInformation = () => {
                 />
                 <div className="img-container d-flex">
                   <input
-                    key={key}
                     multiple
                     id="reviewImgUrl"
                     name="reviewImgUrl"
@@ -613,7 +648,7 @@ const GstInformation = () => {
                   <button
                     className="btn-submit"
                     type="submit"
-                    disabled={reviewTextDesc?.length < 1 || isDisabled ? true : false}
+                    disabled={reviewTextDesc?.length < 1 ? true : false}
                   >
                     Post
                   </button>

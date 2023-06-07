@@ -6,7 +6,7 @@ import { useAppDispatch } from "../../Redux/Store/Store";
 import {
   updateReview,
   addHelpfulCount,
-  getWriteReview
+  getWriteReview,
 } from "../../Redux/Reducers/SearchGstNumReducer";
 import Backdrop from "@mui/material/Backdrop";
 import CircularProgress from "@mui/material/CircularProgress";
@@ -25,6 +25,7 @@ import "swiper/css/navigation";
 import "./styles.css";
 import Swal from "sweetalert2";
 import RichTextEditor from "react-rte";
+import { Icon } from "@material-ui/core";
 
 // import required modules
 import { Keyboard, Pagination, Navigation } from "swiper";
@@ -36,17 +37,8 @@ export default function ReviewCard(props) {
   const dispatch = useAppDispatch();
   const [isLoading, setIsLoading] = useState(false);
   const [reviewText, setReviewText] = useState(
-    RichTextEditor.createValueFromString(
-      review?.reviewText,"html"
-    )
+    RichTextEditor.createValueFromString(review?.reviewText, "html")
   );
-
-  console.log('=============reviewText=======================');
-  console.log(RichTextEditor.createValueFromString(
-    review?.reviewText,"html"
-  ));
-  console.log('====================================');
-
   const [rating, setRating] = useState(review?.rating);
   const takeUserInfo = localStorage.getItem("userInfo");
   const getUserInfo = JSON.parse(takeUserInfo)?.userInfo?.data;
@@ -61,15 +53,30 @@ export default function ReviewCard(props) {
 
   const validateLogin = () => {
     if (getUserInfo === undefined || getUserInfo === null) {
-      Swal.fire(
-        {
-          icon: "error",
-          title: "Login Required!",
-          text: "Please login first to access more."
-        })
+      Swal.fire({
+        icon: "error",
+        title: "Login Required!",
+        text: "Please login first to access more.",
+      });
     }
   };
 
+  // for rating-color
+  const getColor = (value) => {
+    if (value >= 4) {
+      return "green";
+    } else if (value >= 2) {
+      return "orange";
+    } else {
+      return "red";
+    }
+  };
+  const IconComponent = (props) => {
+    const { value, ...other } = props;
+    const color = getColor(value);
+
+    return <Icon style={{ color }} {...other} />;
+  };
 
   const fileChangeHandler = (event) => {
     const file = event.target.files;
@@ -85,7 +92,7 @@ export default function ReviewCard(props) {
         );
         setProfileImg((current) => [
           ...current,
-          { id: randome, img: URL.createObjectURL(file[i]), blobUrl: file[i] }
+          { id: randome, img: URL.createObjectURL(file[i]), blobUrl: file[i] },
         ]);
 
         setImgFile((current) => [...current, file[i]]);
@@ -132,7 +139,7 @@ export default function ReviewCard(props) {
       // if (image.imgUrl) {
       //   imgArray.push({ id: randome, img: image?.imgUrl });
       // }else{
-        imgArray.push({ id: randome, img: image });
+      imgArray.push({ id: randome, img: image });
       // }
       if (++counter === review?.reviewImg?.length) {
         setProfileImg(imgArray);
@@ -143,9 +150,9 @@ export default function ReviewCard(props) {
   const removeImage = (remove_data, takeIndx) => {
     if (remove_data.id) {
       new Swal({
-        title: 'Are you sure?',
+        title: "Are you sure?",
         html: "Once deleted, you will not be able to recover this!",
-        icon: 'warning',
+        icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#DD6B55",
         confirmButtonText: "Confirm",
@@ -154,14 +161,13 @@ export default function ReviewCard(props) {
           const deleteImage = profileImg?.filter(
             (data) => data?.id !== remove_data.id
           );
-          setProfileImg(deleteImage)
+          setProfileImg(deleteImage);
         }
-      })
+      });
     } else if (!remove_data.id) {
       const deleteImage = profileImg?.filter((data) => data !== remove_data);
       setProfileImg(deleteImage);
     }
-
   };
 
   const bottomMenu = (toggle, url) => {
@@ -191,31 +197,32 @@ export default function ReviewCard(props) {
     formData.append("id", review?._id);
     formData.append("reviewText", reviewText.toString("html"));
     formData.append("rating", rating);
+    setReviewText(reviewText);
     let oldImg = [];
     let count = 0;
     profileImg?.filter((data) => {
       // if (data) {
       if (data?.img) {
-        // if (data?.img.slice(0, 4) === "http") {
+        if (data?.img.slice(0, 4) !== "blob") {
           oldImg.push(data?.img);
           // oldImg.push({ imgUrl: data?.img });
-        // }
+        }
         if (++count === profileImg?.length) {
           formData.append("oldImg", JSON.stringify(oldImg));
         }
       }
-      else if (data) {
-        if (data?.img !== undefined) {
-          if (data.slice(0, 4) === "http") {
-          }
-        } else {
-          // oldImg.push({ imgUrl: data?.img });
-          oldImg.push(data?.img);
-          if (++count === profileImg?.length) {
-            formData.append("oldImg", JSON.stringify(oldImg));
-          }
-        }
-      }
+      // else if (data) {
+      //   if (data?.img !== undefined) {
+      //     if (data.slice(0, 4) === "http") {
+      //     }
+      //   } else {
+      //     // oldImg.push({ imgUrl: data?.img });
+      //     oldImg.push(data?.img);
+      //     if (++count === profileImg?.length) {
+      //       formData.append("oldImg", JSON.stringify(oldImg));
+      //     }
+      //   }
+      // }
       // }
       // else if (data) {
       //   if (data.slice(0, 4) === "http") {
@@ -229,7 +236,9 @@ export default function ReviewCard(props) {
     for (const key of profileImg) {
       if (key?.img?.slice(0, 4) === "blob") {
         localStorage.setItem("multiImg", true);
-        formData.append("image", key?.blobUrl);
+        if (key.blobUrl) {
+          formData.append("image", key?.blobUrl);
+        }
       }
     }
     dispatch(updateReview(formData)).then((res) => {
@@ -249,17 +258,18 @@ export default function ReviewCard(props) {
     setImgFile([]);
     setImageUrl([]);
     setProfileImg([]);
-    setReviewText(RichTextEditor.createValueFromString(
-      review?.reviewText ? review?.reviewText : "",
-      "html"
-    ))
+    setReviewText(
+      RichTextEditor.createValueFromString(
+        review?.reviewText ? review?.reviewText : "",
+        "html"
+      )
+    );
   };
-
   const handleHelpful = () => {
     validateLogin();
     const params = {
       reviewId: review?._id,
-      userId: userId
+      userId: userId,
     };
 
     dispatch(addHelpfulCount(params)).then((res) => {
@@ -299,11 +309,11 @@ export default function ReviewCard(props) {
           <div>
             <div className="d-flex justify-content-end">
               <p className="m-0 mr-2 mt-1">
-                {Math.round((review?.rating) || 0).toFixed(1)}
+                {Math.round(review?.rating || 0).toFixed(1)}
               </p>
               <Rating
                 name="simple-controlled"
-                value={(+(Math.round((review?.rating)).toFixed(1)))}
+                value={+Math.round(review?.rating).toFixed(1)}
                 disabled={true}
                 precision={0.5}
               />
@@ -375,11 +385,11 @@ export default function ReviewCard(props) {
             <div>
               <div className="d-flex justify-content-end">
                 <p className="m-0 mr-2 mt-1">
-                  {Math.round((review?.rating) || 0).toFixed(1)}
+                  {Math.round(review?.rating || 0).toFixed(1)}
                 </p>
                 <Rating
                   name="simple-controlled"
-                  value={(+(Math.round((review?.rating)).toFixed(1)))}
+                  value={+Math.round(review?.rating).toFixed(1)}
                   disabled={true}
                   precision={0.5}
                 />
@@ -430,10 +440,11 @@ export default function ReviewCard(props) {
               src={review?.userId?.profileImg}
             />
             <div>
-              <p className="user-name m-0 break-line-1">{`${review?.userId?.fName && review?.userId?.lName
-                ? review?.userId?.fName + " " + review?.userId?.lName
-                : "Anonymous"
-                } `}</p>
+              <p className="user-name m-0 break-line-1">{`${
+                review?.userId?.fName && review?.userId?.lName
+                  ? review?.userId?.fName + " " + review?.userId?.lName
+                  : "Anonymous"
+              } `}</p>
               <p className="company-name m-0">{review?.userId?.businessName}</p>
               <p className="time-lable text-muted m-0">
                 <ReactTimeAgo
@@ -451,7 +462,7 @@ export default function ReviewCard(props) {
               </p>
               <Rating
                 name="simple-controlled"
-                value={+(Math.round(review?.rating).toFixed(1))}
+                value={+Math.round(review?.rating).toFixed(1)}
                 disabled={true}
                 precision={0.5}
               />
@@ -493,11 +504,12 @@ export default function ReviewCard(props) {
   };
 
   const onChangeRichText = (value) => {
+   
+    let data = value.toString("html");
     setReviewText(value);
   };
-
   const toolbarConfig = {
-    display: []
+    display: [],
   };
 
   const ReadMore = () => (
@@ -523,26 +535,25 @@ export default function ReviewCard(props) {
                   dangerouslySetInnerHTML={{
                     __html:
                       review?.reviewText?.length > 232 && !seeMoreToggle
-                        ? review?.reviewText.slice(0, 232) + "<b> Read More...</b>"
-                        : review?.reviewText
+                        ? review?.reviewText.slice(0, 232) +
+                          "<b> Read More...</b>"
+                        : review?.reviewText,
                   }}
                 ></p>
               )}
 
-              {
-                seeMoreToggle && review?.reviewText?.length > 232 && (
-                  <p
-                    onClick={() => setSeeMoreToggle(!seeMoreToggle)}
-                    className="m-0 min-height-wrap"
-                    dangerouslySetInnerHTML={{
-                      __html:
-                        review?.reviewText?.length > 232 && !seeMoreToggle
-                          ? review?.reviewText.slice(0, 232)
-                          : review?.reviewText + "<b> Show Less</b>"
-                    }}
-                  ></p>
-                )
-              }
+              {seeMoreToggle && review?.reviewText?.length > 232 && (
+                <p
+                  onClick={() => setSeeMoreToggle(!seeMoreToggle)}
+                  className="m-0 min-height-wrap"
+                  dangerouslySetInnerHTML={{
+                    __html:
+                      review?.reviewText?.length > 232 && !seeMoreToggle
+                        ? review?.reviewText.slice(0, 232)
+                        : review?.reviewText + "<b> Show Less</b>",
+                  }}
+                ></p>
+              )}
 
               {review?.reviewText?.length < 232 && (
                 <p
@@ -552,7 +563,7 @@ export default function ReviewCard(props) {
                     __html:
                       review?.reviewText?.length > 232 && !seeMoreToggle
                         ? review?.reviewText.slice(0, 232)
-                        : review?.reviewText
+                        : review?.reviewText,
                   }}
                 ></p>
               )}
@@ -620,10 +631,10 @@ export default function ReviewCard(props) {
                       slidesPerView={1}
                       spaceBetween={0}
                       keyboard={{
-                        enabled: true
+                        enabled: true,
                       }}
                       pagination={{
-                        clickable: true
+                        clickable: true,
                       }}
                       navigation={true}
                       modules={[Keyboard, Pagination, Navigation]}
@@ -668,19 +679,24 @@ export default function ReviewCard(props) {
                   <p className="text-muted">Posting Publicity</p>
                 </div>
                 <div className="rate-view">
-                  <Rating
-                    className="mt-1 mb-4"
-                    name="simple-controlled"
-                    value={rating}
-                    onChange={(event, newValue) => {
-                      setRating(newValue);
-                    }}
-                    size="large"
-                  />
-                </div>
+                    <Rating
+                      className="mt-1 mb-4"
+                      name="simple-controlled"
+                      value={rating}
+                      onChange={(event, newValue) => {
+                        setRating(newValue);
+                      }}
+                      size="large"
+                      IconContainerComponent={IconComponent}
+                    />
+                  </div>
                 <RichTextEditor
                   className="text-editor"
-                  toolbarStyle={{ borderBottom: "0px", padding: "2px", marginBottom: "2px" }}
+                  toolbarStyle={{
+                    borderBottom: "0px",
+                    padding: "2px",
+                    marginBottom: "2px",
+                  }}
                   id="review"
                   name="review"
                   toolbarConfig={toolbarConfig}
@@ -708,7 +724,7 @@ export default function ReviewCard(props) {
                           sx={{
                             alignItems: "center",
                             m: 1,
-                            position: "relative"
+                            position: "relative",
                           }}
                         >
                           {data?.img ? (
@@ -716,51 +732,58 @@ export default function ReviewCard(props) {
                               src={data?.img}
                               height={"170px"}
                               width={"150px"}
-                              alt="" />
+                              alt=""
+                            />
                           ) : (
-                            <img id="newImage" src={data} height={"150px"} width={"150px"} alt="" />
+                            <img
+                              id="newImage"
+                              src={data}
+                              height={"150px"}
+                              width={"150px"}
+                              alt=""
+                            />
                           )}
                           {imageUrl?.id
                             ? deleteBar &&
-                            imageUrl?.id === data?.id && (
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "flex-end",
-                                  position: "absolute",
-                                  bottom: 0,
-                                  backgroundColor: "#5A5A5A",
-                                  width: "100%",
-                                  opacity: 0.7
-                                }}
-                              >
-                                <DeleteIcon
-                                  onClick={() => removeImage(data, index)}
-                                  sx={{ color: "#E1E1E1" }}
-                                />
-                              </Box>
-                            )
+                              imageUrl?.id === data?.id && (
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-end",
+                                    position: "absolute",
+                                    bottom: 0,
+                                    backgroundColor: "#5A5A5A",
+                                    width: "100%",
+                                    opacity: 0.7,
+                                  }}
+                                >
+                                  <DeleteIcon
+                                    onClick={() => removeImage(data, index)}
+                                    sx={{ color: "#E1E1E1" }}
+                                  />
+                                </Box>
+                              )
                             : deleteBar &&
-                            imageUrl === data && (
-                              <Box
-                                sx={{
-                                  display: "flex",
-                                  alignItems: "center",
-                                  justifyContent: "flex-end",
-                                  position: "absolute",
-                                  bottom: 0,
-                                  backgroundColor: "#5A5A5A",
-                                  width: "100%",
-                                  opacity: 0.7
-                                }}
-                              >
-                                <DeleteIcon
-                                  onClick={() => removeImage(data, index)}
-                                  sx={{ color: "#E1E1E1" }}
-                                />
-                              </Box>
-                            )}
+                              imageUrl === data && (
+                                <Box
+                                  sx={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    justifyContent: "flex-end",
+                                    position: "absolute",
+                                    bottom: 0,
+                                    backgroundColor: "#5A5A5A",
+                                    width: "100%",
+                                    opacity: 0.7,
+                                  }}
+                                >
+                                  <DeleteIcon
+                                    onClick={() => removeImage(data, index)}
+                                    sx={{ color: "#E1E1E1" }}
+                                  />
+                                </Box>
+                              )}
                         </Box>
                       );
                     })}

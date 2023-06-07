@@ -9,7 +9,7 @@ export const gstVerify = createAsyncThunk(
   async (data, thunkApi) => {
     try {
       return await (
-        await instance.get(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null }`)
+        await instance.get(`${api}gst/verify/${data?.verificationValue}?userId=${data?.userId || null}`)
       ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -34,14 +34,14 @@ export const getGstByUserId = createAsyncThunk(
 // for review for my business by user id
 export const getReviewForMyBusiness = createAsyncThunk(
   "user/getReviewForMyBusiness",
-  async ({ userId, params,token }, thunkApi) => {
+  async ({ userId, params, token }, thunkApi) => {
     let data = {
-      companyName:params?.companyName || '',
-      orderByRating:params?.orderByRating || ''
+      companyName: params?.companyName || '',
+      orderByRating: params?.orderByRating || ''
     };
     try {
-        const response = await instance.post(`${api}review/businessReview/${userId}`, data);
-        return response.data;
+      const response = await instance.post(`${api}review/businessReview/${userId}`, data);
+      return response.data;
       //}
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -69,7 +69,7 @@ export const SearchByGstNumber = createAsyncThunk(
   "Gst/SearchByGstNumber",
   async (data, thunkApi) => {
     try {
-      return await 
+      return await
         (
           await instance.get(`${api}gst/searchGst/${data}`)
         ).data;
@@ -84,7 +84,7 @@ export const getAllGstRecord = createAsyncThunk(
   "Gst/getAllGstRecord",
   async (data, thunkApi) => {
     try {
-      return await 
+      return await
         (
           await instance.get(`${api}gst?size=${data.size}?page=${data.page}`)
         ).data;
@@ -162,18 +162,36 @@ export const getReviewByUser = createAsyncThunk(
   "Gst/getReviewByUser",
   async ({ userId, params }, thunkApi) => {
     let data = {
-      companyName:params?.companyName || '',
-      orderByRating:params?.orderByRating || ''
+      companyName: params?.companyName || '',
+      orderByRating: params?.orderByRating || ''
     };
     try {
-        const response = await instance.post(`${api}review/user/${userId}?size=30`, data);
-        return response.data;
+      const response = await instance.post(`${api}review/user/${userId}?size=30`, data);
+      return response.data;
       //}
     } catch (error) {
       return thunkApi.rejectWithValue(error);
     }
   }
 );
+
+// for our business
+export const getOurBusiness = createAsyncThunk(
+  "Gst/getOurBusiness",
+  async ({ companyName, state, city }, thunkApi) => {
+    try {
+      const response = await instance.post(`${api}gst/business/search?`, {
+        companyName,
+        state,
+        city
+      });
+      return response.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error);
+    }
+  }
+);
+
 
 // for add helpuful
 export const addHelpfulCount = createAsyncThunk(
@@ -289,7 +307,7 @@ export const removeHistory = createAsyncThunk(
     try {
       return await
         (
-          await instance.post(`${api}history/remove/${data?.userId}`,data)
+          await instance.post(`${api}history/remove/${data?.userId}`, data)
         ).data;
     } catch (error) {
       return thunkApi.rejectWithValue(error);
@@ -303,6 +321,7 @@ const initialState = {
   reviewData: {},
   error: {},
   success: false,
+  isSearchedData: false
 };
 
 const SearchGstNumber = createSlice({
@@ -310,6 +329,9 @@ const SearchGstNumber = createSlice({
   initialState,
   reducers: {
     // fill in primary logic here
+    isSearchedData: (state, action) => {
+      state.isSearchedData = action.payload
+    },
   },
   extraReducers: (builder) => {
     // for gst verify
@@ -500,7 +522,26 @@ const SearchGstNumber = createSlice({
       state.error = action?.payload?.response?.data;
       state.loading = false;
     });
+
+    // for our-Business
+    builder.addCase(getOurBusiness.pending, (state, action) => {
+      state.loading = true;
+      state.error = {};
+    });
+    builder.addCase(getOurBusiness.fulfilled, (state, action) => {
+      state.loading = false;
+
+      if (action?.payload?.status === true) {
+      } else {
+      }
+    });
+    builder.addCase(getOurBusiness.rejected, (state, action) => {
+      state.error = action?.payload?.response?.data;
+      state.loading = false;
+    });
   },
 });
+
+export const { isSearchedData } = SearchGstNumber.actions
 
 export default SearchGstNumber.reducer;

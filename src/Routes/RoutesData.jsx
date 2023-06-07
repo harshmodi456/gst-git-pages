@@ -6,6 +6,7 @@ import GstInformation from "../Pages/GstInformation/GstInformation.jsx";
 import MyReviews from "../Pages/MyReviews/MyReviews.jsx";
 import MyBusiness from "../Pages/MyBusiness/MyBusiness.jsx";
 import UserProfile from "../Pages/UserProfile/UserProfile.jsx";
+import OurBusiness from "../Pages/OurBusiness/OurBusiness.jsx";
 import ChangePassword from "../Pages/ChangePassword/ChangePassword.js";
 
 export const routeData = [
@@ -55,6 +56,11 @@ export const routeData = [
     isAuthenticated: true,
     element: MyBusiness
   },
+  // {
+  //   path: "/our-business",
+  //   isAuthenticated: true,
+  //   element: OurBusiness
+  // },
   {
     path: "/user-profile",
     isAuthenticated: true,

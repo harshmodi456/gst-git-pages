@@ -31,6 +31,8 @@ import "./Header.scss";
 import SearchIcon from '@mui/icons-material/Search';
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { FaUserAlt } from "react-icons/fa";
+import { useAppDispatch } from "../../Redux/Store/Store.jsx";
+import { isSearchedData } from "../../Redux/Reducers/SearchGstNumReducer.jsx";
 
 
 const colorConfigs = {
@@ -55,6 +57,7 @@ const sizeConfigs = {
 const Header = (props) => {
   const isVisibleHeader = useHeaderFooter();
   const navigate = useNavigate();
+  const dispatch = useAppDispatch();
 
   const { window } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
@@ -74,6 +77,7 @@ const Header = (props) => {
         "Home",
         "My Reviews",
         "My Business",
+        "Our Business",
         userName
       ]
     }
@@ -87,6 +91,11 @@ const Header = (props) => {
   const handleDrawerToggle = () => {
     setMobileOpen((prevState) => !prevState);
   };
+
+  const NavigationHome = () =>{
+    localStorage.setItem("isSearched", false)
+    navigate("/")
+  }
 
   const handleRoute = (getVal) => {
     if (getVal === "Home") {
@@ -103,7 +112,11 @@ const Header = (props) => {
       navigate("/my-reviews");
     } else if (getVal === "My Business") {
       navigate("/my-business");
-    } else if (getVal === "User Profile") {
+    }
+    //   else if (getVal === "Our Business") {
+    //     navigate("/our-business");
+    // } 
+    else if (getVal === "User Profile") {
       navigate("/user-profile");
     }
   };
@@ -138,6 +151,11 @@ const Header = (props) => {
                     <ListItemText primary={item} className="ml-3" />
                   </>
                 ) : item === "My Business" ? (
+                  <>
+                    <BusinessCenterIcon />
+                    <ListItemText primary={item} className="ml-3" />
+                  </>
+                ) : item === "Our Business" ? (
                   <>
                     <BusinessCenterIcon />
                     <ListItemText primary={item} className="ml-3" />
@@ -214,7 +232,7 @@ const Header = (props) => {
               >
                 <div className="logo-backgroung" ></div>
                 <div className="logo-container" >
-                  <img src={logo} className="logo" alt="logo" onClick={() => navigate('/')} style={{cursor:"pointer"}}/>
+                  <img src={logo} className="logo" alt="logo" onClick={NavigationHome} style={{cursor:"pointer"}}/>
                 </div>
               </Typography>
               <Box sx={{ display: { xs: "none", sm: "block" } }}>

@@ -1,3 +1,39 @@
+.container {
+  position: relative;
+  display: inline-block;
+}
+
+.svg-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.btnhover:hover{
+  .folderIcon{
+    color: #007bff;
+  }
+}
+
+.modelCss .modal-dialog{
+  width: 100VW!important;
+  height: 100VH!important;
+}
+
+.rectangle {
+  cursor: pointer;
+}
+
+.rectangle.clicked {
+  fill: yellow;
+  fill-opacity: 0.3;
+}
+
+.css-nxo287-MuiInputBase-input-MuiOutlinedInput-input {
+  border-radius: 20px 0 0 20px;
+  background: white !important;
+}
+
 .title {
   color: #122c72;
   font-weight: 600;
@@ -6,16 +42,18 @@
 .filterGstCard {
   display: flex;
 }
+
 .MuiInputBase-root {
   padding-right: 0px !important;
 }
 
-.search-barselect{
+.search-barselect {
   font-size: 18px;
   width: calc(32ch);
   margin-right: 4px;
   outline: none;
 }
+
 .search-barselect:focus {
   outline: 2px solid rgb(95, 95, 95);
 }
@@ -299,7 +337,7 @@
     }
 
     .search-bar {
-      padding: 15px 20px;
+      // padding: 15px 20px;
       font-size: 20px;
       border: 2px solid rgb(168, 168, 168);
       border-radius: 20px;
