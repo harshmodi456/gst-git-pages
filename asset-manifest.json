@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/gst-git-pages/static/css/main.0cfc0335.css",
-    "main.js": "/gst-git-pages/static/js/main.c0c9fb26.js",
+    "main.js": "/gst-git-pages/static/js/main.95b732ae.js",
     "static/js/787.bc57fb87.chunk.js": "/gst-git-pages/static/js/787.bc57fb87.chunk.js",
     "static/media/home-bg.svg": "/gst-git-pages/static/media/home-bg.6d683e2e20599dc7c8d8ddfe64861d4e.svg",
     "static/media/login.svg": "/gst-git-pages/static/media/login.79facb67b27f9c418f29073c9de27aad.svg",
@@ -9,11 +9,11 @@
     "static/media/user.png": "/gst-git-pages/static/media/user.33e7df0963941edbeb70.png",
     "index.html": "/gst-git-pages/index.html",
     "main.0cfc0335.css.map": "/gst-git-pages/static/css/main.0cfc0335.css.map",
-    "main.c0c9fb26.js.map": "/gst-git-pages/static/js/main.c0c9fb26.js.map",
+    "main.95b732ae.js.map": "/gst-git-pages/static/js/main.95b732ae.js.map",
     "787.bc57fb87.chunk.js.map": "/gst-git-pages/static/js/787.bc57fb87.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.0cfc0335.css",
-    "static/js/main.c0c9fb26.js"
+    "static/js/main.95b732ae.js"
   ]
 }
