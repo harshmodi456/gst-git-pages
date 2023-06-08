@@ -525,10 +525,14 @@ const SearchGstNumber = () => {
       const modifiedNumericPortion7 = gstNumber.substring(14, 15);
 
       validGSTnumber = `${modifiedNumericPortion1}${modifiedNumericPortion2}${modifiedNumericPortion3}${modifiedNumericPortion4}${modifiedNumericPortion5}${modifiedNumericPortion6}${modifiedNumericPortion7}`
-      if (!modifiedGSTNumbers || modifiedGSTNumbers.findIndex(x => x == validGSTnumber) == -1) {
-        modifiedGSTNumbers = modifiedGSTNumbers || [];
-        modifiedGSTNumbers.push(validGSTnumber?.toUpperCase());
+      if (modifiedGSTNumbers && modifiedGSTNumbers.length > 0) {
+        var index = modifiedGSTNumbers.findIndex(x => x == validGSTnumber);
+        if (index == -1) {
+          modifiedGSTNumbers.push(validGSTnumber?.toUpperCase());
+        }
       }
+      else
+        modifiedGSTNumbers.push(validGSTnumber?.toUpperCase());
     });
 
     return modifiedGSTNumbers;
