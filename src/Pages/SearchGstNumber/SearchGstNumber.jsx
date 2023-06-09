@@ -489,18 +489,19 @@ const SearchGstNumber = () => {
           .map((x) => x.description)
           .join("")
           ?.toUpperCase();
-          const pattern =
+        const pattern =
           /[0-9oOzZBASsilgG]{2}[A-Z01245689]{5}[0-9oOzZBASsIlgG]{4}[A-Z01245689]{1}[1-9A-Z]{1}(Z|2)[0-9A-Z]{1}/g;
         gstNumbers = responseData.match(pattern);
         // console.log("gstNumbers", gstNumbers);
 
-       
+
         var updatedStrings = modifyGSTNumbers(gstNumbers);
 
-        // if (updatedStrings.length <= 0) {
-        // } else {
-        setupdatedImageData(updatedStrings);
-        // }
+        if (updatedStrings.length > 0) {
+          setupdatedImageData(updatedStrings);
+        } else {
+          toast.error("Not able to Recognize GST Number,Kindly enter manually");
+        }
         // console.log("updatedStrings", updatedStrings);
       } else {
         // alert('Enter Manual Number')
