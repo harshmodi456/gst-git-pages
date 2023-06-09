@@ -9,15 +9,15 @@
   left: 0;
 }
 
-.btnhover:hover{
-  .folderIcon{
+.btnhover:hover {
+  .folderIcon {
     color: #007bff;
   }
 }
 
-.modelCss .modal-dialog{
-  width: 100VW!important;
-  height: 100VH!important;
+.modelCss .modal-dialog {
+  width: 100VW !important;
+  height: 100VH !important;
 }
 
 .rectangle {
@@ -197,8 +197,36 @@
     border-radius: 10px;
   }
 
+  // @media (max-width: 768px) {
+  //   /* Mobile styles */
+  //   video {
+  //     width: 100%;
+  //     height: auto;
+  //   }
+  // }
+
+  // @media (min-width: 768px) {
+  //   /* Desktop styles */
+  //   video {
+  //     width: 140px;
+  //     height: 80px;
+  //   }
+  // }
   //  Mobile devices
   @media (max-width: 480px) {
+    .MuiToolbar-gutters {
+      color: #00448b;
+    }
+
+    // .VideoArea {
+    //   width: 100px;
+    //   height: 100px;
+    // }
+
+    .VideoArea {
+      height: auto;
+    }
+
     .filterGstCard {
       display: flex;
       justify-content: center;
@@ -230,6 +258,11 @@
       display: block;
       width: 100%;
       margin: 10px 0;
+    }
+
+    .clicktext {
+      font-size: 8px;
+      color: #00448b;
     }
   }
 
@@ -344,6 +377,11 @@
       text-transform: uppercase;
     }
 
+    .searchIcon {
+      color: #00448b;
+      font-size: 40px;
+    }
+
     .tandc-checkbox {
       cursor: pointer;
 
@@ -353,10 +391,18 @@
       }
     }
 
+    .uploadImageBtn {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      justify-content: center;
+    }
+
     .btn-search {
       padding: 10px;
-      font-size: 25px;
+      font-size: 17px;
       border: none;
+      width: 100%;
       border-radius: 20px;
       cursor: pointer;
       color: white;
@@ -368,9 +414,38 @@
       outline: none;
     }
   }
+}
 
-  //  Mobile devices
-  @media (max-width: 480px) {
+.header-buttons {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
+.container {
+  .VideoArea {
+    height: 390px;
+    max-height: 100%;
+  }
+}
+
+//  Mobile devices
+@media (max-width: 480px) {
+  .home-container {
+    .homepageImage img {
+      display: none;
+    }
+
+    .uploadImageBtn {
+      display: block !important;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-search {
+      margin-bottom: 10px;
+    }
+
     .searchContainer {
       display: inline-block;
     }
@@ -385,8 +460,35 @@
     }
   }
 
-  // Small screens, laptops
-  @media (max-width: 1024px) {
+  .header-buttons {
+    display: flex;
+    justify-content: end;
+    width: 100%;
+
+    .clicktext {
+      display: none !important;
+    }
+
+    .switch-camara {
+      display: none !important;
+    }
+
+    .capture-photo {
+      display: none;
+    }
+  }
+
+  .container {
+    .VideoArea {
+      height: auto !important;
+      max-height: 100%;
+    }
+  }
+}
+
+// Small screens, laptops
+@media (max-width: 1024px) {
+  .home-container {
     img {
       height: 450px;
       width: 450px;
