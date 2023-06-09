@@ -489,20 +489,13 @@ const SearchGstNumber = () => {
           .map((x) => x.description)
           .join("")
           ?.toUpperCase();
-        const pattern =
-          /[0-9]{2}[A-Z]{5}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}(Z|2)[0-9A-Z]{1}/g;
+          const pattern =
+          /[0-9oOzZBASsilgG]{2}[A-Z01245689]{5}[0-9oOzZBASsIlgG]{4}[A-Z01245689]{1}[1-9A-Z]{1}(Z|2)[0-9A-Z]{1}/g;
         gstNumbers = responseData.match(pattern);
         // console.log("gstNumbers", gstNumbers);
 
-        const updatedStrings = gstNumbers.map((string) => {
-          if (string.length >= 2) {
-            let secondLastChar = string.charAt(string.length - 2);
-            if (secondLastChar === "2") {
-              return string.slice(0, -2) + "Z" + string.slice(-1);
-            }
-          }
-          return string;
-        });
+       
+        var updatedStrings = modifyGSTNumbers(gstNumbers);
 
         // if (updatedStrings.length <= 0) {
         // } else {
@@ -526,6 +519,56 @@ const SearchGstNumber = () => {
 
     }
   }, [getUserInfo]);
+
+  const modifyGSTNumbers = (gstNumbers) => {
+    if (!Array.isArray(gstNumbers)) {
+      return [];
+    }
+
+    const modifiedGSTNumbers = [];
+
+    gstNumbers.forEach((gstNumber) => {
+      if (!gstNumber || gstNumber.length < 2) {
+        modifiedGSTNumbers.push(gstNumber);
+        return;
+      }
+
+      var validGSTnumber = gstNumber
+
+      const numericPortion1 = gstNumber.substring(0, 2);
+      const modifiedNumericPortion1 = numericPortion1.replace(/[oO]/g, '0').replace(/[il]/g, '1').replace(/[zZ]/g, '2').replace(/[sS]/g, '5').replace(/[B]/g, '8').replace(/[A]/g, '4').replace(/[g]/g, '9').replace(/[G]/g, '6');
+
+      const numericPortion2 = gstNumber.substring(2, 7);
+      const modifiedNumericPortion2 = numericPortion2.replace(/[0]/g, 'O').replace(/[1]/g, 'L').replace(/[2]/g, 'Z').replace(/[4]/g, 'A').replace(/[5]/g, 'S').replace(/[8]/g, 'B').replace(/[96]/g, 'G');
+
+      const numericPortion3 = gstNumber.substring(7, 11);
+      const modifiedNumericPortion3 = numericPortion3.replace(/[oO]/g, '0').replace(/[il]/g, '1').replace(/[zZ]/g, '2').replace(/[sS]/g, '5').replace(/[B]/g, '8').replace(/[A]/g, '4').replace(/[g]/g, '9').replace(/[G]/g, '6');
+
+      const numericPortion4 = gstNumber.substring(11, 12);
+      const modifiedNumericPortion4 = numericPortion4.replace(/[0]/g, 'O').replace(/[1]/g, 'L').replace(/[2]/g, 'Z').replace(/[4]/g, 'A').replace(/[5]/g, 'S').replace(/[8]/g, 'B').replace(/[96]/g, 'G');
+
+      const modifiedNumericPortion5 = gstNumber.substring(12, 13);
+
+      const numericPortion6 = gstNumber.substring(13, 14);
+      const modifiedNumericPortion6 = numericPortion6.replace(/[2]/g, 'Z');
+
+      const modifiedNumericPortion7 = gstNumber.substring(14, 15);
+
+      validGSTnumber = `${modifiedNumericPortion1}${modifiedNumericPortion2}${modifiedNumericPortion3}${modifiedNumericPortion4}${modifiedNumericPortion5}${modifiedNumericPortion6}${modifiedNumericPortion7}`
+      if (modifiedGSTNumbers && modifiedGSTNumbers.length > 0) {
+        var index = modifiedGSTNumbers.findIndex(x => x == validGSTnumber);
+        if (index == -1) {
+          modifiedGSTNumbers.push(validGSTnumber?.toUpperCase());
+        }
+      }
+      else
+        modifiedGSTNumbers.push(validGSTnumber?.toUpperCase());
+
+    });
+
+    return modifiedGSTNumbers;
+  };
+
   const readFileAsync = (file) => {
     return new Promise((resolve, reject) => {
       const reader = new FileReader();
