@@ -419,7 +419,7 @@
 .header-buttons {
   display: flex;
   justify-content: end;
-  width: 100%;
+  // width: 100%;
 }
 
 .container {
@@ -462,8 +462,9 @@
 
   .header-buttons {
     display: flex;
+    flex: 1;
     justify-content: end;
-    width: 100%;
+    // width: 100%;
 
     .clicktext {
       display: none !important;
