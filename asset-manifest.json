@@ -1,19 +1,19 @@
 {
   "files": {
-    "main.css": "/gst-git-pages/static/css/main.5cc42d44.css",
-    "main.js": "/gst-git-pages/static/js/main.ef340917.js",
+    "main.css": "/gst-git-pages/static/css/main.eeeff509.css",
+    "main.js": "/gst-git-pages/static/js/main.3fbb3dbe.js",
     "static/js/787.bc57fb87.chunk.js": "/gst-git-pages/static/js/787.bc57fb87.chunk.js",
     "static/media/home-bg.svg": "/gst-git-pages/static/media/home-bg.6d683e2e20599dc7c8d8ddfe64861d4e.svg",
     "static/media/login.svg": "/gst-git-pages/static/media/login.79facb67b27f9c418f29073c9de27aad.svg",
     "static/media/logo.svg": "/gst-git-pages/static/media/logo.5b8a7aa2111115a99ed9f003ab1e5147.svg",
     "static/media/user.png": "/gst-git-pages/static/media/user.33e7df0963941edbeb70.png",
     "index.html": "/gst-git-pages/index.html",
-    "main.5cc42d44.css.map": "/gst-git-pages/static/css/main.5cc42d44.css.map",
-    "main.ef340917.js.map": "/gst-git-pages/static/js/main.ef340917.js.map",
+    "main.eeeff509.css.map": "/gst-git-pages/static/css/main.eeeff509.css.map",
+    "main.3fbb3dbe.js.map": "/gst-git-pages/static/js/main.3fbb3dbe.js.map",
     "787.bc57fb87.chunk.js.map": "/gst-git-pages/static/js/787.bc57fb87.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.5cc42d44.css",
-    "static/js/main.ef340917.js"
+    "static/css/main.eeeff509.css",
+    "static/js/main.3fbb3dbe.js"
   ]
 }
